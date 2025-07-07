@@ -13,14 +13,13 @@ import {
   ListItemText,
   useMediaQuery,
   useTheme,
-  Fab,
 } from '@mui/material'
 import {
   Menu as MenuIcon,
-  Mic as MicIcon,
-  MicOff as MicOffIcon,
 } from '@mui/icons-material'
 import { useNavigate, useLocation } from 'react-router-dom'
+import logoImage from '../assets/tisb_logo_transparent.jpg'
+import { VoiceAssistant } from './VoiceAssistant'
 
 interface LayoutProps {
   children: ReactNode
@@ -34,12 +33,12 @@ const navigationItems = [
   { label: 'Code', path: '/code' },
   { label: 'AI', path: '/ai' },
   { label: 'Podcast', path: '/podcast' },
+  { label: 'Task Chat', path: '/task-chat' },
   { label: 'Admin', path: '/admin' },
 ]
 
 export default function Layout({ children }: LayoutProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [voiceActive, setVoiceActive] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const theme = useTheme()
@@ -50,25 +49,47 @@ export default function Layout({ children }: LayoutProps) {
     setDrawerOpen(false)
   }
 
-  const toggleVoice = () => {
-    setVoiceActive(!voiceActive)
-    // TODO: Implement voice interface later
-    console.log('Voice interface:', voiceActive ? 'disabled' : 'enabled')
-  }
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Top Navigation */}
       <AppBar position="fixed" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, fontWeight: 300, cursor: 'pointer' }}
+          <Box
+            sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              flexGrow: 1, 
+              cursor: 'pointer',
+              '&:hover img': {
+                transform: 'scale(1.05)',
+                filter: 'brightness(1.2) contrast(1.2)'
+              }
+            }}
             onClick={() => handleNavigate('/')}
           >
-            TISB
-          </Typography>
+            <img
+              src={logoImage}
+              alt="TISB Logo"
+              style={{
+                height: '40px',
+                width: 'auto',
+                marginRight: '12px',
+                transition: 'all 0.3s ease',
+                filter: 'brightness(1) contrast(1.1)'
+              }}
+            />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ 
+                fontWeight: 400,
+                fontSize: '1.25rem',
+                letterSpacing: '0.02em',
+              }}
+            >
+              TISB
+            </Typography>
+          </Box>
           
           {!isMobile ? (
             <Box sx={{ display: 'flex', gap: 3 }}>
@@ -80,7 +101,10 @@ export default function Layout({ children }: LayoutProps) {
                     cursor: 'pointer',
                     opacity: location.pathname === item.path ? 1 : 0.7,
                     '&:hover': { opacity: 1 },
-                    fontWeight: location.pathname === item.path ? 400 : 300,
+                    fontWeight: location.pathname === item.path ? 500 : 300,
+                    fontSize: '0.95rem',
+                    letterSpacing: '0.02em',
+                    transition: 'all 0.2s ease',
                   }}
                   onClick={() => handleNavigate(item.path)}
                 >
@@ -143,28 +167,16 @@ export default function Layout({ children }: LayoutProps) {
         maxWidth="lg"
         sx={{
           flex: 1,
-          pt: { xs: 10, md: 12 },
-          pb: 4,
+          pt: { xs: 12, md: 14 },
+          pb: 6,
+          px: { xs: 3, md: 4 },
         }}
       >
         {children}
       </Container>
 
-      {/* Voice Interface FAB */}
-      <Fab
-        color={voiceActive ? 'primary' : 'secondary'}
-        aria-label="voice interface"
-        sx={{
-          position: 'fixed',
-          bottom: 24,
-          right: 24,
-          opacity: 0.8,
-          '&:hover': { opacity: 1 },
-        }}
-        onClick={toggleVoice}
-      >
-        {voiceActive ? <MicIcon /> : <MicOffIcon />}
-      </Fab>
+      {/* Voice Assistant */}
+      <VoiceAssistant />
     </Box>
   )
 }
