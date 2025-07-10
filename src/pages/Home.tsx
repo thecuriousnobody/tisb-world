@@ -1,23 +1,23 @@
-import { Typography, Box, Grid, Card, CardContent, Button } from '@mui/material'
-import { PlayArrow, Code, Article, Mic, SmartToy } from '@mui/icons-material'
+import { Typography, Box, Card, CardContent, Button } from '@mui/material'
+import { PlayArrow, Code, Article, Mic, SmartToy, Palette } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import logoImage from '../assets/tisb_logo_transparent.jpg'
+import logoImage from '../assets/TISB Logo Transparent.png'
 
 export default function Home() {
   const navigate = useNavigate()
 
   const features = [
     {
-      title: 'Task Chat',
-      description: 'AI-powered task assistant with cloud API integration',
-      icon: <SmartToy />,
-      path: '/task-chat',
-    },
-    {
       title: 'Music',
-      description: 'Explore my musical journey, compositions, and audio experiences',
+      description: 'Sonic explorations, experimental compositions, and audio landscapes',
       icon: <PlayArrow />,
       path: '/music',
+    },
+    {
+      title: 'Art',
+      description: 'Visual creations, digital art, and creative experiments',
+      icon: <Palette />,
+      path: '/art',
     },
     {
       title: 'Blog',
@@ -32,8 +32,8 @@ export default function Home() {
       path: '/code',
     },
     {
-      title: 'AI Startup',
-      description: 'Building the future with artificial intelligence',
+      title: 'AI',
+      description: 'Building AI-powered tools and exploring artificial intelligence',
       icon: <SmartToy />,
       path: '/ai',
     },
@@ -46,14 +46,18 @@ export default function Home() {
   ]
 
   return (
-    <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
+    <Box sx={{ 
+      maxWidth: '1200px', 
+      mx: 'auto',
+      px: { xs: 2, md: 4 },
+      py: { xs: 4, md: 8 }
+    }}>
       {/* Hero Section */}
       <Box
         sx={{
           textAlign: 'center',
-          py: { xs: 10, md: 16 },
+          py: { xs: 8, md: 12 },
           mb: { xs: 8, md: 12 },
-          px: { xs: 2, md: 0 },
         }}
       >
         <Box sx={{ mb: 6 }}>
@@ -61,154 +65,144 @@ export default function Home() {
             src={logoImage}
             alt="TISB Logo"
             style={{
-              height: '160px',
+              height: '140px',
               width: 'auto',
-              marginBottom: '48px',
+              marginBottom: '32px',
               transition: 'all 0.5s ease',
-              filter: 'brightness(1.05) contrast(1.1)',
-              opacity: 0.95
             }}
           />
         </Box>
         <Typography
           variant="h1"
           sx={{
-            fontSize: { xs: '3rem', md: '5rem', lg: '5.5rem' },
             mb: 4,
-            background: 'linear-gradient(45deg, #ffffff 30%, #888888 90%)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            fontWeight: 200,
-            letterSpacing: '-0.04em',
-            lineHeight: 0.9,
+            color: 'text.primary',
+            fontWeight: 300,
           }}
         >
-          TISB
+          TISB World
         </Typography>
         <Typography
-          variant="h3"
+          variant="h5"
           sx={{
-            fontSize: { xs: '1.25rem', md: '1.75rem' },
             mb: 6,
-            opacity: 0.8,
+            color: 'text.secondary',
             maxWidth: '700px',
             mx: 'auto',
             fontWeight: 300,
-            lineHeight: 1.4,
           }}
         >
-          Music • Technology • AI • Creativity
+          Music • Art • Technology • AI • Creativity
         </Typography>
         <Typography
           variant="body1"
           sx={{
-            fontSize: { xs: '1rem', md: '1.125rem' },
-            opacity: 0.6,
-            mb: 6,
+            color: 'text.secondary',
+            mb: 8,
             maxWidth: '500px',
             mx: 'auto',
             fontWeight: 300,
           }}
         >
-          A minimalistic space for creative exploration and technological innovation
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: '0.875rem',
-            opacity: 0.5,
-            mb: 4,
-            fontWeight: 300,
-            letterSpacing: '0.02em',
-          }}
-        >
-          Try the new Task Chat for AI-powered productivity assistance
+          A creative space exploring the intersection of technology, art, and human expression
         </Typography>
       </Box>
 
       {/* Feature Grid */}
-      <Box sx={{ mb: { xs: 8, md: 12 } }}>
-        <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="center">
-          {features.map((feature) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={feature.title}>
-              <Card
+      <Box sx={{ 
+        display: 'grid',
+        gridTemplateColumns: { 
+          xs: '1fr', 
+          sm: 'repeat(2, 1fr)',
+          lg: 'repeat(3, 1fr)'
+        },
+        gap: 4,
+        mb: 12
+      }}>
+        {features.map((feature) => (
+          <Card
+            key={feature.title}
+            sx={{
+              height: '100%',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-8px)',
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+              },
+            }}
+            onClick={() => navigate(feature.path)}
+          >
+            <CardContent sx={{ p: 4, height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                mb: 3,
+                color: 'rgba(255, 255, 255, 0.9)'
+              }}>
+                <Box sx={{ 
+                  mr: 2, 
+                  fontSize: 32,
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  {feature.icon}
+                </Box>
+                <Typography variant="h5" sx={{ fontWeight: 400, color: 'white' }}>
+                  {feature.title}
+                </Typography>
+              </Box>
+              <Typography
+                variant="body1"
                 sx={{
-                  height: '100%',
-                  backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: 2,
-                  cursor: 'pointer',
-                  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    borderColor: 'rgba(255, 255, 255, 0.15)',
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-                  },
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  flexGrow: 1,
+                  lineHeight: 1.6,
                 }}
-                onClick={() => navigate(feature.path)}
               >
-                <CardContent sx={{ p: { xs: 3, md: 4 }, textAlign: 'center' }}>
-                  <Box sx={{ mb: 3, opacity: 0.8 }}>
-                    {feature.icon}
-                  </Box>
-                  <Typography 
-                    variant="h5" 
-                    sx={{ 
-                      fontWeight: 400, 
-                      mb: 2,
-                      fontSize: '1.25rem',
-                      letterSpacing: '0.01em',
-                    }}
-                  >
-                    {feature.title}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      opacity: 0.7, 
-                      lineHeight: 1.6,
-                      fontSize: '0.95rem',
-                      fontWeight: 300,
-                    }}
-                  >
-                    {feature.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                {feature.description}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
       </Box>
 
       {/* Call to Action */}
-      <Box sx={{ textAlign: 'center', mt: { xs: 8, md: 12 }, mb: 4 }}>
-        <Button
-          variant="outlined"
-          size="large"
-          sx={{
-            borderColor: 'rgba(255, 255, 255, 0.2)',
-            color: 'white',
-            px: 6,
-            py: 2,
-            fontSize: '1rem',
-            fontWeight: 300,
-            letterSpacing: '0.02em',
-            borderRadius: 2,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              borderColor: 'rgba(255, 255, 255, 0.5)',
-              backgroundColor: 'rgba(255, 255, 255, 0.05)',
-              transform: 'translateY(-2px)',
-            },
-          }}
-          onClick={() => navigate('/task-chat')}
-        >
-          Try Task Assistant
-        </Button>
-      </Box>
+      <Card sx={{ textAlign: 'center' }}>
+        <CardContent sx={{ p: 6 }}>
+          <Typography variant="h4" sx={{ mb: 3, color: 'white', fontWeight: 300 }}>
+            Ready to explore?
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              mb: 4,
+              color: 'rgba(255, 255, 255, 0.8)',
+              maxWidth: '600px',
+              mx: 'auto',
+            }}
+          >
+            Dive into the world of creative technology, experimental music, visual art, and innovative thinking.
+          </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => navigate('/music')}
+            sx={{
+              px: 4,
+              py: 1.5,
+              fontSize: '1.1rem',
+              backgroundColor: 'white',
+              color: '#1a1a1a',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              },
+            }}
+          >
+            Start Exploring
+          </Button>
+        </CardContent>
+      </Card>
     </Box>
   )
 }

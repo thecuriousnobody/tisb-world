@@ -1,12 +1,12 @@
 import React from 'react';
 import { 
-  Container, 
   Typography, 
   Box, 
   Card, 
   CardContent,
-  Grid
+  Button
 } from '@mui/material';
+import { OpenInNew } from '@mui/icons-material';
 
 interface ArtProject {
   id: string;
@@ -26,14 +26,14 @@ const artProjects: ArtProject[] = [
   },
   {
     id: '2',
-    title: 'Project 227171655',
+    title: 'Creative Exploration',
     embedSrc: 'https://www.behance.net/embed/project/227171655?ilo0=1',
     behanceUrl: 'https://www.behance.net/gallery/227171655',
     description: 'Creative exploration in visual design and digital art.'
   },
   {
     id: '3',
-    title: 'Project 228140981',
+    title: 'Digital Storytelling',
     embedSrc: 'https://www.behance.net/embed/project/228140981?ilo0=1',
     behanceUrl: 'https://www.behance.net/gallery/228140981',
     description: 'Innovative approach to digital creativity and visual storytelling.'
@@ -56,69 +56,153 @@ const artProjects: ArtProject[] = [
 
 const Art: React.FC = () => {
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h2" component="h1" gutterBottom>
-        Art
-      </Typography>
-      <Typography variant="h6" color="text.secondary" paragraph>
-        Visual explorations at the intersection of technology, consciousness, and creativity.
-      </Typography>
-      
-      <Box sx={{ mt: 4 }}>
-        <Box sx={{ 
-          display: 'grid', 
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-          gap: 4 
-        }}>
-          {artProjects.map((project) => (
-            <Card key={project.id} sx={{ overflow: 'visible' }}>
-              <Box sx={{ 
-                position: 'relative', 
-                paddingBottom: '78%', // Maintain Behance's 404x316 aspect ratio
-                height: 0 
-              }}>
-                <iframe
-                  src={project.embedSrc}
-                  title={project.title}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    border: 'none'
-                  }}
-                  allowFullScreen
-                  allow="clipboard-write"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
-              </Box>
-              
-              <CardContent>
-                <Typography variant="h6" component="h3" gutterBottom>
-                  {project.title}
-                </Typography>
-                
-                <Typography variant="body2" paragraph>
-                  {project.description}
-                </Typography>
-                
-                <Typography variant="body2" color="primary">
-                  <a 
-                    href={project.behanceUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                  >
-                    View full project →
-                  </a>
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </Box>
+    <Box sx={{ 
+      maxWidth: '1200px', 
+      mx: 'auto',
+      px: { xs: 2, md: 4 },
+      py: { xs: 4, md: 8 }
+    }}>
+      {/* Header Section */}
+      <Box sx={{ textAlign: 'center', mb: 8 }}>
+        <Typography 
+          variant="h1" 
+          component="h1" 
+          sx={{ 
+            mb: 3,
+            color: 'text.primary',
+          }}
+        >
+          Art
+        </Typography>
+        <Typography 
+          variant="h5" 
+          color="text.secondary" 
+          sx={{ 
+            maxWidth: '600px',
+            mx: 'auto',
+            fontWeight: 300,
+          }}
+        >
+          Visual explorations at the intersection of technology, consciousness, and creativity
+        </Typography>
       </Box>
-    </Container>
+      
+      {/* Art Projects Grid */}
+      <Box sx={{ 
+        display: 'grid',
+        gridTemplateColumns: { 
+          xs: '1fr', 
+          lg: 'repeat(2, 1fr)'
+        },
+        gap: 6,
+        mb: 8
+      }}>
+        {artProjects.map((project) => (
+          <Card 
+            key={project.id}
+            sx={{ 
+              overflow: 'hidden',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-8px)',
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+              },
+            }}
+          >
+            <Box sx={{ 
+              position: 'relative', 
+              paddingBottom: '60%', // 16:9.6 aspect ratio for better display
+              height: 0,
+              backgroundColor: '#f5f5f5',
+            }}>
+              <iframe
+                src={project.embedSrc}
+                title={project.title}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 'none'
+                }}
+                allowFullScreen
+                allow="clipboard-write"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </Box>
+            
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h5" sx={{ mb: 2, color: 'white', fontWeight: 400 }}>
+                {project.title}
+              </Typography>
+              
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  mb: 3,
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  lineHeight: 1.6,
+                }}
+              >
+                {project.description}
+              </Typography>
+              
+              <Button
+                variant="outlined"
+                startIcon={<OpenInNew />}
+                href={project.behanceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  color: 'white',
+                  '&:hover': {
+                    borderColor: 'rgba(255, 255, 255, 0.6)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                }}
+              >
+                View Full Project
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+
+      {/* Artist Statement */}
+      <Card>
+        <CardContent sx={{ p: 6, textAlign: 'center' }}>
+          <Typography variant="h4" sx={{ mb: 4, color: 'white', fontWeight: 300 }}>
+            Artistic Philosophy
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              color: 'rgba(255, 255, 255, 0.9)',
+              maxWidth: '700px',
+              mx: 'auto',
+              mb: 4,
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
+            }}
+          >
+            My visual work explores the liminal spaces where technology and consciousness intersect. 
+            Each piece is an investigation into the digital sublime, seeking to capture moments of 
+            transcendence within algorithmic processes and computational aesthetics.
+          </Typography>
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              color: 'rgba(255, 255, 255, 0.6)',
+              fontStyle: 'italic',
+            }}
+          >
+            "In the marriage of code and creativity, new forms of beauty emerge."
+          </Typography>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

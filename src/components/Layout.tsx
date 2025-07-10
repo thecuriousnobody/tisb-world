@@ -18,7 +18,7 @@ import {
   Menu as MenuIcon,
 } from '@mui/icons-material'
 import { useNavigate, useLocation } from 'react-router-dom'
-import logoImage from '../assets/tisb_logo_transparent.jpg'
+import logoImage from '../assets/TISB Logo Transparent.png'
 import { VoiceAssistant } from './VoiceAssistant'
 
 interface LayoutProps {
@@ -75,7 +75,6 @@ export default function Layout({ children }: LayoutProps) {
                 width: 'auto',
                 marginRight: '12px',
                 transition: 'all 0.3s ease',
-                filter: 'brightness(1) contrast(1.1)'
               }}
             />
             <Typography
