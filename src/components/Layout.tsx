@@ -27,12 +27,11 @@ interface LayoutProps {
 
 const navigationItems = [
   { label: 'Home', path: '/' },
-  { label: 'Music', path: '/music' },
-  { label: 'Art', path: '/art' },
-  { label: 'Blog', path: '/blog' },
-  { label: 'Code', path: '/code' },
-  { label: 'AI', path: '/ai' },
   { label: 'Podcast', path: '/podcast' },
+  { label: 'Blog', path: '/blog' },
+  { label: 'Art', path: '/art' },
+  { label: 'Music', path: '/music' },
+  { label: 'AI', path: '/ai' },
   { label: 'Timeline', path: '/timeline' },
   { label: 'Task Chat', path: '/task-chat' },
   { label: 'Admin', path: '/admin' },

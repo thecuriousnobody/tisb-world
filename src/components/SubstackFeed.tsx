@@ -8,6 +8,11 @@ interface SubstackPost {
   content: string
   pubDate: string
   guid: string
+  thumbnail?: string
+  enclosure?: {
+    link: string
+    type: string
+  }
 }
 
 interface SubstackData {
@@ -28,11 +33,67 @@ export default function SubstackFeed() {
 
   // Replace this with your actual Substack URL
   const SUBSTACK_URL = 'thecuriousnobody.substack.com'  // Your actual Substack URL
-  const feedUrl = `https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2F${SUBSTACK_URL}%2Ffeed`
+  
+  // Try multiple RSS services for better data coverage
+  const feedUrls = [
+    `https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2F${SUBSTACK_URL}%2Ffeed`,
+    `https://api.allorigins.win/get?url=${encodeURIComponent(`https://${SUBSTACK_URL}/feed`)}&format=json`,
+  ]
 
-  const extractImageFromContent = (content: string): string | null => {
-    const imageUrlMatch = content.match(/<img[^>]+src="([^"]+)"/i)
-    return imageUrlMatch ? imageUrlMatch[1] : null
+  const extractImageFromContent = (post: SubstackPost): string => {
+    // First, check if there's a thumbnail field
+    if (post.thumbnail) {
+      return post.thumbnail
+    }
+    
+    // Check for enclosure (media attachments)
+    if (post.enclosure && post.enclosure.type && post.enclosure.type.startsWith('image/')) {
+      return post.enclosure.link
+    }
+    
+    // Extract from content
+    if (post.content) {
+      const imageUrlMatch = post.content.match(/<img[^>]+src="([^"]+)"/i)
+      if (imageUrlMatch) {
+        return imageUrlMatch[1]
+      }
+    }
+    
+    // Extract from description as fallback
+    if (post.description) {
+      const imageUrlMatch = post.description.match(/<img[^>]+src="([^"]+)"/i)
+      if (imageUrlMatch) {
+        return imageUrlMatch[1]
+      }
+    }
+    
+    // Generate a placeholder based on post title
+    return generatePlaceholderImage(post.title)
+  }
+
+  const generatePlaceholderImage = (title: string): string => {
+    // Create a deterministic but varied placeholder
+    const seed = title.replace(/\s+/g, '').toLowerCase()
+    const hash = seed.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0)
+      return a & a
+    }, 0)
+    
+    // Use a more reliable placeholder service or generate a data URL
+    const colors = ['FF6B35', '2E3440', '5D4E37', 'D08C60', 'B48EAD']
+    const colorIndex = Math.abs(hash) % colors.length
+    const bgColor = colors[colorIndex]
+    
+    // Return a solid color data URL as fallback
+    return `data:image/svg+xml,${encodeURIComponent(`
+      <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="#${bgColor}"/>
+        <text x="200" y="150" font-family="Arial, sans-serif" font-size="24" font-weight="bold" 
+              text-anchor="middle" dominant-baseline="middle" fill="white" opacity="0.8">
+          ${title.slice(0, 20)}${title.length > 20 ? '...' : ''}
+        </text>
+      </svg>
+    `)}`
   }
 
   const stripHtmlTags = (html: string): string => {
@@ -44,7 +105,9 @@ export default function SubstackFeed() {
   const fetchLatestPosts = async () => {
     try {
       setLoading(true)
-      const response = await fetch(feedUrl)
+      
+      // Try the primary RSS service first
+      let response = await fetch(feedUrls[0])
       
       if (!response.ok) {
         throw new Error('Failed to fetch RSS feed')
@@ -54,6 +117,11 @@ export default function SubstackFeed() {
       
       if (data.status !== 'ok') {
         throw new Error('RSS feed returned error status')
+      }
+
+      // Debug: Log the first post to see what data we're getting
+      if (data.items && data.items.length > 0) {
+        console.log('Sample Substack post data:', data.items[0])
       }
 
       // Get up to 20 latest posts (increased from 3)
@@ -145,7 +213,7 @@ export default function SubstackFeed() {
         px: { xs: 2, md: 8 },
       }}>
         {posts.map((post, index) => {
-          const imageUrl = extractImageFromContent(post.content)
+          const imageUrl = extractImageFromContent(post)
           const cleanDescription = stripHtmlTags(post.description).slice(0, 150) + '...'
           
           return (
@@ -160,42 +228,34 @@ export default function SubstackFeed() {
                 '&:hover': {
                   transform: 'translateY(-8px)',
                   '& .post-image': {
-                    filter: 'brightness(60%)',
+                    filter: 'brightness(85%)', // Slightly brighter on hover
                   },
                 },
               }}
               onClick={() => window.open(post.link, '_blank')}
             >
-              {/* Background Image or Color */}
-              {imageUrl ? (
-                <CardMedia
-                  component="img"
-                  image={imageUrl}
-                  alt={post.title}
-                  className="post-image"
-                  sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    filter: 'brightness(40%)',
-                    transition: 'filter 0.3s ease',
-                  }}
-                />
-              ) : (
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'secondary.main', // Orange background
-                  }}
-                />
-              )}
+              {/* Background Image */}
+              <CardMedia
+                component="img"
+                image={imageUrl}
+                alt={post.title}
+                className="post-image"
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: 'brightness(75%)', // Lighter tint for more vibrant visuals
+                  transition: 'filter 0.3s ease',
+                }}
+                onError={(e) => {
+                  // Fallback to generated placeholder if image fails to load
+                  const target = e.target as HTMLImageElement
+                  target.src = generatePlaceholderImage(post.title)
+                }}
+              />
 
               {/* Content Overlay */}
               <CardContent
@@ -209,7 +269,7 @@ export default function SubstackFeed() {
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
                   p: 3,
-                  background: 'linear-gradient(transparent 0%, rgba(0,0,0,0.7) 100%)',
+                  background: 'linear-gradient(transparent 30%, rgba(0,0,0,0.5) 100%)',
                 }}
               >
                 <Typography

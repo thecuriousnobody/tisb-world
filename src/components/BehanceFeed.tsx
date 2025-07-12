@@ -224,7 +224,7 @@ export default function BehanceFeed() {
                 '&:hover': {
                   transform: 'translateY(-8px)',
                   '& .project-image': {
-                    filter: 'brightness(60%)',
+                    filter: 'brightness(80%)',
                     transform: 'scale(1.05)',
                   },
                 },
@@ -245,7 +245,7 @@ export default function BehanceFeed() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    filter: 'brightness(40%)',
+                    filter: 'brightness(60%)',
                     transition: 'all 0.3s ease',
                   }}
                 />
@@ -274,7 +274,7 @@ export default function BehanceFeed() {
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
                   p: 3,
-                  background: 'linear-gradient(transparent 0%, rgba(0,0,0,0.8) 100%)',
+                  background: 'linear-gradient(transparent 30%, rgba(0,0,0,0.5) 100%)',
                 }}
               >
                 <Typography

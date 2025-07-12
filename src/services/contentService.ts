@@ -108,12 +108,23 @@ export class ContentService {
       const doc = parser.parseFromString(xmlText, 'application/xml');
       const entries = Array.from(doc.querySelectorAll('entry'));
 
-      const contentItems: ContentItem[] = entries.slice(0, 5).map((entry, index) => {
+      const contentItems: ContentItem[] = entries.slice(0, 20).map((entry, index) => {
         const title = entry.querySelector('title')?.textContent || '';
         const link = entry.querySelector('link')?.getAttribute('href') || '';
         const description = entry.querySelector('media\\:description, description')?.textContent || '';
         const published = entry.querySelector('published')?.textContent || '';
-        const thumbnail = entry.querySelector('media\\:thumbnail')?.getAttribute('url') || '';
+        
+        // Try multiple ways to get thumbnail
+        let thumbnail = entry.querySelector('media\\:thumbnail')?.getAttribute('url') || 
+                       entry.querySelector('media\\:group media\\:thumbnail')?.getAttribute('url') || '';
+        
+        // If no thumbnail found, generate from YouTube video ID
+        if (!thumbnail && link) {
+          const videoIdMatch = link.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+          if (videoIdMatch) {
+            thumbnail = `https://img.youtube.com/vi/${videoIdMatch[1]}/maxresdefault.jpg`;
+          }
+        }
         
         return {
           id: `youtube-${index}`,

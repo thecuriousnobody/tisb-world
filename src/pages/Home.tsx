@@ -70,26 +70,25 @@ export default function Home() {
           </Typography>
         </Box>
         
-        {/* Subtitle */}
+        {/* The Complete Story - Single Powerful Blurb */}
         <Box sx={{ 
           width: '100%', 
-          overflow: 'hidden',
           mb: 6,
         }}>
           <Typography
-            variant="h3"
+            variant="body1"
             sx={{
-              fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.5rem', lg: '3rem' },
-              fontWeight: 600,
-              color: 'text.secondary',
-              maxWidth: '800px',
-              overflow: 'hidden',
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
+              fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.4rem' },
+              fontWeight: 500,
+              lineHeight: 1.6,
+              maxWidth: '900px',
+              color: 'text.primary',
+              mb: 4,
             }}
           >
-            Digital creator exploring the intersection of technology, art, and human experience
+            Creator, writer, and automation specialist exploring the intersection of technology and human experience. 
+            I showcase my art, share my thoughts through writing and podcasting, and help people streamline their 
+            digital lives. Welcome to my sandbox of ideas, where creativity meets innovation.
           </Typography>
         </Box>
 
@@ -109,34 +108,6 @@ export default function Home() {
           READ MY THOUGHTS
         </Button>
 
-      </Box>
-
-      {/* FOOTER STATEMENT */}
-      <Box sx={{
-        px: { xs: 2, md: 8 },
-        py: { xs: 6, md: 12 },
-        borderTop: '2px solid #000000',
-        textAlign: 'center',
-        overflow: 'hidden',
-      }}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2rem', lg: '2.5rem' },
-            fontWeight: 700,
-            maxWidth: '800px',
-            mx: 'auto',
-            lineHeight: 1.2,
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 4,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          Creating at the intersection of<br />
-          <Box component="span" sx={{ color: 'secondary.main' }}>TECHNOLOGY</Box> and{' '}
-          <Box component="span" sx={{ color: 'secondary.main' }}>HUMAN EXPERIENCE</Box>
-        </Typography>
       </Box>
 
     </Box>

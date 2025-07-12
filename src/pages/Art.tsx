@@ -10,36 +10,9 @@ import BehanceFeed from '../components/BehanceFeed';
 const Art: React.FC = () => {
   return (
     <Box sx={{ 
-      maxWidth: '1200px', 
-      mx: 'auto',
-      px: { xs: 2, md: 4 },
-      py: { xs: 4, md: 8 }
+      minHeight: '100vh',
+      py: { xs: 2, md: 4 },
     }}>
-      {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 8 }}>
-        <Typography 
-          variant="h1" 
-          component="h1" 
-          sx={{ 
-            mb: 3,
-            color: 'text.primary',
-          }}
-        >
-          Art
-        </Typography>
-        <Typography 
-          variant="h5" 
-          color="text.secondary" 
-          sx={{ 
-            maxWidth: '600px',
-            mx: 'auto',
-            fontWeight: 300,
-          }}
-        >
-          Visual explorations at the intersection of technology, consciousness, and creativity
-        </Typography>
-      </Box>
-      
       {/* Behance Feed */}
       <BehanceFeed />
 
