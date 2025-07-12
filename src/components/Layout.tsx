@@ -33,6 +33,7 @@ const navigationItems = [
   { label: 'Code', path: '/code' },
   { label: 'AI', path: '/ai' },
   { label: 'Podcast', path: '/podcast' },
+  { label: 'Timeline', path: '/timeline' },
   { label: 'Task Chat', path: '/task-chat' },
   { label: 'Admin', path: '/admin' },
 ]
@@ -51,9 +52,16 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Top Navigation */}
-      <AppBar position="fixed" sx={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}>
-        <Toolbar>
+      {/* BOLD TOP NAVIGATION */}
+      <AppBar 
+        position="fixed" 
+        sx={{ 
+          backgroundColor: 'primary.main',
+          boxShadow: 'none',
+          borderBottom: '3px solid #D2691E',
+        }}
+      >
+        <Toolbar sx={{ py: 1 }}>
           <Box
             sx={{ 
               display: 'flex', 
@@ -61,8 +69,8 @@ export default function Layout({ children }: LayoutProps) {
               flexGrow: 1, 
               cursor: 'pointer',
               '&:hover img': {
-                transform: 'scale(1.05)',
-                filter: 'brightness(1.2) contrast(1.2)'
+                transform: 'scale(1.1)',
+                filter: 'drop-shadow(0 0 8px #D2691E)'
               }
             }}
             onClick={() => handleNavigate('/')}
@@ -71,19 +79,20 @@ export default function Layout({ children }: LayoutProps) {
               src={logoImage}
               alt="TISB Logo"
               style={{
-                height: '40px',
+                height: '45px',
                 width: 'auto',
-                marginRight: '12px',
+                marginRight: '16px',
                 transition: 'all 0.3s ease',
               }}
             />
             <Typography
-              variant="h6"
+              variant="h4"
               component="div"
               sx={{ 
-                fontWeight: 400,
-                fontSize: '1.25rem',
-                letterSpacing: '0.02em',
+                fontWeight: 900,
+                fontSize: '2rem',
+                letterSpacing: '-0.02em',
+                color: 'white',
               }}
             >
               TISB
@@ -91,24 +100,40 @@ export default function Layout({ children }: LayoutProps) {
           </Box>
           
           {!isMobile ? (
-            <Box sx={{ display: 'flex', gap: 3 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 0.5,
+              flexWrap: 'nowrap',
+              overflow: 'hidden',
+              maxWidth: 'calc(100vw - 300px)', // Reserve space for logo
+            }}>
               {navigationItems.map((item) => (
-                <Typography
+                <Box
                   key={item.path}
-                  variant="body1"
                   sx={{
                     cursor: 'pointer',
-                    opacity: location.pathname === item.path ? 1 : 0.7,
-                    '&:hover': { opacity: 1 },
-                    fontWeight: location.pathname === item.path ? 500 : 300,
-                    fontSize: '0.95rem',
-                    letterSpacing: '0.02em',
+                    px: { xs: 1.5, md: 2.5 },
+                    py: 1.5,
+                    backgroundColor: location.pathname === item.path ? '#D2691E' : 'transparent',
+                    color: 'white',
+                    fontWeight: 700,
+                    fontSize: { xs: '0.75rem', md: '0.9rem' },
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
                     transition: 'all 0.2s ease',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0, // Allow flex shrinking
+                    '&:hover': {
+                      backgroundColor: '#D2691E',
+                      transform: 'translateY(-2px)',
+                    },
                   }}
                   onClick={() => handleNavigate(item.path)}
                 >
                   {item.label}
-                </Typography>
+                </Box>
               ))}
             </Box>
           ) : (
@@ -116,6 +141,12 @@ export default function Layout({ children }: LayoutProps) {
               color="inherit"
               aria-label="open drawer"
               onClick={() => setDrawerOpen(true)}
+              sx={{
+                backgroundColor: '#D2691E',
+                '&:hover': {
+                  backgroundColor: '#A0522D',
+                }
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -123,19 +154,32 @@ export default function Layout({ children }: LayoutProps) {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer - BOLD DESIGN */}
       <Drawer
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         sx={{
           '& .MuiDrawer-paper': {
-            backgroundColor: 'rgba(17, 17, 17, 0.95)',
-            backdropFilter: 'blur(10px)',
+            backgroundColor: '#1A0E0A',
+            color: 'white',
+            width: 300,
           },
         }}
       >
-        <Box sx={{ width: 250, pt: 2 }}>
+        <Box sx={{ pt: 4 }}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: 900,
+              fontSize: '3rem',
+              textAlign: 'center',
+              mb: 4,
+              color: '#D2691E',
+            }}
+          >
+            MENU
+          </Typography>
           <List>
             {navigationItems.map((item) => (
               <ListItem
@@ -143,15 +187,26 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={() => handleNavigate(item.path)}
                 sx={{
                   cursor: 'pointer',
-                  opacity: location.pathname === item.path ? 1 : 0.7,
-                  '&:hover': { opacity: 1 },
+                  py: 2,
+                  px: 4,
+                  backgroundColor: location.pathname === item.path ? '#D2691E' : 'transparent',
+                  mb: 1,
+                  mx: 2,
+                  '&:hover': { 
+                    backgroundColor: '#D2691E',
+                    transform: 'translateX(8px)',
+                  },
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <ListItemText
                   primary={item.label}
                   sx={{
                     '& .MuiTypography-root': {
-                      fontWeight: location.pathname === item.path ? 400 : 300,
+                      fontWeight: 700,
+                      fontSize: '1.25rem',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
                     },
                   }}
                 />

@@ -4,22 +4,22 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1a1a1a',
-      light: '#333333',
+      main: '#1A0E0A', // Rich dark brown/black
+      light: '#3D2B1F',
       dark: '#000000',
     },
     secondary: {
-      main: '#f5f5f5',
-      light: '#ffffff',
-      dark: '#e0e0e0',
+      main: '#FF4500', // BRIGHT BOLD ORANGE
+      light: '#FF6A33',
+      dark: '#CC3700',
     },
     background: {
-      default: '#f8f8f8',
-      paper: '#1a1a1a',
+      default: '#FF4500', // BRIGHT ORANGE BACKGROUND
+      paper: '#000000', // Pure black
     },
     text: {
-      primary: '#1a1a1a',
-      secondary: '#666666',
+      primary: '#000000', // Pure black text on orange
+      secondary: '#333333', // Dark gray
     },
     grey: {
       100: '#f5f5f5',
@@ -34,46 +34,77 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Space Grotesk", "Inter", "Outfit", -apple-system, BlinkMacSystemFont, sans-serif',
+    fontFamily: '"Yapari", "Yapari Extended", "Yapari Wide", "Yapari Expanded", "Black Ops One", "Bungee", "Archivo Black", "Russo One", "Fredoka One", "Righteous", "Racing Sans One", "Orbitron", "Bebas Neue", "Anton", "Oswald", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
     h1: {
-      fontWeight: 700,
-      fontSize: '3.5rem',
-      lineHeight: 1.1,
-      letterSpacing: '-0.02em',
+      fontWeight: 900, // MAXIMUM BOLD
+      fontSize: '8rem', // MASSIVE
+      lineHeight: 0.9,
+      letterSpacing: '-0.03em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
+      '@media (max-width:768px)': {
+        fontSize: '4rem',
+      },
     },
     h2: {
-      fontWeight: 600,
-      fontSize: '2.5rem',
-      lineHeight: 1.2,
-      letterSpacing: '-0.01em',
+      fontWeight: 800,
+      fontSize: '5rem',
+      lineHeight: 0.95,
+      letterSpacing: '-0.02em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
+      '@media (max-width:768px)': {
+        fontSize: '3rem',
+      },
     },
     h3: {
-      fontWeight: 500,
-      fontSize: '2rem',
-      lineHeight: 1.3,
+      fontWeight: 700,
+      fontSize: '3.5rem',
+      lineHeight: 1.0,
+      letterSpacing: '-0.015em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
+      '@media (max-width:768px)': {
+        fontSize: '2rem',
+      },
     },
     h4: {
-      fontWeight: 500,
-      fontSize: '1.5rem',
-      lineHeight: 1.4,
+      fontWeight: 600,
+      fontSize: '2.5rem',
+      lineHeight: 1.1,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
+      '@media (max-width:768px)': {
+        fontSize: '1.75rem',
+      },
     },
     h5: {
-      fontWeight: 500,
-      fontSize: '1.25rem',
-      lineHeight: 1.5,
+      fontWeight: 600,
+      fontSize: '1.75rem',
+      lineHeight: 1.2,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
     },
     h6: {
-      fontWeight: 500,
-      fontSize: '1rem',
-      lineHeight: 1.5,
+      fontWeight: 600,
+      fontSize: '1.25rem',
+      lineHeight: 1.3,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      wordBreak: 'break-word',
     },
     body1: {
-      fontSize: '1rem',
-      lineHeight: 1.6,
+      fontSize: '1.125rem',
+      lineHeight: 1.7,
       fontWeight: 400,
     },
     body2: {
-      fontSize: '0.875rem',
+      fontSize: '1rem',
       lineHeight: 1.6,
       fontWeight: 400,
     },
@@ -87,36 +118,44 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1a1a1a',
+          backgroundColor: '#000000',
           color: '#ffffff',
-          borderRadius: '16px',
+          borderRadius: '0px', // Sharp edges for boldness
           border: 'none',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          boxShadow: 'none',
+          overflow: 'hidden', // Prevent content overflow
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '200px', // Ensure consistent card heights
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '24px',
-          padding: '10px 28px',
+          borderRadius: '0px', // No rounded corners
+          padding: '16px 32px',
           textTransform: 'none',
-          fontWeight: 500,
-          fontSize: '0.95rem',
+          fontWeight: 600,
+          fontSize: '1rem',
+          letterSpacing: '0.5px',
         },
         outlined: {
-          borderColor: '#e0e0e0',
-          color: '#1a1a1a',
+          borderColor: '#1A0E0A',
+          borderWidth: '2px',
+          color: '#1A0E0A',
           '&:hover': {
-            borderColor: '#1a1a1a',
-            backgroundColor: 'rgba(26, 26, 26, 0.04)',
+            borderColor: '#D2691E',
+            color: '#D2691E',
+            backgroundColor: 'transparent',
+            borderWidth: '2px',
           },
         },
         contained: {
-          backgroundColor: '#1a1a1a',
+          backgroundColor: '#1A0E0A',
           color: '#ffffff',
           '&:hover': {
-            backgroundColor: '#333333',
+            backgroundColor: '#D2691E',
           },
         },
       },
@@ -124,17 +163,26 @@ export const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: '16px',
-          fontWeight: 300,
+          borderRadius: '0px',
+          fontWeight: 500,
+          textTransform: 'uppercase',
+          letterSpacing: '1px',
+          fontSize: '0.75rem',
         },
         outlined: {
-          borderColor: 'rgba(255, 255, 255, 0.3)',
-          color: 'rgba(255, 255, 255, 0.8)',
+          borderColor: '#1A0E0A',
+          color: '#1A0E0A',
+          borderWidth: '1px',
+          '&:hover': {
+            backgroundColor: '#D2691E',
+            color: '#ffffff',
+            borderColor: '#D2691E',
+          },
         },
       },
     },
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 0, // No rounded corners anywhere
   },
 });

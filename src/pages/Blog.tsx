@@ -1,130 +1,71 @@
-import React from 'react';
-import { 
-  Container, 
-  Typography, 
-  Box, 
-  Card, 
-  CardContent,
-  Chip,
-  Stack
-} from '@mui/material';
+import { Typography, Box } from '@mui/material'
+import SubstackFeed from '../components/SubstackFeed'
 
-interface BlogPost {
-  id: string;
-  title: string;
-  url: string;
-  excerpt: string;
-  publishDate: string;
-  tags: string[];
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'The Accidental Artist',
-    url: 'https://thecuriousnobody.substack.com/p/the-accidental-artist?r=1b8vj5',
-    excerpt: 'Exploring the unexpected journey into creativity and what it means to become an artist by accident.',
-    publishDate: '2024-12-01',
-    tags: ['Creativity', 'Art', 'Personal Journey', 'Self-Discovery']
-  },
-  {
-    id: '2',
-    title: "We're Gonna Have Our Bullshit Called",
-    url: 'https://thecuriousnobody.substack.com/p/were-gonna-have-our-bullshit-called?r=1b8vj5',
-    excerpt: 'A reflection on authenticity, accountability, and the inevitable moment when pretense meets reality.',
-    publishDate: '2024-11-15',
-    tags: ['Authenticity', 'Truth', 'Personal Growth', 'Reflection']
-  },
-  {
-    id: '3',
-    title: 'The Ganesha Chronicles: How a Cat...',
-    url: 'https://thecuriousnobody.substack.com/p/the-ganesha-chronicles-how-a-cat?r=1b8vj5',
-    excerpt: 'An unexpected story about wisdom, obstacles, and the unlikely teachers that appear in our lives.',
-    publishDate: '2024-10-30',
-    tags: ['Spirituality', 'Life Lessons', 'Storytelling', 'Wisdom']
-  }
-];
-
-const BlogCard: React.FC<{ post: BlogPost }> = ({ post }) => {
+export default function Blog() {
   return (
-    <Card sx={{ mb: 3, transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-2px)' } }}>
-      <CardContent>
-        <Typography variant="h5" component="h3" gutterBottom>
-          <a 
-            href={post.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ 
-              textDecoration: 'none', 
-              color: 'inherit'
+    <Box sx={{ 
+      minHeight: '100vh',
+      py: { xs: 2, md: 4 },
+    }}>
+      {/* Substack Feed */}
+      <SubstackFeed />
+
+      {/* About Section */}
+      <Box sx={{ 
+        mt: 12,
+        px: { xs: 2, md: 8 },
+        borderTop: '2px solid #000000',
+        pt: 8,
+      }}>
+        <Box
+          sx={{
+            backgroundColor: '#000000',
+            color: 'white',
+            borderRadius: '0px',
+            p: { xs: 4, md: 8 },
+            textAlign: 'center',
+            border: '2px solid #FF4500',
+          }}
+        >
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              fontSize: { xs: '1.75rem', md: '2.5rem' },
+              fontWeight: 700,
+              mb: 4,
+              overflow: 'hidden',
             }}
           >
-            {post.title}
-          </a>
-        </Typography>
-        
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          {post.publishDate}
-        </Typography>
-        
-        <Typography variant="body1" paragraph>
-          {post.excerpt}
-        </Typography>
-        
-        <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
-          {post.tags.map((tag) => (
-            <Chip key={tag} label={tag} size="small" variant="outlined" />
-          ))}
-        </Stack>
-        
-        <Typography variant="body2" color="primary">
-          <a 
-            href={post.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            ABOUT THE BLOG
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              fontSize: { xs: '1rem', md: '1.125rem' },
+              maxWidth: '700px',
+              mx: 'auto',
+              mb: 6,
+              lineHeight: 1.7,
+              opacity: 0.9,
+            }}
           >
-            Read on Substack →
-          </a>
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-};
-
-const Blog: React.FC = () => {
-  return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h2" component="h1" gutterBottom>
-        Blog
-      </Typography>
-      <Typography variant="h6" color="text.secondary" paragraph>
-        Thoughts from "The Curious Nobody" - exploring creativity, authenticity, and the unexpected.
-      </Typography>
-      
-      <Box sx={{ mt: 4 }}>
-        {blogPosts.map((post) => (
-          <BlogCard key={post.id} post={post} />
-        ))}
-      </Box>
-      
-      <Box sx={{ mt: 6, textAlign: 'center' }}>
-        <Typography variant="body1" paragraph>
-          Want to read more? Check out my full publication:
-        </Typography>
-        <Typography variant="h6" color="primary">
-          <a 
-            href="https://thecuriousnobody.substack.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            "The Curious Nobody" is my exploration of the spaces between technology and humanity, 
+            creativity and logic, the known and the mysterious. Each post is an attempt to make 
+            sense of our rapidly changing world through the lens of curiosity and wonder.
+          </Typography>
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              fontSize: '1rem',
+              fontStyle: 'italic',
+              opacity: 0.7,
+              color: '#FF4500',
+            }}
           >
-            The Curious Nobody on Substack →
-          </a>
-        </Typography>
+            "The most beautiful thing we can experience is the mysterious." - Albert Einstein
+          </Typography>
+        </Box>
       </Box>
-    </Container>
-  );
-};
-
-export default Blog;
+    </Box>
+  )
+}

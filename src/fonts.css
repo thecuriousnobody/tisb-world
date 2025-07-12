@@ -1,0 +1,158 @@
+/* Yapari Font Face Declarations */
+
+/* Yapari Regular */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yapari Medium */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yapari SemiBold */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yapari Bold */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yapari ExtraBold */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yapari Ultra (Black) */
+@font-face {
+  font-family: 'Yapari';
+  src: url('/fonts/yapari/YapariTrial-Ultra.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* YAPARI EXTENDED VARIANTS - For even more brutal impact */
+
+/* Yapari Extended variants for extra wide characters */
+@font-face {
+  font-family: 'Yapari Extended';
+  src: url('/fonts/yapari/YapariTrial-Extended.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Extended';
+  src: url('/fonts/yapari/YapariTrial-BoldExtended.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Extended';
+  src: url('/fonts/yapari/YapariTrial-ExtraBoldExtended.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Extended';
+  src: url('/fonts/yapari/YapariTrial-UltraExtended.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* YAPARI WIDE VARIANTS - For maximum brutal impact */
+
+@font-face {
+  font-family: 'Yapari Wide';
+  src: url('/fonts/yapari/YapariTrial-Wide.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Wide';
+  src: url('/fonts/yapari/YapariTrial-BoldWide.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Wide';
+  src: url('/fonts/yapari/YapariTrial-ExtraBoldWide.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Wide';
+  src: url('/fonts/yapari/YapariTrial-UltraWide.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* YAPARI EXPANDED VARIANTS - For brutalist display purposes */
+
+@font-face {
+  font-family: 'Yapari Expanded';
+  src: url('/fonts/yapari/YapariTrial-Expanded.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Expanded';
+  src: url('/fonts/yapari/YapariTrial-BoldExpanded.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Expanded';
+  src: url('/fonts/yapari/YapariTrial-ExtraBoldExpanded.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yapari Expanded';
+  src: url('/fonts/yapari/YapariTrial-UltraExpanded.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
