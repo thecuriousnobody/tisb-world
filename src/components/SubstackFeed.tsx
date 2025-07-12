@@ -222,7 +222,7 @@ export default function SubstackFeed() {
               sx={{
                 cursor: 'pointer',
                 position: 'relative',
-                height: '300px',
+                height: '380px', // Increased from 300px to 380px for better aspect ratio
                 overflow: 'hidden',
                 transition: 'all 0.3s ease',
                 '&:hover': {

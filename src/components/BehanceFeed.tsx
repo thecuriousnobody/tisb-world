@@ -218,7 +218,7 @@ export default function BehanceFeed() {
               sx={{
                 cursor: 'pointer',
                 position: 'relative',
-                height: '350px',
+                height: '380px', // Increased from 350px to 380px for better aspect ratio
                 overflow: 'hidden',
                 transition: 'all 0.3s ease',
                 '&:hover': {
