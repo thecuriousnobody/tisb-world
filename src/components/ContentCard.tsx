@@ -35,6 +35,11 @@ const platformConfig = {
     color: '#1DB954',
     label: 'Track',
   },
+  behance: {
+    icon: <Article />,
+    color: '#1769FF',
+    label: 'Art Project',
+  },
   other: {
     icon: <Article />,
     color: '#666666',
