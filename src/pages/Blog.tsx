@@ -1,5 +1,6 @@
 import { Typography, Box } from '@mui/material'
 import SubstackFeed from '../components/SubstackFeed'
+import SocialSection from '../components/SocialSection'
 
 export default function Blog() {
   return (
@@ -53,19 +54,11 @@ export default function Blog() {
             creativity and logic, the known and the mysterious. Each post is an attempt to make 
             sense of our rapidly changing world through the lens of curiosity and wonder.
           </Typography>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              fontSize: '1rem',
-              fontStyle: 'italic',
-              opacity: 0.7,
-              color: '#FF4500',
-            }}
-          >
-            "The most beautiful thing we can experience is the mysterious." - Albert Einstein
-          </Typography>
         </Box>
       </Box>
+
+      {/* Social Media Section */}
+      <SocialSection />
     </Box>
   )
 }

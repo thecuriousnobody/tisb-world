@@ -1,5 +1,6 @@
 import { Typography, Box, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import SocialSection from '../components/SocialSection'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -103,12 +104,15 @@ export default function Home() {
             py: 2,
             mb: 8,
           }}
-          onClick={() => navigate('/blog')}
+          onClick={() => navigate('/thoughts')}
         >
           READ MY THOUGHTS
         </Button>
 
       </Box>
+
+      {/* Social Media Section */}
+      <SocialSection />
 
     </Box>
   )

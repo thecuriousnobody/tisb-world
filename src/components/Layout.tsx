@@ -19,7 +19,6 @@ import {
 } from '@mui/icons-material'
 import { useNavigate, useLocation } from 'react-router-dom'
 import logoImage from '../assets/TISB Logo Transparent.png'
-import { VoiceAssistant } from './VoiceAssistant'
 
 interface LayoutProps {
   children: ReactNode
@@ -32,9 +31,6 @@ const navigationItems = [
   { label: 'Art', path: '/art' },
   { label: 'Music', path: '/music' },
   { label: 'AI', path: '/ai' },
-  { label: 'Timeline', path: '/timeline' },
-  { label: 'Task Chat', path: '/task-chat' },
-  { label: 'Admin', path: '/admin' },
 ]
 
 export default function Layout({ children }: LayoutProps) {
@@ -227,9 +223,6 @@ export default function Layout({ children }: LayoutProps) {
       >
         {children}
       </Container>
-
-      {/* Voice Assistant */}
-      <VoiceAssistant />
     </Box>
   )
 }

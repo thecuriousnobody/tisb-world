@@ -6,6 +6,7 @@ import {
   CardContent
 } from '@mui/material';
 import BehanceFeed from '../components/BehanceFeed';
+import SocialSection from '../components/SocialSection';
 
 const Art: React.FC = () => {
   return (
@@ -38,6 +39,9 @@ const Art: React.FC = () => {
           </Typography>
         </CardContent>
       </Card>
+
+      {/* Social Media Section */}
+      <SocialSection />
     </Box>
   );
 };

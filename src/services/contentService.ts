@@ -129,7 +129,7 @@ export class ContentService {
         return {
           id: `youtube-${index}`,
           title,
-          description: description.substring(0, 200) + '...',
+          description: description.length > 300 ? description.substring(0, 300) + '...' : description,
           link,
           publishedAt: new Date(published),
           platform: 'youtube' as const,

@@ -6,89 +6,164 @@ import {
 } from '@mui/material';
 import { useYouTubeVideos } from '../hooks/useContent';
 import type { ContentItem } from '../services/contentService';
+import SocialSection from '../components/SocialSection';
 
 const VideoCard: React.FC<{ video: ContentItem }> = ({ video }) => {
   return (
     <Card 
       sx={{ 
         cursor: 'pointer',
-        position: 'relative',
-        height: '250px',
+        display: 'flex', // Horizontal layout
+        height: '180px', // Fixed height for consistency
         overflow: 'hidden',
         transition: 'all 0.3s ease',
+        backgroundColor: '#000000',
+        border: '2px solid #FF4500',
         '&:hover': {
-          transform: 'translateY(-8px)',
+          transform: 'translateY(-4px)',
+          boxShadow: '0 8px 24px rgba(255, 69, 0, 0.3)',
           '& .video-thumbnail': {
-            filter: 'brightness(80%)',
             transform: 'scale(1.05)',
           },
         },
       }}
       onClick={() => window.open(video.link, '_blank')}
     >
-      {/* Thumbnail Background */}
-      <Box
-        className="video-thumbnail"
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundImage: `url(${video.thumbnail})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'brightness(60%)',
-          transition: 'all 0.3s ease',
-        }}
-      />
-
-      {/* Content Overlay */}
+      {/* Thumbnail Section - Left Side */}
       <Box
         sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
+          width: '40%', // 40% for thumbnail
+          minWidth: '200px',
           height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          p: 2,
-          background: 'linear-gradient(transparent 30%, rgba(0,0,0,0.5) 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+          backgroundColor: '#333', // Fallback color
         }}
       >
+        {video.thumbnail ? (
+          <img
+            src={video.thumbnail}
+            alt={video.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'all 0.3s ease',
+            }}
+            className="video-thumbnail"
+            onError={(e) => {
+              // Fallback if image fails to load
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
+          />
+        ) : (
+          // Fallback thumbnail
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#FF4500',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography sx={{ color: 'white', fontSize: '1.5rem', fontWeight: 700 }}>
+              PODCAST
+            </Typography>
+          </Box>
+        )}
+        
+        {/* Play Button Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 48,
+            height: 48,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255, 69, 0, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.3s ease',
+          }}
+        >
+          <Typography sx={{ color: 'white', fontSize: '1.5rem', marginLeft: '2px' }}>▶</Typography>
+        </Box>
+      </Box>
+
+      {/* Content Section - Right Side */}
+      <Box
+        sx={{
+          width: '60%', // 60% for content
+          p: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          backgroundColor: '#000000',
+        }}
+      >
+        {/* Title */}
         <Typography
           variant="h6"
           sx={{
             color: 'white',
             fontWeight: 700,
-            fontSize: { xs: '0.9rem', md: '1rem' },
-            lineHeight: 1.2,
-            mb: 1,
+            fontSize: { xs: '0.95rem', md: '1.1rem' },
+            lineHeight: 1.3,
+            mb: 2,
             overflow: 'hidden',
             display: '-webkit-box',
-            WebkitLineClamp: 2,
+            WebkitLineClamp: 2, // Allow 2 lines for title
             WebkitBoxOrient: 'vertical',
           }}
         >
           {video.title}
         </Typography>
-        
-        {/* Play Button Indicator */}
-        <Box
+
+        {/* Description */}
+        <Typography
+          variant="body2"
           sx={{
-            width: 32,
-            height: 32,
-            borderRadius: '50%',
-            backgroundColor: '#FF4500',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            alignSelf: 'flex-start',
+            color: 'rgba(255, 255, 255, 0.85)',
+            fontSize: { xs: '0.8rem', md: '0.85rem' },
+            lineHeight: 1.4,
+            mb: 2,
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: 4, // Show 4 lines of description
+            WebkitBoxOrient: 'vertical',
+            flex: 1, // Take remaining space
           }}
         >
-          <Typography sx={{ color: 'white', fontSize: '1.2rem' }}>▶</Typography>
+          {video.description}
+        </Typography>
+
+        {/* Date and Duration */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography
+            variant="caption"
+            sx={{
+              color: '#FF4500',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+            }}
+          >
+            {video.publishedAt.toLocaleDateString()}
+          </Typography>
+          
+          <Typography
+            variant="caption"
+            sx={{
+              color: 'rgba(255, 255, 255, 0.6)',
+              fontSize: '0.75rem',
+            }}
+          >
+            Watch →
+          </Typography>
         </Box>
       </Box>
     </Card>
@@ -152,8 +227,8 @@ const Podcast: React.FC = () => {
           {videos && videos.length > 0 && (
             <Box sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
-              gap: 3,
+              gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' }, // 1 column on mobile, 2 on desktop
+              gap: 4, // Increased gap for better spacing
             }}>
               {videos.map((video: ContentItem) => (
                 <VideoCard key={video.id} video={video} />
@@ -227,6 +302,9 @@ const Podcast: React.FC = () => {
           </Typography>
         </Box>
       </Box>
+
+      {/* Social Media Section */}
+      <SocialSection />
     </Box>
   );
 };

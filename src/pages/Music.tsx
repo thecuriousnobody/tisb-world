@@ -3,6 +3,7 @@ import {
   Typography, 
   Box
 } from '@mui/material';
+import SocialSection from '../components/SocialSection';
 
 const Music: React.FC = () => {
   return (
@@ -136,6 +137,9 @@ const Music: React.FC = () => {
           </Typography>
         </Box>
       </Box>
+
+      {/* Social Media Section */}
+      <SocialSection />
     </Box>
   );
 };
