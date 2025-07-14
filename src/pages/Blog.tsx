@@ -45,7 +45,7 @@ export default function Blog() {
               fontSize: { xs: '1rem', md: '1.125rem' },
               maxWidth: '700px',
               mx: 'auto',
-              mb: 6,
+              mb: 4,
               lineHeight: 1.7,
               opacity: 0.9,
             }}
@@ -53,6 +53,35 @@ export default function Blog() {
             "The Curious Nobody" is my exploration of the spaces between technology and humanity, 
             creativity and logic, the known and the mysterious. Each post is an attempt to make 
             sense of our rapidly changing world through the lens of curiosity and wonder.
+          </Typography>
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              fontSize: { xs: '0.9rem', md: '1rem' },
+              maxWidth: '700px',
+              mx: 'auto',
+              mb: 6,
+              lineHeight: 1.7,
+              opacity: 0.7,
+              fontStyle: 'italic',
+            }}
+          >
+            Questions, thoughts, or just want to continue the conversation? Reach out at{' '}
+            <Box 
+              component="a" 
+              href="mailto:rajeev@theideasandbox.com"
+              sx={{ 
+                color: '#FFFFFF',
+                textDecoration: 'underline',
+                fontWeight: 600,
+                '&:hover': { 
+                  color: '#FF4500',
+                  textDecoration: 'underline' 
+                }
+              }}
+            >
+              rajeev@theideasandbox.com
+            </Box>
           </Typography>
         </Box>
       </Box>
