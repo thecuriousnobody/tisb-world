@@ -39,7 +39,7 @@ export default function Thoughts() {
             mb: 4,
           }}
         >
-          THE SPARK OF IDEAS
+          THE SANDBOX OF IDEAS
         </Typography>
       </Box>
 
@@ -50,7 +50,7 @@ export default function Thoughts() {
         mx: 'auto',
       }}>
         
-        {/* Historical Context */}
+        {/* The Origin Story */}
         <Box sx={{
           backgroundColor: '#000000',
           color: 'white',
@@ -67,7 +67,7 @@ export default function Thoughts() {
               color: '#FF4500',
             }}
           >
-            THEN: THE ENLIGHTENMENT
+            WHERE IDEAS BEGIN
           </Typography>
           <Typography
             variant="body1"
@@ -78,9 +78,9 @@ export default function Thoughts() {
               opacity: 0.9,
             }}
           >
-            The 18th century Enlightenment was humanity's great intellectual awakening. In the salons of Paris, 
-            the coffeehouses of London, and the academies across Europe, brilliant minds gathered to challenge 
-            dogma, question authority, and imagine new possibilities for human knowledge and society.
+            Growing up in 1980s and 90s Bangalore, I watched a city transform from sleepy garden town to India's 
+            Silicon Valley. But it was moving to America that crystallized something profound for me—the gap between 
+            having ideas and implementing them systematically.
           </Typography>
           <Typography
             variant="body1"
@@ -90,13 +90,13 @@ export default function Thoughts() {
               opacity: 0.9,
             }}
           >
-            Voltaire championed reason over superstition. Diderot compiled all human knowledge into his 
-            Encyclopédie. Rousseau reimagined the social contract. These weren't just academic exercises—they 
-            were revolutionary acts that reshaped civilization itself.
+            America wasn't just prosperous because of resources or luck. It had developed systematic approaches 
+            to turning ideas into reality—processes, structures, and mindsets that could be studied, understood, 
+            and adapted. That insight became my sandbox.
           </Typography>
         </Box>
 
-        {/* Modern Context */}
+        {/* The Philosophy */}
         <Box sx={{
           backgroundColor: '#D2691E',
           color: 'white',
@@ -113,7 +113,7 @@ export default function Thoughts() {
               color: 'white',
             }}
           >
-            NOW: THE DIGITAL RENAISSANCE
+            THE LABORATORY OF POSSIBILITY
           </Typography>
           <Typography
             variant="body1"
@@ -123,10 +123,21 @@ export default function Thoughts() {
               mb: 4,
             }}
           >
-            Today, we stand at another pivotal moment. Artificial intelligence, automation, and digital creativity 
-            are not just tools—they're catalysts for a new kind of human expression. The curious minds of our era 
-            aren't gathering in salons; they're building in digital spaces, creating at the intersection of human 
-            intuition and machine capability.
+            This space—TISB—is my laboratory for exploring ideas across disciplines. Art, automation, music, 
+            writing, AI, philosophy. Not because I'm seeking attention, but because cross-pollination between 
+            different domains often yields the most interesting insights.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: '1.1rem', md: '1.25rem' },
+              lineHeight: 1.7,
+              mb: 4,
+            }}
+          >
+            When you understand both creative expression and systematic thinking, you start seeing patterns. 
+            How automation principles apply to art. How design thinking improves code. How storytelling enhances 
+            technical communication.
           </Typography>
           <Typography
             variant="body1"
@@ -135,9 +146,8 @@ export default function Thoughts() {
               lineHeight: 1.7,
             }}
           >
-            This is my contribution to that ongoing conversation. Through art, writing, music, and code, I explore 
-            what it means to be human in an age of artificial minds. Every podcast episode, blog post, and creative 
-            project is part of a larger experiment in understanding our evolving relationship with technology.
+            Every project here—whether it's a podcast exploring AI ethics, generative art experiments, or building 
+            efficient systems—flows from this fundamental curiosity about how ideas move from imagination to impact.
           </Typography>
         </Box>
 
@@ -157,7 +167,7 @@ export default function Thoughts() {
               mb: 4,
             }}
           >
-            JOIN THE CONVERSATION
+            EXPLORE THE SANDBOX
           </Typography>
           <Typography
             variant="body1"
@@ -169,9 +179,9 @@ export default function Thoughts() {
               mb: 6,
             }}
           >
-            Ideas are meant to be shared, challenged, and evolved. Whether you're fascinated by AI's creative 
-            potential, interested in automation's philosophical implications, or simply curious about the future 
-            we're building together—this is your invitation to explore alongside me.
+            Ideas are most powerful when they're shared, tested, and evolved through dialogue. Whether you're 
+            curious about AI's creative potential, interested in systematic approaches to innovation, or simply 
+            enjoy exploring connections between seemingly unrelated fields—welcome to the sandbox.
           </Typography>
           
           {/* Action Buttons */}
@@ -195,7 +205,7 @@ export default function Thoughts() {
               }}
               onClick={() => navigate('/blog')}
             >
-              READ MY THOUGHTS
+              READ THE EXPERIMENTS
             </Button>
             <Button
               variant="outlined"
@@ -215,7 +225,7 @@ export default function Thoughts() {
               }}
               onClick={() => navigate('/podcast')}
             >
-              LISTEN & DISCUSS
+              JOIN THE CONVERSATION
             </Button>
           </Box>
         </Box>
