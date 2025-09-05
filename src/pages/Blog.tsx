@@ -1,15 +1,67 @@
 import { Typography, Box } from '@mui/material'
-import SubstackFeed from '../components/SubstackFeed'
+import { useSubstackPosts } from '../hooks/useContent'
+import { useVideoLoadMore } from '../hooks/useVideoLoadMore'
+import BrutalistBlogGrid from '../components/BrutalistBlogGrid'
 import SocialSection from '../components/SocialSection'
 
 export default function Blog() {
+  const { posts, loading, error } = useSubstackPosts();
+  const { displayedVideos, loadMore, hasMore } = useVideoLoadMore(posts || [], {
+    initialCount: 8,
+    increment: 6
+  });
+
+  // Transform posts to match BrutalistBlogGrid format with actual reading time
+  const blogPosts = displayedVideos?.map(post => ({
+    ...post,
+    readTime: post.tags?.[0] || '5 min read',
+  })) || [];
+
   return (
     <Box sx={{ 
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
-      {/* Substack Feed */}
-      <SubstackFeed />
+      {/* Brutalist Blog Grid */}
+      <BrutalistBlogGrid posts={blogPosts} loading={loading} error={error} />
+      
+      {/* Load More Button */}
+      {hasMore && !loading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', pb: 4 }}>
+          <Box
+            component="button"
+            onClick={loadMore}
+            sx={{
+              backgroundColor: '#000000',
+              color: '#FFFFFF',
+              border: '3px solid #FF4500',
+              px: 6,
+              py: 2,
+              fontSize: '1.25rem',
+              fontWeight: 900,
+              fontFamily: 'monospace',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              position: 'relative',
+              transition: 'all 0.2s ease',
+              boxShadow: '4px 4px 0px #FF4500',
+              '&:hover': {
+                transform: 'translate(-4px, -4px)',
+                boxShadow: '8px 8px 0px #FF4500',
+                backgroundColor: '#FF4500',
+                color: '#000000',
+              },
+              '&:active': {
+                transform: 'translate(0, 0)',
+                boxShadow: 'none',
+              },
+            }}
+          >
+            LOAD MORE POSTS
+          </Box>
+        </Box>
+      )}
 
       {/* About Section */}
       <Box sx={{ 

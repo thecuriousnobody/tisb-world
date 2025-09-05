@@ -82,3 +82,57 @@ export function useYouTubeVideos() {
 
   return { videos, loading, error };
 }
+
+export function useSpotifyContent() {
+  const [music, setMusic] = useState<ContentItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMusic = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const contentService = ContentService.getInstance();
+        const items = await contentService.getContentByPlatform('spotify');
+        setMusic(items);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch Spotify music');
+        console.error('Spotify fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMusic();
+  }, []);
+
+  return { music, loading, error };
+}
+
+export function useBehanceProjects() {
+  const [projects, setProjects] = useState<ContentItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const contentService = ContentService.getInstance();
+        const items = await contentService.getContentByPlatform('behance');
+        setProjects(items);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch Behance projects');
+        console.error('Behance fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  return { projects, loading, error };
+}

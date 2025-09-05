@@ -1,16 +1,162 @@
 import React from 'react';
 import { 
   Typography, 
-  Box
+  Box,
+  Card,
+  CardMedia,
+  CardContent
 } from '@mui/material';
 import SocialSection from '../components/SocialSection';
+import { useSpotifyContent } from '../hooks/useContent';
 
 const Music: React.FC = () => {
+  const { music, loading, error } = useSpotifyContent();
+
   return (
     <Box sx={{ 
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
+      {/* Latest Releases Section */}
+      <Box sx={{ py: { xs: 4, md: 6 } }}>
+        <Box sx={{ 
+          width: '100%', 
+          overflow: 'hidden',
+          mb: 6,
+          textAlign: 'center',
+        }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem' },
+              fontWeight: 800,
+              overflow: 'hidden',
+              mb: 2,
+            }}
+          >
+            LATEST RELEASES
+          </Typography>
+        </Box>
+
+        <Box sx={{ px: { xs: 2, md: 8 }, mb: 8 }}>
+          {loading && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+              <Typography variant="h3" sx={{ fontWeight: 700 }}>
+                LOADING MUSIC...
+              </Typography>
+            </Box>
+          )}
+
+          {error && (
+            <Box sx={{ textAlign: 'center', py: 8 }}>
+              <Typography variant="h3" sx={{ fontWeight: 700, color: 'error.main' }}>
+                FAILED TO LOAD MUSIC
+              </Typography>
+              <Typography variant="body1" sx={{ mt: 2 }}>
+                {error}
+              </Typography>
+            </Box>
+          )}
+
+          {music && music.length > 0 && (
+            <Box sx={{ 
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: '1fr',
+                sm: 'repeat(2, 1fr)', 
+                md: 'repeat(3, 1fr)'
+              },
+              gap: 3 
+            }}>
+              {music.slice(0, 6).map((track) => (
+                <Card key={track.id}
+                    component="a"
+                    href={track.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      backgroundColor: '#000000',
+                      color: 'white',
+                      border: '2px solid #FF4500',
+                      borderRadius: '0px',
+                      boxShadow: '4px 4px 0px #FF4500',
+                      textDecoration: 'none',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        transform: 'translate(-4px, -4px)',
+                        boxShadow: '8px 8px 0px #FF4500',
+                        backgroundColor: '#1a1a1a',
+                      },
+                      '&:active': {
+                        transform: 'translate(0, 0)',
+                        boxShadow: 'none',
+                      },
+                    }}
+                  >
+                    {track.thumbnail && (
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={track.thumbnail}
+                        alt={track.title}
+                        sx={{
+                          objectFit: 'cover',
+                          borderBottom: '2px solid #FF4500',
+                        }}
+                      />
+                    )}
+                    <CardContent sx={{ p: 3 }}>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          mb: 2,
+                          color: '#FF4500',
+                          fontSize: '1.1rem',
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {track.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          opacity: 0.8,
+                          fontSize: '0.9rem',
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {track.description}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          display: 'block',
+                          mt: 2,
+                          color: '#FF4500',
+                          fontWeight: 600,
+                          fontSize: '0.8rem',
+                        }}
+                      >
+                        {new Date(track.publishedAt).getFullYear()}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+              ))}
+            </Box>
+          )}
+
+          {music && music.length === 0 && !loading && (
+            <Box sx={{ textAlign: 'center', py: 8 }}>
+              <Typography variant="h3" sx={{ fontWeight: 700 }}>
+                NO RELEASES AVAILABLE
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      </Box>
+
       {/* Main Spotify Playlist Section */}
       <Box sx={{ py: { xs: 4, md: 8 } }}>
         {/* Spotify Playlist Embed */}

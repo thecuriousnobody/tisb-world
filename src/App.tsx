@@ -13,6 +13,8 @@ import Thoughts from './pages/Thoughts'
 import Timeline from './pages/Timeline'
 import TaskChat from './pages/TaskChat'
 import Admin from './pages/Admin'
+import BetaFeedback from './pages/BetaFeedback'
+import AdminFeedback from './pages/AdminFeedback'
 import { theme } from './theme'
 
 function App() {
@@ -20,21 +22,32 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/art" element={<Art />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/code" element={<Code />} />
-            <Route path="/ai" element={<AI />} />
-            <Route path="/podcast" element={<Podcast />} />
-            <Route path="/thoughts" element={<Thoughts />} />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/task-chat" element={<TaskChat />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Beta Feedback - No Layout */}
+          <Route path="/beta-feedback" element={<BetaFeedback />} />
+          
+          {/* Admin Feedback - No Layout */}
+          <Route path="/admin-feedback" element={<AdminFeedback />} />
+          
+          {/* Main Site with Layout */}
+          <Route path="/*" element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/music" element={<Music />} />
+                <Route path="/art" element={<Art />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/code" element={<Code />} />
+                <Route path="/ai" element={<AI />} />
+                <Route path="/podcast" element={<Podcast />} />
+                <Route path="/thoughts" element={<Thoughts />} />
+                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/task-chat" element={<TaskChat />} />
+                <Route path="/admin" element={<Admin />} />
+              </Routes>
+            </Layout>
+          } />
+        </Routes>
       </Router>
     </ThemeProvider>
   )

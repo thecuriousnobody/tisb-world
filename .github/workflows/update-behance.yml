@@ -1,0 +1,43 @@
+name: Update Behance Portfolio
+
+on:
+  schedule:
+    # Run daily at 8 AM UTC (adjust for your timezone)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Manual trigger
+  push:
+    paths:
+      - '.github/workflows/update-behance.yml' # Test when workflow changes
+
+jobs:
+  scrape-behance:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install cheerio axios
+        
+    - name: Scrape Behance portfolio
+      run: |
+        node scripts/scrape-behance.js
+        
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add public/data/behance-portfolio.json
+        git diff --staged --quiet || git commit -m "🎨 Update Behance portfolio data
+
+        🤖 Generated with GitHub Actions
+        
+        Co-Authored-By: GitHub Actions <noreply@github.com>"
+        git push

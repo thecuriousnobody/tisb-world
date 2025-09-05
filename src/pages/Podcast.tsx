@@ -1,134 +1,16 @@
 import React from 'react';
 import { 
   Typography, 
-  Box, 
-  Card
+  Box
 } from '@mui/material';
 import { useYouTubeVideos } from '../hooks/useContent';
-import type { ContentItem } from '../services/contentService';
+import { useVideoLoadMore } from '../hooks/useVideoLoadMore';
 import SocialSection from '../components/SocialSection';
-
-const VideoCard: React.FC<{ video: ContentItem }> = ({ video }) => {
-  return (
-    <Card 
-      sx={{ 
-        cursor: 'pointer',
-        position: 'relative',
-        height: '280px', // Increased from 200px to 280px for more thumbnail coverage
-        overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          '& .video-thumbnail': {
-            filter: 'brightness(80%)',
-            transform: 'scale(1.05)',
-          },
-        },
-      }}
-      onClick={() => window.open(video.link, '_blank')}
-    >
-      {/* Thumbnail Background - Back to working method */}
-      <Box
-        className="video-thumbnail"
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundImage: `url(${video.thumbnail})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'brightness(60%)',
-          transition: 'all 0.3s ease',
-        }}
-      />
-
-      {/* Content Overlay - Enhanced for horizontal layout */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          p: 3,
-          background: 'linear-gradient(transparent 20%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.85) 100%)',
-        }}
-      >
-        {/* Title */}
-        <Typography
-          variant="h6"
-          sx={{
-            color: 'white',
-            fontWeight: 700,
-            fontSize: { xs: '0.95rem', md: '1rem' },
-            lineHeight: 1.3,
-            mb: 1,
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {video.title}
-        </Typography>
-
-        {/* Description - More lines for better context */}
-        <Typography
-          variant="body2"
-          sx={{
-            color: 'rgba(255, 255, 255, 0.85)',
-            fontSize: { xs: '0.75rem', md: '0.8rem' },
-            lineHeight: 1.3,
-            mb: 2,
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 3, // Show 3 lines
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {video.description}
-        </Typography>
-
-        {/* Bottom row with date and play button */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography
-            variant="caption"
-            sx={{
-              color: '#FF4500',
-              fontSize: '0.7rem',
-              fontWeight: 600,
-            }}
-          >
-            {video.publishedAt.toLocaleDateString()}
-          </Typography>
-          
-          {/* Play Button */}
-          <Box
-            sx={{
-              width: 32,
-              height: 32,
-              borderRadius: '50%',
-              backgroundColor: '#FF4500',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography sx={{ color: 'white', fontSize: '1rem', marginLeft: '1px' }}>▶</Typography>
-          </Box>
-        </Box>
-      </Box>
-    </Card>
-  );
-};
+import BrutalistVideoGrid from '../components/BrutalistVideoGrid';
 
 const Podcast: React.FC = () => {
   const { videos, loading, error } = useYouTubeVideos();
+  const { displayedVideos, loadMore, hasMore } = useVideoLoadMore(videos || []);
 
   return (
     <Box sx={{ 
@@ -182,15 +64,11 @@ const Podcast: React.FC = () => {
           )}
 
           {videos && videos.length > 0 && (
-            <Box sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' }, // 1 column on mobile, 2 on desktop
-              gap: 4, // Increased gap for better spacing
-            }}>
-              {videos.map((video: ContentItem) => (
-                <VideoCard key={video.id} video={video} />
-              ))}
-            </Box>
+            <BrutalistVideoGrid
+              videos={displayedVideos}
+              onLoadMore={loadMore}
+              hasMore={hasMore}
+            />
           )}
 
           {videos && videos.length === 0 && !loading && (
