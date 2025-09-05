@@ -125,19 +125,115 @@ export class ContentService {
 
   async getSubstackPosts(): Promise<ContentFeed> {
     return this.fetchWithCache('substack', async () => {
-      // Since we're in a browser environment, we'll need to use a CORS proxy
+      try {
+        // Use Substack's direct API instead of RSS - much faster!
+        const apiUrl = 'https://thecuriousnobody.substack.com/api/v1/posts?limit=20';
+        
+        console.log('Fetching from Substack API...');
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error(`Substack API error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        const contentItems: ContentItem[] = data.map((post: any, index: number) => {
+          // Enhanced image extraction with fallbacks
+          let thumbnail = '';
+          
+          // First priority: cover_image (main featured image)
+          if (post.cover_image) {
+            thumbnail = post.cover_image;
+          } 
+          // Second priority: first image from body_html content
+          else if (post.body_html) {
+            // Look for Substack-specific image patterns
+            const substackImgMatch = post.body_html.match(/src="(https:\/\/substackcdn\.com[^"]+)"/);
+            const regularImgMatch = post.body_html.match(/<img[^>]+src="([^"]+)"/);
+            
+            if (substackImgMatch && substackImgMatch[1]) {
+              thumbnail = substackImgMatch[1];
+            } else if (regularImgMatch && regularImgMatch[1]) {
+              thumbnail = regularImgMatch[1];
+            }
+          }
+          
+          // Enhanced description extraction
+          let description = '';
+          
+          // First priority: subtitle (clean, author-written)
+          if (post.subtitle && post.subtitle.trim()) {
+            description = post.subtitle;
+          }
+          // Second priority: clean first paragraph from body
+          else if (post.body_html) {
+            const cleanContent = post.body_html
+              .replace(/<[^>]*>/g, '') // Remove HTML tags
+              .replace(/\s+/g, ' ')    // Normalize whitespace  
+              .trim();
+            
+            // Get first meaningful paragraph (skip very short ones)
+            const paragraphs = cleanContent.split(/\n\s*\n|\. [A-Z]/);
+            for (const para of paragraphs) {
+              if (para.length > 50) { // Skip short fragments
+                description = para.length > 300 ? para.substring(0, 300) + '...' : para;
+                break;
+              }
+            }
+          }
+          
+          // Fallback description
+          if (!description) {
+            description = 'Read the full post on Substack';
+          }
+          
+          // Enhanced reading time calculation
+          const wordCount = post.word_count || 0;
+          const readingTime = wordCount > 0 ? Math.ceil(wordCount / 200) : 5;
+          
+          return {
+            id: `substack-${post.id || index}`,
+            title: post.title || `Post ${index + 1}`,
+            description,
+            link: `https://thecuriousnobody.substack.com/p/${post.slug}`,
+            publishedAt: new Date(post.post_date || post.created_at),
+            platform: 'substack' as const,
+            author: 'The Curious Nobody',
+            thumbnail,
+            tags: [`${readingTime} min read`],
+          };
+        });
+
+        console.log(`Successfully fetched ${contentItems.length} posts from Substack API`);
+
+        return {
+          platform: 'Substack',
+          items: contentItems,
+          lastUpdated: new Date(),
+        };
+      } catch (error) {
+        console.error('Substack API failed, falling back to RSS:', error);
+        
+        // Fallback to RSS if API fails
+        return this.getSubstackPostsRSS();
+      }
+    });
+  }
+
+  private async getSubstackPostsRSS(): Promise<ContentFeed> {
+    try {
+      // Fallback RSS method (the old slow way)
       const proxyUrl = 'https://api.allorigins.win/raw?url=';
       const feedUrl = 'https://thecuriousnobody.substack.com/feed';
       
       const response = await fetch(`${proxyUrl}${encodeURIComponent(feedUrl)}`);
       const xmlText = await response.text();
       
-      // Parse RSS XML
       const parser = new DOMParser();
       const doc = parser.parseFromString(xmlText, 'application/xml');
       const items = Array.from(doc.querySelectorAll('item'));
 
-      // Get ALL blog posts, not just 5
       const contentItems: ContentItem[] = items.map((item, index) => {
         const title = item.querySelector('title')?.textContent || '';
         const link = item.querySelector('link')?.textContent || '';
@@ -145,18 +241,14 @@ export class ContentService {
         const content = item.querySelector('content\\:encoded')?.textContent || description;
         const pubDate = item.querySelector('pubDate')?.textContent || '';
         
-        // Extract first image from content
         let thumbnail = '';
         const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
         if (imgMatch && imgMatch[1]) {
           thumbnail = imgMatch[1];
         }
         
-        // Extract clean text and get first paragraph for better preview
         const cleanContent = content.replace(/<[^>]*>/g, '').trim();
         const firstParagraph = cleanContent.split('\n\n')[0];
-        
-        // Estimate reading time (average 200 words per minute)
         const wordCount = cleanContent.split(/\s+/).length;
         const readingTime = Math.ceil(wordCount / 200);
         
@@ -180,7 +272,14 @@ export class ContentService {
         items: contentItems,
         lastUpdated: new Date(),
       };
-    });
+    } catch (error) {
+      console.error('Both Substack API and RSS failed:', error);
+      return {
+        platform: 'Substack',
+        items: [],
+        lastUpdated: new Date(),
+      };
+    }
   }
 
   async getYouTubeVideos(): Promise<ContentFeed> {

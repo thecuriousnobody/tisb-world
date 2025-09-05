@@ -1,19 +1,6 @@
 {
   "platform": "Behance",
-  "items": [
-    {
-      "id": "behance-manual-1",
-      "title": "The Idea Sandbox Portfolio",
-      "description": "Explore my creative work and design projects • View full portfolio on Behance",
-      "link": "https://www.behance.net/theideasandbox",
-      "publishedAt": "2024-01-01T00:00:00.000Z",
-      "platform": "behance",
-      "thumbnail": "",
-      "author": "The Idea Sandbox",
-      "tags": ["art", "design", "portfolio"]
-    }
-  ],
-  "lastUpdated": "2025-09-05T00:18:48.598Z",
-  "scrapedAt": "2025-09-05T00:18:48.599Z",
-  "note": "Manual placeholder - update with actual projects when available"
+  "items": [],
+  "lastUpdated": "2025-09-05T19:03:39.047Z",
+  "scrapedAt": "2025-09-05T19:03:39.047Z"
 }
