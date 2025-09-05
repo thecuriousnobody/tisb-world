@@ -28,7 +28,7 @@ jobs:
         
     - name: Scrape Behance portfolio
       run: |
-        node scripts/scrape-behance.js
+        node scrape-behance.js
         
     - name: Commit and push if changed
       run: |
