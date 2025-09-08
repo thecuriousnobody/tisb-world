@@ -19,22 +19,26 @@ app.use((req, res, next) => {
 // Serve static files from dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Substack API proxy
+// Substack RSS proxy
 app.get('/api/substack/posts', async (req, res) => {
   try {
-    console.log('📡 Fetching Substack posts...');
-    const response = await fetch('https://thecuriousnobody.substack.com/api/v1/posts?limit=20');
+    console.log('📡 Fetching Substack posts via RSS...');
+    const feedUrl = 'https://thecuriousnobody.substack.com/feed';
+    
+    const response = await fetch(feedUrl);
     
     if (!response.ok) {
-      throw new Error(`Substack API error: ${response.status}`);
+      throw new Error(`RSS fetch error: ${response.status}`);
     }
     
-    const data = await response.json();
-    console.log(`✅ Fetched ${data.length} Substack posts`);
+    const xmlText = await response.text();
+    console.log('✅ Fetched Substack RSS feed');
     
-    res.json(data);
+    // Send the raw XML - the frontend will parse it
+    res.set('Content-Type', 'application/xml');
+    res.send(xmlText);
   } catch (error) {
-    console.error('❌ Substack error:', error);
+    console.error('❌ Substack RSS error:', error);
     res.status(500).json({ error: 'Failed to fetch Substack posts' });
   }
 });

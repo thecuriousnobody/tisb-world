@@ -154,15 +154,23 @@ const BrutalistBlogCard: React.FC<{
             component="img"
             src={getThumbnail()}
             onLoad={() => setImageLoaded(true)}
+            alt={post.title}
             sx={{
               position: 'absolute',
               inset: 0,
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              filter: 'contrast(1.1) brightness(0.8) grayscale(0.2)',
-              opacity: imageLoaded ? 0.3 : 0,
+              filter: post.thumbnail 
+                ? 'contrast(1.2) brightness(0.9) saturate(1.2)' 
+                : 'contrast(1.1) brightness(0.8) grayscale(0.2)',
+              opacity: imageLoaded ? (post.thumbnail ? 0.7 : 0.3) : 0,
               transition: 'opacity 0.3s ease',
+              '&:hover': {
+                filter: post.thumbnail 
+                  ? 'contrast(1.3) brightness(1) saturate(1.3)' 
+                  : 'contrast(1.1) brightness(0.8) grayscale(0.2)',
+              }
             }}
           />
         </>

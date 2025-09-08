@@ -125,63 +125,146 @@ export class ContentService {
 
   async getSubstackPosts(): Promise<ContentFeed> {
     return this.fetchWithCache('substack', async () => {
-      // Just use RSS for now since it was working before
-      console.log('Fetching Substack posts via RSS...');
+      // Try server proxy first, then fall back to direct RSS
+      console.log('Fetching Substack posts...');
+      
+      try {
+        // First try: Server-side proxy (avoids CORS issues)
+        const response = await fetch('/api/substack/posts');
+        if (response.ok) {
+          const xmlText = await response.text();
+          return this.parseSubstackXML(xmlText);
+        }
+      } catch (error) {
+        console.warn('Server proxy failed, trying direct RSS...', error);
+      }
+      
+      // Fallback to direct RSS with CORS proxies
       return this.getSubstackPostsRSS();
     });
   }
 
-  private async getSubstackPostsRSS(): Promise<ContentFeed> {
-    try {
-      // Fallback RSS method (the old slow way)
-      const proxyUrl = 'https://api.allorigins.win/raw?url=';
-      const feedUrl = 'https://thecuriousnobody.substack.com/feed';
-      
-      const response = await fetch(`${proxyUrl}${encodeURIComponent(feedUrl)}`);
-      const xmlText = await response.text();
-      
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(xmlText, 'application/xml');
-      const items = Array.from(doc.querySelectorAll('item'));
+  private parseSubstackXML(xmlText: string): ContentFeed {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'application/xml');
+    const items = Array.from(doc.querySelectorAll('item'));
 
-      const contentItems: ContentItem[] = items.map((item, index) => {
-        const title = item.querySelector('title')?.textContent || '';
-        const link = item.querySelector('link')?.textContent || '';
-        const description = item.querySelector('description')?.textContent || '';
-        const content = item.querySelector('content\\:encoded')?.textContent || description;
-        const pubDate = item.querySelector('pubDate')?.textContent || '';
-        
-        let thumbnail = '';
+    const contentItems: ContentItem[] = items.slice(0, 20).map((item, index) => {
+      const title = item.querySelector('title')?.textContent || '';
+      const link = item.querySelector('link')?.textContent || '';
+      const description = item.querySelector('description')?.textContent || '';
+      const content = item.querySelector('content\\:encoded')?.textContent || description;
+      const pubDate = item.querySelector('pubDate')?.textContent || '';
+      
+      // Try multiple methods to extract thumbnail
+      let thumbnail = '';
+      
+      // Method 1: Check for enclosure tag (Substack often uses this)
+      const enclosure = item.querySelector('enclosure');
+      if (enclosure && enclosure.getAttribute('type')?.startsWith('image/')) {
+        thumbnail = enclosure.getAttribute('url') || '';
+      }
+      
+      // Method 2: Look for first img tag in content
+      if (!thumbnail) {
         const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
         if (imgMatch && imgMatch[1]) {
           thumbnail = imgMatch[1];
         }
-        
-        const cleanContent = content.replace(/<[^>]*>/g, '').trim();
-        const firstParagraph = cleanContent.split('\n\n')[0];
-        const wordCount = cleanContent.split(/\s+/).length;
-        const readingTime = Math.ceil(wordCount / 200);
-        
-        return {
-          id: `substack-${index}`,
-          title: title.replace('<![CDATA[', '').replace(']]>', ''),
-          description: firstParagraph.length > 300 
-            ? firstParagraph.substring(0, 300) + '...' 
-            : firstParagraph || description.replace(/<[^>]*>/g, '').substring(0, 300) + '...',
-          link,
-          publishedAt: new Date(pubDate),
-          platform: 'substack' as const,
-          author: 'The Curious Nobody',
-          thumbnail,
-          tags: [`${readingTime} min read`],
-        };
-      });
-
+      }
+      
+      // Method 3: Look for figure img specifically (Substack often wraps images in figure tags)
+      if (!thumbnail) {
+        const figureImgMatch = content.match(/<figure[^>]*>[\s\S]*?<img[^>]+src="([^"]+)"[^>]*>/);
+        if (figureImgMatch && figureImgMatch[1]) {
+          thumbnail = figureImgMatch[1];
+        }
+      }
+      
+      // Method 4: Look for a tag that starts with substack-post-media
+      if (!thumbnail) {
+        const substackImgMatch = content.match(/https:\/\/(?:substackcdn\.com|substack-post-media\.s3\.amazonaws\.com)[^"'\s>]+/);
+        if (substackImgMatch) {
+          thumbnail = substackImgMatch[0];
+        }
+      }
+      
+      const cleanContent = content.replace(/<[^>]*>/g, '').trim();
+      const firstParagraph = cleanContent.split('\n\n')[0];
+      const wordCount = cleanContent.split(/\s+/).length;
+      const readingTime = Math.ceil(wordCount / 200);
+      
+      // Clean up CDATA tags from title and description
+      const cleanTitle = title.replace(/<!\[CDATA\[/g, '').replace(/\]\]>/g, '').trim();
+      const cleanDescription = description.replace(/<!\[CDATA\[/g, '').replace(/\]\]>/g, '').replace(/<[^>]*>/g, '').trim();
+      
       return {
-        platform: 'Substack',
-        items: contentItems,
-        lastUpdated: new Date(),
+        id: `substack-${index}`,
+        title: cleanTitle,
+        description: firstParagraph.length > 300 
+          ? firstParagraph.substring(0, 300) + '...' 
+          : firstParagraph || cleanDescription.substring(0, 300) + '...',
+        link,
+        publishedAt: new Date(pubDate),
+        platform: 'substack' as const,
+        author: 'The Curious Nobody',
+        thumbnail,
+        tags: [`${readingTime} min read`],
       };
+    });
+
+    return {
+      platform: 'Substack',
+      items: contentItems,
+      lastUpdated: new Date(),
+    };
+  }
+
+  private async getSubstackPostsRSS(): Promise<ContentFeed> {
+    try {
+      // Multiple CORS proxy options for reliability
+      const proxyUrls = [
+        'https://api.allorigins.win/raw?url=',
+        'https://corsproxy.io/?',
+        'https://api.codetabs.com/v1/proxy?quest=',
+        'https://cors-anywhere.herokuapp.com/',
+      ];
+      const feedUrl = 'https://thecuriousnobody.substack.com/feed';
+      
+      let xmlText = '';
+      let lastError: Error | null = null;
+      
+      // Try each proxy until one works
+      for (const proxyUrl of proxyUrls) {
+        try {
+          console.log(`Trying Substack RSS with proxy: ${proxyUrl}`);
+          const response = await fetch(`${proxyUrl}${encodeURIComponent(feedUrl)}`);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          xmlText = await response.text();
+          
+          // Verify we got valid XML
+          if (xmlText.includes('<rss') || xmlText.includes('<item')) {
+            console.log('Successfully fetched Substack RSS');
+            break;
+          } else {
+            throw new Error('Invalid XML response');
+          }
+        } catch (error) {
+          console.warn(`Proxy ${proxyUrl} failed:`, error);
+          lastError = error as Error;
+          continue;
+        }
+      }
+      
+      if (!xmlText) {
+        throw lastError || new Error('All CORS proxies failed');
+      }
+      
+      return this.parseSubstackXML(xmlText);
     } catch (error) {
       console.error('Both Substack API and RSS failed:', error);
       return {
