@@ -80,9 +80,9 @@ Browser → Express Server → External APIs
 
 ### Environment Variables Required
 ```bash
-YOUTUBE_API_KEY=AIzaSyCuw6EkTCAKHRPUNVqk0LhCTufslKOw1G4
-SPOTIFY_CLIENT_ID=f09efa915dc448d4b2a135bac42ca50a  
-SPOTIFY_CLIENT_SECRET=998bc1169832483ba4e70a9bb88a7979
+YOUTUBE_API_KEY=your_youtube_api_key_here
+SPOTIFY_CLIENT_ID=your_spotify_client_id_here
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret_here
 ```
 
 ### Dependencies Added
@@ -98,7 +98,7 @@ SPOTIFY_CLIENT_SECRET=998bc1169832483ba4e70a9bb88a7979
 ```bash
 # Local testing (works)
 npm run build
-YOUTUBE_API_KEY=... SPOTIFY_CLIENT_ID=... SPOTIFY_CLIENT_SECRET=... node simple-server.js
+YOUTUBE_API_KEY=your_key SPOTIFY_CLIENT_ID=your_id SPOTIFY_CLIENT_SECRET=your_secret node simple-server.js
 
 # Vercel deployment (failed)
 # Automatic deployment of api-server-fix branch
