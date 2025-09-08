@@ -1,6 +1,6 @@
 # TISB - The Idea Sandbox
 
-A brutalist-designed portfolio website showcasing music, podcasts, blog posts, and creative work.
+A brutalist-designed portfolio website showcasing music, podcasts, blog posts, and creative work with secure API integrations.
 
 ## 🚀 Quick Start
 
