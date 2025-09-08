@@ -278,63 +278,45 @@ export class ContentService {
   async getYouTubeVideos(): Promise<ContentFeed> {
     return this.fetchWithCache('youtube', async () => {
       try {
-        const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-        const channelId = 'UC_pKSnd_emg2JJMDGJpwZnQ';
+        // Try server proxy first
+        console.log('Fetching YouTube videos from server proxy...');
+        const response = await fetch('/api/youtube/videos');
         
-        if (!apiKey) {
-          console.error('YouTube API key not configured');
-          throw new Error('YouTube API key not configured');
-        }
-
-        // Use YouTube Data API v3 for real-time data
-        const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=50&type=video`;
-        
-        console.log('Fetching from YouTube Data API v3...');
-        const response = await fetch(apiUrl);
-        
-        if (!response.ok) {
-          throw new Error(`YouTube API error: ${response.status} ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        
-        if (data.error) {
-          console.error('YouTube API error:', data.error);
-          throw new Error(`YouTube API error: ${data.error.message}`);
-        }
-
-        const contentItems: ContentItem[] = data.items?.map((item: any, index: number) => {
-          const videoId = item.id.videoId;
-          const snippet = item.snippet;
+        if (response.ok) {
+          const data = await response.json();
           
+          const contentItems: ContentItem[] = data.items?.map((item: any, index: number) => {
+            const videoId = item.id.videoId;
+            const snippet = item.snippet;
+            
+            return {
+              id: `youtube-${videoId}`,
+              title: snippet.title,
+              description: snippet.description.length > 300 
+                ? snippet.description.substring(0, 300) + '...' 
+                : snippet.description,
+              link: `https://www.youtube.com/watch?v=${videoId}`,
+              publishedAt: new Date(snippet.publishedAt),
+              platform: 'youtube' as const,
+              thumbnail: snippet.thumbnails.high?.url || snippet.thumbnails.medium?.url || snippet.thumbnails.default?.url,
+              author: snippet.channelTitle,
+            };
+          }) || [];
+
+          console.log(`Successfully fetched ${contentItems.length} videos from server proxy`);
+
           return {
-            id: `youtube-${videoId}`,
-            title: snippet.title,
-            description: snippet.description.length > 300 
-              ? snippet.description.substring(0, 300) + '...' 
-              : snippet.description,
-            link: `https://www.youtube.com/watch?v=${videoId}`,
-            publishedAt: new Date(snippet.publishedAt),
-            platform: 'youtube' as const,
-            thumbnail: snippet.thumbnails.high?.url || snippet.thumbnails.medium?.url || snippet.thumbnails.default?.url,
-            author: snippet.channelTitle,
+            platform: 'YouTube',
+            items: contentItems,
+            lastUpdated: new Date(),
           };
-        }) || [];
-
-        console.log(`Successfully fetched ${contentItems.length} videos from YouTube API`);
-
-        return {
-          platform: 'YouTube',
-          items: contentItems,
-          lastUpdated: new Date(),
-        };
+        }
       } catch (error) {
-        console.error('YouTube API fetch error:', error);
-        
-        // Fallback to RSS if API fails
-        console.log('Falling back to RSS feed...');
-        return this.getYouTubeVideosRSS();
+        console.warn('Server proxy failed, falling back to RSS...', error);
       }
+      
+      // Fallback to RSS if server proxy fails
+      return this.getYouTubeVideosRSS();
     });
   }
 
@@ -480,77 +462,46 @@ export class ContentService {
   async getSpotifyContent(): Promise<ContentFeed> {
     return this.fetchWithCache('spotify', async () => {
       try {
-        const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-        const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
-        const artistId = '2fEAGWgz0y6MdIpvIywp1R'; // The Curious Nobody
+        // Try server proxy first
+        console.log('Fetching Spotify content from server proxy...');
+        const response = await fetch('/api/spotify/releases');
         
-        if (!clientId || !clientSecret) {
-          console.error('Spotify API credentials not configured');
-          throw new Error('Spotify API credentials not configured');
-        }
+        if (response.ok) {
+          const albumsData = await response.json();
+          
+          const contentItems: ContentItem[] = albumsData.items?.map((album: any, index: number) => {
+            return {
+              id: `spotify-${album.id}`,
+              title: album.name,
+              description: `${album.album_type.charAt(0).toUpperCase() + album.album_type.slice(1)} • ${album.total_tracks} track${album.total_tracks > 1 ? 's' : ''} • Released ${new Date(album.release_date).getFullYear()}`,
+              link: album.external_urls.spotify,
+              publishedAt: new Date(album.release_date),
+              platform: 'spotify' as const,
+              thumbnail: album.images[0]?.url || album.images[1]?.url || album.images[2]?.url,
+              author: 'The Curious Nobody',
+              tags: [album.album_type, `${album.total_tracks} tracks`],
+            };
+          }) || [];
 
-        // Get access token using Client Credentials flow
-        const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
-        });
+          console.log(`Successfully fetched ${contentItems.length} releases from server proxy`);
 
-        if (!tokenResponse.ok) {
-          throw new Error(`Token request failed: ${tokenResponse.status}`);
-        }
-
-        const tokenData = await tokenResponse.json();
-        const accessToken = tokenData.access_token;
-
-        // Fetch artist's albums and singles
-        const albumsResponse = await fetch(
-          `https://api.spotify.com/v1/artists/${artistId}/albums?limit=20&include_groups=album,single&market=US`,
-          {
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-            },
-          }
-        );
-
-        if (!albumsResponse.ok) {
-          throw new Error(`Albums request failed: ${albumsResponse.status}`);
-        }
-
-        const albumsData = await albumsResponse.json();
-
-        const contentItems: ContentItem[] = albumsData.items?.map((album: any, index: number) => {
           return {
-            id: `spotify-${album.id}`,
-            title: album.name,
-            description: `${album.album_type.charAt(0).toUpperCase() + album.album_type.slice(1)} • ${album.total_tracks} track${album.total_tracks > 1 ? 's' : ''} • Released ${new Date(album.release_date).getFullYear()}`,
-            link: album.external_urls.spotify,
-            publishedAt: new Date(album.release_date),
-            platform: 'spotify' as const,
-            thumbnail: album.images[0]?.url || album.images[1]?.url || album.images[2]?.url,
-            author: 'The Curious Nobody',
-            tags: [album.album_type, `${album.total_tracks} tracks`],
+            platform: 'Spotify',
+            items: contentItems,
+            lastUpdated: new Date(),
           };
-        }) || [];
-
-        console.log(`Successfully fetched ${contentItems.length} releases from Spotify API`);
-
-        return {
-          platform: 'Spotify',
-          items: contentItems,
-          lastUpdated: new Date(),
-        };
+        }
       } catch (error) {
-        console.error('Spotify API fetch error:', error);
-        // Return empty feed if fetch fails
-        return {
-          platform: 'Spotify',
-          items: [],
-          lastUpdated: new Date(),
-        };
+        console.error('Spotify server proxy error:', error);
       }
+      
+      // Return empty feed if server proxy fails
+      console.log('Server proxy failed, returning empty Spotify feed');
+      return {
+        platform: 'Spotify',
+        items: [],
+        lastUpdated: new Date(),
+      };
     });
   }
 
