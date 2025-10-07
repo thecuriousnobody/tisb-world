@@ -1,27 +1,43 @@
 import { Typography, Box, Grid, Card, CardContent, Button, Alert } from '@mui/material'
-import { Security, Dashboard, Settings, Analytics } from '@mui/icons-material'
+import { Security, Dashboard, Settings, Analytics, VideoLibrary } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Admin() {
+  const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
+  
   const adminSections = [
+    {
+      title: 'Video Production Tracker',
+      description: 'Track progress of 30 video pilot project with Riverside links',
+      icon: <VideoLibrary />,
+      action: () => navigate('/admin/video-tracker'),
+      available: true,
+    },
     {
       title: 'Content Management',
       description: 'Manage blog posts, music uploads, and project information',
       icon: <Dashboard />,
+      available: false,
     },
     {
       title: 'AI Tools Configuration',
       description: 'Configure voice interface, Whisper API, and AI model settings',
       icon: <Settings />,
+      available: false,
     },
     {
       title: 'Analytics & Insights',
       description: 'View website analytics and user interaction data',
       icon: <Analytics />,
+      available: false,
     },
     {
       title: 'Security & Access',
       description: 'Manage authentication and admin access controls',
       icon: <Security />,
+      available: false,
     }
   ]
 
@@ -32,7 +48,7 @@ export default function Admin() {
       </Typography>
       
       <Alert severity="info" sx={{ mb: 4, backgroundColor: 'rgba(33, 150, 243, 0.1)' }}>
-        Admin functionality is in development. Authentication and backend integration coming soon.
+        Video Production Tracker is now available! {isAuthenticated ? 'You are logged in.' : 'Click on Video Production Tracker to login.'}
       </Alert>
 
       <Grid container spacing={4}>
@@ -56,15 +72,20 @@ export default function Admin() {
                   {section.description}
                 </Typography>
                 <Button
-                  variant="outlined"
+                  variant={section.available ? "contained" : "outlined"}
                   size="small"
-                  disabled
+                  disabled={!section.available}
+                  onClick={section.action}
                   sx={{
                     borderColor: 'rgba(255, 255, 255, 0.2)',
-                    color: 'rgba(255, 255, 255, 0.5)',
+                    color: section.available ? '#000' : 'rgba(255, 255, 255, 0.5)',
+                    backgroundColor: section.available ? '#fff' : 'transparent',
+                    '&:hover': {
+                      backgroundColor: section.available ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
+                    }
                   }}
                 >
-                  Coming Soon
+                  {section.available ? 'Access' : 'Coming Soon'}
                 </Button>
               </CardContent>
             </Card>
