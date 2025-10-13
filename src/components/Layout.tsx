@@ -31,6 +31,7 @@ const navigationItems = [
   { label: 'Art', path: '/art' },
   { label: 'Music', path: '/music' },
   { label: 'AI', path: '/ai' },
+  { label: 'Admin', path: '/admin' },
 ]
 
 export default function Layout({ children }: LayoutProps) {

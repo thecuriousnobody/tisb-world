@@ -22,7 +22,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
 
 // Define authorized emails (you can move this to an env variable later)
-const AUTHORIZED_EMAILS = ['rajeev@theideasandbox.com'] // Replace with your email
+const AUTHORIZED_EMAILS = [
+  'rajeev@theideasandbox.com',
+  'theideasandboxpodcast@gmail.com',
+  'apexrisesolutions7@gmail.com',
+  // Add more editors' emails here as needed:
+  // 'editor2@example.com',
+]
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
