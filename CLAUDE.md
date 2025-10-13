@@ -257,5 +257,128 @@ If needed to manually refresh content, clear browser cache or wait 30 minutes fo
 
 ---
 
-*Last Updated: 2025-01-09*
-*Status: All systems operational ✅*
+## 🎬 Video Production Tracker (NEW - January 2025)
+
+### Overview
+A secure admin panel for managing the 30-video pilot project with Google OAuth authentication, status tracking, and editor communication tools.
+
+### Access URLs
+- **Production**: https://tisb.world/admin → Video Production Tracker
+- **Local Dev**: http://localhost:4444/admin → Video Production Tracker
+- **Direct Access**: `/admin/video-tracker` (requires authentication)
+
+### Authentication System
+- **Method**: Google OAuth 2.0 with email allowlisting
+- **Authorized Emails**: 
+  - `rajeev@theideasandbox.com`
+  - `theideasandboxpodcast@gmail.com`
+  - `apexrisesolutions7@gmail.com`
+- **Location**: `src/contexts/AuthContext.tsx` (AUTHORIZED_EMAILS array)
+
+### Google OAuth Configuration
+- **Client ID**: `733665139428-nna76ns3bl0509toju3ovhrfiq1a0c6a.apps.googleusercontent.com`
+- **Environment Variable**: `VITE_GOOGLE_CLIENT_ID` (in Vercel)
+- **Authorized Origins**: 
+  - `https://tisb.world` ⚠️ **CRITICAL - Must be added in Google Cloud Console**
+  - `http://localhost:4444`
+  - `https://tisb-world.vercel.app`
+
+### Features
+1. **Color-Coded Status Tracking** (Google Sheets style)
+   - Gray: Not Started (transparent background)
+   - Yellow: In Progress (`#ffc107`)
+   - Green: Completed (`#4caf50`)
+
+2. **Video Management**
+   - Add/Edit/Delete videos
+   - Riverside FM link storage
+   - Editor assignment
+   - Notes and timestamps
+
+3. **Instructions System**
+   - Dedicated column for creative direction
+   - Rich text instructions for editors
+   - Two-way comment system with timestamps
+   - Copy functionality for sharing instructions
+
+4. **Statistics Dashboard**
+   - Real-time progress overview
+   - Color-coded completion metrics
+
+### Critical Files
+- `src/pages/VideoTracker.tsx` - Main tracker interface
+- `src/pages/AdminLogin.tsx` - Google OAuth login page
+- `src/contexts/AuthContext.tsx` - Authentication logic and email allowlist
+- `src/components/ProtectedRoute.tsx` - Route protection wrapper
+
+### Data Storage
+- **Current**: localStorage (temporary, per-device)
+- **Future**: Can be upgraded to database (Supabase/Firebase) for cross-device sync
+
+### Known Issues & Solutions
+
+#### "Authorization Error: origin_mismatch"
+**Cause**: `tisb.world` not added to Google OAuth authorized origins
+**Solution**: 
+1. Google Cloud Console → APIs & Credentials
+2. Edit OAuth Client ID
+3. Add `https://tisb.world` to Authorized JavaScript origins
+4. Save changes
+
+#### Video Tracker Not Loading
+**Cause**: Missing `VITE_GOOGLE_CLIENT_ID` in Vercel
+**Solution**: 
+1. Vercel Dashboard → Project Settings → Environment Variables
+2. Add `VITE_GOOGLE_CLIENT_ID=733665139428-nna76ns3bl0509toju3ovhrfiq1a0c6a.apps.googleusercontent.com`
+3. Redeploy
+
+#### Adding New Editors
+**Location**: `src/contexts/AuthContext.tsx`
+```javascript
+const AUTHORIZED_EMAILS = [
+  'rajeev@theideasandbox.com',
+  'theideasandboxpodcast@gmail.com',
+  'apexrisesolutions7@gmail.com',
+  'new-editor@gmail.com', // Add here
+]
+```
+**Steps**: Edit file → `npm run build` → Deploy
+
+### Deployment Status
+- ✅ **Code Deployed**: Merged to main branch
+- ✅ **Live URL**: https://tisb.world/admin
+- ❌ **Google OAuth**: Needs `tisb.world` added to authorized origins
+- ✅ **Environment Variables**: `VITE_GOOGLE_CLIENT_ID` configured in Vercel
+
+### Usage Instructions for Editors
+1. Visit https://tisb.world/admin
+2. Click "Video Production Tracker"
+3. Sign in with Google (one-time setup)
+4. Access color-coded video tracker
+5. Update statuses: Not Started → In Progress → Done
+6. Use Instructions button for creative direction
+7. Leave comments for two-way communication
+
+### Development Workflow
+```bash
+# Local development
+npm run build && node simple-server.js
+# Access: http://localhost:4444/admin
+
+# Add new authorized email
+# Edit: src/contexts/AuthContext.tsx
+# Add to AUTHORIZED_EMAILS array
+# Build and deploy
+```
+
+### Future Enhancements
+- Database integration for persistent storage
+- Email notifications for status changes
+- Advanced filtering and search
+- Batch operations for multiple videos
+- Export functionality to CSV/PDF
+
+---
+
+*Last Updated: 2025-01-13*
+*Status: Video Tracker deployed, awaiting Google OAuth domain configuration ⚠️*

@@ -23,6 +23,8 @@ import {
   InputLabel,
   Grid,
   Tooltip,
+  Tabs,
+  Tab,
 } from '@mui/material'
 import {
   Edit as EditIcon,
@@ -58,6 +60,15 @@ interface Comment {
   timestamp: string
 }
 
+interface Music {
+  id: string
+  title: string
+  googleDriveLink: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+}
+
 const statusColors = {
   not_started: 'default',
   in_progress: 'warning',
@@ -72,9 +83,13 @@ const statusIcons = {
 
 export default function VideoTracker() {
   const { user, logout } = useAuth()
+  const [tabValue, setTabValue] = useState(0)
   const [videos, setVideos] = useState<Video[]>([])
+  const [music, setMusic] = useState<Music[]>([])
   const [openDialog, setOpenDialog] = useState(false)
+  const [openMusicDialog, setOpenMusicDialog] = useState(false)
   const [editingVideo, setEditingVideo] = useState<Video | null>(null)
+  const [editingMusic, setEditingMusic] = useState<Music | null>(null)
   const [instructionsDialog, setInstructionsDialog] = useState<{ open: boolean; videoId: string | null }>({ 
     open: false, 
     videoId: null 
@@ -88,12 +103,22 @@ export default function VideoTracker() {
     editor: '',
     notes: '',
   })
+  const [musicFormData, setMusicFormData] = useState({
+    title: '',
+    googleDriveLink: '',
+    notes: '',
+  })
 
-  // Load videos from localStorage (temporary storage until backend is ready)
+  // Load data from localStorage (temporary storage until backend is ready)
   useEffect(() => {
     const storedVideos = localStorage.getItem('video-tracker-data')
     if (storedVideos) {
       setVideos(JSON.parse(storedVideos))
+    }
+    
+    const storedMusic = localStorage.getItem('music-library-data')
+    if (storedMusic) {
+      setMusic(JSON.parse(storedMusic))
     }
   }, [])
 
@@ -101,6 +126,11 @@ export default function VideoTracker() {
   useEffect(() => {
     localStorage.setItem('video-tracker-data', JSON.stringify(videos))
   }, [videos])
+
+  // Save music to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('music-library-data', JSON.stringify(music))
+  }, [music])
 
   const handleOpenDialog = (video?: Video) => {
     if (video) {
@@ -237,6 +267,61 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
     }
   }
 
+  // Music handlers
+  const handleOpenMusicDialog = (musicTrack?: Music) => {
+    if (musicTrack) {
+      setEditingMusic(musicTrack)
+      setMusicFormData({
+        title: musicTrack.title,
+        googleDriveLink: musicTrack.googleDriveLink,
+        notes: musicTrack.notes || '',
+      })
+    } else {
+      setEditingMusic(null)
+      setMusicFormData({
+        title: '',
+        googleDriveLink: '',
+        notes: '',
+      })
+    }
+    setOpenMusicDialog(true)
+  }
+
+  const handleCloseMusicDialog = () => {
+    setOpenMusicDialog(false)
+    setEditingMusic(null)
+  }
+
+  const handleMusicSubmit = () => {
+    const now = new Date().toISOString()
+    
+    if (editingMusic) {
+      // Update existing music
+      setMusic(music.map(m => 
+        m.id === editingMusic.id 
+          ? { ...m, ...musicFormData, updatedAt: now }
+          : m
+      ))
+    } else {
+      // Add new music
+      const newMusic: Music = {
+        id: Date.now().toString(),
+        ...musicFormData,
+        createdAt: now,
+        updatedAt: now,
+      }
+      setMusic([...music, newMusic])
+    }
+    
+    handleCloseMusicDialog()
+  }
+
+  const handleDeleteMusic = (id: string) => {
+    if (confirm('Are you sure you want to delete this music track?')) {
+      setMusic(music.filter(m => m.id !== id))
+    }
+  }
+
   const stats = getStats()
 
   return (
@@ -245,22 +330,55 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
         <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
           Video Production Tracker
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => handleOpenDialog()}
-          sx={{
-            backgroundColor: '#000',
-            color: '#fff',
-            '&:hover': { backgroundColor: '#333' }
-          }}
-        >
-          Add Video
-        </Button>
+        {tabValue === 0 ? (
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => handleOpenDialog()}
+            sx={{
+              backgroundColor: '#000',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#333' }
+            }}
+          >
+            Add Video
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => handleOpenMusicDialog()}
+            sx={{
+              backgroundColor: '#000',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#333' }
+            }}
+          >
+            Add Music
+          </Button>
+        )}
       </Box>
 
-      {/* Statistics */}
-      <Grid container spacing={2} sx={{ mb: 4 }}>
+      {/* Tabs */}
+      <Tabs 
+        value={tabValue} 
+        onChange={(e, newValue) => setTabValue(newValue)}
+        sx={{ 
+          mb: 3,
+          '& .MuiTabs-indicator': { backgroundColor: '#fff' },
+          '& .MuiTab-root': { color: 'rgba(255, 255, 255, 0.7)' },
+          '& .Mui-selected': { color: '#fff' },
+        }}
+      >
+        <Tab label="Videos" />
+        <Tab label="Music Library" />
+      </Tabs>
+
+      {/* Tab Content */}
+      {tabValue === 0 && (
+        <>
+          {/* Statistics */}
+          <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid size={{ xs: 6, md: 3 }}>
           <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
             <Typography variant="h4">{stats.total}</Typography>
@@ -745,6 +863,166 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
             </Button>
           </Box>
         </DialogContent>
+      </Dialog>
+        </>
+      )}
+
+      {/* Music Library Tab */}
+      {tabValue === 1 && (
+        <TableContainer component={Paper} sx={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Song Title</TableCell>
+                <TableCell>Google Drive Link</TableCell>
+                <TableCell>Notes</TableCell>
+                <TableCell>Added</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {music.map((track) => (
+                <TableRow key={track.id}>
+                  <TableCell>
+                    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      {track.title}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <IconButton
+                      size="small"
+                      href={track.googleDriveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ color: 'primary.main' }}
+                    >
+                      <LinkIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                      {track.notes || '-'}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {new Date(track.createdAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton size="small" onClick={() => handleOpenMusicDialog(track)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton size="small" onClick={() => handleDeleteMusic(track.id)} color="error">
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          {music.length === 0 && (
+            <Box sx={{ p: 4, textAlign: 'center' }}>
+              <Typography variant="body2" sx={{ opacity: 0.6 }}>
+                No music tracks added yet. Click "Add Music" to get started.
+              </Typography>
+            </Box>
+          )}
+        </TableContainer>
+      )}
+
+      {/* Music Add/Edit Dialog */}
+      <Dialog 
+        open={openMusicDialog} 
+        onClose={handleCloseMusicDialog}
+        maxWidth="sm" 
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: '#000',
+            color: '#fff',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+          }
+        }}
+      >
+        <DialogTitle sx={{ color: '#fff' }}>{editingMusic ? 'Edit Music Track' : 'Add New Music Track'}</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
+            <TextField
+              label="Song Title"
+              value={musicFormData.title}
+              onChange={(e) => setMusicFormData({ ...musicFormData, title: e.target.value })}
+              fullWidth
+              required
+              sx={{
+                '& .MuiInputBase-input': { color: '#fff' },
+                '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                  '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
+                  '&.Mui-focused fieldset': { borderColor: '#fff' },
+                },
+              }}
+            />
+            <TextField
+              label="Google Drive Link"
+              value={musicFormData.googleDriveLink}
+              onChange={(e) => setMusicFormData({ ...musicFormData, googleDriveLink: e.target.value })}
+              fullWidth
+              required
+              placeholder="https://drive.google.com/..."
+              sx={{
+                '& .MuiInputBase-input': { color: '#fff' },
+                '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                  '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
+                  '&.Mui-focused fieldset': { borderColor: '#fff' },
+                },
+              }}
+            />
+            <TextField
+              label="Notes"
+              value={musicFormData.notes}
+              onChange={(e) => setMusicFormData({ ...musicFormData, notes: e.target.value })}
+              fullWidth
+              multiline
+              rows={3}
+              placeholder="Suggest which video clips might work well with this track..."
+              sx={{
+                '& .MuiInputBase-input': { color: '#fff' },
+                '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                  '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
+                  '&.Mui-focused fieldset': { borderColor: '#fff' },
+                },
+              }}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', pt: 2 }}>
+          <Button 
+            onClick={handleCloseMusicDialog}
+            sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleMusicSubmit}
+            variant="contained"
+            disabled={!musicFormData.title || !musicFormData.googleDriveLink}
+            sx={{
+              backgroundColor: '#fff',
+              color: '#000',
+              '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' },
+              '&:disabled': { 
+                backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+                color: 'rgba(255, 255, 255, 0.3)' 
+              }
+            }}
+          >
+            {editingMusic ? 'Update' : 'Add'}
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   )
