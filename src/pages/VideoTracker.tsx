@@ -45,10 +45,8 @@ interface Video {
   title: string
   riversideLink: string
   status: 'not_started' | 'in_progress' | 'done'
-  editor?: string
+  sentiment?: string
   notes?: string
-  instructions?: string
-  comments?: Comment[]
   createdAt: string
   updatedAt: string
 }
@@ -90,17 +88,11 @@ export default function VideoTracker() {
   const [openMusicDialog, setOpenMusicDialog] = useState(false)
   const [editingVideo, setEditingVideo] = useState<Video | null>(null)
   const [editingMusic, setEditingMusic] = useState<Music | null>(null)
-  const [instructionsDialog, setInstructionsDialog] = useState<{ open: boolean; videoId: string | null }>({ 
-    open: false, 
-    videoId: null 
-  })
-  const [instructionsText, setInstructionsText] = useState('')
-  const [newComment, setNewComment] = useState('')
   const [formData, setFormData] = useState({
     title: '',
     riversideLink: '',
     status: 'not_started' as Video['status'],
-    editor: '',
+    sentiment: '',
     notes: '',
   })
   const [musicFormData, setMusicFormData] = useState({
@@ -109,12 +101,19 @@ export default function VideoTracker() {
     notes: '',
   })
 
-  // Load data from localStorage (temporary storage until backend is ready)
-  useEffect(() => {
-    const storedVideos = localStorage.getItem('video-tracker-data')
-    if (storedVideos) {
-      setVideos(JSON.parse(storedVideos))
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch('/api/notion/videos')
+      if (!response.ok) throw new Error('Failed to fetch videos')
+      const data = await response.json()
+      setVideos(data.videos || [])
+    } catch (error) {
+      console.error('Error fetching videos:', error)
     }
+  }
+
+  useEffect(() => {
+    fetchVideos()
     
     const storedMusic = localStorage.getItem('music-library-data')
     if (storedMusic) {
@@ -122,12 +121,6 @@ export default function VideoTracker() {
     }
   }, [])
 
-  // Save videos to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('video-tracker-data', JSON.stringify(videos))
-  }, [videos])
-
-  // Save music to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('music-library-data', JSON.stringify(music))
   }, [music])
@@ -139,7 +132,7 @@ export default function VideoTracker() {
         title: video.title,
         riversideLink: video.riversideLink,
         status: video.status,
-        editor: video.editor || '',
+        sentiment: video.sentiment || '',
         notes: video.notes || '',
       })
     } else {
@@ -148,7 +141,7 @@ export default function VideoTracker() {
         title: '',
         riversideLink: '',
         status: 'not_started',
-        editor: '',
+        sentiment: '',
         notes: '',
       })
     }
@@ -160,42 +153,62 @@ export default function VideoTracker() {
     setEditingVideo(null)
   }
 
-  const handleSubmit = () => {
-    const now = new Date().toISOString()
-    
-    if (editingVideo) {
-      // Update existing video
-      setVideos(videos.map(v => 
-        v.id === editingVideo.id 
-          ? { ...v, ...formData, updatedAt: now }
-          : v
-      ))
-    } else {
-      // Add new video
-      const newVideo: Video = {
-        id: Date.now().toString(),
-        ...formData,
-        createdAt: now,
-        updatedAt: now,
+  const handleSubmit = async () => {
+    try {
+      if (editingVideo) {
+        const response = await fetch('/api/notion/videos', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: editingVideo.id, ...formData })
+        })
+        if (!response.ok) throw new Error('Failed to update video')
+      } else {
+        const response = await fetch('/api/notion/videos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        })
+        if (!response.ok) throw new Error('Failed to create video')
       }
-      setVideos([...videos, newVideo])
+      
+      await fetchVideos()
+      handleCloseDialog()
+    } catch (error) {
+      console.error('Error saving video:', error)
+      alert('Failed to save video. Please try again.')
     }
-    
-    handleCloseDialog()
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this video?')) {
-      setVideos(videos.filter(v => v.id !== id))
+      try {
+        const response = await fetch('/api/notion/videos', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        })
+        if (!response.ok) throw new Error('Failed to delete video')
+        await fetchVideos()
+      } catch (error) {
+        console.error('Error deleting video:', error)
+        alert('Failed to delete video. Please try again.')
+      }
     }
   }
 
-  const handleStatusChange = (id: string, newStatus: Video['status']) => {
-    setVideos(videos.map(v => 
-      v.id === id 
-        ? { ...v, status: newStatus, updatedAt: new Date().toISOString() }
-        : v
-    ))
+  const handleStatusChange = async (id: string, newStatus: Video['status']) => {
+    try {
+      const response = await fetch('/api/notion/videos', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status: newStatus })
+      })
+      if (!response.ok) throw new Error('Failed to update status')
+      await fetchVideos()
+    } catch (error) {
+      console.error('Error updating status:', error)
+      alert('Failed to update status. Please try again.')
+    }
   }
 
   const getStats = () => {
@@ -206,65 +219,6 @@ export default function VideoTracker() {
       done: videos.filter(v => v.status === 'done').length,
     }
     return stats
-  }
-
-  const handleOpenInstructions = (videoId: string) => {
-    const video = videos.find(v => v.id === videoId)
-    if (video) {
-      setInstructionsText(video.instructions || '')
-      setInstructionsDialog({ open: true, videoId })
-    }
-  }
-
-  const handleCloseInstructions = () => {
-    setInstructionsDialog({ open: false, videoId: null })
-    setInstructionsText('')
-    setNewComment('')
-  }
-
-  const handleSaveInstructions = () => {
-    if (instructionsDialog.videoId) {
-      setVideos(videos.map(v => 
-        v.id === instructionsDialog.videoId 
-          ? { ...v, instructions: instructionsText, updatedAt: new Date().toISOString() }
-          : v
-      ))
-    }
-  }
-
-  const handleAddComment = () => {
-    if (instructionsDialog.videoId && newComment.trim()) {
-      const comment: Comment = {
-        id: Date.now().toString(),
-        author: user?.name || user?.email || 'Unknown',
-        text: newComment.trim(),
-        timestamp: new Date().toISOString()
-      }
-      
-      setVideos(videos.map(v => 
-        v.id === instructionsDialog.videoId 
-          ? { 
-              ...v, 
-              comments: [...(v.comments || []), comment],
-              updatedAt: new Date().toISOString() 
-            }
-          : v
-      ))
-      setNewComment('')
-    }
-  }
-
-  const handleCopyInstructions = () => {
-    const video = videos.find(v => v.id === instructionsDialog.videoId)
-    if (video) {
-      const textToCopy = `Instructions for "${video.title}":
-${instructionsText}
-
-Comments:
-${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocaleString()}): ${c.text}`).join('\n')}
-      `
-      navigator.clipboard.writeText(textToCopy)
-    }
   }
 
   // Music handlers
@@ -427,9 +381,9 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
             <TableRow>
               <TableCell>Title</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Editor</TableCell>
               <TableCell>Riverside Link</TableCell>
-              <TableCell>Instructions</TableCell>
+              <TableCell>Sentiment</TableCell>
+              <TableCell>Notes</TableCell>
               <TableCell>Last Updated</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
@@ -441,11 +395,6 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
                   <Typography variant="body2" sx={{ fontWeight: 500 }}>
                     {video.title}
                   </Typography>
-                  {video.notes && (
-                    <Typography variant="caption" sx={{ opacity: 0.6, display: 'block' }}>
-                      {video.notes}
-                    </Typography>
-                  )}
                 </TableCell>
                 <TableCell>
                   <Select
@@ -525,7 +474,6 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
                     </MenuItem>
                   </Select>
                 </TableCell>
-                <TableCell>{video.editor || '-'}</TableCell>
                 <TableCell>
                   <IconButton
                     size="small"
@@ -537,23 +485,14 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  <Button
-                    size="small"
-                    variant={video.instructions || video.comments?.length ? "contained" : "outlined"}
-                    onClick={() => handleOpenInstructions(video.id)}
-                    sx={{
-                      minWidth: 100,
-                      backgroundColor: video.instructions || video.comments?.length ? '#fff' : 'transparent',
-                      color: video.instructions || video.comments?.length ? '#000' : 'rgba(255, 255, 255, 0.7)',
-                      borderColor: 'rgba(255, 255, 255, 0.3)',
-                      '&:hover': {
-                        backgroundColor: video.instructions || video.comments?.length ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)',
-                        borderColor: 'rgba(255, 255, 255, 0.5)',
-                      }
-                    }}
-                  >
-                    {video.instructions ? 'View' : 'Add'}
-                  </Button>
+                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    {video.sentiment || '-'}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    {video.notes || '-'}
+                  </Typography>
                 </TableCell>
                 <TableCell>
                   {new Date(video.updatedAt).toLocaleDateString()}
@@ -674,11 +613,13 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
               </Select>
             </FormControl>
             <TextField
-              label="Editor Name"
-              value={formData.editor}
-              onChange={(e) => setFormData({ ...formData, editor: e.target.value })}
+              label="Sentiment"
+              value={formData.sentiment}
+              onChange={(e) => setFormData({ ...formData, sentiment: e.target.value })}
               fullWidth
-              placeholder="Assigned editor's name"
+              multiline
+              rows={2}
+              placeholder="Describe the mood/tone: inspiring, educational, controversial, funny, etc."
               sx={{
                 '& .MuiInputBase-input': { color: '#fff' },
                 '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
@@ -733,136 +674,6 @@ ${(video.comments || []).map(c => `${c.author} (${new Date(c.timestamp).toLocale
             {editingVideo ? 'Update' : 'Add'}
           </Button>
         </DialogActions>
-      </Dialog>
-
-      {/* Instructions & Comments Dialog */}
-      <Dialog 
-        open={instructionsDialog.open} 
-        onClose={handleCloseInstructions}
-        maxWidth="md" 
-        fullWidth
-        PaperProps={{
-          sx: {
-            backgroundColor: '#000',
-            color: '#fff',
-            border: '2px solid rgba(255, 255, 255, 0.2)',
-          }
-        }}
-      >
-        <DialogTitle sx={{ 
-          color: '#fff',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        }}>
-          <Typography variant="h6">
-            Custom Instructions - {videos.find(v => v.id === instructionsDialog.videoId)?.title}
-          </Typography>
-          <Box>
-            <IconButton onClick={handleCopyInstructions} sx={{ color: '#fff' }}>
-              <CopyIcon />
-            </IconButton>
-            <IconButton onClick={handleCloseInstructions} sx={{ color: '#fff' }}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-        </DialogTitle>
-        <DialogContent sx={{ mt: 2 }}>
-          <Typography variant="subtitle2" sx={{ mb: 2, opacity: 0.7 }}>
-            Video Editing Instructions
-          </Typography>
-          <TextField
-            fullWidth
-            multiline
-            rows={8}
-            value={instructionsText}
-            onChange={(e) => setInstructionsText(e.target.value)}
-            onBlur={handleSaveInstructions}
-            placeholder="Add your creative vision here: How should this video feel? What's the pacing? Any specific cuts, transitions, or effects? Music suggestions? Key moments to highlight?"
-            sx={{
-              mb: 3,
-              '& .MuiInputBase-input': { color: '#fff' },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                '&.Mui-focused fieldset': { borderColor: '#fff' },
-              },
-            }}
-          />
-
-          <Typography variant="subtitle2" sx={{ mb: 2, opacity: 0.7 }}>
-            Comments & Communication
-          </Typography>
-          
-          <Box sx={{ maxHeight: 300, overflowY: 'auto', mb: 2 }}>
-            {videos.find(v => v.id === instructionsDialog.videoId)?.comments?.map((comment) => (
-              <Paper 
-                key={comment.id} 
-                sx={{ 
-                  p: 2, 
-                  mb: 1, 
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  {comment.author}
-                </Typography>
-                <Typography variant="caption" sx={{ opacity: 0.6 }}>
-                  {new Date(comment.timestamp).toLocaleString()}
-                </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
-                  {comment.text}
-                </Typography>
-              </Paper>
-            ))}
-            {(!videos.find(v => v.id === instructionsDialog.videoId)?.comments?.length) && (
-              <Typography variant="body2" sx={{ opacity: 0.5, textAlign: 'center' }}>
-                No comments yet
-              </Typography>
-            )}
-          </Box>
-
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            <TextField
-              fullWidth
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Add a comment..."
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault()
-                  handleAddComment()
-                }
-              }}
-              sx={{
-                '& .MuiInputBase-input': { color: '#fff' },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                  '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                  '&.Mui-focused fieldset': { borderColor: '#fff' },
-                },
-              }}
-            />
-            <Button
-              variant="contained"
-              onClick={handleAddComment}
-              disabled={!newComment.trim()}
-              sx={{
-                backgroundColor: '#fff',
-                color: '#000',
-                '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' },
-                '&:disabled': { 
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)', 
-                  color: 'rgba(255, 255, 255, 0.3)' 
-                }
-              }}
-            >
-              Send
-            </Button>
-          </Box>
-        </DialogContent>
       </Dialog>
         </>
       )}

@@ -37,6 +37,7 @@ TISB is a brutalist-designed portfolio website showcasing music, podcasts, blog 
 - `api/substack/posts.js` - Substack RSS feed proxy
 - `api/spotify/releases.js` - Spotify API proxy  
 - `api/youtube/videos.js` - YouTube API proxy
+- `api/notion/videos.js` - Notion database proxy for video tracker
 
 ### UI Components
 - `src/pages/Blog.tsx` - Blog page using Substack content
@@ -56,6 +57,8 @@ TISB is a brutalist-designed portfolio website showcasing music, podcasts, blog 
 YOUTUBE_API_KEY=your_youtube_api_key
 SPOTIFY_CLIENT_ID=your_spotify_client_id  
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+NOTION_API_KEY=your_notion_integration_token
+VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id
 ```
 
 ### Local Development
@@ -90,11 +93,13 @@ git push origin main
 curl http://localhost:4444/api/substack/posts
 curl http://localhost:4444/api/spotify/releases  
 curl http://localhost:4444/api/youtube/videos
+curl http://localhost:4444/api/notion/videos
 
 # Test Vercel endpoints
 curl https://tisb-world.vercel.app/api/substack/posts
 curl https://tisb-world.vercel.app/api/spotify/releases
 curl https://tisb-world.vercel.app/api/youtube/videos
+curl https://tisb-world.vercel.app/api/notion/videos
 ```
 
 ## 🔧 Content Integration Details
@@ -306,14 +311,18 @@ A secure admin panel for managing the 30-video pilot project with Google OAuth a
    - Color-coded completion metrics
 
 ### Critical Files
-- `src/pages/VideoTracker.tsx` - Main tracker interface
+- `src/pages/VideoTracker.tsx` - Main tracker interface (uses Notion API)
 - `src/pages/AdminLogin.tsx` - Google OAuth login page
 - `src/contexts/AuthContext.tsx` - Authentication logic and email allowlist
 - `src/components/ProtectedRoute.tsx` - Route protection wrapper
+- `api/notion/videos.js` - Notion API serverless function
+- `simple-server.js` - Local development server with Notion proxy
 
 ### Data Storage
-- **Current**: localStorage (temporary, per-device)
-- **Future**: Can be upgraded to database (Supabase/Firebase) for cross-device sync
+- **Backend**: Notion Database (centralized, multi-user)
+- **Database ID**: `e6101ffb-6592-49c0-9af0-7012d65ba65f`
+- **Integration**: YouTube Editor Database
+- **API Endpoints**: `/api/notion/videos` (GET, POST, PATCH, DELETE)
 
 ### Known Issues & Solutions
 
@@ -331,6 +340,14 @@ A secure admin panel for managing the 30-video pilot project with Google OAuth a
 1. Vercel Dashboard → Project Settings → Environment Variables
 2. Add `VITE_GOOGLE_CLIENT_ID=733665139428-nna76ns3bl0509toju3ovhrfiq1a0c6a.apps.googleusercontent.com`
 3. Redeploy
+
+#### Notion Database Not Accessible
+**Cause**: Database not shared with integration
+**Solution**: 
+1. Open Notion database: https://bold-biology-3eb.notion.site/e6101ffb659249c09af07012d65ba65f
+2. Click "Share" → "Invite"
+3. Search for "YouTube Editor Database" integration
+4. Add integration to grant access
 
 #### Adding New Editors
 **Location**: `src/contexts/AuthContext.tsx`
@@ -380,5 +397,33 @@ npm run build && node simple-server.js
 
 ---
 
-*Last Updated: 2025-01-13*
-*Status: Video Tracker deployed, awaiting Google OAuth domain configuration ⚠️*
+### Notion Database Schema
+The video tracker uses the following Notion properties:
+- **Title** (title) - Video title
+- **Video Link** (url) - Riverside FM recording link
+- **Status** (status) - Not Started, In Progress, Done
+- **Sentiment** (rich_text) - Editor name/assignment
+- **Comments** (rich_text) - Notes and comments
+
+### API Operations
+```bash
+# Fetch all videos
+GET /api/notion/videos
+
+# Create new video
+POST /api/notion/videos
+Body: { title, riversideLink, status, editor, notes }
+
+# Update video
+PATCH /api/notion/videos
+Body: { id, title, riversideLink, status, editor, notes }
+
+# Delete video (archives in Notion)
+DELETE /api/notion/videos
+Body: { id }
+```
+
+---
+
+*Last Updated: 2025-10-31*
+*Status: Video Tracker with Notion integration - LIVE ✅*
