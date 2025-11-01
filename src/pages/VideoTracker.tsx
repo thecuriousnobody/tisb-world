@@ -37,6 +37,8 @@ import {
   Comment as CommentIcon,
   Close as CloseIcon,
   ContentCopy as CopyIcon,
+  Description as DescriptionIcon,
+  Mood as MoodIcon,
 } from '@mui/icons-material'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -95,6 +97,10 @@ export default function VideoTracker() {
     sentiment: '',
     notes: '',
   })
+  const [sentimentDialog, setSentimentDialog] = useState<{ open: boolean; videoId: string | null }>({ open: false, videoId: null })
+  const [notesDialog, setNotesDialog] = useState<{ open: boolean; videoId: string | null }>({ open: false, videoId: null })
+  const [sentimentText, setSentimentText] = useState('')
+  const [notesText, setNotesText] = useState('')
   const [musicFormData, setMusicFormData] = useState({
     title: '',
     googleDriveLink: '',
@@ -219,6 +225,68 @@ export default function VideoTracker() {
       done: videos.filter(v => v.status === 'done').length,
     }
     return stats
+  }
+
+  const handleOpenSentiment = (videoId: string) => {
+    const video = videos.find(v => v.id === videoId)
+    if (video) {
+      setSentimentText(video.sentiment || '')
+      setSentimentDialog({ open: true, videoId })
+    }
+  }
+
+  const handleCloseSentiment = () => {
+    setSentimentDialog({ open: false, videoId: null })
+    setSentimentText('')
+  }
+
+  const handleSaveSentiment = async () => {
+    if (sentimentDialog.videoId) {
+      try {
+        const response = await fetch('/api/notion/videos', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: sentimentDialog.videoId, sentiment: sentimentText })
+        })
+        if (!response.ok) throw new Error('Failed to save sentiment')
+        await fetchVideos()
+        handleCloseSentiment()
+      } catch (error) {
+        console.error('Error saving sentiment:', error)
+        alert('Failed to save sentiment. Please try again.')
+      }
+    }
+  }
+
+  const handleOpenNotes = (videoId: string) => {
+    const video = videos.find(v => v.id === videoId)
+    if (video) {
+      setNotesText(video.notes || '')
+      setNotesDialog({ open: true, videoId })
+    }
+  }
+
+  const handleCloseNotes = () => {
+    setNotesDialog({ open: false, videoId: null })
+    setNotesText('')
+  }
+
+  const handleSaveNotes = async () => {
+    if (notesDialog.videoId) {
+      try {
+        const response = await fetch('/api/notion/videos', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: notesDialog.videoId, notes: notesText })
+        })
+        if (!response.ok) throw new Error('Failed to save notes')
+        await fetchVideos()
+        handleCloseNotes()
+      } catch (error) {
+        console.error('Error saving notes:', error)
+        alert('Failed to save notes. Please try again.')
+      }
+    }
   }
 
   // Music handlers
@@ -485,14 +553,44 @@ export default function VideoTracker() {
                   </IconButton>
                 </TableCell>
                 <TableCell>
-                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                    {video.sentiment || '-'}
-                  </Typography>
+                  <Button
+                    size="small"
+                    variant={video.sentiment ? "contained" : "outlined"}
+                    onClick={() => handleOpenSentiment(video.id)}
+                    startIcon={<MoodIcon />}
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: video.sentiment ? '#fff' : 'transparent',
+                      color: video.sentiment ? '#000' : 'rgba(255, 255, 255, 0.7)',
+                      borderColor: 'rgba(255, 255, 255, 0.3)',
+                      '&:hover': {
+                        backgroundColor: video.sentiment ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(255, 255, 255, 0.5)',
+                      }
+                    }}
+                  >
+                    {video.sentiment ? 'View' : 'Add'}
+                  </Button>
                 </TableCell>
                 <TableCell>
-                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                    {video.notes || '-'}
-                  </Typography>
+                  <Button
+                    size="small"
+                    variant={video.notes ? "contained" : "outlined"}
+                    onClick={() => handleOpenNotes(video.id)}
+                    startIcon={<DescriptionIcon />}
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: video.notes ? '#fff' : 'transparent',
+                      color: video.notes ? '#000' : 'rgba(255, 255, 255, 0.7)',
+                      borderColor: 'rgba(255, 255, 255, 0.3)',
+                      '&:hover': {
+                        backgroundColor: video.notes ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(255, 255, 255, 0.5)',
+                      }
+                    }}
+                  >
+                    {video.notes ? 'View' : 'Add'}
+                  </Button>
                 </TableCell>
                 <TableCell>
                   {new Date(video.updatedAt).toLocaleDateString()}
@@ -672,6 +770,146 @@ export default function VideoTracker() {
             }}
           >
             {editingVideo ? 'Update' : 'Add'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Sentiment Modal */}
+      <Dialog 
+        open={sentimentDialog.open} 
+        onClose={handleCloseSentiment}
+        maxWidth="md" 
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: '#000',
+            color: '#fff',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          color: '#fff',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        }}>
+          <Typography variant="h6">
+            Video Sentiment - {videos.find(v => v.id === sentimentDialog.videoId)?.title}
+          </Typography>
+          <IconButton onClick={handleCloseSentiment} sx={{ color: '#fff' }}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ mt: 2 }}>
+          <Typography variant="subtitle2" sx={{ mb: 2, opacity: 0.7 }}>
+            Describe the mood, tone, and emotional direction for this video. This helps editors create appropriate thumbnails and show notes.
+          </Typography>
+          <TextField
+            fullWidth
+            multiline
+            rows={12}
+            value={sentimentText}
+            onChange={(e) => setSentimentText(e.target.value)}
+            placeholder="Example: This video should feel inspiring and uplifting. The tone is educational but accessible. Focus on hope and possibility. Thumbnail should be bright and inviting with warm colors. Show notes should emphasize actionable takeaways and positive framing."
+            sx={{
+              '& .MuiInputBase-input': { color: '#fff' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
+                '&.Mui-focused fieldset': { borderColor: '#fff' },
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', pt: 2 }}>
+          <Button 
+            onClick={handleCloseSentiment}
+            sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSaveSentiment}
+            variant="contained"
+            sx={{
+              backgroundColor: '#fff',
+              color: '#000',
+              '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' }
+            }}
+          >
+            Save Sentiment
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Notes Modal */}
+      <Dialog 
+        open={notesDialog.open} 
+        onClose={handleCloseNotes}
+        maxWidth="md" 
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: '#000',
+            color: '#fff',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          color: '#fff',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        }}>
+          <Typography variant="h6">
+            Notes & Comments - {videos.find(v => v.id === notesDialog.videoId)?.title}
+          </Typography>
+          <IconButton onClick={handleCloseNotes} sx={{ color: '#fff' }}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ mt: 2 }}>
+          <Typography variant="subtitle2" sx={{ mb: 2, opacity: 0.7 }}>
+            Add any additional notes, instructions, or comments about this video.
+          </Typography>
+          <TextField
+            fullWidth
+            multiline
+            rows={12}
+            value={notesText}
+            onChange={(e) => setNotesText(e.target.value)}
+            placeholder="Add detailed notes, specific timestamps, editing instructions, music suggestions, or any other relevant information..."
+            sx={{
+              '& .MuiInputBase-input': { color: '#fff' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
+                '&.Mui-focused fieldset': { borderColor: '#fff' },
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', pt: 2 }}>
+          <Button 
+            onClick={handleCloseNotes}
+            sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSaveNotes}
+            variant="contained"
+            sx={{
+              backgroundColor: '#fff',
+              color: '#000',
+              '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' }
+            }}
+          >
+            Save Notes
           </Button>
         </DialogActions>
       </Dialog>
