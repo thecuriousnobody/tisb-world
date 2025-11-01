@@ -297,14 +297,14 @@ A secure admin panel for managing the 30-video pilot project with Google OAuth a
 2. **Video Management**
    - Add/Edit/Delete videos
    - Riverside FM link storage
-   - Editor assignment
-   - Notes and timestamps
+   - Notion database backend for centralized data
+   - Real-time sync across all users
 
-3. **Instructions System**
-   - Dedicated column for creative direction
-   - Rich text instructions for editors
-   - Two-way comment system with timestamps
-   - Copy functionality for sharing instructions
+3. **Modal Dialogs for Rich Content**
+   - **Sentiment Modal**: Large text area for describing video mood/tone for thumbnails and show notes
+   - **Notes Modal**: Large text area for detailed editing instructions and comments
+   - Both modals support unlimited content with 12-row text areas
+   - Smart buttons show "View" when content exists, "Add" when empty
 
 4. **Statistics Dashboard**
    - Real-time progress overview
@@ -341,6 +341,15 @@ A secure admin panel for managing the 30-video pilot project with Google OAuth a
 2. Add `VITE_GOOGLE_CLIENT_ID=733665139428-nna76ns3bl0509toju3ovhrfiq1a0c6a.apps.googleusercontent.com`
 3. Redeploy
 
+#### Videos Not Showing from Notion Database
+**Cause**: Missing `NOTION_API_KEY` in Vercel
+**Solution**: 
+1. Vercel Dashboard → Project Settings → Environment Variables
+2. Add `NOTION_API_KEY` (obtain from Notion integration settings)
+3. Select all environments (Production, Preview, Development)
+4. Redeploy from Deployments tab
+5. Verify: https://tisb-world.vercel.app/api/notion/videos should return video data
+
 #### Notion Database Not Accessible
 **Cause**: Database not shared with integration
 **Solution**: 
@@ -362,10 +371,12 @@ const AUTHORIZED_EMAILS = [
 **Steps**: Edit file → `npm run build` → Deploy
 
 ### Deployment Status
-- ✅ **Code Deployed**: Merged to main branch
+- ✅ **Code Deployed**: Merged to main branch with Notion integration
 - ✅ **Live URL**: https://tisb.world/admin
-- ❌ **Google OAuth**: Needs `tisb.world` added to authorized origins
-- ✅ **Environment Variables**: `VITE_GOOGLE_CLIENT_ID` configured in Vercel
+- ✅ **Google OAuth**: Domain configured
+- ✅ **Environment Variables Required in Vercel**:
+  - `VITE_GOOGLE_CLIENT_ID` (for Google OAuth)
+  - `NOTION_API_KEY` (for Notion database integration)
 
 ### Usage Instructions for Editors
 1. Visit https://tisb.world/admin
@@ -425,5 +436,14 @@ Body: { id }
 
 ---
 
-*Last Updated: 2025-10-31*
-*Status: Video Tracker with Notion integration - LIVE ✅*
+---
+
+*Last Updated: 2025-11-01*
+*Status: Video Tracker with Notion integration and modal dialogs - LIVE ✅*
+
+**Recent Updates (2025-11-01):**
+- ✅ Notion database integration for centralized video storage
+- ✅ Modal dialogs for Sentiment and Notes fields
+- ✅ Unlimited text entry with large text areas
+- ✅ Real-time sync across all editors
+- ⚠️ **Required**: Add `NOTION_API_KEY` to Vercel environment variables for production
