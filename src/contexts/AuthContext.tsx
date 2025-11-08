@@ -26,6 +26,7 @@ const AUTHORIZED_EMAILS = [
   'rajeev@theideasandbox.com',
   'theideasandboxpodcast@gmail.com',
   'apexrisesolutions7@gmail.com',
+  'shay999.in@gmail.com',
   // Add more editors' emails here as needed:
   // 'editor2@example.com',
 ]
