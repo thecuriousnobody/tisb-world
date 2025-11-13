@@ -45,8 +45,8 @@ export default async function handler(req, res) {
         const statusName = props.Status?.status?.name || 'Not Started';
         const statusMap = {
           'Not Started': 'not_started',
-          'In Progress': 'in_progress',
-          'Done': 'done'
+          'In Process': 'in_progress',
+          'Completed': 'done'
         };
         
         return {
@@ -69,8 +69,8 @@ export default async function handler(req, res) {
 
       const statusMap = {
         'not_started': 'Not Started',
-        'in_progress': 'In Progress',
-        'done': 'Done'
+        'in_progress': 'In Process',
+        'done': 'Completed'
       };
 
       const response = await fetch('https://api.notion.com/v1/pages', {
@@ -108,8 +108,8 @@ export default async function handler(req, res) {
 
       const statusMap = {
         'not_started': 'Not Started',
-        'in_progress': 'In Progress',
-        'done': 'Done'
+        'in_progress': 'In Process',
+        'done': 'Completed'
       };
 
       const properties = {};
