@@ -584,7 +584,7 @@ export default function ArtworkAdmin() {
                 '& .MuiAlert-icon': { color: '#90caf9' }
               }}
             >
-              <strong>Quick Add:</strong> Paste your Behance project URL and click "Auto-fill" to automatically extract the title, description, thumbnail, and tags!
+              <strong>Quick Add:</strong> 1) Paste Behance URL → 2) Click "Auto-fill" → 3) Click "Get Image" for thumbnail URL helper → 4) Save!
             </Alert>
           )}
           
@@ -631,17 +631,68 @@ export default function ArtworkAdmin() {
               </Button>
             </Box>
             
-            <TextField
-              fullWidth
-              label="Thumbnail Image URL"
-              value={formData.thumbnail}
-              onChange={handleFormChange('thumbnail')}
-              variant="outlined"
-              InputProps={{
-                startAdornment: <ImageIcon sx={{ mr: 1, color: 'text.secondary' }} />
-              }}
-              helperText="Direct link to project thumbnail image"
-            />
+            <Box>
+              <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
+                <TextField
+                  fullWidth
+                  label="Thumbnail Image URL"
+                  value={formData.thumbnail}
+                  onChange={handleFormChange('thumbnail')}
+                  variant="outlined"
+                  InputProps={{
+                    startAdornment: <ImageIcon sx={{ mr: 1, color: 'text.secondary' }} />
+                  }}
+                  helperText="Direct link to project thumbnail image"
+                />
+                
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    if (formData.link) {
+                      window.open(formData.link, '_blank')
+                      setSuccess('💡 On the Behance page: Right-click the main project image → "Copy image address" → Paste here!')
+                      setTimeout(() => setSuccess(''), 5000)
+                    }
+                  }}
+                  disabled={!formData.link}
+                  sx={{ 
+                    mt: 0.5,
+                    minWidth: 120,
+                    height: 56,
+                    borderColor: '#4CAF50',
+                    color: '#4CAF50',
+                    '&:hover': { 
+                      borderColor: '#45a049',
+                      backgroundColor: 'rgba(76, 175, 80, 0.1)'
+                    }
+                  }}
+                >
+                  Get Image
+                </Button>
+              </Box>
+              
+              {formData.thumbnail && (
+                <Box sx={{ mt: 2, textAlign: 'center' }}>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                    Preview:
+                  </Typography>
+                  <img 
+                    src={formData.thumbnail} 
+                    alt="Thumbnail preview"
+                    style={{ 
+                      maxWidth: '200px', 
+                      maxHeight: '150px', 
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      borderRadius: '4px'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                      setError('Thumbnail URL appears to be invalid')
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
             
             <TextField
               fullWidth
