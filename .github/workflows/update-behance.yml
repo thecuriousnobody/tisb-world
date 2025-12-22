@@ -1,13 +1,13 @@
 name: Update Behance Portfolio
 
 on:
-  schedule:
-    # Run daily at 8 AM UTC (adjust for your timezone)
-    - cron: '0 8 * * *'
-  workflow_dispatch: # Manual trigger
-  push:
-    paths:
-      - '.github/workflows/update-behance.yml' # Test when workflow changes
+  workflow_dispatch: # Manual trigger only
+  # schedule:
+  #   # Run daily at 8 AM UTC (adjust for your timezone)
+  #   - cron: '0 8 * * *'
+  # push:
+  #   paths:
+  #     - '.github/workflows/update-behance.yml' # Test when workflow changes
 
 jobs:
   scrape-behance:

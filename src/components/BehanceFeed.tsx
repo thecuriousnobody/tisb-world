@@ -2,6 +2,27 @@ import { useState, useEffect } from 'react'
 import { Typography, Box, Card, CardContent, CardMedia } from '@mui/material'
 
 interface BehanceProject {
+  id: string
+  title: string
+  link: string
+  description: string
+  thumbnail: string
+  publishedAt: string
+  platform: string
+  author: string
+  tags: string[]
+}
+
+interface ScrapedBehanceData {
+  platform: string
+  items: BehanceProject[]
+  lastUpdated: string
+  scrapedAt: string
+  error?: string
+}
+
+// Legacy interface for fallback compatibility
+interface LegacyBehanceProject {
   title: string
   link: string
   description: string
@@ -10,28 +31,13 @@ interface BehanceProject {
   guid: string
 }
 
-interface BehanceData {
-  status: string
-  feed: {
-    url: string
-    title: string
-    link: string
-    description: string
-  }
-  items: BehanceProject[]
-}
-
 export default function BehanceFeed() {
   const [projects, setProjects] = useState<BehanceProject[]>([])
   const [loading, setLoading] = useState(true)
-
-  // Behance RSS feed for theideasandbox
-  const BEHANCE_USERNAME = 'theideasandbox'
-  const directFeedUrl = `https://www.behance.net/feeds/user?username=${BEHANCE_USERNAME}`
-  const proxiedFeedUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(directFeedUrl)}`
+  const [dataSource, setDataSource] = useState<string>('local') // Track data source
   
-  // Fallback projects from your recent work
-  const fallbackProjects: BehanceProject[] = [
+  // Legacy fallback projects for when everything fails
+  const legacyFallbackProjects: LegacyBehanceProject[] = [
     {
       title: "Liminal Radiance",
       link: "https://www.behance.net/gallery/229744893/Liminal-Radiance",
@@ -113,32 +119,98 @@ export default function BehanceFeed() {
     try {
       setLoading(true)
       
-      // Try the rss2json proxy first
+      // First: Check localStorage for admin updates (highest priority)
       try {
-        const response = await fetch(proxiedFeedUrl)
-        
-        if (response.ok) {
-          const data: BehanceData = await response.json()
-          
-          if (data.status === 'ok' && data.items && data.items.length > 0) {
-            // Get up to 20 latest projects
-            const latestProjects = data.items.slice(0, 20)
-            setProjects(latestProjects)
+        const localData = localStorage.getItem('tisb-artwork-portfolio')
+        if (localData) {
+          const data: ScrapedBehanceData = JSON.parse(localData)
+          if (data.items && data.items.length > 0) {
+            console.log(`✅ Loaded ${data.items.length} projects from admin updates`)
+            setProjects(data.items)
+            setDataSource('admin')
             return
           }
         }
-      } catch (proxyError) {
-        console.log('RSS proxy failed, using fallback:', proxyError)
+      } catch (localError) {
+        console.log('⚠️ Admin localStorage data invalid:', localError)
+      }
+
+      // Second: Try to load from local scraped data
+      try {
+        console.log('🎨 Loading artwork from local scraped data...')
+        const response = await fetch('/data/behance-portfolio.json')
+        
+        if (response.ok) {
+          const data: ScrapedBehanceData = await response.json()
+          
+          if (data.items && data.items.length > 0) {
+            console.log(`✅ Loaded ${data.items.length} projects from scraped data`)
+            setProjects(data.items)
+            setDataSource('scraped')
+            return
+          }
+        }
+      } catch (scrapedError) {
+        console.log('⚠️ Local scraped data failed:', scrapedError)
       }
       
-      // If proxy fails, use fallback projects
-      console.log('Using fallback projects from your recent Behance work')
-      setProjects(fallbackProjects)
+      // Third: Try the RSS proxy (unreliable but sometimes works)
+      try {
+        console.log('📡 Trying RSS proxy as backup...')
+        const BEHANCE_USERNAME = 'theideasandbox'
+        const directFeedUrl = `https://www.behance.net/feeds/user?username=${BEHANCE_USERNAME}`
+        const proxiedFeedUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(directFeedUrl)}`
+        
+        const response = await fetch(proxiedFeedUrl, { timeout: 5000 } as any)
+        
+        if (response.ok) {
+          const data = await response.json()
+          
+          if (data.status === 'ok' && data.items && data.items.length > 0) {
+            // Convert RSS format to our format
+            const convertedProjects: BehanceProject[] = data.items.slice(0, 12).map((item: any, index: number) => ({
+              id: item.guid || `rss-${index}`,
+              title: item.title,
+              link: item.link,
+              description: item.description || '',
+              thumbnail: extractImageFromContent(item.content || '') || '',
+              publishedAt: item.pubDate || new Date().toISOString(),
+              platform: 'behance',
+              author: 'The Idea Sandbox',
+              tags: ['art', 'design']
+            }))
+            
+            console.log(`✅ Loaded ${convertedProjects.length} projects from RSS proxy`)
+            setProjects(convertedProjects)
+            setDataSource('rss')
+            return
+          }
+        }
+      } catch (rssError) {
+        console.log('⚠️ RSS proxy failed:', rssError)
+      }
+      
+      // Fourth: Use legacy hardcoded fallback
+      console.log('📝 Using legacy fallback projects...')
+      const convertedFallback: BehanceProject[] = legacyFallbackProjects.map((item, index) => ({
+        id: `fallback-${index}`,
+        title: item.title,
+        link: item.link,
+        description: item.description,
+        thumbnail: extractImageFromContent(item.content) || '',
+        publishedAt: item.pubDate,
+        platform: 'behance',
+        author: 'The Idea Sandbox',
+        tags: ['art', 'design']
+      }))
+      
+      setProjects(convertedFallback)
+      setDataSource('fallback')
       
     } catch (err) {
-      // If everything fails, still show fallback
-      console.log('All methods failed, using fallback projects:', err)
-      setProjects(fallbackProjects)
+      console.error('❌ All data sources failed:', err)
+      setProjects([])
+      setDataSource('error')
     } finally {
       setLoading(false)
     }
@@ -201,6 +273,22 @@ export default function BehanceFeed() {
         </Typography>
       </Box>
 
+      {/* Data Source Indicator */}
+      <Box sx={{ textAlign: 'center', mb: 2 }}>
+        <Typography variant="caption" sx={{ 
+          color: dataSource === 'admin' ? 'success.main' : 
+                dataSource === 'scraped' ? 'primary.main' :
+                dataSource === 'fallback' ? 'warning.main' : 'info.main',
+          fontSize: '0.8rem'
+        }}>
+          {dataSource === 'admin' && '✅ Latest updates from admin panel'}
+          {dataSource === 'scraped' && '📁 Curated artwork collection'}
+          {dataSource === 'rss' && '📡 Live data from RSS feed'}
+          {dataSource === 'fallback' && '⚠️ Using cached artwork data'}
+          {dataSource === 'error' && '❌ Unable to load artwork data'}
+        </Typography>
+      </Box>
+
       {/* Projects Grid */}
       <Box sx={{
         display: 'grid',
@@ -209,18 +297,20 @@ export default function BehanceFeed() {
         px: { xs: 2, md: 8 },
       }}>
         {projects.map((project, index) => {
-          const imageUrl = extractImageFromContent(project.content)
+          const imageUrl = project.thumbnail || extractImageFromContent(project.description) || ''
           const cleanDescription = stripHtmlTags(project.description).slice(0, 150) + '...'
           
           return (
             <Card
-              key={project.guid || index}
+              key={project.id || index}
               sx={{
                 cursor: 'pointer',
                 position: 'relative',
-                height: '380px', // Increased from 350px to 380px for better aspect ratio
+                height: '380px',
                 overflow: 'hidden',
                 transition: 'all 0.3s ease',
+                border: dataSource === 'scraped' ? '2px solid' : '1px solid',
+                borderColor: dataSource === 'scraped' ? 'success.main' : 'divider',
                 '&:hover': {
                   transform: 'translateY(-8px)',
                   '& .project-image': {
@@ -257,9 +347,16 @@ export default function BehanceFeed() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'secondary.main', // Orange background
+                    background: 'linear-gradient(45deg, #1a1a1a 0%, #ff4500 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
-                />
+                >
+                  <Typography variant="h4" sx={{ color: 'white', opacity: 0.7 }}>
+                    🎨
+                  </Typography>
+                </Box>
               )}
 
               {/* Content Overlay */}
@@ -274,7 +371,7 @@ export default function BehanceFeed() {
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
                   p: 3,
-                  background: 'linear-gradient(transparent 30%, rgba(0,0,0,0.5) 100%)',
+                  background: 'linear-gradient(transparent 30%, rgba(0,0,0,0.7) 100%)',
                 }}
               >
                 <Typography
@@ -297,7 +394,7 @@ export default function BehanceFeed() {
                   variant="body2"
                   sx={{
                     color: 'white',
-                    opacity: 0.8,
+                    opacity: 0.9,
                     fontSize: '0.9rem',
                     overflow: 'hidden',
                     display: '-webkit-box',
@@ -307,6 +404,28 @@ export default function BehanceFeed() {
                 >
                   {cleanDescription}
                 </Typography>
+                
+                {/* Tags */}
+                {project.tags && project.tags.length > 0 && (
+                  <Box sx={{ mt: 1, display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+                    {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                      <Typography
+                        key={tagIndex}
+                        variant="caption"
+                        sx={{
+                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                          color: 'white',
+                          px: 1,
+                          py: 0.2,
+                          borderRadius: 1,
+                          fontSize: '0.7rem',
+                        }}
+                      >
+                        {tag}
+                      </Typography>
+                    ))}
+                  </Box>
+                )}
               </CardContent>
             </Card>
           )

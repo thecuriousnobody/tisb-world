@@ -1,5 +1,5 @@
 import { Typography, Box, Grid, Card, CardContent, Button, Alert } from '@mui/material'
-import { Security, Dashboard, Settings, Analytics, VideoLibrary } from '@mui/icons-material'
+import { Security, Dashboard, Settings, Analytics, VideoLibrary, Palette } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -13,6 +13,13 @@ export default function Admin() {
       description: 'Track progress of 30 video pilot project with Riverside links',
       icon: <VideoLibrary />,
       action: () => navigate('/admin/video-tracker'),
+      available: true,
+    },
+    {
+      title: 'Artwork Management',
+      description: 'Add, edit, and manage your Behance artwork portfolio',
+      icon: <Palette />,
+      action: () => navigate('/admin/artwork'),
       available: true,
     },
     {

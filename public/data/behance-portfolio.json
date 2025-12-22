@@ -2,48 +2,96 @@
   "platform": "Behance",
   "items": [
     {
-      "id": "behance-1",
-      "title": "Digital Art Collection",
-      "description": "Explore my latest digital artworks and creative experiments • View on Behance",
-      "link": "https://www.behance.net/theideasandbox",
-      "publishedAt": "2025-09-08T21:24:20.986Z",
+      "id": "liminal-radiance-2024",
+      "title": "Liminal Radiance",
+      "description": "Exploring the boundaries between dimensions through fluid, organic forms and luminescent energy fields. A visual meditation on consciousness and perception.",
+      "link": "https://www.behance.net/gallery/229744893/Liminal-Radiance",
+      "publishedAt": "2024-07-15T16:08:25.000Z",
       "platform": "behance",
-      "thumbnail": "https://via.placeholder.com/400x300/000000/FF4500?text=Digital+Art",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/72595c229744893.Y3JvcCwxMDgwLDg0NCwwLDExNw.png",
       "author": "The Idea Sandbox",
-      "tags": [
-        "digital art",
-        "creative"
-      ]
+      "tags": ["digital art", "abstract", "consciousness", "3d"]
     },
     {
-      "id": "behance-2",
-      "title": "Brutalist Design Experiments",
-      "description": "Bold typography and experimental layout designs • View on Behance",
-      "link": "https://www.behance.net/theideasandbox",
-      "publishedAt": "2025-09-08T21:24:20.987Z",
+      "id": "undulating-qualia-2024",
+      "title": "Undulating Qualia",
+      "description": "Digital exploration of consciousness and perception through rhythmic, flowing forms that seem to breathe with digital life.",
+      "link": "https://www.behance.net/gallery/228140981/Undulating-Qualia",
+      "publishedAt": "2024-06-20T14:55:52.000Z",
       "platform": "behance",
-      "thumbnail": "https://via.placeholder.com/400x300/1a1a1a/00FF00?text=Brutalist+Design",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/4ce73b228140981.Y3JvcCwxMDgwLDg0NCwwLDE3MQ.png",
       "author": "The Idea Sandbox",
-      "tags": [
-        "brutalism",
-        "typography"
-      ]
+      "tags": ["digital art", "philosophy", "fluid dynamics"]
     },
     {
-      "id": "behance-3",
-      "title": "AI-Generated Art Series",
-      "description": "Exploring the intersection of AI and creative expression • View on Behance",
-      "link": "https://www.behance.net/theideasandbox",
-      "publishedAt": "2025-09-08T21:24:20.987Z",
+      "id": "transcendent-currents-2024",
+      "title": "Transcendent Currents",
+      "description": "Visual journey through energy and transformation, capturing the invisible forces that shape our reality through computational aesthetics.",
+      "link": "https://www.behance.net/gallery/228111041/Transcendent-Currents",
+      "publishedAt": "2024-06-14T02:39:42.000Z",
       "platform": "behance",
-      "thumbnail": "https://via.placeholder.com/400x300/2a2a2a/FFD700?text=AI+Art",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/cdebbf228111041.Y3JvcCwxMDgwLDg0NCwwLDExNw.png",
       "author": "The Idea Sandbox",
-      "tags": [
-        "ai art",
-        "experimental"
-      ]
+      "tags": ["energy", "transformation", "digital sublime"]
+    },
+    {
+      "id": "primal-vibrations-2024",
+      "title": "Primal Vibrations",
+      "description": "A visual journey into the fundamental frequencies that shape our reality, expressed through dynamic digital forms and resonant patterns.",
+      "link": "https://www.behance.net/gallery/227711897/Primal-Vibrations",
+      "publishedAt": "2024-06-08T18:08:06.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/64e6ae227711897.Y3JvcCw4NjMsNjc1LDEwOCwyMDM.png",
+      "author": "The Idea Sandbox",
+      "tags": ["frequencies", "sound visualization", "primal"]
+    },
+    {
+      "id": "possibility-blooms-2024",
+      "title": "Possibility Blooms",
+      "description": "Creative exploration in visual design and digital art, where potential unfolds like organic growth in computational space.",
+      "link": "https://www.behance.net/gallery/227171655/Possibility-Blooms",
+      "publishedAt": "2024-05-31T15:50:58.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/00a0d6227171655.Y3JvcCwxMDgwLDg0NCwwLDExNw.png",
+      "author": "The Idea Sandbox",
+      "tags": ["possibility", "growth", "organic forms"]
+    },
+    {
+      "id": "emergence-2024",
+      "title": "Emergence",
+      "description": "Digital emergence and organic forms colliding in a dance of complexity and beauty, where simple rules create intricate patterns.",
+      "link": "https://www.behance.net/gallery/226776859/Emergence",
+      "publishedAt": "2024-05-29T15:37:34.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/e4fc05226776859.Y3JvcCwxMDgwLDg0NCwwLDE0OQ.png",
+      "author": "The Idea Sandbox",
+      "tags": ["emergence", "complexity", "systems"]
+    },
+    {
+      "id": "radiant-odyssey-2024",
+      "title": "Radiant Odyssey",
+      "description": "An exploration of light, energy, and transformation through digital art, mapping the journey of consciousness through luminous landscapes.",
+      "link": "https://www.behance.net/gallery/226134717/Radiant-Odyssey",
+      "publishedAt": "2024-05-18T06:17:24.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/341bc4226134717.Y3JvcCwxMDgwLDg0NCwwLDQxMQ.png",
+      "author": "The Idea Sandbox",
+      "tags": ["light", "odyssey", "consciousness journey"]
+    },
+    {
+      "id": "fluid-consciousness-2024",
+      "title": "Fluid Consciousness",
+      "description": "Exploration of consciousness through fluid digital forms that seem to flow between states of being and awareness.",
+      "link": "https://www.behance.net/gallery/225558559/Fluid-Consciousness",
+      "publishedAt": "2024-05-10T13:27:32.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/e2b7b1225558559.Y3JvcCwxOTk5LDE1NjQsMCwyMTc.png",
+      "author": "The Idea Sandbox",
+      "tags": ["consciousness", "fluid dynamics", "awareness"]
     }
   ],
-  "lastUpdated": "2025-09-08T21:24:20.987Z",
-  "scrapedAt": "2025-09-08T21:24:20.987Z"
+  "lastUpdated": "2025-11-29T22:10:00.000Z",
+  "scrapedAt": "2025-11-29T22:10:00.000Z",
+  "updateMethod": "manual_curated",
+  "note": "Curated artwork collection with real Behance URLs and CDN images"
 }

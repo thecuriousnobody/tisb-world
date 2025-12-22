@@ -1,8 +1,4 @@
-# TISB World Design System Export
-# Use this to quickly set up the aesthetic in your Distillery Labs project
-
-## Color Palette
-```typescript
+ hi boo-boo I miss you all the time
 export const colors = {
   primary: '#FF4500',      // Orange
   secondary: '#8B4513',    // Brown  

@@ -17,6 +17,7 @@ import BetaFeedback from './pages/BetaFeedback'
 import AdminFeedback from './pages/AdminFeedback'
 import AdminLogin from './pages/AdminLogin'
 import VideoTracker from './pages/VideoTracker'
+import ArtworkAdmin from './pages/ArtworkAdmin'
 import { theme } from './theme'
 import { AuthProvider } from './contexts/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -42,6 +43,14 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <VideoTracker />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/admin/artwork" element={
+              <ProtectedRoute>
+                <Layout>
+                  <ArtworkAdmin />
                 </Layout>
               </ProtectedRoute>
             } />

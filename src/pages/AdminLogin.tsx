@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Typography, Paper, Alert } from '@mui/material'
+import { Box, Typography, Paper, Alert, Button } from '@mui/material'
 import { GoogleLogin } from '@react-oauth/google'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function AdminLogin() {
   const navigate = useNavigate()
-  const { login } = useAuth()
+  const { login, developmentLogin, isDevelopment } = useAuth()
   const [error, setError] = useState<string | null>(null)
 
   const handleSuccess = async (credentialResponse: any) => {
@@ -20,6 +20,15 @@ export default function AdminLogin() {
 
   const handleError = () => {
     setError('Google login failed')
+  }
+
+  const handleDevLogin = () => {
+    try {
+      developmentLogin()
+      navigate('/admin')
+    } catch (err: any) {
+      setError('Development login failed')
+    }
   }
 
   return (
@@ -66,6 +75,28 @@ export default function AdminLogin() {
             shape="rectangular"
           />
         </Box>
+
+        {isDevelopment && (
+          <Box sx={{ mt: 3 }}>
+            <Typography variant="caption" sx={{ display: 'block', mb: 2, color: 'warning.main' }}>
+              🚀 Development Mode
+            </Typography>
+            <Button 
+              variant="outlined" 
+              onClick={handleDevLogin}
+              sx={{ 
+                borderColor: 'warning.main',
+                color: 'warning.main',
+                '&:hover': {
+                  borderColor: 'warning.light',
+                  backgroundColor: 'rgba(255, 152, 0, 0.1)'
+                }
+              }}
+            >
+              Skip OAuth - Dev Login
+            </Button>
+          </Box>
+        )}
 
         <Typography variant="caption" sx={{ mt: 4, display: 'block', opacity: 0.5 }}>
           Only authorized email addresses can access the admin panel.
