@@ -1,26 +1,22 @@
 #!/usr/bin/env node
 /**
- * Fetch artwork from Notion database and save to JSON
+ * Fetch artwork from Notion database and auto-extract Behance metadata
  *
- * This script fetches artwork/portfolio items from a Notion database
- * and saves them to a static JSON file that the website can read.
+ * SIMPLE WORKFLOW:
+ * 1. Paste a Behance URL into your Notion database
+ * 2. Run this script (manually or via GitHub Actions)
+ * 3. Title, thumbnail, etc. are automatically extracted!
  *
- * Setup:
- * 1. Create a Notion database with these properties:
- *    - Title (title) - Artwork name
- *    - Behance URL (url) - Link to Behance project
- *    - Thumbnail (url) - Direct link to thumbnail image
- *    - Description (rich_text) - Description of the artwork
- *    - Tags (rich_text) - Comma-separated tags
+ * Notion Database Setup:
+ * - Just need ONE column: "Behance URL" (type: URL)
+ * - Optional: "Tags" column (type: Text) for custom tags
  *
- * 2. Share the database with your Notion integration
- *
- * 3. Set environment variables:
- *    - NOTION_API_KEY: Your Notion integration token
- *    - NOTION_ARTWORK_DB: Your artwork database ID
+ * Environment Variables:
+ * - NOTION_API_KEY: Your Notion integration token
+ * - NOTION_ARTWORK_DB: Your artwork database ID
  *
  * Usage:
- *   NOTION_API_KEY=xxx NOTION_ARTWORK_DB=xxx node scripts/fetch-artwork.js
+ *   node scripts/fetch-artwork.js
  *
  * Output:
  *   public/data/behance-portfolio.json
@@ -40,7 +36,42 @@ const NOTION_TOKEN = process.env.NOTION_API_KEY;
 const DATABASE_ID = process.env.NOTION_ARTWORK_DB;
 
 /**
- * Make HTTPS request to Notion API
+ * Make HTTPS request
+ */
+function httpsGet(url, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const options = {
+      hostname: urlObj.hostname,
+      port: 443,
+      path: urlObj.pathname + urlObj.search,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        ...headers
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      // Handle redirects
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return httpsGet(res.headers.location, headers).then(resolve).catch(reject);
+      }
+
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve(data));
+    });
+
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+/**
+ * Make Notion API request
  */
 function notionRequest(endpoint, method = 'POST', body = null) {
   return new Promise((resolve, reject) => {
@@ -83,42 +114,114 @@ function notionRequest(endpoint, method = 'POST', body = null) {
 }
 
 /**
- * Fetch all artwork from Notion database
+ * Extract metadata from a Behance URL
  */
-async function fetchArtwork() {
-  console.log('Fetching artwork from Notion database...');
+async function fetchBehanceMetadata(url) {
+  console.log(`  Fetching: ${url}`);
+
+  try {
+    const html = await httpsGet(url);
+
+    // Extract title from <title> tag
+    const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+    let title = titleMatch ? titleMatch[1].replace(/\s*::\s*Behance\s*$/i, '').trim() : 'Untitled';
+
+    // Extract thumbnail from og:image or Behance CDN URL
+    let thumbnail = '';
+
+    // Try og:image first
+    const ogImageMatch = html.match(/property="og:image"\s+content="([^"]+)"/i) ||
+                         html.match(/content="([^"]+)"\s+property="og:image"/i);
+    if (ogImageMatch) {
+      thumbnail = ogImageMatch[1];
+    }
+
+    // Fallback: look for Behance CDN image URLs
+    if (!thumbnail) {
+      const cdnMatch = html.match(/content="(https:\/\/mir-s3-cdn-cf\.behance\.net\/projects\/[^"]+)"/);
+      if (cdnMatch) {
+        thumbnail = cdnMatch[1];
+      }
+    }
+
+    // Fallback: any Behance CDN image
+    if (!thumbnail) {
+      const anyImageMatch = html.match(/(https:\/\/mir-s3-cdn-cf\.behance\.net\/[^"'\s]+\.(jpg|jpeg|png|webp))/i);
+      if (anyImageMatch) {
+        thumbnail = anyImageMatch[1];
+      }
+    }
+
+    // Extract description from og:description
+    const descMatch = html.match(/property="og:description"\s+content="([^"]+)"/i) ||
+                      html.match(/name="description"\s+content="([^"]+)"/i);
+    const description = descMatch ? descMatch[1].trim() : `Creative artwork by The Idea Sandbox`;
+
+    // Extract project ID from URL for unique ID
+    const idMatch = url.match(/gallery\/(\d+)/);
+    const projectId = idMatch ? idMatch[1] : Date.now().toString();
+
+    console.log(`    ✓ Title: ${title}`);
+    console.log(`    ✓ Thumbnail: ${thumbnail ? 'Found' : 'Not found'}`);
+
+    return {
+      id: `behance-${projectId}`,
+      title,
+      description: description.length > 300 ? description.substring(0, 300) + '...' : description,
+      thumbnail,
+      projectId
+    };
+
+  } catch (error) {
+    console.error(`    ✗ Error: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * Fetch Behance URLs from Notion database
+ */
+async function fetchNotionEntries() {
+  console.log('Fetching entries from Notion database...');
 
   const data = await notionRequest(`/v1/databases/${DATABASE_ID}/query`, 'POST', {
-    sorts: [{ property: 'Created', direction: 'descending' }]
+    sorts: [{ timestamp: 'created_time', direction: 'descending' }]
   });
 
-  console.log(`Found ${data.results?.length || 0} artwork items`);
+  console.log(`Found ${data.results?.length || 0} entries in Notion\n`);
 
-  const items = data.results.map((page, index) => {
+  const entries = [];
+
+  for (const page of data.results) {
     const props = page.properties;
 
-    // Extract title
-    const title = props.Title?.title?.[0]?.plain_text ||
-                  props.Name?.title?.[0]?.plain_text ||
-                  `Artwork ${index + 1}`;
+    // Find the Behance URL - check common column names
+    let behanceUrl = props['Behance URL']?.url ||
+                     props['URL']?.url ||
+                     props['Link']?.url ||
+                     props['Behance']?.url ||
+                     null;
 
-    // Extract Behance URL
-    const link = props['Behance URL']?.url ||
-                 props.URL?.url ||
-                 props.Link?.url ||
-                 'https://www.behance.net/theideasandbox';
+    // Also check if URL is in a rich_text field
+    if (!behanceUrl) {
+      for (const key of Object.keys(props)) {
+        if (props[key].type === 'url' && props[key].url?.includes('behance.net')) {
+          behanceUrl = props[key].url;
+          break;
+        }
+        if (props[key].type === 'rich_text' && props[key].rich_text?.[0]?.plain_text?.includes('behance.net')) {
+          behanceUrl = props[key].rich_text[0].plain_text;
+          break;
+        }
+      }
+    }
 
-    // Extract thumbnail
-    const thumbnail = props.Thumbnail?.url ||
-                      props.Image?.url ||
-                      props['Image URL']?.url ||
-                      '';
+    if (!behanceUrl || !behanceUrl.includes('behance.net/gallery/')) {
+      console.log(`  Skipping entry (no valid Behance URL found)`);
+      continue;
+    }
 
-    // Extract description
-    const description = props.Description?.rich_text?.[0]?.plain_text ||
-                        'Creative project by The Idea Sandbox';
-
-    // Extract tags (can be rich_text or multi_select)
+    // Get optional tags
     let tags = ['digital art'];
     if (props.Tags?.rich_text?.[0]?.plain_text) {
       tags = props.Tags.rich_text[0].plain_text.split(',').map(t => t.trim()).filter(t => t);
@@ -126,26 +229,14 @@ async function fetchArtwork() {
       tags = props.Tags.multi_select.map(t => t.name);
     }
 
-    // Generate ID from title
-    const id = title.toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '-')
-      .substring(0, 30) + '-' + new Date(page.created_time).getFullYear();
+    entries.push({
+      behanceUrl,
+      tags,
+      createdTime: page.created_time
+    });
+  }
 
-    return {
-      id,
-      title,
-      description,
-      link,
-      publishedAt: page.created_time,
-      platform: 'behance',
-      thumbnail,
-      author: 'The Idea Sandbox',
-      tags
-    };
-  });
-
-  return items;
+  return entries;
 }
 
 /**
@@ -167,12 +258,43 @@ async function main() {
   }
 
   try {
-    const items = await fetchArtwork();
+    // Get Behance URLs from Notion
+    const entries = await fetchNotionEntries();
 
-    if (items.length === 0) {
-      console.warn('Warning: No artwork found in database');
-      console.warn('Make sure to share the database with your Notion integration');
+    if (entries.length === 0) {
+      console.warn('\nNo valid Behance URLs found in Notion database');
+      console.warn('Make sure to:');
+      console.warn('1. Add entries with Behance gallery URLs');
+      console.warn('2. Share the database with your Notion integration');
+      process.exit(0);
     }
+
+    console.log(`\nFetching metadata for ${entries.length} Behance projects...\n`);
+
+    // Fetch metadata for each Behance URL
+    const items = [];
+    for (const entry of entries) {
+      const metadata = await fetchBehanceMetadata(entry.behanceUrl);
+
+      if (metadata) {
+        items.push({
+          id: metadata.id,
+          title: metadata.title,
+          description: metadata.description,
+          link: entry.behanceUrl,
+          publishedAt: entry.createdTime,
+          platform: 'behance',
+          thumbnail: metadata.thumbnail,
+          author: 'The Idea Sandbox',
+          tags: entry.tags
+        });
+      }
+
+      // Small delay to be nice to Behance servers
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`\nSuccessfully processed ${items.length} artwork items`);
 
     // Create output object
     const output = {
@@ -180,8 +302,8 @@ async function main() {
       items,
       lastUpdated: new Date().toISOString(),
       scrapedAt: new Date().toISOString(),
-      updateMethod: 'notion_sync',
-      note: 'Synced from Notion database'
+      updateMethod: 'notion_behance_sync',
+      note: 'Auto-synced from Notion with Behance metadata extraction'
     };
 
     // Ensure output directory exists
@@ -192,21 +314,10 @@ async function main() {
 
     // Write JSON file
     fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
-    console.log(`Saved ${items.length} artwork items to ${OUTPUT_PATH}`);
-
-    // Print summary
-    if (items.length > 0) {
-      console.log('\nArtwork synced:');
-      items.slice(0, 5).forEach((item, i) => {
-        console.log(`  ${i + 1}. ${item.title.substring(0, 40)}${item.title.length > 40 ? '...' : ''}`);
-      });
-      if (items.length > 5) {
-        console.log(`  ... and ${items.length - 5} more`);
-      }
-    }
+    console.log(`\nSaved to ${OUTPUT_PATH}`);
 
   } catch (error) {
-    console.error('Error fetching artwork:', error.message);
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }
