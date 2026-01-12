@@ -25,10 +25,21 @@ export default async function handler(req, res) {
     
     console.log('📡 Fetching YouTube videos...');
     const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=50&type=video`);
-    
+
     const data = await response.json();
+
+    // Check for YouTube API errors (quota exceeded, invalid key, etc.)
+    if (data.error) {
+      console.error('❌ YouTube API error:', data.error.message);
+      return res.status(data.error.code || 500).json({
+        error: data.error.message,
+        code: data.error.code,
+        reason: data.error.errors?.[0]?.reason
+      });
+    }
+
     console.log(`✅ Fetched ${data.items?.length || 0} YouTube videos`);
-    
+
     res.status(200).json(data);
   } catch (error) {
     console.error('❌ YouTube error:', error);

@@ -281,10 +281,16 @@ export class ContentService {
         // Try server proxy first
         console.log('Fetching YouTube videos from server proxy...');
         const response = await fetch('/api/youtube/videos');
-        
+
         if (response.ok) {
           const data = await response.json();
-          
+
+          // Check for YouTube API errors in response (quota exceeded, etc.)
+          if (data.error || !data.items) {
+            console.warn('YouTube API returned error or no items, falling back to RSS...', data.error);
+            throw new Error(data.error || 'No items in response');
+          }
+
           const contentItems: ContentItem[] = data.items?.map((item: any, index: number) => {
             const videoId = item.id.videoId;
             const snippet = item.snippet;
