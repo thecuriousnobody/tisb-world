@@ -1,0 +1,42 @@
+name: Update YouTube Videos
+
+on:
+  # Run daily at 6 AM UTC (adjust for your timezone)
+  schedule:
+    - cron: '0 6 * * *'
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  fetch-youtube:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Fetch YouTube videos from RSS
+      run: node scripts/fetch-youtube.js
+
+    - name: Check for changes
+      id: git-check
+      run: |
+        git diff --exit-code public/data/youtube-videos.json || echo "changes=true" >> $GITHUB_OUTPUT
+
+    - name: Commit and push if changed
+      if: steps.git-check.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add public/data/youtube-videos.json
+        git commit -m "Update YouTube videos from RSS feed
+
+        Automated update via GitHub Actions
+
+        Co-Authored-By: GitHub Actions <noreply@github.com>"
+        git push

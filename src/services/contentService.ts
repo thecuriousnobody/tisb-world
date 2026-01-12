@@ -277,51 +277,40 @@ export class ContentService {
 
   async getYouTubeVideos(): Promise<ContentFeed> {
     return this.fetchWithCache('youtube', async () => {
+      // Try static JSON file first (updated daily via GitHub Actions - no API quota needed)
       try {
-        // Try server proxy first
-        console.log('Fetching YouTube videos from server proxy...');
-        const response = await fetch('/api/youtube/videos');
+        console.log('Fetching YouTube videos from static JSON...');
+        const response = await fetch('/data/youtube-videos.json');
 
         if (response.ok) {
           const data = await response.json();
 
-          // Check for YouTube API errors in response (quota exceeded, etc.)
-          if (data.error || !data.items) {
-            console.warn('YouTube API returned error or no items, falling back to RSS...', data.error);
-            throw new Error(data.error || 'No items in response');
-          }
-
-          const contentItems: ContentItem[] = data.items?.map((item: any, index: number) => {
-            const videoId = item.id.videoId;
-            const snippet = item.snippet;
-            
-            return {
-              id: `youtube-${videoId}`,
-              title: snippet.title,
-              description: snippet.description.length > 300 
-                ? snippet.description.substring(0, 300) + '...' 
-                : snippet.description,
-              link: `https://www.youtube.com/watch?v=${videoId}`,
-              publishedAt: new Date(snippet.publishedAt),
+          if (data.items && data.items.length > 0) {
+            const contentItems: ContentItem[] = data.items.map((item: any) => ({
+              id: item.id,
+              title: item.title,
+              description: item.description,
+              link: item.link,
+              publishedAt: new Date(item.publishedAt),
               platform: 'youtube' as const,
-              thumbnail: snippet.thumbnails.high?.url || snippet.thumbnails.medium?.url || snippet.thumbnails.default?.url,
-              author: snippet.channelTitle,
+              thumbnail: item.thumbnail,
+              author: item.author || 'The Idea Sandbox',
+            }));
+
+            console.log(`Successfully loaded ${contentItems.length} videos from static JSON`);
+
+            return {
+              platform: 'YouTube',
+              items: contentItems,
+              lastUpdated: new Date(data.lastUpdated || Date.now()),
             };
-          }) || [];
-
-          console.log(`Successfully fetched ${contentItems.length} videos from server proxy`);
-
-          return {
-            platform: 'YouTube',
-            items: contentItems,
-            lastUpdated: new Date(),
-          };
+          }
         }
       } catch (error) {
-        console.warn('Server proxy failed, falling back to RSS...', error);
+        console.warn('Static JSON failed, trying RSS fallback...', error);
       }
-      
-      // Fallback to RSS if server proxy fails
+
+      // Fallback to RSS if static JSON fails
       return this.getYouTubeVideosRSS();
     });
   }
