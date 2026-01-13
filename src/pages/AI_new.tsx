@@ -68,23 +68,33 @@ const AI: React.FC = () => {
         <Card sx={{ mb: 4, overflow: 'visible' }}>
           <CardContent>
             <Typography variant="h4" component="h3" gutterBottom>
-              Potentiator AI
+              DeSilo - Startup Intelligence
             </Typography>
 
             <Typography variant="body1" paragraph>
-              AI-powered tools for unlocking human potential. Explore the platform below or visit directly.
+              Decentralized Startup Intelligence for Local Operators. AI-powered platform connecting
+              Central Illinois entrepreneurs with resources, funding, and opportunities.
             </Typography>
 
             <Box sx={{ mb: 3 }}>
               <Button
                 variant="contained"
                 size="large"
-                href="https://www.potentiator.ai"
+                href="https://www.potentiator.ai/about"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ mr: 2 }}
               >
-                Open in New Tab
+                Learn More
+              </Button>
+              <Button
+                variant="outlined"
+                size="large"
+                href="https://www.potentiator.ai/intake"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DeSilo Admin Access
               </Button>
             </Box>
 
@@ -92,14 +102,14 @@ const AI: React.FC = () => {
             <Box sx={{
               position: 'relative',
               width: '100%',
-              height: '600px',
+              height: '800px',
               border: '1px solid rgba(255, 255, 255, 0.1)',
               borderRadius: 2,
               overflow: 'hidden'
             }}>
               <iframe
-                src="https://www.potentiator.ai"
-                title="Potentiator AI"
+                src="https://www.potentiator.ai/about"
+                title="DeSilo - Startup Intelligence"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -124,8 +134,9 @@ const AI: React.FC = () => {
             </Typography>
 
             <Typography variant="body1" paragraph>
-              <strong>Potentiator AI</strong> is designed to help individuals and teams unlock their full potential
-              through AI-powered insights and tools.
+              <strong>DeSilo (Potentiator AI)</strong> is my startup intelligence platform for Central Illinois.
+              It breaks down the silos that keep entrepreneurs isolated, using AI to connect founders with
+              local resources, funding opportunities, mentors, and programs they might otherwise miss.
             </Typography>
 
             <Typography variant="body1">
