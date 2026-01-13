@@ -79,7 +79,7 @@ const AI: React.FC = () => {
               <Button
                 variant="contained"
                 size="large"
-                href="https://potentiator.ai"
+                href="https://www.potentiator.ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ mr: 2 }}
@@ -98,7 +98,7 @@ const AI: React.FC = () => {
               overflow: 'hidden'
             }}>
               <iframe
-                src="https://potentiator.ai"
+                src="https://www.potentiator.ai"
                 title="Potentiator AI"
                 style={{
                   width: '100%',
