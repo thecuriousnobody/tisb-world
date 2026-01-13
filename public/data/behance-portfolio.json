@@ -16,12 +16,12 @@
     },
     {
       "id": "behance-234667859",
-      "title": "Behance",
+      "title": "The Language of Love",
       "description": "Creative artwork by The Idea Sandbox",
       "link": "https://www.behance.net/gallery/234667859/The-Language-of-Love",
       "publishedAt": "2026-01-13T02:30:00.000Z",
       "platform": "behance",
-      "thumbnail": "",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/max_808/772f3a234667859.Y3JvcCw5MjYsNzI0LDAsMTExOA.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -107,12 +107,12 @@
     },
     {
       "id": "behance-238606797",
-      "title": "Behance",
-      "description": "Creative artwork by The Idea Sandbox",
+      "title": "Sedimentary Becoming",
+      "description": "An exploration of consciousness as geological process - where transformation happens not through sudden rupture, but through patient accumulation. Each striation marks a moment in time, each layered form an epoch of understanding accreting upon itself. Working within a constrained yellow-and-black p...",
       "link": "https://www.behance.net/gallery/238606797/Sedimentary-Becoming",
       "publishedAt": "2026-01-13T02:27:00.000Z",
       "platform": "behance",
-      "thumbnail": "",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/max_808/41821c238606797.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -172,12 +172,12 @@
     },
     {
       "id": "behance-240888653",
-      "title": "Unfoldment",
-      "description": "Six pieces exploring what happens when you stop forcing and start trusting. Created on mobile during a period of intense creative expansion—building an AI collective, launching a podcast, starting companies—these works emerged in the spaces between, when the only option was to let form find itself. ...",
+      "title": "Behance",
+      "description": "Creative artwork by The Idea Sandbox",
       "link": "https://www.behance.net/gallery/240888653/Unfoldment",
       "publishedAt": "2026-01-13T02:23:00.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/max_808/8cb5a0240888653.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "thumbnail": "",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -185,12 +185,12 @@
     },
     {
       "id": "behance-241197819",
-      "title": "Primordial Grammar",
-      "description": "\"Primordial Grammar\" explores the visual syntax that precedes language—the loops, spirals, and serpentine forms that consciousness draws before it learns to speak. Across four compositions, the work moves between chaos and structure, explosion and excavation, solid form and luminous dissolution. Per...",
+      "title": "Behance",
+      "description": "Creative artwork by The Idea Sandbox",
       "link": "https://www.behance.net/gallery/241197819/Primordial-Grammar",
       "publishedAt": "2026-01-13T02:23:00.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/max_808/f4f70d241197819.Y3JvcCwxMjAwLDkzOCwwLDgzMQ.png",
+      "thumbnail": "",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -223,8 +223,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-01-13T02:33:04.265Z",
-  "scrapedAt": "2026-01-13T02:33:04.265Z",
+  "lastUpdated": "2026-01-13T07:12:47.135Z",
+  "scrapedAt": "2026-01-13T07:12:47.136Z",
   "updateMethod": "notion_behance_sync",
   "note": "Auto-synced from Notion with Behance metadata extraction"
 }
