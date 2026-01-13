@@ -65,22 +65,73 @@ const AI: React.FC = () => {
           </CardContent>
         </Card>
         
+        <Card sx={{ mb: 4, overflow: 'visible' }}>
+          <CardContent>
+            <Typography variant="h4" component="h3" gutterBottom>
+              Potentiator AI
+            </Typography>
+
+            <Typography variant="body1" paragraph>
+              AI-powered tools for unlocking human potential. Explore the platform below or visit directly.
+            </Typography>
+
+            <Box sx={{ mb: 3 }}>
+              <Button
+                variant="contained"
+                size="large"
+                href="https://potentiator.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ mr: 2 }}
+              >
+                Open in New Tab
+              </Button>
+            </Box>
+
+            {/* iframe embed */}
+            <Box sx={{
+              position: 'relative',
+              width: '100%',
+              height: '600px',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: 2,
+              overflow: 'hidden'
+            }}>
+              <iframe
+                src="https://potentiator.ai"
+                title="Potentiator AI"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none'
+                }}
+                allowFullScreen
+              />
+            </Box>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardContent>
             <Typography variant="h5" component="h3" gutterBottom>
-              About the Platform
+              About These Platforms
             </Typography>
-            
+
             <Typography variant="body1" paragraph>
-              Podcast Bots AI is my comprehensive solution for automating podcast production workflows. 
-              The platform handles guest discovery, outreach automation, and content optimization so 
+              <strong>Podcast Bots AI</strong> is my comprehensive solution for automating podcast production workflows.
+              The platform handles guest discovery, outreach automation, and content optimization so
               creators can focus on what they do best - creating meaningful conversations.
             </Typography>
-            
+
+            <Typography variant="body1" paragraph>
+              <strong>Potentiator AI</strong> is designed to help individuals and teams unlock their full potential
+              through AI-powered insights and tools.
+            </Typography>
+
             <Typography variant="body1">
-              Built with the philosophy that AI should enhance human creativity, not replace it. 
-              The system handles the operational complexity while preserving the authentic human 
-              connections that make great podcasts.
+              Built with the philosophy that AI should enhance human creativity, not replace it.
+              These systems handle operational complexity while preserving authentic human
+              connections and growth.
             </Typography>
           </CardContent>
         </Card>

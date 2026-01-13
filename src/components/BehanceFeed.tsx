@@ -145,7 +145,11 @@ export default function BehanceFeed() {
           
           if (data.items && data.items.length > 0) {
             console.log(`✅ Loaded ${data.items.length} projects from scraped data`)
-            setProjects(data.items)
+            // Sort by publishedAt date, newest first
+            const sortedItems = [...data.items].sort((a, b) =>
+              new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+            )
+            setProjects(sortedItems)
             setDataSource('scraped')
             return
           }
