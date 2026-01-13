@@ -126,36 +126,78 @@ async function fetchBehanceMetadata(url) {
     const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
     let title = titleMatch ? titleMatch[1].replace(/\s*::\s*Behance\s*$/i, '').trim() : 'Untitled';
 
-    // Extract thumbnail from og:image or Behance CDN URL
+    // Extract thumbnail - try multiple patterns
     let thumbnail = '';
 
-    // Try og:image first
-    const ogImageMatch = html.match(/property="og:image"\s+content="([^"]+)"/i) ||
-                         html.match(/content="([^"]+)"\s+property="og:image"/i);
-    if (ogImageMatch) {
-      thumbnail = ogImageMatch[1];
+    // Method 1: og:image meta tag (various formats)
+    const ogImagePatterns = [
+      /<meta\s+property="og:image"\s+content="([^"]+)"/i,
+      /<meta\s+content="([^"]+)"\s+property="og:image"/i,
+      /property="og:image"[^>]+content="([^"]+)"/i,
+      /content="([^"]+)"[^>]+property="og:image"/i,
+    ];
+
+    for (const pattern of ogImagePatterns) {
+      const match = html.match(pattern);
+      if (match && match[1].includes('behance.net')) {
+        thumbnail = match[1];
+        break;
+      }
     }
 
-    // Fallback: look for Behance CDN image URLs
+    // Method 2: twitter:image
     if (!thumbnail) {
-      const cdnMatch = html.match(/content="(https:\/\/mir-s3-cdn-cf\.behance\.net\/projects\/[^"]+)"/);
+      const twitterMatch = html.match(/<meta\s+name="twitter:image"\s+content="([^"]+)"/i);
+      if (twitterMatch) {
+        thumbnail = twitterMatch[1];
+      }
+    }
+
+    // Method 3: Look for Behance CDN project images
+    if (!thumbnail) {
+      const cdnMatch = html.match(/https:\/\/mir-s3-cdn-cf\.behance\.net\/projects\/[^"'\s]+/);
       if (cdnMatch) {
-        thumbnail = cdnMatch[1];
+        thumbnail = cdnMatch[0];
       }
     }
 
-    // Fallback: any Behance CDN image
+    // Method 4: JSON-LD structured data
     if (!thumbnail) {
-      const anyImageMatch = html.match(/(https:\/\/mir-s3-cdn-cf\.behance\.net\/[^"'\s]+\.(jpg|jpeg|png|webp))/i);
-      if (anyImageMatch) {
-        thumbnail = anyImageMatch[1];
+      const jsonLdMatch = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
+      if (jsonLdMatch) {
+        try {
+          const jsonLd = JSON.parse(jsonLdMatch[1]);
+          if (jsonLd.image) {
+            thumbnail = jsonLd.image;
+          }
+        } catch (e) {}
       }
     }
 
-    // Extract description from og:description
-    const descMatch = html.match(/property="og:description"\s+content="([^"]+)"/i) ||
-                      html.match(/name="description"\s+content="([^"]+)"/i);
-    const description = descMatch ? descMatch[1].trim() : `Creative artwork by The Idea Sandbox`;
+    // Extract description - try JSON-LD first for richer content
+    let description = '';
+    const jsonLdMatch = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
+    if (jsonLdMatch) {
+      try {
+        const jsonLd = JSON.parse(jsonLdMatch[1]);
+        if (jsonLd.description) {
+          // Clean up the description
+          description = jsonLd.description
+            .replace(/\\n/g, ' ')
+            .replace(/&quot;/g, '"')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+        // Also get title from JSON-LD if available (more reliable)
+        if (jsonLd.name && jsonLd.name !== 'Behance') {
+          title = jsonLd.name;
+        }
+      } catch (e) {}
+    }
+
+    if (!description) {
+      description = `Creative artwork by The Idea Sandbox`;
+    }
 
     // Extract project ID from URL for unique ID
     const idMatch = url.match(/gallery\/(\d+)/);
@@ -163,6 +205,7 @@ async function fetchBehanceMetadata(url) {
 
     console.log(`    ✓ Title: ${title}`);
     console.log(`    ✓ Thumbnail: ${thumbnail ? 'Found' : 'Not found'}`);
+    console.log(`    ✓ Description: ${description.substring(0, 50)}...`);
 
     return {
       id: `behance-${projectId}`,
