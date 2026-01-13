@@ -204,6 +204,88 @@ const AI: React.FC = () => {
               </Box>
             </CardContent>
           </Card>
+
+          {/* DeSilo Card */}
+          <Card sx={{
+            mb: 4,
+            overflow: 'visible',
+            backgroundColor: '#F7F3E9',
+            color: '#000000',
+            border: '3px solid #FF3333',
+          }}>
+            <CardContent sx={{ p: { xs: 4, md: 6 } }}>
+              <Typography
+                variant="h3"
+                sx={{
+                  fontSize: { xs: '2rem', md: '3rem' },
+                  fontWeight: 700,
+                  mb: 3,
+                  color: '#FF3333',
+                }}
+              >
+                DESILO
+              </Typography>
+
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  mb: 4,
+                  lineHeight: 1.6,
+                  opacity: 0.9,
+                }}
+              >
+                The AI system that does the grunt work so you can focus on building. DeSilo provides
+                intelligent research, market analysis, and planning tools for entrepreneurs and startups.
+                Built for the Central Illinois innovation ecosystem, powered by CrewAI agents and
+                comprehensive market intelligence.
+              </Typography>
+
+              <Box sx={{ mb: 4 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  href="https://potentiator.ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    py: 2,
+                    px: 4,
+                    backgroundColor: '#FF3333',
+                    color: '#ffffff',
+                    '&:hover': {
+                      backgroundColor: '#CC0000',
+                    }
+                  }}
+                >
+                  LAUNCH DESILO
+                </Button>
+              </Box>
+
+              {/* iframe embed */}
+              <Box sx={{
+                position: 'relative',
+                width: '100%',
+                height: '600px',
+                border: '2px solid #FF3333',
+                borderRadius: 0,
+                overflow: 'hidden'
+              }}>
+                <iframe
+                  src="https://potentiator.ai/"
+                  title="DeSilo - AI for Entrepreneurs"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    border: 'none'
+                  }}
+                  allowFullScreen
+                />
+              </Box>
+            </CardContent>
+          </Card>
         </TabPanel>
 
         {/* Ideas Lab Tab */}
