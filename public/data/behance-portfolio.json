@@ -3,20 +3,20 @@
   "items": [
     {
       "id": "behance-242047293",
-      "title": "Behance",
-      "description": "Creative artwork by The Idea Sandbox",
+      "title": "Immanence",
+      "description": "IMMANENCE Diptych I: \"Natura Sive Deus\" (Nature, or God) Serpentine forms emerge from golden and crimson grounds - energy organizing, awareness taking shape. The Arabic \"هوشیاری\" (awareness) and \"اعتدال\" (balance) anchor vision in concept without doctrine. Spinoza made visible: no ghost in the machi...",
       "link": "https://www.behance.net/gallery/242047293/Immanence",
       "publishedAt": "2026-01-12T23:12:00.000Z",
       "platform": "behance",
-      "thumbnail": "",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/max_808/3fe5d7242047293.Y3JvcCwyNDAyLDE4NzgsMCw5NQ.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
       ]
     }
   ],
-  "lastUpdated": "2026-01-13T02:11:07.227Z",
-  "scrapedAt": "2026-01-13T02:11:07.227Z",
+  "lastUpdated": "2026-01-13T02:15:06.681Z",
+  "scrapedAt": "2026-01-13T02:15:06.681Z",
   "updateMethod": "notion_behance_sync",
   "note": "Auto-synced from Notion with Behance metadata extraction"
 }
