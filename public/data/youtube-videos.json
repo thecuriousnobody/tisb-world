@@ -14,7 +14,7 @@
       "thumbnail": "https://img.youtube.com/vi/v8V3aHh9z0Y/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/v8V3aHh9z0Y/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 83
+      "views": 161
     },
     {
       "id": "youtube-m5D5yiglvjE",
@@ -27,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/m5D5yiglvjE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/m5D5yiglvjE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 16
+      "views": 17
     },
     {
       "id": "youtube-o0gOSzVKxCk",
@@ -53,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/pvagGEhMiTU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/pvagGEhMiTU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 6
+      "views": 7
     },
     {
       "id": "youtube-EhURmnJav3E",
@@ -66,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/EhURmnJav3E/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/EhURmnJav3E/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 101
+      "views": 102
     },
     {
       "id": "youtube-SRYBJsnV7cI",
@@ -105,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/uI0bxHBwNc4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/uI0bxHBwNc4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 284
+      "views": 285
     },
     {
       "id": "youtube-pjzOkRg3eks",
@@ -157,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/nry-xSuOrE0/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/nry-xSuOrE0/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 803
+      "views": 804
     },
     {
       "id": "youtube-FVYRVLXTlGc",
@@ -199,7 +199,7 @@
       "views": 6
     }
   ],
-  "lastUpdated": "2026-01-18T06:12:25.129Z",
+  "lastUpdated": "2026-01-20T06:15:43.056Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
