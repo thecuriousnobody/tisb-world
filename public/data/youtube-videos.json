@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-AFsZ4EVVRrw",
+      "videoId": "AFsZ4EVVRrw",
+      "title": "90% of Startups Fail. DeSilo Changes That.",
+      "description": "Most startups don't fail from bad ideas—they fail from bad access. The data is clear: where you are and who you know determines whether you succeed more than talent or hustle.\n42% build something nobody wants. 29% never apply for funding they'd qualify for. 73% of fintech startups die from regulatory blindspots they didn't see coming.\nWe're building DeSilo to fix this—a tool that puts accelerator-level intelligence in every founder's hands.\n🗓️ Beta Focus Group is on January 21st, 2026 at 12:00 ...",
+      "link": "https://www.youtube.com/watch?v=AFsZ4EVVRrw",
+      "publishedAt": "2026-01-20T16:58:10+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/AFsZ4EVVRrw/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/AFsZ4EVVRrw/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 28
+    },
+    {
       "id": "youtube-v8V3aHh9z0Y",
       "videoId": "v8V3aHh9z0Y",
       "title": "India's Emergency Response is Broken. Here's How AI Fixes It.",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/v8V3aHh9z0Y/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/v8V3aHh9z0Y/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 161
+      "views": 178
     },
     {
       "id": "youtube-m5D5yiglvjE",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/TraUlsInfU8/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 9
-    },
-    {
-      "id": "youtube-rKlQGvFMz6o",
-      "videoId": "rKlQGvFMz6o",
-      "title": "Can AI Ever Replace Real Love? Stanford Professor Explains",
-      "description": "AI “girlfriends” and chatbots are always online, never tired and say exactly what you want to hear. But can AI love ever replace real love? In this Idea Sandbox clip, Stanford sociologist Dr Michael Rosenfeld shares what his research on online dating and marriage actually shows: apps like Tinder have changed how we meet, but they haven’t changed what we need another imperfect human being who chooses to love us back.​​​\n\nHe explains why meeting partners through dating apps is now completely norma...",
-      "link": "https://www.youtube.com/watch?v=rKlQGvFMz6o",
-      "publishedAt": "2025-12-06T01:10:48+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/rKlQGvFMz6o/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/rKlQGvFMz6o/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 6
     }
   ],
-  "lastUpdated": "2026-01-20T06:15:43.056Z",
+  "lastUpdated": "2026-01-21T06:15:33.659Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
