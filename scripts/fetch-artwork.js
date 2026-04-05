@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 /**
- * Fetch artwork from Notion database and auto-extract Behance metadata
+ * Fetch artwork from Behance profile using a headless browser (Puppeteer).
  *
- * SIMPLE WORKFLOW:
- * 1. Paste a Behance URL into your Notion database
- * 2. Run this script (manually or via GitHub Actions)
- * 3. Title, thumbnail, etc. are automatically extracted!
+ * WHY PUPPETEER?
+ * Behance is a JavaScript SPA – plain HTTP requests only get a minimal HTML
+ * shell with <title>Behance</title> and no og:image tags. A headless browser
+ * renders the JS, giving us real titles, thumbnails, and descriptions.
  *
- * Notion Database Setup:
- * - Just need ONE column: "Behance URL" (type: URL)
- * - Optional: "Tags" column (type: Text) for custom tags
+ * WORKFLOW:
+ * 1. Launch headless Chrome
+ * 2. Visit https://www.behance.net/theideasandbox
+ * 3. Scroll to load all projects
+ * 4. Extract project cards (title, thumbnail, link)
+ * 5. Optionally enrich with Notion database tags
+ * 6. Write public/data/behance-portfolio.json
  *
- * Environment Variables:
- * - NOTION_API_KEY: Your Notion integration token
- * - NOTION_ARTWORK_DB: Your artwork database ID
+ * Environment Variables (all optional now):
+ * - NOTION_API_KEY:    Notion integration token (for custom tags)
+ * - NOTION_ARTWORK_DB: Artwork database ID     (for custom tags)
  *
  * Usage:
  *   node scripts/fetch-artwork.js
- *
- * Output:
- *   public/data/behance-portfolio.json
  */
 
 import fs from 'fs';
@@ -31,48 +32,235 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'behance-portfolio.json');
+const BEHANCE_PROFILE = 'https://www.behance.net/theideasandbox';
 
 const NOTION_TOKEN = process.env.NOTION_API_KEY;
 const DATABASE_ID = process.env.NOTION_ARTWORK_DB;
 
-/**
- * Make HTTPS request
- */
-function httpsGet(url, headers = {}) {
-  return new Promise((resolve, reject) => {
-    const urlObj = new URL(url);
-    const options = {
-      hostname: urlObj.hostname,
-      port: 443,
-      path: urlObj.pathname + urlObj.search,
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        ...headers
-      }
-    };
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
-    const req = https.request(options, (res) => {
-      // Handle redirects
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return httpsGet(res.headers.location, headers).then(resolve).catch(reject);
-      }
-
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve(data));
-    });
-
-    req.on('error', reject);
-    req.end();
-  });
+/** Extract a human-readable title from a Behance gallery URL slug */
+function titleFromSlug(url) {
+  const m = url.match(/\/gallery\/\d+\/([^/?#]+)/);
+  if (!m) return 'Untitled';
+  return decodeURIComponent(m[1])
+    .replace(/-+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
-/**
- * Make Notion API request
- */
+/** Scroll the page to trigger lazy-loaded project cards */
+async function autoScroll(page) {
+  await page.evaluate(async () => {
+    await new Promise((resolve) => {
+      let totalHeight = 0;
+      const distance = 600;
+      const maxHeight = 20000; // safety cap
+      const timer = setInterval(() => {
+        window.scrollBy(0, distance);
+        totalHeight += distance;
+        if (totalHeight >= document.body.scrollHeight || totalHeight >= maxHeight) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, 250);
+    });
+  });
+  // Give lazy-loaded images a moment to appear
+  await new Promise((r) => setTimeout(r, 3000));
+}
+
+// ---------------------------------------------------------------------------
+// Primary: Scrape profile page with Puppeteer
+// ---------------------------------------------------------------------------
+
+async function scrapeProfileWithBrowser() {
+  let puppeteer;
+  try {
+    puppeteer = await import('puppeteer');
+  } catch {
+    console.error('Puppeteer not installed – falling back to URL-slug extraction');
+    return null;
+  }
+
+  console.log('Launching headless browser…');
+  const browser = await puppeteer.default.launch({
+    headless: 'new',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+    ],
+  });
+
+  try {
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
+    );
+    // Block unnecessary resources to speed things up
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      const type = req.resourceType();
+      if (['font', 'stylesheet', 'media'].includes(type)) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
+
+    console.log(`Navigating to ${BEHANCE_PROFILE}…`);
+    await page.goto(BEHANCE_PROFILE, { waitUntil: 'networkidle2', timeout: 60000 });
+
+    // Wait for project cards to render
+    try {
+      await page.waitForSelector('a[href*="/gallery/"] img', { timeout: 15000 });
+      console.log('Project cards detected, scrolling to load more…');
+    } catch {
+      console.warn('⚠ Could not detect project card images – page layout may have changed');
+    }
+
+    await autoScroll(page);
+
+    // Extract projects from rendered DOM
+    const projects = await page.evaluate(() => {
+      const items = [];
+      const seen = new Set();
+
+      // Behance renders project cards as <a> tags linking to /gallery/{id}/…
+      document.querySelectorAll('a[href*="/gallery/"]').forEach((anchor) => {
+        const href = anchor.getAttribute('href');
+        if (!href) return;
+
+        const fullUrl = href.startsWith('http') ? href : `https://www.behance.net${href}`;
+        const idMatch = fullUrl.match(/\/gallery\/(\d+)/);
+        if (!idMatch) return;
+
+        const projectId = idMatch[1];
+        if (seen.has(projectId)) return;
+        seen.add(projectId);
+
+        // Thumbnail: first <img> inside the anchor (cover image)
+        const img = anchor.querySelector('img');
+        let thumbnail = '';
+        if (img) {
+          thumbnail = img.src || img.getAttribute('data-src') || img.getAttribute('srcset')?.split(' ')[0] || '';
+        }
+
+        // Title: look for text nodes near the anchor
+        // Behance typically has the title in a sibling or child element
+        let title = '';
+        const titleEl =
+          anchor.querySelector('[class*="Title"]') ||
+          anchor.querySelector('[class*="title"]') ||
+          anchor.closest('[class*="ProjectCover"]')?.querySelector('[class*="Title"]');
+        if (titleEl) {
+          title = titleEl.textContent?.trim() || '';
+        }
+
+        // Also check aria-label or alt text
+        if (!title && img?.alt) {
+          title = img.alt;
+        }
+
+        items.push({ projectId, link: fullUrl, title, thumbnail });
+      });
+
+      return items;
+    });
+
+    console.log(`✓ Found ${projects.length} projects on profile page`);
+    return projects;
+  } finally {
+    await browser.close();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Fallback: Scrape individual project pages with Puppeteer
+// ---------------------------------------------------------------------------
+
+async function scrapeIndividualPages(urls) {
+  let puppeteer;
+  try {
+    puppeteer = await import('puppeteer');
+  } catch {
+    return null;
+  }
+
+  console.log('Falling back to individual page scraping…');
+  const browser = await puppeteer.default.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+  });
+
+  const results = [];
+  try {
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
+    );
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      const type = req.resourceType();
+      if (['font', 'stylesheet', 'media'].includes(type)) req.abort();
+      else req.continue();
+    });
+
+    for (const url of urls) {
+      console.log(`  Fetching: ${url}`);
+      try {
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+
+        const meta = await page.evaluate(() => {
+          const og = (prop) =>
+            document.querySelector(`meta[property="og:${prop}"]`)?.getAttribute('content') || '';
+          const title =
+            og('title') ||
+            document.querySelector('title')?.textContent?.replace(/\s*[-|:]\s*Behance\s*$/i, '').trim() ||
+            '';
+          const thumbnail = og('image');
+          const description = og('description');
+          return { title, thumbnail, description };
+        });
+
+        const idMatch = url.match(/\/gallery\/(\d+)/);
+        results.push({
+          projectId: idMatch ? idMatch[1] : Date.now().toString(),
+          link: url,
+          title: meta.title || titleFromSlug(url),
+          thumbnail: meta.thumbnail,
+          description: meta.description,
+        });
+        console.log(`    ✓ ${meta.title || '(title from slug)'}`);
+      } catch (err) {
+        console.error(`    ✗ ${err.message}`);
+        const idMatch = url.match(/\/gallery\/(\d+)/);
+        results.push({
+          projectId: idMatch ? idMatch[1] : Date.now().toString(),
+          link: url,
+          title: titleFromSlug(url),
+          thumbnail: '',
+          description: '',
+        });
+      }
+      // Be polite
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+  } finally {
+    await browser.close();
+  }
+
+  return results;
+}
+
+// ---------------------------------------------------------------------------
+// Notion helpers (for custom tags – optional)
+// ---------------------------------------------------------------------------
+
 function notionRequest(endpoint, method = 'POST', body = null) {
   return new Promise((resolve, reject) => {
     const options = {
@@ -81,288 +269,213 @@ function notionRequest(endpoint, method = 'POST', body = null) {
       path: endpoint,
       method,
       headers: {
-        'Authorization': `Bearer ${NOTION_TOKEN}`,
+        Authorization: `Bearer ${NOTION_TOKEN}`,
         'Content-Type': 'application/json',
-        'Notion-Version': '2022-06-28'
-      }
+        'Notion-Version': '2022-06-28',
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      res.on('data', (c) => (data += c));
       res.on('end', () => {
         try {
           const parsed = JSON.parse(data);
-          if (res.statusCode >= 400) {
-            reject(new Error(`Notion API error: ${res.statusCode} - ${parsed.message || data}`));
-          } else {
-            resolve(parsed);
-          }
-        } catch (e) {
-          reject(new Error(`Failed to parse response: ${data}`));
+          if (res.statusCode >= 400) reject(new Error(`Notion ${res.statusCode}: ${parsed.message || data}`));
+          else resolve(parsed);
+        } catch {
+          reject(new Error(`Notion parse error: ${data}`));
         }
       });
     });
-
     req.on('error', reject);
-
-    if (body) {
-      req.write(JSON.stringify(body));
-    }
+    if (body) req.write(JSON.stringify(body));
     req.end();
   });
 }
 
-/**
- * Extract metadata from a Behance URL
- */
-async function fetchBehanceMetadata(url) {
-  console.log(`  Fetching: ${url}`);
+/** Returns a Map of behanceUrl → { tags } from the Notion database */
+async function fetchNotionTags() {
+  if (!NOTION_TOKEN || !DATABASE_ID) return new Map();
 
   try {
-    const html = await httpsGet(url);
+    console.log('Fetching tags from Notion…');
+    const data = await notionRequest(`/v1/databases/${DATABASE_ID}/query`, 'POST', {
+      sorts: [{ timestamp: 'created_time', direction: 'descending' }],
+    });
 
-    // Extract title from <title> tag
-    const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
-    let title = titleMatch ? titleMatch[1].replace(/\s*::\s*Behance\s*$/i, '').trim() : 'Untitled';
+    const tagMap = new Map();
+    for (const page of data.results || []) {
+      const props = page.properties;
 
-    // Extract thumbnail - try multiple patterns
-    let thumbnail = '';
-
-    // Method 1: og:image meta tag (various formats)
-    const ogImagePatterns = [
-      /<meta\s+property="og:image"\s+content="([^"]+)"/i,
-      /<meta\s+content="([^"]+)"\s+property="og:image"/i,
-      /property="og:image"[^>]+content="([^"]+)"/i,
-      /content="([^"]+)"[^>]+property="og:image"/i,
-    ];
-
-    for (const pattern of ogImagePatterns) {
-      const match = html.match(pattern);
-      if (match && match[1].includes('behance.net')) {
-        thumbnail = match[1];
-        break;
-      }
-    }
-
-    // Method 2: twitter:image
-    if (!thumbnail) {
-      const twitterMatch = html.match(/<meta\s+name="twitter:image"\s+content="([^"]+)"/i);
-      if (twitterMatch) {
-        thumbnail = twitterMatch[1];
-      }
-    }
-
-    // Method 3: Look for Behance CDN project images
-    if (!thumbnail) {
-      const cdnMatch = html.match(/https:\/\/mir-s3-cdn-cf\.behance\.net\/projects\/[^"'\s]+/);
-      if (cdnMatch) {
-        thumbnail = cdnMatch[0];
-      }
-    }
-
-    // Method 4: JSON-LD structured data
-    if (!thumbnail) {
-      const jsonLdMatch = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
-      if (jsonLdMatch) {
-        try {
-          const jsonLd = JSON.parse(jsonLdMatch[1]);
-          if (jsonLd.image) {
-            thumbnail = jsonLd.image;
-          }
-        } catch (e) {}
-      }
-    }
-
-    // Extract description - try JSON-LD first for richer content
-    let description = '';
-    const jsonLdMatch = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/);
-    if (jsonLdMatch) {
-      try {
-        const jsonLd = JSON.parse(jsonLdMatch[1]);
-        if (jsonLd.description) {
-          // Clean up the description
-          description = jsonLd.description
-            .replace(/\\n/g, ' ')
-            .replace(/&quot;/g, '"')
-            .replace(/\s+/g, ' ')
-            .trim();
-        }
-        // Also get title from JSON-LD if available (more reliable)
-        if (jsonLd.name && jsonLd.name !== 'Behance') {
-          title = jsonLd.name;
-        }
-      } catch (e) {}
-    }
-
-    if (!description) {
-      description = `Creative artwork by The Idea Sandbox`;
-    }
-
-    // Extract project ID from URL for unique ID
-    const idMatch = url.match(/gallery\/(\d+)/);
-    const projectId = idMatch ? idMatch[1] : Date.now().toString();
-
-    console.log(`    ✓ Title: ${title}`);
-    console.log(`    ✓ Thumbnail: ${thumbnail ? 'Found' : 'Not found'}`);
-    console.log(`    ✓ Description: ${description.substring(0, 50)}...`);
-
-    return {
-      id: `behance-${projectId}`,
-      title,
-      description: description.length > 300 ? description.substring(0, 300) + '...' : description,
-      thumbnail,
-      projectId
-    };
-
-  } catch (error) {
-    console.error(`    ✗ Error: ${error.message}`);
-    return null;
-  }
-}
-
-/**
- * Fetch Behance URLs from Notion database
- */
-async function fetchNotionEntries() {
-  console.log('Fetching entries from Notion database...');
-
-  const data = await notionRequest(`/v1/databases/${DATABASE_ID}/query`, 'POST', {
-    sorts: [{ timestamp: 'created_time', direction: 'descending' }]
-  });
-
-  console.log(`Found ${data.results?.length || 0} entries in Notion\n`);
-
-  const entries = [];
-
-  for (const page of data.results) {
-    const props = page.properties;
-
-    // Find the Behance URL - check common column names
-    let behanceUrl = props['Behance URL']?.url ||
-                     props['URL']?.url ||
-                     props['Link']?.url ||
-                     props['Behance']?.url ||
-                     null;
-
-    // Also check if URL is in a rich_text field
-    if (!behanceUrl) {
+      // Find Behance URL
+      let url = null;
       for (const key of Object.keys(props)) {
         if (props[key].type === 'url' && props[key].url?.includes('behance.net')) {
-          behanceUrl = props[key].url;
+          url = props[key].url;
           break;
         }
         if (props[key].type === 'rich_text' && props[key].rich_text?.[0]?.plain_text?.includes('behance.net')) {
-          behanceUrl = props[key].rich_text[0].plain_text;
+          url = props[key].rich_text[0].plain_text;
+          break;
+        }
+      }
+      if (!url) continue;
+
+      // Get tags
+      let tags = ['digital art'];
+      if (props.Tags?.rich_text?.[0]?.plain_text) {
+        tags = props.Tags.rich_text[0].plain_text.split(',').map((t) => t.trim()).filter(Boolean);
+      } else if (props.Tags?.multi_select) {
+        tags = props.Tags.multi_select.map((t) => t.name);
+      }
+
+      // Normalize URL for matching (strip trailing slashes, etc.)
+      const normalized = url.replace(/\/+$/, '').toLowerCase();
+      tagMap.set(normalized, { tags, createdTime: page.created_time });
+    }
+
+    console.log(`  Found tags for ${tagMap.size} entries`);
+    return tagMap;
+  } catch (err) {
+    console.warn(`  ⚠ Notion tags unavailable: ${err.message}`);
+    return new Map();
+  }
+}
+
+/** Get Behance URLs from Notion (used when profile scraping fails) */
+async function fetchNotionUrls() {
+  if (!NOTION_TOKEN || !DATABASE_ID) return [];
+
+  try {
+    const data = await notionRequest(`/v1/databases/${DATABASE_ID}/query`, 'POST', {
+      sorts: [{ timestamp: 'created_time', direction: 'descending' }],
+    });
+
+    const urls = [];
+    for (const page of data.results || []) {
+      const props = page.properties;
+      for (const key of Object.keys(props)) {
+        if (props[key].type === 'url' && props[key].url?.includes('behance.net/gallery/')) {
+          urls.push(props[key].url);
+          break;
+        }
+        if (
+          props[key].type === 'rich_text' &&
+          props[key].rich_text?.[0]?.plain_text?.includes('behance.net/gallery/')
+        ) {
+          urls.push(props[key].rich_text[0].plain_text);
           break;
         }
       }
     }
-
-    if (!behanceUrl || !behanceUrl.includes('behance.net/gallery/')) {
-      console.log(`  Skipping entry (no valid Behance URL found)`);
-      continue;
-    }
-
-    // Get optional tags
-    let tags = ['digital art'];
-    if (props.Tags?.rich_text?.[0]?.plain_text) {
-      tags = props.Tags.rich_text[0].plain_text.split(',').map(t => t.trim()).filter(t => t);
-    } else if (props.Tags?.multi_select) {
-      tags = props.Tags.multi_select.map(t => t.name);
-    }
-
-    entries.push({
-      behanceUrl,
-      tags,
-      createdTime: page.created_time
-    });
+    return urls;
+  } catch (err) {
+    console.warn(`  ⚠ Could not fetch Notion URLs: ${err.message}`);
+    return [];
   }
-
-  return entries;
 }
 
-/**
- * Main function
- */
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+
 async function main() {
-  // Check for required environment variables
-  if (!NOTION_TOKEN) {
-    console.error('Error: NOTION_API_KEY environment variable is required');
-    console.error('Get your integration token from https://www.notion.so/my-integrations');
-    process.exit(1);
+  console.log('=== Behance Artwork Sync ===\n');
+
+  // 1. Try scraping the profile page (best: one page load gets everything)
+  let rawProjects = await scrapeProfileWithBrowser();
+
+  // 2. If profile scrape failed or got nothing, try individual pages from Notion
+  if (!rawProjects || rawProjects.length === 0) {
+    console.log('\nProfile scrape returned no results.');
+    const notionUrls = await fetchNotionUrls();
+
+    if (notionUrls.length > 0) {
+      console.log(`Got ${notionUrls.length} URLs from Notion, trying individual pages…\n`);
+      rawProjects = await scrapeIndividualPages(notionUrls);
+    }
   }
 
-  if (!DATABASE_ID) {
-    console.error('Error: NOTION_ARTWORK_DB environment variable is required');
-    console.error('This is the ID of your Notion artwork database');
-    console.error('You can find it in the database URL: notion.so/[DATABASE_ID]?v=...');
-    process.exit(1);
+  // 3. If still nothing, fall back to URL-slug extraction from Notion
+  if (!rawProjects || rawProjects.length === 0) {
+    console.log('\nBrowser scraping unavailable. Extracting titles from URL slugs…');
+    const notionUrls = await fetchNotionUrls();
+
+    if (notionUrls.length === 0) {
+      console.error('No Notion URLs and no browser – cannot proceed.');
+      console.error('Set NOTION_API_KEY + NOTION_ARTWORK_DB, or install puppeteer.');
+      process.exit(1);
+    }
+
+    rawProjects = notionUrls.map((url) => {
+      const idMatch = url.match(/\/gallery\/(\d+)/);
+      return {
+        projectId: idMatch ? idMatch[1] : Date.now().toString(),
+        link: url,
+        title: titleFromSlug(url),
+        thumbnail: '',
+        description: '',
+      };
+    });
+    console.log(`  Extracted ${rawProjects.length} projects from URL slugs`);
   }
 
-  try {
-    // Get Behance URLs from Notion
-    const entries = await fetchNotionEntries();
+  // 4. Fetch Notion tags for enrichment
+  const notionTags = await fetchNotionTags();
 
-    if (entries.length === 0) {
-      console.warn('\nNo valid Behance URLs found in Notion database');
-      console.warn('Make sure to:');
-      console.warn('1. Add entries with Behance gallery URLs');
-      console.warn('2. Share the database with your Notion integration');
-      process.exit(0);
-    }
+  // 5. Build final items
+  const items = rawProjects.map((p) => {
+    const normalized = p.link.replace(/\/+$/, '').toLowerCase();
+    const notionEntry = notionTags.get(normalized);
 
-    console.log(`\nFetching metadata for ${entries.length} Behance projects...\n`);
-
-    // Fetch metadata for each Behance URL
-    const items = [];
-    for (const entry of entries) {
-      const metadata = await fetchBehanceMetadata(entry.behanceUrl);
-
-      if (metadata) {
-        items.push({
-          id: metadata.id,
-          title: metadata.title,
-          description: metadata.description,
-          link: entry.behanceUrl,
-          publishedAt: entry.createdTime,
-          platform: 'behance',
-          thumbnail: metadata.thumbnail,
-          author: 'The Idea Sandbox',
-          tags: entry.tags
-        });
-      }
-
-      // Small delay to be nice to Behance servers
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
-
-    console.log(`\nSuccessfully processed ${items.length} artwork items`);
-
-    // Create output object
-    const output = {
-      platform: 'Behance',
-      items,
-      lastUpdated: new Date().toISOString(),
-      scrapedAt: new Date().toISOString(),
-      updateMethod: 'notion_behance_sync',
-      note: 'Auto-synced from Notion with Behance metadata extraction'
+    return {
+      id: `behance-${p.projectId}`,
+      title: p.title || titleFromSlug(p.link),
+      description: p.description || `Creative artwork by The Idea Sandbox`,
+      link: p.link,
+      publishedAt: notionEntry?.createdTime || new Date().toISOString(),
+      platform: 'behance',
+      thumbnail: p.thumbnail || '',
+      author: 'The Idea Sandbox',
+      tags: notionEntry?.tags || ['digital art'],
     };
+  });
 
-    // Ensure output directory exists
-    const outputDir = path.dirname(OUTPUT_PATH);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
+  // Filter out any with generic "Behance" title (sign of failed extraction)
+  for (const item of items) {
+    if (item.title === 'Behance' || !item.title) {
+      item.title = titleFromSlug(item.link);
     }
-
-    // Write JSON file
-    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
-    console.log(`\nSaved to ${OUTPUT_PATH}`);
-
-  } catch (error) {
-    console.error('Error:', error.message);
-    process.exit(1);
   }
+
+  console.log(`\n✓ ${items.length} artwork items ready`);
+
+  // 6. Write output
+  const output = {
+    platform: 'Behance',
+    items,
+    lastUpdated: new Date().toISOString(),
+    scrapedAt: new Date().toISOString(),
+    updateMethod: 'puppeteer_profile_scrape',
+    note: 'Scraped from Behance profile with headless browser',
+  };
+
+  const outputDir = path.dirname(OUTPUT_PATH);
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
+  console.log(`Saved to ${OUTPUT_PATH}\n`);
+
+  // Quick summary
+  const withThumbs = items.filter((i) => i.thumbnail).length;
+  const withTitles = items.filter((i) => i.title && i.title !== 'Untitled').length;
+  console.log(`Summary: ${items.length} projects, ${withThumbs} with thumbnails, ${withTitles} with titles`);
 }
 
-main();
+main().catch((err) => {
+  console.error('Fatal error:', err.message);
+  process.exit(1);
+});
