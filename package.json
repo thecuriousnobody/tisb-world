@@ -12,13 +12,11 @@
     "clean": "./cleanup-dev.sh"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.66",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.2.0",
     "@mui/material": "^7.2.0",
     "@react-oauth/google": "^0.12.2",
-    "ai": "^6.0.146",
     "axios": "^1.12.2",
     "cheerio": "^1.1.0",
     "cors": "^2.8.5",
@@ -32,9 +30,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.3",
-    "rss-parser": "^3.13.0",
-    "tsx": "^4.21.0",
-    "zod": "^4.3.6"
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
