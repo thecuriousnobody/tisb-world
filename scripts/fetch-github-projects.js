@@ -75,12 +75,18 @@ function githubHeaders() {
 // ---------------------------------------------------------------------------
 
 async function fetchAllRepos() {
-  console.log(`Fetching public repos for ${GITHUB_USERNAME}…`);
+  // Use /user/repos (authenticated) to get private repos, fall back to /users/:name/repos (public only)
+  const useAuthEndpoint = !!GITHUB_TOKEN;
+  console.log(`Fetching repos for ${GITHUB_USERNAME}${useAuthEndpoint ? ' (including private)' : ' (public only)'}…`);
+
   const repos = [];
   let page = 1;
 
   while (true) {
-    const url = `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&page=${page}&sort=updated&type=owner`;
+    // Authenticated endpoint returns both public + private repos you own
+    const url = useAuthEndpoint
+      ? `https://api.github.com/user/repos?per_page=100&page=${page}&sort=updated&affiliation=owner`
+      : `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&page=${page}&sort=updated&type=owner`;
     const batch = await httpsRequest(url, { headers: githubHeaders() });
     if (!Array.isArray(batch) || batch.length === 0) break;
     repos.push(...batch);
@@ -88,12 +94,15 @@ async function fetchAllRepos() {
     page++;
   }
 
-  // Filter: public, not forks, not archived, not .github special repos
+  // Filter: not forks, not archived, not .github special repos
+  // Keep BOTH public and private repos
   const filtered = repos.filter(
-    (r) => !r.fork && !r.archived && !r.private && !r.name.startsWith('.')
+    (r) => !r.fork && !r.archived && !r.name.startsWith('.')
   );
 
-  console.log(`  Found ${repos.length} total, ${filtered.length} after filtering\n`);
+  const publicCount = filtered.filter((r) => !r.private).length;
+  const privateCount = filtered.filter((r) => r.private).length;
+  console.log(`  Found ${repos.length} total, ${filtered.length} after filtering (${publicCount} public, ${privateCount} private)\n`);
   return filtered;
 }
 
@@ -121,10 +130,12 @@ async function generateDescription(repo, readme) {
   }
 
   const readmeSnippet = readme ? readme.slice(0, 4000) : 'No README available.';
+  const isPrivate = repo.private;
 
   const prompt = `You are writing for a bold, brutalist-designed portfolio website for a creative technologist.
 Given this GitHub repository, write a compelling 2-3 sentence description that captures the essence and ambition of the project.
 Be vivid and energetic. Focus on WHAT it does and WHY it matters. No fluff, no filler.
+${isPrivate ? '\nIMPORTANT: This is a PRIVATE repository. Do NOT mention specific API keys, passwords, internal URLs, secret endpoints, proprietary algorithms, or any sensitive implementation details. Focus on the high-level vision and what the project achieves, not how it works internally.' : ''}
 
 Repository: ${repo.name}
 Language: ${repo.language || 'Various'}
@@ -199,6 +210,8 @@ async function main() {
     const aiDescription = await generateDescription(repo, readme);
     console.log(`  Description: ${aiDescription.slice(0, 80)}…`);
 
+    const isPrivate = repo.private;
+
     items.push({
       id: `github-${repo.id}`,
       name: repo.name,
@@ -208,7 +221,8 @@ async function main() {
         .replace(/\b\w/g, (c) => c.toUpperCase()),
       description: repo.description || '',
       aiDescription,
-      url: repo.html_url,
+      // Only expose URL for public repos — private repos get no link
+      url: isPrivate ? '' : repo.html_url,
       homepage: repo.homepage || '',
       language: repo.language || 'Various',
       stars: repo.stargazers_count,
@@ -216,6 +230,7 @@ async function main() {
       topics: repo.topics || [],
       lastUpdated: repo.pushed_at,
       createdAt: repo.created_at,
+      visibility: isPrivate ? 'private' : 'public',
     });
 
     // Small delay to respect rate limits

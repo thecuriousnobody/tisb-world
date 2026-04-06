@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Typography, Box, Card, CardContent, Chip } from '@mui/material'
-import { GitHub, Launch, Star, ForkRight } from '@mui/icons-material'
+import { GitHub, Launch, Star, ForkRight, Lock } from '@mui/icons-material'
 
 interface GitHubProject {
   id: string
@@ -17,6 +17,7 @@ interface GitHubProject {
   topics: string[]
   lastUpdated: string
   createdAt: string
+  visibility: 'public' | 'private'
 }
 
 interface GitHubData {
@@ -110,23 +111,26 @@ export default function GitHubProjectsFeed() {
         gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
         gap: 3,
       }}>
-        {visible.map((project) => (
+        {visible.map((project) => {
+          const isPrivate = project.visibility === 'private'
+          return (
           <Card
             key={project.id}
             sx={{
-              border: '2px solid #000',
+              border: isPrivate ? '2px solid #9c27b0' : '2px solid #000',
               borderRadius: 0,
-              cursor: 'pointer',
+              cursor: project.url ? 'pointer' : 'default',
               transition: 'all 0.2s ease',
               display: 'flex',
               flexDirection: 'column',
+              position: 'relative',
               '&:hover': {
                 transform: 'translateY(-4px)',
-                borderColor: '#FF4500',
-                boxShadow: '4px 4px 0px #FF4500',
+                borderColor: isPrivate ? '#9c27b0' : '#FF4500',
+                boxShadow: isPrivate ? '4px 4px 0px #9c27b0' : '4px 4px 0px #FF4500',
               },
             }}
-            onClick={() => window.open(project.url, '_blank')}
+            onClick={() => project.url && window.open(project.url, '_blank')}
           >
             {/* Language bar */}
             <Box sx={{
@@ -137,15 +141,33 @@ export default function GitHubProjectsFeed() {
             <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
               {/* Header */}
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                <Typography variant="h6" sx={{
-                  fontWeight: 800,
-                  fontSize: '1.1rem',
-                  lineHeight: 1.2,
-                  flex: 1,
-                  mr: 1,
-                }}>
-                  {project.title}
-                </Typography>
+                <Box sx={{ flex: 1, mr: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                    <Typography variant="h6" sx={{
+                      fontWeight: 800,
+                      fontSize: '1.1rem',
+                      lineHeight: 1.2,
+                    }}>
+                      {project.title}
+                    </Typography>
+                    {isPrivate && (
+                      <Chip
+                        icon={<Lock sx={{ fontSize: '0.7rem !important' }} />}
+                        label="PRIVATE"
+                        size="small"
+                        sx={{
+                          height: 20,
+                          backgroundColor: '#9c27b0',
+                          color: '#fff',
+                          fontWeight: 700,
+                          fontSize: '0.6rem',
+                          borderRadius: 0,
+                          '& .MuiChip-icon': { color: '#fff' },
+                        }}
+                      />
+                    )}
+                  </Box>
+                </Box>
                 <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center', flexShrink: 0 }}>
                   {project.stars > 0 && (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.3 }}>
@@ -223,7 +245,8 @@ export default function GitHubProjectsFeed() {
                   })}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                  <GitHub sx={{ fontSize: 18, opacity: 0.6 }} />
+                  {!isPrivate && <GitHub sx={{ fontSize: 18, opacity: 0.6 }} />}
+                  {isPrivate && <Lock sx={{ fontSize: 18, opacity: 0.4 }} />}
                   {project.homepage && (
                     <Launch
                       sx={{ fontSize: 18, opacity: 0.6 }}
@@ -237,7 +260,8 @@ export default function GitHubProjectsFeed() {
               </Box>
             </CardContent>
           </Card>
-        ))}
+          )
+        })}
       </Box>
 
       {/* Show More / Show Less */}

@@ -32,7 +32,11 @@ jobs:
     - name: Fetch GitHub projects and generate descriptions
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Use a Personal Access Token (PAT) with 'repo' scope to include private repos.
+        # Create one at: https://github.com/settings/tokens/new?scopes=repo
+        # Save it as GHPAT_REPO_READ in your repo secrets.
+        # Falls back to public repos only if not set.
+        GITHUB_TOKEN: ${{ secrets.GHPAT_REPO_READ }}
         GITHUB_USERNAME: thecuriousnobody
       run: node scripts/fetch-github-projects.js
 
