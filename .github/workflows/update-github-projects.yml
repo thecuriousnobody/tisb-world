@@ -29,16 +29,18 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Fetch GitHub projects and generate descriptions
+    - name: Install dependencies
+      run: npm install ai @ai-sdk/anthropic tsx --legacy-peer-deps
+
+    - name: Run GitHub Projects Agent (Haiku)
       env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        # Use a Personal Access Token (PAT) with 'repo' scope to include private repos.
-        # Create one at: https://github.com/settings/tokens/new?scopes=repo
-        # Save it as GHPAT_REPO_READ in your repo secrets.
-        # Falls back to public repos only if not set.
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        # PAT with 'repo' scope to include private repos.
+        # Create at: https://github.com/settings/tokens/new?scopes=repo
+        # Save as GHPAT_REPO_READ in repo secrets.
         GITHUB_TOKEN: ${{ secrets.GHPAT_REPO_READ }}
         GITHUB_USERNAME: thecuriousnobody
-      run: node scripts/fetch-github-projects.js
+      run: npx tsx scripts/fetch-github-projects.ts
 
     - name: Check for changes
       id: git-check
