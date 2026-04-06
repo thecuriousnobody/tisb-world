@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
-  Typography, 
-  Box, 
+import {
+  Typography,
+  Box,
   Button,
   Tab,
   Tabs,
@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { ThumbUp, ThumbDown, Email } from '@mui/icons-material';
 import SocialSection from '../components/SocialSection';
+import GitHubProjectsFeed from '../components/GitHubProjectsFeed';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -116,6 +117,7 @@ const AI: React.FC = () => {
           }}
         >
           <Tab label="IN PRODUCTION" />
+          <Tab label="OPEN SOURCE" />
           <Tab label="IDEAS LAB" />
         </Tabs>
       </Box>
@@ -288,8 +290,40 @@ const AI: React.FC = () => {
           </Card>
         </TabPanel>
 
-        {/* Ideas Lab Tab */}
+        {/* Open Source Tab */}
         <TabPanel value={tabValue} index={1}>
+          <Box sx={{ mb: 4, textAlign: 'center' }}>
+            <Typography
+              variant="h4"
+              sx={{
+                fontSize: { xs: '1.75rem', md: '2.25rem' },
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
+              CODE IN THE WILD
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1rem', md: '1.125rem' },
+                opacity: 0.8,
+                maxWidth: '800px',
+                mx: 'auto',
+                mb: 4,
+                lineHeight: 1.6,
+              }}
+            >
+              Every repo is a rabbit hole of curiosity — from AI-powered podcast tools to
+              experimental automation systems. Each description below was written by an AI agent
+              that read the README and grokked the intent.
+            </Typography>
+          </Box>
+          <GitHubProjectsFeed />
+        </TabPanel>
+
+        {/* Ideas Lab Tab */}
+        <TabPanel value={tabValue} index={2}>
           <Box sx={{ mb: 6 }}>
             <Typography 
               variant="h4" 
