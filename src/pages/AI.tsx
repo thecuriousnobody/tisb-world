@@ -7,10 +7,9 @@ import {
   Tabs,
   Card,
   CardContent,
-  CardMedia,
-  IconButton
+  Chip,
 } from '@mui/material';
-import { ThumbUp, ThumbDown, Email } from '@mui/icons-material';
+import { Launch, Email } from '@mui/icons-material';
 import SocialSection from '../components/SocialSection';
 import GitHubProjectsFeed from '../components/GitHubProjectsFeed';
 
@@ -22,98 +21,84 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`ai-tabpanel-${index}`}
-      aria-labelledby={`ai-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ pt: 4 }}>
-          {children}
-        </Box>
-      )}
+    <div role="tabpanel" hidden={value !== index} {...other}>
+      {value === index && <Box sx={{ pt: 4 }}>{children}</Box>}
     </div>
   );
 }
 
+// Production projects data
+const productionProjects = [
+  {
+    name: 'PODCASTBOTS.AI',
+    description:
+      'AI-powered platform for podcast creators. Automates guest discovery, outreach, and content optimization so creators can focus on meaningful conversations.',
+    url: 'https://www.podcastbots.ai/',
+    accent: '#FF4500',
+    stack: ['CrewAI', 'React', 'Python', 'LLMs'],
+    status: 'LIVE',
+  },
+  {
+    name: 'DESILO',
+    description:
+      'The AI system that does the grunt work so you can focus on building. Intelligent research, market analysis, and planning tools for entrepreneurs and startups. Built for the Central Illinois innovation ecosystem.',
+    url: 'https://potentiator.ai/',
+    accent: '#FF3333',
+    stack: ['CrewAI', 'Market Intelligence', 'Agents'],
+    status: 'LIVE',
+  },
+];
+
 const AI: React.FC = () => {
   const [tabValue, setTabValue] = useState(0);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue);
-  };
-
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      py: { xs: 2, md: 4 },
-    }}>
-      
+    <Box sx={{ minHeight: '100vh', py: { xs: 2, md: 4 } }}>
+
       {/* Header */}
-      <Box sx={{
-        px: { xs: 2, md: 8 },
-        mb: 6,
-        textAlign: 'center',
-      }}>
-        <Typography 
-          variant="h1" 
-          sx={{ 
-            fontSize: { xs: '2.5rem', md: '4rem' },
-            fontWeight: 900,
-            mb: 3,
-          }}
+      <Box sx={{ px: { xs: 2, md: 8 }, mb: 5, textAlign: 'center' }}>
+        <Typography
+          variant="h1"
+          sx={{ fontSize: { xs: '2rem', md: '3rem' }, fontWeight: 900, mb: 2 }}
         >
           AI INNOVATIONS
         </Typography>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontSize: { xs: '1.1rem', md: '1.25rem' },
-            opacity: 0.8,
-            maxWidth: '800px',
+        <Typography
+          sx={{
+            fontSize: { xs: '1rem', md: '1.15rem' },
+            opacity: 0.7,
+            maxWidth: '700px',
             mx: 'auto',
             lineHeight: 1.6,
           }}
         >
-          Exploring the intersection of artificial intelligence, automation, and human creativity. 
-          From production tools to experimental prototypes.
+          What happens when the tools that used to require a department now fit in a conversation.
+          We're building with it, writing about it, and arguing about who should own it.
         </Typography>
       </Box>
 
       {/* Tabs */}
-      <Box sx={{ 
-        px: { xs: 2, md: 8 },
-        mb: 4,
-      }}>
-        <Tabs 
-          value={tabValue} 
-          onChange={handleTabChange}
+      <Box sx={{ px: { xs: 2, md: 8 }, mb: 3 }}>
+        <Tabs
+          value={tabValue}
+          onChange={(_, v) => setTabValue(v)}
           centered
           sx={{
             '& .MuiTab-root': {
-              fontSize: { xs: '1rem', md: '1.25rem' },
+              fontSize: { xs: '0.85rem', md: '1rem' },
               fontWeight: 700,
-              py: 2,
-              px: 4,
-              color: '#000000',
-              border: '2px solid #000000',
+              py: 1.5,
+              px: 3,
+              color: '#000',
+              border: '2px solid #000',
               borderRadius: 0,
-              mr: 2,
-              '&.Mui-selected': {
-                backgroundColor: '#FF4500',
-                color: '#000000',
-              },
-              '&:hover': {
-                backgroundColor: 'rgba(255, 69, 0, 0.1)',
-              }
+              mr: 1,
+              minHeight: 'auto',
+              '&.Mui-selected': { backgroundColor: '#FF4500', color: '#000' },
+              '&:hover': { backgroundColor: 'rgba(255, 69, 0, 0.08)' },
             },
-            '& .MuiTabs-indicator': {
-              display: 'none',
-            }
+            '& .MuiTabs-indicator': { display: 'none' },
           }}
         >
           <Tab label="IN PRODUCTION" />
@@ -122,394 +107,209 @@ const AI: React.FC = () => {
         </Tabs>
       </Box>
 
-      {/* Tab Content */}
       <Box sx={{ px: { xs: 2, md: 8 } }}>
-        
-        {/* Production Tab */}
+
+        {/* ═══ PRODUCTION TAB ═══ */}
         <TabPanel value={tabValue} index={0}>
-          <Card sx={{ 
-            mb: 4, 
-            overflow: 'visible',
-            backgroundColor: '#000000',
-            color: 'white',
-            border: '3px solid #FF4500',
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+            gap: 3,
           }}>
-            <CardContent sx={{ p: { xs: 4, md: 6 } }}>
-              <Typography 
-                variant="h3" 
-                sx={{ 
-                  fontSize: { xs: '2rem', md: '3rem' },
-                  fontWeight: 700,
-                  mb: 3,
-                  color: '#FF4500',
-                }}
-              >
-                PODCASTBOTS.AI
-              </Typography>
-              
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  fontSize: { xs: '1.1rem', md: '1.25rem' },
-                  mb: 4,
-                  lineHeight: 1.6,
-                  opacity: 0.9,
-                }}
-              >
-                AI-powered platform for podcast creators. Automates guest discovery, outreach, and content 
-                optimization so creators can focus on meaningful conversations. Built with the philosophy 
-                that AI should enhance human creativity, not replace it.
-              </Typography>
-              
-              <Box sx={{ mb: 4 }}>
-                <Button 
-                  variant="contained" 
-                  size="large"
-                  href="https://www.podcastbots.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    py: 2,
-                    px: 4,
-                    backgroundColor: '#FF4500',
-                    color: '#000000',
-                    '&:hover': {
-                      backgroundColor: '#e63e00',
-                    }
-                  }}
-                >
-                  LAUNCH PODCASTBOTS.AI
-                </Button>
-              </Box>
-              
-              {/* iframe embed */}
-              <Box sx={{ 
-                position: 'relative', 
-                width: '100%',
-                height: '600px',
-                border: '2px solid #FF4500',
-                borderRadius: 0,
-                overflow: 'hidden'
-              }}>
-                <iframe
-                  src="https://www.podcastbots.ai/"
-                  title="Podcast Bots AI"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: 'none'
-                  }}
-                  allowFullScreen
-                />
-              </Box>
-            </CardContent>
-          </Card>
-
-          {/* DeSilo Card */}
-          <Card sx={{
-            mb: 4,
-            overflow: 'visible',
-            backgroundColor: '#F7F3E9',
-            color: '#000000',
-            border: '3px solid #FF3333',
-          }}>
-            <CardContent sx={{ p: { xs: 4, md: 6 } }}>
-              <Typography
-                variant="h3"
+            {productionProjects.map((project) => (
+              <Card
+                key={project.name}
                 sx={{
-                  fontSize: { xs: '2rem', md: '3rem' },
-                  fontWeight: 700,
-                  mb: 3,
-                  color: '#FF3333',
+                  border: `2px solid ${project.accent}`,
+                  borderRadius: 0,
+                  backgroundColor: '#000',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: `4px 4px 0px ${project.accent}`,
+                  },
                 }}
+                onClick={() => window.open(project.url, '_blank')}
               >
-                DESILO
-              </Typography>
+                {/* Accent top bar */}
+                <Box sx={{ height: 4, backgroundColor: project.accent }} />
 
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: { xs: '1.1rem', md: '1.25rem' },
-                  mb: 4,
-                  lineHeight: 1.6,
-                  opacity: 0.9,
-                }}
-              >
-                The AI system that does the grunt work so you can focus on building. DeSilo provides
-                intelligent research, market analysis, and planning tools for entrepreneurs and startups.
-                Built for the Central Illinois innovation ecosystem, powered by CrewAI agents and
-                comprehensive market intelligence.
-              </Typography>
+                <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  {/* Header row */}
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                    <Typography sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, fontWeight: 800, color: project.accent }}>
+                      {project.name}
+                    </Typography>
+                    <Chip
+                      label={project.status}
+                      size="small"
+                      sx={{
+                        backgroundColor: project.accent,
+                        color: '#000',
+                        fontWeight: 700,
+                        borderRadius: 0,
+                        fontSize: '0.7rem',
+                      }}
+                    />
+                  </Box>
 
-              <Box sx={{ mb: 4 }}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  href="https://potentiator.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    py: 2,
-                    px: 4,
-                    backgroundColor: '#FF3333',
-                    color: '#ffffff',
-                    '&:hover': {
-                      backgroundColor: '#CC0000',
-                    }
-                  }}
-                >
-                  LAUNCH DESILO
-                </Button>
-              </Box>
+                  {/* Description */}
+                  <Typography sx={{ fontSize: '1rem', lineHeight: 1.7, opacity: 0.85, mb: 3, flex: 1 }}>
+                    {project.description}
+                  </Typography>
 
-              {/* iframe embed */}
-              <Box sx={{
-                position: 'relative',
-                width: '100%',
-                height: '600px',
-                border: '2px solid #FF3333',
-                borderRadius: 0,
-                overflow: 'hidden'
-              }}>
-                <iframe
-                  src="https://potentiator.ai/"
-                  title="DeSilo - AI for Entrepreneurs"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: 'none'
-                  }}
-                  allowFullScreen
-                />
-              </Box>
-            </CardContent>
-          </Card>
+                  {/* Stack tags */}
+                  <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: 3 }}>
+                    {project.stack.map((tech) => (
+                      <Chip
+                        key={tech}
+                        label={tech}
+                        size="small"
+                        variant="outlined"
+                        sx={{ borderColor: 'rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.7)', borderRadius: 0, fontSize: '0.7rem' }}
+                      />
+                    ))}
+                  </Box>
+
+                  {/* Launch button */}
+                  <Button
+                    variant="contained"
+                    endIcon={<Launch />}
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    sx={{
+                      backgroundColor: project.accent,
+                      color: '#000',
+                      fontWeight: 700,
+                      borderRadius: 0,
+                      alignSelf: 'flex-start',
+                      '&:hover': { backgroundColor: project.accent, opacity: 0.9 },
+                    }}
+                  >
+                    LAUNCH
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
         </TabPanel>
 
-        {/* Open Source Tab */}
+        {/* ═══ OPEN SOURCE TAB ═══ */}
         <TabPanel value={tabValue} index={1}>
           <Box sx={{ mb: 4, textAlign: 'center' }}>
             <Typography
               variant="h4"
-              sx={{
-                fontSize: { xs: '1.75rem', md: '2.25rem' },
-                fontWeight: 700,
-                mb: 2,
-              }}
+              sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, fontWeight: 700, mb: 2 }}
             >
               CODE IN THE WILD
             </Typography>
             <Typography
-              variant="body1"
               sx={{
-                fontSize: { xs: '1rem', md: '1.125rem' },
-                opacity: 0.8,
-                maxWidth: '800px',
+                fontSize: { xs: '0.95rem', md: '1.05rem' },
+                opacity: 0.7,
+                maxWidth: '700px',
                 mx: 'auto',
-                mb: 4,
+                mb: 3,
                 lineHeight: 1.6,
               }}
             >
               Every repo is a rabbit hole of curiosity — from AI-powered podcast tools to
-              experimental automation systems. Each description below was written by an AI agent
-              that read the README and grokked the intent.
+              experimental automation systems.
             </Typography>
           </Box>
           <GitHubProjectsFeed />
         </TabPanel>
 
-        {/* Ideas Lab Tab */}
+        {/* ═══ IDEAS LAB TAB ═══ */}
         <TabPanel value={tabValue} index={2}>
-          <Box sx={{ mb: 6 }}>
-            <Typography 
-              variant="h4" 
-              sx={{ 
-                fontSize: { xs: '1.75rem', md: '2.25rem' },
-                fontWeight: 700,
-                mb: 3,
-                textAlign: 'center',
-              }}
+          <Box sx={{ mb: 4, textAlign: 'center' }}>
+            <Typography
+              variant="h4"
+              sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, fontWeight: 700, mb: 2 }}
             >
               EXPERIMENTAL PROTOTYPES
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: { xs: '1rem', md: '1.125rem' },
-                textAlign: 'center',
-                opacity: 0.8,
-                maxWidth: '800px',
+            <Typography
+              sx={{
+                fontSize: { xs: '0.95rem', md: '1.05rem' },
+                opacity: 0.7,
+                maxWidth: '700px',
                 mx: 'auto',
-                mb: 6,
+                mb: 4,
                 lineHeight: 1.6,
               }}
             >
-              Early-stage concepts and prototypes exploring new possibilities. Your feedback helps shape 
-              these ideas into practical solutions.
+              Early-stage concepts and prototypes. Your feedback helps shape these into real solutions.
             </Typography>
           </Box>
 
-          {/* KettleMic Card */}
-          <Card sx={{ 
-            mb: 6,
-            border: '3px solid #000000',
-            borderRadius: 0,
-          }}>
-            <Box sx={{ 
-              display: 'flex', 
-              flexDirection: { xs: 'column', md: 'row' },
-            }}>
-              <Box 
+          {/* KettleMic */}
+          <Card sx={{ mb: 4, border: '2px solid #000', borderRadius: 0 }}>
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+              <Box
                 component="video"
                 controls
-                sx={{ 
+                sx={{
                   width: { xs: '100%', md: '40%' },
-                  height: { xs: '300px', md: '400px' },
+                  height: { xs: '250px', md: '350px' },
                   objectFit: 'cover',
-                  backgroundColor: '#000000',
+                  backgroundColor: '#000',
                 }}
                 src="/Media/Prototypes/KettleMic/kettleMicProto.mp4"
-                poster="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkY0NTAwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+S0VUVExFTUlDPC90ZXh0Pgo8L3N2Zz4="
               />
-              <CardContent sx={{ 
-                flex: 1,
-                p: { xs: 3, md: 4 },
-              }}>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    fontSize: { xs: '1.5rem', md: '2rem' },
-                    fontWeight: 700,
-                    mb: 2,
-                  }}
-                >
-                  KETTLEMIC
-                </Typography>
-                
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    backgroundColor: '#FF4500',
-                    color: 'white',
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: 0,
-                    fontWeight: 600,
-                    display: 'inline-block',
-                    mb: 3,
-                  }}
-                >
-                  PROTOTYPE
-                </Typography>
-                
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    fontSize: { xs: '1rem', md: '1.125rem' },
-                    mb: 3,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Solving the fundamental instability problem of microphone stands. Traditional stands are 
-                  unstable, move around, and aren't easily configurable. KettleMic reimagines the microphone 
-                  stand as a stable, weighted base with flexible positioning.
-                </Typography>
-
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
-                    fontWeight: 700,
-                    mb: 2,
-                  }}
-                >
-                  HELP REFINE THIS IDEA
-                </Typography>
-
-                <Box sx={{ 
-                  display: 'flex', 
-                  gap: 2, 
-                  mb: 3,
-                  alignItems: 'center',
-                }}>
-                  <IconButton 
-                    sx={{ 
-                      border: '2px solid #000000',
-                      borderRadius: 0,
-                      '&:hover': { backgroundColor: 'rgba(0, 255, 0, 0.1)' }
-                    }}
-                  >
-                    <ThumbUp />
-                  </IconButton>
-                  <IconButton 
-                    sx={{ 
-                      border: '2px solid #000000',
-                      borderRadius: 0,
-                      '&:hover': { backgroundColor: 'rgba(255, 0, 0, 0.1)' }
-                    }}
-                  >
-                    <ThumbDown />
-                  </IconButton>
-                  <Button
-                    startIcon={<Email />}
-                    variant="outlined"
-                    href="mailto:rajeev@theideasandbox.com?subject=KettleMic Feedback"
-                    sx={{
-                      borderColor: '#FF4500',
-                      color: '#FF4500',
-                      borderRadius: 0,
-                      fontWeight: 600,
-                      '&:hover': {
-                        borderColor: '#FF4500',
-                        backgroundColor: 'rgba(255, 69, 0, 0.1)',
-                      }
-                    }}
-                  >
-                    SEND FEEDBACK
-                  </Button>
+              <CardContent sx={{ flex: 1, p: { xs: 3, md: 4 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Typography sx={{ fontSize: { xs: '1.3rem', md: '1.6rem' }, fontWeight: 800 }}>
+                    KETTLEMIC
+                  </Typography>
+                  <Chip
+                    label="PROTOTYPE"
+                    size="small"
+                    sx={{ backgroundColor: '#FF4500', color: '#fff', fontWeight: 700, borderRadius: 0, fontSize: '0.65rem' }}
+                  />
                 </Box>
 
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    fontStyle: 'italic',
-                    opacity: 0.7,
+                <Typography sx={{ fontSize: '1rem', lineHeight: 1.7, mb: 3 }}>
+                  Solving the fundamental instability problem of microphone stands. KettleMic
+                  reimagines the mic stand as a stable, weighted base with flexible positioning.
+                </Typography>
+
+                <Button
+                  startIcon={<Email />}
+                  variant="outlined"
+                  href="mailto:rajeev@theideasandbox.com?subject=KettleMic Feedback"
+                  sx={{
+                    borderColor: '#FF4500',
+                    color: '#FF4500',
+                    borderRadius: 0,
+                    fontWeight: 600,
+                    '&:hover': { borderColor: '#FF4500', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
                   }}
                 >
-                  Your insights help shape these prototypes into real solutions. What features matter most to you?
-                </Typography>
+                  SEND FEEDBACK
+                </Button>
               </CardContent>
             </Box>
           </Card>
 
-          {/* Coming Soon Section */}
+          {/* More coming */}
           <Box sx={{
             textAlign: 'center',
-            py: 6,
-            border: '2px dashed #000000',
-            borderRadius: 0,
-            backgroundColor: 'rgba(255, 69, 0, 0.05)',
+            py: 5,
+            border: '2px dashed rgba(0,0,0,0.2)',
+            backgroundColor: 'rgba(255, 69, 0, 0.03)',
           }}>
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                fontWeight: 700,
-                mb: 2,
-              }}
-            >
+            <Typography sx={{ fontWeight: 700, mb: 1, fontSize: '1.1rem' }}>
               MORE IDEAS BREWING...
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                opacity: 0.8,
-                mb: 3,
-              }}
-            >
-              3D printed prototypes, automation tools, and AI experiments coming soon.
+            <Typography sx={{ opacity: 0.6, mb: 2, fontSize: '0.95rem' }}>
+              3D printed prototypes, automation tools, and AI experiments.
             </Typography>
             <Button
               variant="outlined"
@@ -519,10 +319,7 @@ const AI: React.FC = () => {
                 color: '#FF4500',
                 borderRadius: 0,
                 fontWeight: 600,
-                '&:hover': {
-                  borderColor: '#FF4500',
-                  backgroundColor: 'rgba(255, 69, 0, 0.1)',
-                }
+                '&:hover': { borderColor: '#FF4500', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
               }}
             >
               SUGGEST AN IDEA
@@ -531,7 +328,6 @@ const AI: React.FC = () => {
         </TabPanel>
       </Box>
 
-      {/* Social Section */}
       <SocialSection />
     </Box>
   );
