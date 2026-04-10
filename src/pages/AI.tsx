@@ -35,7 +35,6 @@ const productionProjects = [
     description:
       'AI-powered platform for podcast creators. Automates guest discovery, outreach, and content optimization so creators can focus on meaningful conversations.',
     url: 'https://www.podcastbots.ai/',
-    accent: '#FF4500',
     stack: ['CrewAI', 'React', 'Python', 'LLMs'],
     status: 'LIVE',
   },
@@ -44,7 +43,6 @@ const productionProjects = [
     description:
       'The AI system that does the grunt work so you can focus on building. Intelligent research, market analysis, and planning tools for entrepreneurs and startups. Built for the Central Illinois innovation ecosystem.',
     url: 'https://potentiator.ai/',
-    accent: '#FF3333',
     stack: ['CrewAI', 'Market Intelligence', 'Agents'],
     status: 'LIVE',
   },
@@ -90,13 +88,14 @@ const AI: React.FC = () => {
               fontWeight: 700,
               py: 1.5,
               px: 3,
-              color: '#000',
-              border: '2px solid #000',
+              color: 'text.secondary',
+              border: '1px solid',
+              borderColor: 'divider',
               borderRadius: 0,
               mr: 1,
               minHeight: 'auto',
-              '&.Mui-selected': { backgroundColor: '#FF4500', color: '#000' },
-              '&:hover': { backgroundColor: 'rgba(255, 69, 0, 0.08)' },
+              '&.Mui-selected': { backgroundColor: 'primary.main', color: 'background.default' },
+              '&:hover': { borderColor: 'primary.main', color: 'primary.main' },
             },
             '& .MuiTabs-indicator': { display: 'none' },
           }}
@@ -120,36 +119,33 @@ const AI: React.FC = () => {
               <Card
                 key={project.name}
                 sx={{
-                  border: `2px solid ${project.accent}`,
-                  borderRadius: 0,
-                  backgroundColor: '#000',
-                  color: '#fff',
+                  border: '1px solid',
+                  borderColor: 'divider',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
+                  transition: 'all 0.3s ease',
                   display: 'flex',
                   flexDirection: 'column',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: `4px 4px 0px ${project.accent}`,
+                    borderColor: 'primary.main',
                   },
                 }}
                 onClick={() => window.open(project.url, '_blank')}
               >
                 {/* Accent top bar */}
-                <Box sx={{ height: 4, backgroundColor: project.accent }} />
+                <Box sx={{ height: 4, backgroundColor: 'primary.main' }} />
 
                 <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
                   {/* Header row */}
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                    <Typography sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, fontWeight: 800, color: project.accent }}>
+                    <Typography sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, fontWeight: 800, color: 'primary.main' }}>
                       {project.name}
                     </Typography>
                     <Chip
                       label={project.status}
                       size="small"
                       sx={{
-                        backgroundColor: project.accent,
-                        color: '#000',
+                        backgroundColor: 'primary.main',
+                        color: 'background.default',
                         fontWeight: 700,
                         borderRadius: 0,
                         fontSize: '0.7rem',
@@ -184,12 +180,12 @@ const AI: React.FC = () => {
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
                     sx={{
-                      backgroundColor: project.accent,
-                      color: '#000',
+                      backgroundColor: 'primary.main',
+                      color: 'background.default',
                       fontWeight: 700,
                       borderRadius: 0,
                       alignSelf: 'flex-start',
-                      '&:hover': { backgroundColor: project.accent, opacity: 0.9 },
+                      '&:hover': { backgroundColor: 'primary.main', opacity: 0.9 },
                     }}
                   >
                     LAUNCH
@@ -250,7 +246,7 @@ const AI: React.FC = () => {
           </Box>
 
           {/* KettleMic */}
-          <Card sx={{ mb: 4, border: '2px solid #000', borderRadius: 0 }}>
+          <Card sx={{ mb: 4, border: '1px solid', borderColor: 'divider', borderRadius: 0 }}>
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
               <Box
                 component="video"
@@ -259,7 +255,7 @@ const AI: React.FC = () => {
                   width: { xs: '100%', md: '40%' },
                   height: { xs: '250px', md: '350px' },
                   objectFit: 'cover',
-                  backgroundColor: '#000',
+                  backgroundColor: 'background.default',
                 }}
                 src="/Media/Prototypes/KettleMic/kettleMicProto.mp4"
               />
@@ -271,7 +267,7 @@ const AI: React.FC = () => {
                   <Chip
                     label="PROTOTYPE"
                     size="small"
-                    sx={{ backgroundColor: '#FF4500', color: '#fff', fontWeight: 700, borderRadius: 0, fontSize: '0.65rem' }}
+                    sx={{ backgroundColor: '#f5c542', color: 'background.default', fontWeight: 700, borderRadius: 0, fontSize: '0.65rem' }}
                   />
                 </Box>
 
@@ -285,11 +281,11 @@ const AI: React.FC = () => {
                   variant="outlined"
                   href="mailto:rajeev@theideasandbox.com?subject=KettleMic Feedback"
                   sx={{
-                    borderColor: '#FF4500',
-                    color: '#FF4500',
+                    borderColor: '#f5c542',
+                    color: '#f5c542',
                     borderRadius: 0,
                     fontWeight: 600,
-                    '&:hover': { borderColor: '#FF4500', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
+                    '&:hover': { borderColor: '#f5c542', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
                   }}
                 >
                   SEND FEEDBACK
@@ -315,11 +311,11 @@ const AI: React.FC = () => {
               variant="outlined"
               href="mailto:rajeev@theideasandbox.com?subject=Ideas Lab - New Concept"
               sx={{
-                borderColor: '#FF4500',
-                color: '#FF4500',
+                borderColor: '#f5c542',
+                color: '#f5c542',
                 borderRadius: 0,
                 fontWeight: 600,
-                '&:hover': { borderColor: '#FF4500', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
+                '&:hover': { borderColor: '#f5c542', backgroundColor: 'rgba(255, 69, 0, 0.08)' },
               }}
             >
               SUGGEST AN IDEA

@@ -16,9 +16,9 @@ import {
 } from '@mui/material'
 import {
   Menu as MenuIcon,
+  Close as CloseIcon,
 } from '@mui/icons-material'
 import { useNavigate, useLocation } from 'react-router-dom'
-import logoImage from '../assets/TISB Logo Transparent.png'
 
 interface LayoutProps {
   children: ReactNode
@@ -47,84 +47,58 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* BOLD TOP NAVIGATION */}
-      <AppBar 
-        position="fixed" 
-        sx={{ 
-          backgroundColor: 'primary.main',
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default' }}>
+      {/* NAV */}
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: 'rgba(10,10,10,0.92)',
+          backdropFilter: 'blur(12px)',
           boxShadow: 'none',
-          borderBottom: '3px solid #D2691E',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
         }}
       >
-        <Toolbar sx={{ py: 1 }}>
+        <Toolbar sx={{ py: 0.5, minHeight: '56px !important' }}>
           <Box
-            sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              flexGrow: 1, 
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              flexGrow: 1,
               cursor: 'pointer',
-              '&:hover img': {
-                transform: 'scale(1.1)',
-                filter: 'drop-shadow(0 0 8px #D2691E)'
-              }
+              gap: 1.5,
             }}
             onClick={() => handleNavigate('/')}
           >
-            <img
-              src={logoImage}
-              alt="TISB Logo"
-              style={{
-                height: '45px',
-                width: 'auto',
-                marginRight: '16px',
-                transition: 'all 0.3s ease',
-              }}
-            />
             <Typography
-              variant="h4"
-              component="div"
-              sx={{ 
-                fontWeight: 900,
-                fontSize: '2rem',
+              sx={{
+                fontFamily: '"Instrument Serif", Georgia, serif',
+                fontSize: '1.25rem',
+                fontWeight: 400,
+                color: 'text.primary',
                 letterSpacing: '-0.02em',
-                color: 'white',
               }}
             >
-              TISB
+              The Idea Sandbox
             </Typography>
           </Box>
-          
+
           {!isMobile ? (
-            <Box sx={{ 
-              display: 'flex', 
-              gap: 0.5,
-              flexWrap: 'nowrap',
-              overflow: 'hidden',
-              maxWidth: 'calc(100vw - 300px)', // Reserve space for logo
-            }}>
-              {navigationItems.map((item) => (
+            <Box sx={{ display: 'flex', gap: 0 }}>
+              {navigationItems.filter(i => i.path !== '/').map((item) => (
                 <Box
                   key={item.path}
                   sx={{
                     cursor: 'pointer',
-                    px: { xs: 1.5, md: 2.5 },
-                    py: 1.5,
-                    backgroundColor: location.pathname === item.path ? '#D2691E' : 'transparent',
-                    color: 'white',
-                    fontWeight: 700,
-                    fontSize: { xs: '0.75rem', md: '0.9rem' },
-                    letterSpacing: '0.5px',
+                    px: 2,
+                    py: 1,
+                    color: location.pathname === item.path ? 'primary.main' : 'text.secondary',
+                    fontSize: '0.6875rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.15em',
                     textTransform: 'uppercase',
-                    transition: 'all 0.2s ease',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    minWidth: 0, // Allow flex shrinking
-                    '&:hover': {
-                      backgroundColor: '#D2691E',
-                      transform: 'translateY(-2px)',
-                    },
+                    transition: 'color 0.2s',
+                    '&:hover': { color: 'primary.main' },
                   }}
                   onClick={() => handleNavigate(item.path)}
                 >
@@ -134,15 +108,8 @@ export default function Layout({ children }: LayoutProps) {
             </Box>
           ) : (
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
               onClick={() => setDrawerOpen(true)}
-              sx={{
-                backgroundColor: '#D2691E',
-                '&:hover': {
-                  backgroundColor: '#A0522D',
-                }
-              }}
+              sx={{ color: 'text.primary' }}
             >
               <MenuIcon />
             </IconButton>
@@ -150,66 +117,55 @@ export default function Layout({ children }: LayoutProps) {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Drawer - BOLD DESIGN */}
+      {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         sx={{
           '& .MuiDrawer-paper': {
-            backgroundColor: '#1A0E0A',
-            color: 'white',
-            width: 300,
+            backgroundColor: 'background.default',
+            color: 'text.primary',
+            width: 280,
+            border: 'none',
+            borderLeft: '1px solid',
+            borderColor: 'divider',
           },
         }}
       >
-        <Box sx={{ pt: 4 }}>
-          <Typography
-            variant="h3"
-            sx={{
-              fontWeight: 900,
-              fontSize: '3rem',
-              textAlign: 'center',
-              mb: 4,
-              color: '#D2691E',
-            }}
-          >
-            MENU
-          </Typography>
-          <List>
-            {navigationItems.map((item) => (
-              <ListItem
-                key={item.path}
-                onClick={() => handleNavigate(item.path)}
-                sx={{
-                  cursor: 'pointer',
-                  py: 2,
-                  px: 4,
-                  backgroundColor: location.pathname === item.path ? '#D2691E' : 'transparent',
-                  mb: 1,
-                  mx: 2,
-                  '&:hover': { 
-                    backgroundColor: '#D2691E',
-                    transform: 'translateX(8px)',
-                  },
-                  transition: 'all 0.2s ease',
-                }}
-              >
-                <ListItemText
-                  primary={item.label}
-                  sx={{
-                    '& .MuiTypography-root': {
-                      fontWeight: 700,
-                      fontSize: '1.25rem',
-                      letterSpacing: '0.5px',
-                      textTransform: 'uppercase',
-                    },
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
+        <Box sx={{ pt: 2, px: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: 'text.secondary' }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
+        <List sx={{ pt: 2 }}>
+          {navigationItems.map((item) => (
+            <ListItem
+              key={item.path}
+              onClick={() => handleNavigate(item.path)}
+              sx={{
+                cursor: 'pointer',
+                py: 1.5,
+                px: 3,
+                color: location.pathname === item.path ? 'primary.main' : 'text.primary',
+                transition: 'all 0.2s',
+                '&:hover': { color: 'primary.main', pl: 4 },
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                sx={{
+                  '& .MuiTypography-root': {
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                  },
+                }}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
 
       {/* Main Content */}
@@ -217,9 +173,9 @@ export default function Layout({ children }: LayoutProps) {
         maxWidth="lg"
         sx={{
           flex: 1,
-          pt: { xs: 12, md: 14 },
+          pt: { xs: 8, md: 8 },
           pb: 6,
-          px: { xs: 3, md: 4 },
+          px: { xs: 0, md: 4 },
         }}
       >
         {children}
