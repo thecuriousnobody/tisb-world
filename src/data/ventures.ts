@@ -39,8 +39,9 @@ const ventures: Venture[] = [
     name: 'swych-box',
     tagline: 'An AI concierge at the edge for every small business.',
     status: 'beta',
-    url: 'https://app.swychbox.com',
+    url: 'https://app.swych-box.com',
     accentColor: '#00BFFF',
+    image: '/ventures/swychbox.jpg',
   },
   {
     name: 'podcastbots',
