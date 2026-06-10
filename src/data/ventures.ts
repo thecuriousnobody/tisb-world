@@ -8,6 +8,8 @@ export interface Venture {
   url: string
   /** Hairline accent only — never used as a fill */
   accentColor: string
+  /** Optional card image (path under public/), pulled from the venture's own site */
+  image?: string
 }
 
 const STATUS_ORDER: Record<VentureStatus, number> = {
@@ -21,36 +23,40 @@ const ventures: Venture[] = [
     name: 'Stack Day',
     tagline: 'Your day, stacked and conquered.',
     status: 'shipped',
-    url: '',
+    url: 'https://stackday.ai',
     accentColor: '#FFD700',
+    image: '/ventures/stackday.jpg',
   },
   {
     name: 'DeSilo',
     tagline: 'The AI appliance for entrepreneurs. Ideas in, ventures out.',
     status: 'beta',
-    url: 'https://potentiator.ai',
+    url: 'https://desilo-it.ai',
     accentColor: '#FF3333',
+    image: '/ventures/desilo.jpg',
   },
   {
     name: 'swych-box',
     tagline: 'An AI concierge at the edge for every small business.',
     status: 'beta',
-    url: '',
+    url: 'https://app.swychbox.com',
     accentColor: '#00BFFF',
   },
   {
     name: 'podcastbots',
     tagline: 'Find people doing meaningful work. Have better conversations.',
     status: 'beta',
-    url: '',
+    url: 'https://podcastbots.ai',
     accentColor: '#9370DB',
+    image: '/ventures/podcastbots.jpg',
   },
   {
     name: 'Autonomy Labs',
     tagline: 'Building autonomous systems that work for you.',
     status: 'building',
-    url: '',
+    url: 'https://autonomylabs.dev',
     accentColor: '#32CD32',
+    image: '/ventures/autonomylabs.jpg',
   },
 ]
 

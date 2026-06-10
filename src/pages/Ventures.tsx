@@ -6,7 +6,7 @@ export default function Ventures() {
   return (
     <Box sx={{ py: { xs: 4, md: 8 } }}>
       <Box sx={{ mb: { xs: 4, md: 8 } }}>
-        <Typography variant="h1" sx={{ mb: 2 }}>
+        <Typography variant="h1" sx={{ mb: 2, fontSize: { xs: '3rem', sm: '4.5rem', md: '6rem' } }}>
           VENTURES
         </Typography>
         <Typography

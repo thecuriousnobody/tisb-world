@@ -25,7 +25,7 @@ export default function About() {
   return (
     <Box sx={{ py: { xs: 4, md: 8 } }}>
       <Box sx={{ mb: { xs: 4, md: 8 } }}>
-        <Typography variant="h1" sx={{ mb: 2 }}>
+        <Typography variant="h1" sx={{ mb: 2, fontSize: { xs: '3rem', sm: '4.5rem', md: '6rem' } }}>
           THE BUILDER
         </Typography>
         <Typography variant="h5" sx={{ color: 'text.secondary', maxWidth: '700px' }}>
@@ -65,7 +65,7 @@ export default function About() {
           textAlign: 'center',
         }}
       >
-        <Typography variant="h3" sx={{ color: '#ffffff', mb: 3 }}>
+        <Typography variant="h3" sx={{ color: '#ffffff', mb: 3, fontSize: { xs: '1.75rem', md: '3rem' } }}>
           FOLLOW THE BUILD
         </Typography>
         <Typography variant="body1" sx={{ color: 'grey.400', mb: 4, maxWidth: '600px', mx: 'auto' }}>

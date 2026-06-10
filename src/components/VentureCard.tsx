@@ -41,11 +41,27 @@ export default function VentureCard({ venture }: VentureCardProps) {
         },
       }}
     >
+      {venture.image && (
+        <Box
+          component="img"
+          src={venture.image}
+          alt={`${venture.name} preview`}
+          loading="lazy"
+          sx={{
+            width: '100%',
+            height: 140,
+            objectFit: 'cover',
+            display: 'block',
+            borderBottom: '2px solid #000000',
+            filter: 'brightness(92%)',
+          }}
+        />
+      )}
       <CardContent
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
+          flexGrow: 1,
           p: { xs: 3, md: 4 },
         }}
       >
