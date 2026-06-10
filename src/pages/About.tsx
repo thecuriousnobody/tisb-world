@@ -9,7 +9,7 @@ const chapters = [
   },
   {
     title: 'THE CATERPILLAR YEARS',
-    body: 'Running PMO at Caterpillar taught me how giant systems actually move — the discipline of shipping when a thousand things can go wrong. I took that operating rigor and pointed it at something smaller, faster, and mine.',
+    body: 'Eighteen years of engineering inside Caterpillar taught me how giant systems actually move — the discipline of shipping when a thousand things can go wrong. I took that operating rigor and pointed it at something smaller, faster, and mine.',
   },
   {
     title: 'BUILDING FROM CENTRAL ILLINOIS',
