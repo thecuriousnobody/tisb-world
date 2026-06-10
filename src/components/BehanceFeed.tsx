@@ -325,7 +325,7 @@ export default function BehanceFeed() {
               }}
               onClick={() => window.open(project.link, '_blank')}
             >
-              {/* Background Image or Color */}
+              {/* Background Image or Stylized Gradient */}
               {imageUrl ? (
                 <CardMedia
                   component="img"
@@ -351,14 +351,29 @@ export default function BehanceFeed() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: 'linear-gradient(45deg, #1a1a1a 0%, #ff4500 100%)',
+                    background: `linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, ${
+                      ['#ff4500', '#e91e63', '#9c27b0', '#3f51b5', '#009688', '#ff9800'][index % 6]
+                    } 100%)`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    p: 3,
                   }}
                 >
-                  <Typography variant="h4" sx={{ color: 'white', opacity: 0.7 }}>
-                    🎨
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      color: 'white',
+                      opacity: 0.15,
+                      fontWeight: 900,
+                      fontSize: { xs: '2.5rem', md: '3.5rem' },
+                      textAlign: 'center',
+                      lineHeight: 1.1,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    {project.title}
                   </Typography>
                 </Box>
               )}

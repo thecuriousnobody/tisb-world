@@ -4,6 +4,45 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-4eEbzQdTVYI",
+      "videoId": "4eEbzQdTVYI",
+      "title": "Agentic AI for Founders — Watch It Work Live | DeSilo",
+      "description": "DeSilo — What's New: Focus Group Invite\n\nWe heard you. After our first focus group in January, we took every piece of feedback and went to work. This video walks through what we've built since then — a startup intelligence platform that knows who you are, finds real resources, builds real plans, and actually does things for you.\n\nThis isn't a polished corporate demo. I'm building this as a one-person team, racing the clock to get something genuinely useful into founders' hands. The tool is real,...",
+      "link": "https://www.youtube.com/watch?v=4eEbzQdTVYI",
+      "publishedAt": "2026-03-10T04:18:39+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/4eEbzQdTVYI/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/4eEbzQdTVYI/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 76
+    },
+    {
+      "id": "youtube-AFsZ4EVVRrw",
+      "videoId": "AFsZ4EVVRrw",
+      "title": "90% of Startups Fail. DeSilo Changes That.",
+      "description": "Most startups don't fail from bad ideas—they fail from bad access. The data is clear: where you are and who you know determines whether you succeed more than talent or hustle.\n42% build something nobody wants. 29% never apply for funding they'd qualify for. 73% of fintech startups die from regulatory blindspots they didn't see coming.\nWe're building DeSilo to fix this—a tool that puts accelerator-level intelligence in every founder's hands.\n🗓️ Beta Focus Group is on January 21st, 2026 at 12:00 ...",
+      "link": "https://www.youtube.com/watch?v=AFsZ4EVVRrw",
+      "publishedAt": "2026-01-20T16:58:10+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/AFsZ4EVVRrw/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/AFsZ4EVVRrw/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 91
+    },
+    {
+      "id": "youtube-v8V3aHh9z0Y",
+      "videoId": "v8V3aHh9z0Y",
+      "title": "India's Emergency Response is Broken. Here's How AI Fixes It.",
+      "description": "Every year, India loses 2.4 million people to treatable conditions — heart attacks, road accidents, snakebites, maternal emergencies.\n\nThe treatments exist. The hospitals exist. The ambulances exist.\n\nWhat's missing is coordination.\n\nOnly 7% of trauma patients in India reach a hospital within the &quot;Golden Hour&quot; — that critical 60-minute window when intervention saves lives. In the US, it's over 50%.\n\nThis video proposes Golden Hour — a voice-first, AI-powered emergency response system t...",
+      "link": "https://www.youtube.com/watch?v=v8V3aHh9z0Y",
+      "publishedAt": "2026-01-16T23:00:00+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/v8V3aHh9z0Y/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/v8V3aHh9z0Y/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 224
+    },
+    {
       "id": "youtube-m5D5yiglvjE",
       "videoId": "m5D5yiglvjE",
       "title": "India’s Stray Dog Crisis: Too Poor and Too Afraid To Care?",
@@ -14,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/m5D5yiglvjE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/m5D5yiglvjE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 14
+      "views": 62
     },
     {
       "id": "youtube-o0gOSzVKxCk",
@@ -27,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/o0gOSzVKxCk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/o0gOSzVKxCk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 7
+      "views": 21
     },
     {
       "id": "youtube-pvagGEhMiTU",
@@ -40,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/pvagGEhMiTU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/pvagGEhMiTU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 6
+      "views": 11
     },
     {
       "id": "youtube-EhURmnJav3E",
@@ -53,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/EhURmnJav3E/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/EhURmnJav3E/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 99
+      "views": 147
     },
     {
       "id": "youtube-SRYBJsnV7cI",
@@ -79,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/EX02iKe0Vdg/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/EX02iKe0Vdg/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 36
+      "views": 42
     },
     {
       "id": "youtube-uI0bxHBwNc4",
@@ -92,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/uI0bxHBwNc4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/uI0bxHBwNc4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 283
+      "views": 327
     },
     {
       "id": "youtube-pjzOkRg3eks",
@@ -105,7 +144,7 @@
       "thumbnail": "https://img.youtube.com/vi/pjzOkRg3eks/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/pjzOkRg3eks/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 10
     },
     {
       "id": "youtube-Gi94Z0DnDlI",
@@ -118,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/Gi94Z0DnDlI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/Gi94Z0DnDlI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 14
+      "views": 16
     },
     {
       "id": "youtube-QMLWGUMQEh4",
@@ -144,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/nry-xSuOrE0/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/nry-xSuOrE0/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 802
+      "views": 869
     },
     {
       "id": "youtube-FVYRVLXTlGc",
@@ -158,48 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/FVYRVLXTlGc/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 25
-    },
-    {
-      "id": "youtube-TraUlsInfU8",
-      "videoId": "TraUlsInfU8",
-      "title": "The Costly Blind Spot Most Business Owners Miss (CFO Explains)",
-      "description": "After 30+ years as a CFO across multiple industries, Lowell Mora keeps seeing the same quiet disaster: business owners who ‘know’ their numbers but never analyze their product and customer margins deeply enough. On the surface, everything looks fine—revenue is coming in, top customers seem loyal—but hidden in the data are loss‑making products, underpriced contracts and entire segments that are slowly bleeding profit.”​​\n\nIn this Idea Sandbox clip, Lowell explains why experience alone creates bli...",
-      "link": "https://www.youtube.com/watch?v=TraUlsInfU8",
-      "publishedAt": "2025-12-06T20:46:31+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/TraUlsInfU8/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/TraUlsInfU8/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 9
-    },
-    {
-      "id": "youtube-rKlQGvFMz6o",
-      "videoId": "rKlQGvFMz6o",
-      "title": "Can AI Ever Replace Real Love? Stanford Professor Explains",
-      "description": "AI “girlfriends” and chatbots are always online, never tired and say exactly what you want to hear. But can AI love ever replace real love? In this Idea Sandbox clip, Stanford sociologist Dr Michael Rosenfeld shares what his research on online dating and marriage actually shows: apps like Tinder have changed how we meet, but they haven’t changed what we need another imperfect human being who chooses to love us back.​​​\n\nHe explains why meeting partners through dating apps is now completely norma...",
-      "link": "https://www.youtube.com/watch?v=rKlQGvFMz6o",
-      "publishedAt": "2025-12-06T01:10:48+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/rKlQGvFMz6o/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/rKlQGvFMz6o/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 6
-    },
-    {
-      "id": "youtube-hxoJf59lPyA",
-      "videoId": "hxoJf59lPyA",
-      "title": "From ‘No Options’ to Salon Owner: Giri’s 18‑Year Hairdressing Journey",
-      "description": "Giri never became a hairdresser out of ‘passion’. As a school dropout with no degree, hairdressing was simply the only option left. 18 years later, he runs a busy salon, leads a team of 20+ people and treats hair like a limitless creative playground. In this Idea Sandbox clip, he shares how a ‘bread and butter’ job turned into a calling, why he studies movies and London fashion for inspiration, and the mindset that lets him learn from other artists instead of getting jealous.​​\n\nIf you’re a barb...",
-      "link": "https://www.youtube.com/watch?v=hxoJf59lPyA",
-      "publishedAt": "2025-12-05T00:28:21+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/hxoJf59lPyA/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/hxoJf59lPyA/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 18
     }
   ],
-  "lastUpdated": "2026-01-13T06:14:00.883Z",
+  "lastUpdated": "2026-06-09T07:28:42.862Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
