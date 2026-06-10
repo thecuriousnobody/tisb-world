@@ -1,13 +1,14 @@
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
+import Ventures from './pages/Ventures'
+import About from './pages/About'
 import Music from './pages/Music'
 import Art from './pages/Art'
 import Blog from './pages/Blog'
 import Code from './pages/Code'
-import AI from './pages/AI'
 import Podcast from './pages/Podcast'
 import Thoughts from './pages/Thoughts'
 import Timeline from './pages/Timeline'
@@ -69,11 +70,13 @@ function App() {
               <Layout>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/ventures" element={<Ventures />} />
+                  <Route path="/about" element={<About />} />
                   <Route path="/music" element={<Music />} />
                   <Route path="/art" element={<Art />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/code" element={<Code />} />
-                  <Route path="/ai" element={<AI />} />
+                  <Route path="/ai" element={<Navigate to="/ventures" replace />} />
                   <Route path="/podcast" element={<Podcast />} />
                   <Route path="/thoughts" element={<Thoughts />} />
                   <Route path="/timeline" element={<Timeline />} />

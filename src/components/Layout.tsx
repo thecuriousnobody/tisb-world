@@ -26,11 +26,12 @@ interface LayoutProps {
 
 const navigationItems = [
   { label: 'Home', path: '/' },
+  { label: 'Ventures', path: '/ventures' },
   { label: 'Podcast', path: '/podcast' },
-  { label: 'Blog', path: '/blog' },
-  { label: 'Art', path: '/art' },
   { label: 'Music', path: '/music' },
-  { label: 'AI', path: '/ai' },
+  { label: 'Art', path: '/art' },
+  { label: 'Writing', path: '/blog' },
+  { label: 'About', path: '/about' },
   { label: 'Admin', path: '/admin' },
 ]
 

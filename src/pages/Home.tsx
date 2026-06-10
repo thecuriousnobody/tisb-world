@@ -1,6 +1,8 @@
 import { Typography, Box, Button, IconButton } from '@mui/material'
 import { Facebook, X, LinkedIn } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
+import VentureCard from '../components/VentureCard'
+import { featuredVentures, ventureCount } from '../data/ventures'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -87,27 +89,51 @@ export default function Home() {
               mb: 4,
             }}
           >
-            Creator, writer, and automation specialist exploring the intersection of technology and human experience. 
-            I showcase my art, share my thoughts through writing and podcasting, and help people streamline their 
-            digital lives. Welcome to my sandbox of ideas, where creativity meets innovation.
+            Rajeev Kumar builds {ventureCount} companies from Central Illinois —
+            AI tools that remove the artificial barriers between people and what
+            they want to create. This is the sandbox where all of it happens.
           </Typography>
         </Box>
 
-        {/* Bold Action */}
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            fontSize: '1.25rem',
-            fontWeight: 600,
-            px: 6,
-            py: 2,
-            mb: 6,
-          }}
-          onClick={() => navigate('/thoughts')}
-        >
-          READ MY THOUGHTS
-        </Button>
+        {/* Featured Ventures */}
+        <Box sx={{ width: '100%', mb: 6 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              mb: 3,
+            }}
+          >
+            Now Building
+          </Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' },
+              gap: { xs: 3, md: 4 },
+              mb: 4,
+            }}
+          >
+            {featuredVentures.map((venture) => (
+              <VentureCard key={venture.name} venture={venture} />
+            ))}
+          </Box>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{
+              fontSize: '1.25rem',
+              fontWeight: 600,
+              px: 6,
+              py: 2,
+            }}
+            onClick={() => navigate('/ventures')}
+          >
+            ALL {ventureCount} VENTURES
+          </Button>
+        </Box>
 
         {/* Direct Contact Section */}
         <Box sx={{
