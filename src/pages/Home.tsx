@@ -3,6 +3,7 @@ import { Facebook, X, LinkedIn } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import VentureCard from '../components/VentureCard'
 import { featuredVentures, ventureCount } from '../data/ventures'
+import cadenceImage from '../assets/cadence-01.jpg'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -73,26 +74,91 @@ export default function Home() {
           </Typography>
         </Box>
         
-        {/* The Complete Story - Single Powerful Blurb */}
-        <Box sx={{ 
-          width: '100%', 
-          mb: 6,
-        }}>
-          <Typography
-            variant="body1"
+        {/* The Story + Cadence 01 */}
+        <Box
+          sx={{
+            width: '100%',
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '3fr 2fr' },
+            gap: { xs: 4, md: 8 },
+            alignItems: 'center',
+            mb: 6,
+          }}
+        >
+          <Box>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                fontWeight: 500,
+                lineHeight: 1.7,
+                mb: 3,
+              }}
+            >
+              I spent eighteen years as an engineer inside one of the world's
+              biggest machines, quietly collecting a suspicion: that the most
+              interesting ideas don't live in institutions — they live in
+              people, waiting for someone curious enough to ask.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                fontWeight: 500,
+                lineHeight: 1.7,
+                mb: 3,
+              }}
+            >
+              So I left. Now I build things — AI products, podcasts, art,
+              community — and I write about what I find.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                fontWeight: 500,
+                lineHeight: 1.7,
+                mb: 4,
+              }}
+            >
+              The Idea Sandbox is where it all lands: forty-plus conversations
+              with scientists, artists, and beautiful misfits; essays on
+              technology, culture, and the games we choose to play; and a
+              running experiment in what one stubbornly optimistic nobody can
+              build when the tools finally catch up to the imagination.
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                fontSize: { xs: '1.5rem', md: '2rem' },
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.15,
+              }}
+            >
+              Dig in. Get your hands dirty.
+              <Box component="span" sx={{ display: 'block', color: '#000000', opacity: 0.7 }}>
+                That's what a sandbox is for.
+              </Box>
+            </Typography>
+          </Box>
+
+          <Box
+            component="img"
+            src={cadenceImage}
+            alt="Cadence 01 — original painting by Rajeev Kumar"
             sx={{
-              fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.4rem' },
-              fontWeight: 500,
-              lineHeight: 1.6,
-              maxWidth: '900px',
-              color: 'text.primary',
-              mb: 4,
+              width: '100%',
+              maxWidth: { xs: 420, md: '100%' },
+              justifySelf: { xs: 'center', md: 'end' },
+              height: { xs: 420, md: 560 },
+              objectFit: 'cover',
+              border: '4px solid #000000',
+              boxShadow: '12px 12px 0px #000000',
+              display: 'block',
             }}
-          >
-            Rajeev Kumar builds {ventureCount} companies from Central Illinois —
-            AI tools that remove the artificial barriers between people and what
-            they want to create. This is the sandbox where all of it happens.
-          </Typography>
+          />
         </Box>
 
         {/* Featured Ventures */}
