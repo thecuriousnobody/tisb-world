@@ -20,6 +20,7 @@ import AdminLogin from './pages/AdminLogin'
 import VideoTracker from './pages/VideoTracker'
 import ArtworkAdmin from './pages/ArtworkAdmin'
 import ContentEngine from './pages/ContentEngine'
+import DropZone from './pages/DropZone'
 import { theme } from './theme'
 import { AuthProvider } from './contexts/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -61,6 +62,14 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <ContentEngine />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/admin/drop-zone" element={
+              <ProtectedRoute>
+                <Layout>
+                  <DropZone />
                 </Layout>
               </ProtectedRoute>
             } />

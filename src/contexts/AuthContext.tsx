@@ -93,6 +93,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       setUser(userData)
       localStorage.setItem('admin-user', JSON.stringify(userData))
+      // Raw credential kept for server-side verification by admin API routes
+      localStorage.setItem('admin-credential', credential)
     } catch (error) {
       console.error('Login failed:', error)
       throw error
@@ -102,6 +104,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null)
     localStorage.removeItem('admin-user')
+    localStorage.removeItem('admin-credential')
   }
 
   return (
