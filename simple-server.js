@@ -2,6 +2,8 @@ import express from 'express';
 import fetch from 'node-fetch';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { postsHandler, publishHandler, cronHandler, rescheduleHandler } from './api/content/_lib/handlers.js';
+import contentUpload from './api/content/upload.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -321,6 +323,16 @@ app.delete('/api/notion/videos', async (req, res) => {
     res.status(500).json({ error: 'Failed to delete video in Notion' });
   }
 });
+
+// Content Engine routes
+app.all('/api/content/posts', (req, res) => postsHandler(req, res));
+app.post('/api/content/publish', (req, res) => publishHandler(req, res));
+app.all('/api/content/cron', (req, res) => cronHandler(req, res));
+app.post('/api/content/reschedule', (req, res) => rescheduleHandler(req, res));
+app.post('/api/content/upload', (req, res) => contentUpload(req, res));
+
+// Serve uploaded images in dev
+app.use('/content-uploads', express.static(path.join(__dirname, 'public', 'content-uploads')));
 
 // Catch-all handler for React Router
 app.get('*', (req, res) => {

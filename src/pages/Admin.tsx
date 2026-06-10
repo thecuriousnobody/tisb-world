@@ -1,5 +1,5 @@
 import { Typography, Box, Grid, Card, CardContent, Button, Alert } from '@mui/material'
-import { Security, Dashboard, Settings, Analytics, VideoLibrary, Palette } from '@mui/icons-material'
+import { Security, Dashboard, Settings, Analytics, VideoLibrary, Palette, Send } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -20,6 +20,13 @@ export default function Admin() {
       description: 'Add, edit, and manage your Behance artwork portfolio',
       icon: <Palette />,
       action: () => navigate('/admin/artwork'),
+      available: true,
+    },
+    {
+      title: 'Content Engine',
+      description: 'Compose posts, attach images, and schedule across Email, LinkedIn, Facebook, and Instagram.',
+      icon: <Send />,
+      action: () => navigate('/admin/content-engine'),
       available: true,
     },
     {

@@ -110,3 +110,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 .vercel
+
+# Content Engine runtime data
+api/content/_data/
+public/content-uploads/
