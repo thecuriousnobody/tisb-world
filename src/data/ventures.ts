@@ -59,6 +59,20 @@ const ventures: Venture[] = [
     accentColor: '#32CD32',
     image: '/ventures/autonomylabs.jpg',
   },
+  {
+    name: 'Golden Hour',
+    tagline: 'Voice-first AI emergency response for India. Every minute counts.',
+    status: 'building',
+    url: '',
+    accentColor: '#FF9933',
+  },
+  {
+    name: 'Neuronify',
+    tagline: "Your city's nervous system. Speak, and City Hall hears a costed brief.",
+    status: 'building',
+    url: 'https://neuronify.ai',
+    accentColor: '#40E0D0',
+  },
 ]
 
 export const sortedVentures: Venture[] = [...ventures].sort(
