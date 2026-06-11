@@ -72,6 +72,7 @@ const ventures: Venture[] = [
     status: 'building',
     url: 'https://neuronify.ai',
     accentColor: '#40E0D0',
+    image: '/ventures/neuronify.png',
   },
 ]
 
