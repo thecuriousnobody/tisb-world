@@ -27,6 +27,8 @@ const VENTURE_LABELS: Record<string, string> = {
   swychbox: 'swych-box',
   podcastbots: 'podcastbots',
   autonomylabs: 'Autonomy Labs',
+  goldenhour: 'Golden Hour',
+  neuronify: 'Neuronify',
 }
 
 interface Draft {
