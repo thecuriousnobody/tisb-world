@@ -1,10 +1,10 @@
 name: Update Artwork from Behance
 
 on:
-  # Run daily at 7 AM UTC
+  # Weekly: Sundays 13:00 UTC (~8am Central)
   schedule:
-    - cron: '0 7 * * *'
-  # Allow manual trigger from GitHub Actions UI
+    - cron: '0 13 * * 0'
+  # Manual trigger for right after publishing new work
   workflow_dispatch:
 
 permissions:
@@ -21,31 +21,19 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
 
-    - name: Install Puppeteer
-      run: npm install puppeteer@latest
-
-    - name: Fetch artwork from Behance
-      env:
-        NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-        NOTION_ARTWORK_DB: ${{ secrets.NOTION_ARTWORK_DB }}
+    - name: Sync artwork from Behance RSS
       run: node scripts/fetch-artwork.js
 
-    - name: Check for changes
-      id: git-check
-      run: |
-        git diff --exit-code public/data/behance-portfolio.json || echo "changes=true" >> $GITHUB_OUTPUT
-
     - name: Commit and push if changed
-      if: steps.git-check.outputs.changes == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add public/data/behance-portfolio.json
-        git commit -m "Update artwork from Behance profile
+        git diff --staged --quiet || git commit -m "Update artwork from Behance RSS
 
-        Automated sync via GitHub Actions (Puppeteer)
+        Automated sync via GitHub Actions
 
         Co-Authored-By: GitHub Actions <noreply@github.com>"
         git push
