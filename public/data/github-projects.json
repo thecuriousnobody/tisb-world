@@ -11,11 +11,45 @@
       "url": "https://github.com/thecuriousnobody/golden-hour",
       "homepage": "https://golden-hour-fawn.vercel.app",
       "language": "Python",
-      "stars": 2,
+      "stars": 3,
       "forks": 0,
       "topics": [],
       "lastUpdated": "2026-05-26T22:36:23Z",
       "createdAt": "2026-01-28T22:13:17Z",
+      "visibility": "public"
+    },
+    {
+      "id": "github-981282654",
+      "name": "tisb-world",
+      "fullName": "thecuriousnobody/tisb-world",
+      "title": "Tisb World",
+      "description": "",
+      "aiDescription": "A TypeScript project exploring tisb world.",
+      "url": "https://github.com/thecuriousnobody/tisb-world",
+      "homepage": "https://tisb-world.vercel.app",
+      "language": "TypeScript",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "lastUpdated": "2026-06-17T23:49:43Z",
+      "createdAt": "2025-05-10T18:45:52Z",
+      "visibility": "public"
+    },
+    {
+      "id": "github-1255224431",
+      "name": "neuronify",
+      "fullName": "thecuriousnobody/neuronify",
+      "title": "Neuronify",
+      "description": "",
+      "aiDescription": "A TypeScript project exploring neuronify.",
+      "url": "https://github.com/thecuriousnobody/neuronify",
+      "homepage": "https://neuronify-sooty.vercel.app",
+      "language": "TypeScript",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "lastUpdated": "2026-06-09T21:08:29Z",
+      "createdAt": "2026-05-31T15:07:39Z",
       "visibility": "public"
     },
     {
@@ -50,40 +84,6 @@
       "topics": [],
       "lastUpdated": "2025-01-21T20:57:55Z",
       "createdAt": "2024-12-31T18:26:24Z",
-      "visibility": "public"
-    },
-    {
-      "id": "github-981282654",
-      "name": "tisb-world",
-      "fullName": "thecuriousnobody/tisb-world",
-      "title": "Tisb World",
-      "description": "",
-      "aiDescription": "A TypeScript project exploring tisb world.",
-      "url": "https://github.com/thecuriousnobody/tisb-world",
-      "homepage": "https://tisb-world.vercel.app",
-      "language": "TypeScript",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "lastUpdated": "2026-06-15T08:19:56Z",
-      "createdAt": "2025-05-10T18:45:52Z",
-      "visibility": "public"
-    },
-    {
-      "id": "github-1255224431",
-      "name": "neuronify",
-      "fullName": "thecuriousnobody/neuronify",
-      "title": "Neuronify",
-      "description": "",
-      "aiDescription": "A TypeScript project exploring neuronify.",
-      "url": "https://github.com/thecuriousnobody/neuronify",
-      "homepage": "https://neuronify-sooty.vercel.app",
-      "language": "TypeScript",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "lastUpdated": "2026-06-09T21:08:29Z",
-      "createdAt": "2026-05-31T15:07:39Z",
       "visibility": "public"
     },
     {
@@ -206,6 +206,6 @@
       "visibility": "public"
     }
   ],
-  "lastUpdated": "2026-06-15T10:06:43.942Z",
+  "lastUpdated": "2026-06-17T23:50:15.289Z",
   "generatedWith": "repo-metadata-only"
 }
