@@ -7,6 +7,7 @@ import {
   CardContent
 } from '@mui/material';
 import SocialSection from '../components/SocialSection';
+import Seo from '../components/Seo';
 import { useSpotifyContent } from '../hooks/useContent';
 
 const Music: React.FC = () => {
@@ -17,6 +18,11 @@ const Music: React.FC = () => {
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
+      <Seo
+        title="Music"
+        description="Original music from The Idea Sandbox — an evolving playlist exploring sound through an experimental, brutalist lens."
+        path="/music"
+      />
       {/* Latest Releases Section */}
       <Box sx={{ py: { xs: 4, md: 6 } }}>
         <Box sx={{ 

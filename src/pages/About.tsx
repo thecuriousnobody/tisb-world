@@ -1,5 +1,6 @@
 import { Box, Typography, Button, Card, CardContent } from '@mui/material'
 import { LinkedIn, X, Email } from '@mui/icons-material'
+import Seo from '../components/Seo'
 import { ventureCount } from '../data/ventures'
 
 const chapters = [
@@ -24,6 +25,11 @@ const chapters = [
 export default function About() {
   return (
     <Box sx={{ py: { xs: 4, md: 8 } }}>
+      <Seo
+        title="The Builder"
+        description="Immigrant founder, eighteen years of engineering at Caterpillar, now building seven companies from Central Illinois. The thesis: every human has agency — AI just removes the barriers."
+        path="/about"
+      />
       <Box sx={{ mb: { xs: 4, md: 8 } }}>
         <Typography variant="h1" sx={{ mb: 2, fontSize: { xs: '3rem', sm: '4.5rem', md: '6rem' } }}>
           THE BUILDER

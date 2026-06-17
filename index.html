@@ -36,6 +36,39 @@
     <link rel="preconnect" href="https://i.ytimg.com">
     <link rel="dns-prefetch" href="https://img.youtube.com">
     <link rel="dns-prefetch" href="https://i.ytimg.com">
+
+    <!-- Structured data: who runs this site, so search engines build a knowledge entity -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.tisb.world/#website",
+          "url": "https://www.tisb.world/",
+          "name": "TISB — The Idea Sandbox",
+          "description": "Rajeev Kumar builds seven AI startups from Central Illinois — alongside original music, brutalist art, and a podcast.",
+          "publisher": { "@id": "https://www.tisb.world/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.tisb.world/#person",
+          "name": "Rajeev Kumar",
+          "url": "https://www.tisb.world/",
+          "jobTitle": "Founder",
+          "description": "Immigrant founder building seven AI startups from Central Illinois. Eighteen years of engineering at Caterpillar. The thesis: every human has agency — AI just removes the barriers.",
+          "image": "https://www.tisb.world/social-banner.png",
+          "sameAs": [
+            "https://www.linkedin.com/in/industrious1/",
+            "https://x.com/theideasandbox",
+            "https://www.behance.net/theideasandbox",
+            "https://www.youtube.com/channel/UC_pKSnd_emg2JJMDGJpwZnQ",
+            "https://www.facebook.com/profile.php?id=100093144579226"
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,5 +1,6 @@
 import { Typography, Box, Grid, Card, CardContent, Chip } from '@mui/material'
 import { GitHub, Launch } from '@mui/icons-material'
+import Seo from '../components/Seo'
 
 export default function Code() {
   const projects = [
@@ -19,6 +20,11 @@ export default function Code() {
 
   return (
     <Box>
+      <Seo
+        title="Code"
+        description="Projects and engineering experiments from The Idea Sandbox — the tools and prototypes behind the ventures."
+        path="/code"
+      />
       <Typography variant="h1" sx={{ mb: 4, fontSize: { xs: '2rem', md: '3rem' } }}>
         Code
       </Typography>

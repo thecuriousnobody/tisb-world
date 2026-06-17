@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import BehanceFeed from '../components/BehanceFeed';
 import SocialSection from '../components/SocialSection';
+import Seo from '../components/Seo';
 
 const Art: React.FC = () => {
   return (
@@ -14,6 +15,11 @@ const Art: React.FC = () => {
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
+      <Seo
+        title="Art"
+        description="Brutalist digital art and design experiments by The Idea Sandbox — a growing gallery synced live from Behance."
+        path="/art"
+      />
       {/* Behance Feed */}
       <BehanceFeed />
 

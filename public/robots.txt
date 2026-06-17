@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Admin and internal surfaces — no SEO value, keep out of the index
+Disallow: /admin
+Disallow: /admin/
+Disallow: /beta-feedback
+Disallow: /admin-feedback
+Disallow: /task-chat
+
+Sitemap: https://www.tisb.world/sitemap.xml

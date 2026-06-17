@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useContent } from '../hooks/useContent';
 import { ContentCard } from '../components/ContentCard';
+import Seo from '../components/Seo';
 
 const Timeline: React.FC = () => {
   const { content, loading, error } = useContent();
@@ -37,6 +38,11 @@ const Timeline: React.FC = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Seo
+        title="Timeline"
+        description="The journey of The Idea Sandbox — milestones across seven startups, music, art, and a podcast, built from Central Illinois."
+        path="/timeline"
+      />
       {/* Header Section */}
       <Box sx={{ mb: 6, textAlign: 'center' }}>
         <Typography 

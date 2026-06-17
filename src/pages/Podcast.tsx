@@ -7,6 +7,7 @@ import { useYouTubeVideos } from '../hooks/useContent';
 import { useVideoLoadMore } from '../hooks/useVideoLoadMore';
 import SocialSection from '../components/SocialSection';
 import BrutalistVideoGrid from '../components/BrutalistVideoGrid';
+import Seo from '../components/Seo';
 
 const Podcast: React.FC = () => {
   const { videos, loading, error } = useYouTubeVideos();
@@ -17,6 +18,11 @@ const Podcast: React.FC = () => {
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
+      <Seo
+        title="Podcast & Videos"
+        description="The Idea Sandbox podcast and video archive — conversations with people doing meaningful work, plus build-in-public updates."
+        path="/podcast"
+      />
       {/* YouTube Videos Feed */}
       <Box sx={{ py: { xs: 4, md: 8 } }}>
         {/* Section Header */}

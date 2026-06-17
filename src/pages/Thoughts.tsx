@@ -1,6 +1,7 @@
 import { Typography, Box, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import logoImage from '../assets/TISB Logo Transparent.png'
+import Seo from '../components/Seo'
 
 export default function Thoughts() {
   const navigate = useNavigate()
@@ -10,7 +11,12 @@ export default function Thoughts() {
       minHeight: '100vh',
       py: { xs: 4, md: 8 },
     }}>
-      
+      <Seo
+        title="The Sandbox of Ideas"
+        description="Where ideas begin — Rajeev Kumar's origin story and the philosophy behind The Idea Sandbox: turning ideas into reality, systematically."
+        path="/thoughts"
+      />
+
       {/* Hero Section with Logo */}
       <Box sx={{
         display: 'flex',

@@ -2,6 +2,7 @@ import { Typography, Box, Button, IconButton } from '@mui/material'
 import { Facebook, X, LinkedIn } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import VentureCard from '../components/VentureCard'
+import Seo from '../components/Seo'
 import { featuredVentures, ventureCount } from '../data/ventures'
 import cadenceImage from '../assets/cadence-01.jpg'
 
@@ -15,7 +16,12 @@ export default function Home() {
       flexDirection: 'column',
       position: 'relative',
     }}>
-      
+      <Seo
+        title="TISB — The Idea Sandbox"
+        description="Rajeev Kumar builds seven AI startups from Central Illinois — alongside original music, brutalist art, and a podcast. Where ideas become ventures."
+        path="/"
+      />
+
       {/* HERO SECTION - MASSIVE BOLD TEXT */}
       <Box sx={{
         flex: 1,

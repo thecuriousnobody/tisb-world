@@ -3,6 +3,7 @@ import { useSubstackPosts } from '../hooks/useContent'
 import { useVideoLoadMore } from '../hooks/useVideoLoadMore'
 import BrutalistBlogGrid from '../components/BrutalistBlogGrid'
 import SocialSection from '../components/SocialSection'
+import Seo from '../components/Seo'
 
 export default function Blog() {
   const { posts, loading, error } = useSubstackPosts();
@@ -22,6 +23,11 @@ export default function Blog() {
       minHeight: '100vh',
       py: { xs: 2, md: 4 },
     }}>
+      <Seo
+        title="The Curious Nobody"
+        description="Writing on building, AI, agency, and the messy middle of creating companies from the middle of the country."
+        path="/blog"
+      />
       {/* Brutalist Blog Grid */}
       <BrutalistBlogGrid posts={blogPosts} loading={loading} error={error} />
       
