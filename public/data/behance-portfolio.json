@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-251301149",
+      "title": "The Innermost Loop",
+      "description": "The innermost loop is where the work actually happens ? the hottest path, the routine a system can't stop running. This is that loop made visible: a single disciplined line holding its shape through a field of pure detonation, refusing to dissolve. The chaos isn't the subject. It's the proof. What survives the storm is the part that was never up for negotiation ? the core that keeps executing because it has to.",
+      "link": "https://www.behance.net/gallery/251301149/The-Innermost-Loop",
+      "publishedAt": "2026-06-17T22:40:20.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/80c38c251301149.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-251013691",
       "title": "Afterglow",
       "description": "Afterglow is proof the event was real. The universe still glows with the Big Bang's afterglow ? we never saw the event, only its residue. The strike feels primary, but the afterglow is what's knowable, what lasts. This series documents the only part that becomes permanent. Afterglow is light without a source. During the strike, energy comes from outside. In afterglow, the medium itself radiates. That's what high agency is ? you've absorbed enough impact that you now emit on your own. A thing only glows afterward if it took the hit fully. Afterglow doesn't moralize. A bruise blooming and a sunset blooming are the same phenomenon ? color spreading after contact. Rust and green, wound and growth, both honest aftermaths of the same force. The conduit, still warm. Strike was the transmission; Afterglow is the medium discovering it's still radiating. This is the first series about the changed material ? about you. Strike: the moment force lands. Afterglow: what keeps burning after.",
@@ -1588,8 +1601,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-06-14T13:31:04.423Z",
-  "scrapedAt": "2026-06-14T13:31:04.423Z",
+  "lastUpdated": "2026-06-21T13:31:36.370Z",
+  "scrapedAt": "2026-06-21T13:31:36.370Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
