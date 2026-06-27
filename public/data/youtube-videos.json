@@ -53,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/m5D5yiglvjE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/m5D5yiglvjE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 68
+      "views": 69
     },
     {
       "id": "youtube-o0gOSzVKxCk",
@@ -199,7 +199,7 @@
       "views": 27
     }
   ],
-  "lastUpdated": "2026-06-26T07:32:00.846Z",
+  "lastUpdated": "2026-06-27T07:16:51.436Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
