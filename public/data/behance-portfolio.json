@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-251560845",
+      "title": "Callback",
+      "description": "Every system keeps a function it wrote and forgot ? defined at the edge, dormant, waiting to be called. A callback. In theater it means you survived the audition; they want you back. In code, it's the routine invoked later, when the moment finally fires. The changemaker is a callback: the oddball written off, then run exactly when history needed that routine. One loop, auditioning. One head, called.",
+      "link": "https://www.behance.net/gallery/251560845/Callback",
+      "publishedAt": "2026-06-22T23:56:52.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/87135f251560845.Y3JvcCwxMjAwLDkzOCwwLDg4Mg.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-251301149",
       "title": "The Innermost Loop",
       "description": "The innermost loop is where the work actually happens ? the hottest path, the routine a system can't stop running. This is that loop made visible: a single disciplined line holding its shape through a field of pure detonation, refusing to dissolve. The chaos isn't the subject. It's the proof. What survives the storm is the part that was never up for negotiation ? the core that keeps executing because it has to.",
@@ -1601,8 +1614,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-06-21T13:31:36.370Z",
-  "scrapedAt": "2026-06-21T13:31:36.370Z",
+  "lastUpdated": "2026-06-28T13:29:45.424Z",
+  "scrapedAt": "2026-06-28T13:29:45.424Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
