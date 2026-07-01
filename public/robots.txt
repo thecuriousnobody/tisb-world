@@ -7,5 +7,6 @@ Disallow: /admin/
 Disallow: /beta-feedback
 Disallow: /admin-feedback
 Disallow: /task-chat
+Disallow: /go/
 
 Sitemap: https://www.tisb.world/sitemap.xml

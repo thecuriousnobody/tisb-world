@@ -1,14 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/go/:code",
+      "destination": "/api/go/:code"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/content/cron",
-      "schedule": "*/5 * * * *"
     }
   ]
 }

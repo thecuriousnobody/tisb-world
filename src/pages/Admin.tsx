@@ -23,10 +23,10 @@ export default function Admin() {
       available: true,
     },
     {
-      title: 'Content Engine',
-      description: 'Compose posts, attach images, and schedule across Email, LinkedIn, Facebook, and Instagram.',
+      title: 'Static Drop',
+      description: 'Drop marketing copy + images, schedule, and fan out to X, LinkedIn, and Facebook with click tracking.',
       icon: <Send />,
-      action: () => navigate('/admin/content-engine'),
+      action: () => navigate('/admin/static-drop'),
       available: true,
     },
     {
