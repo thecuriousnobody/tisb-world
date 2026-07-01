@@ -31,7 +31,7 @@
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-06-17T23:49:43Z",
+      "lastUpdated": "2026-06-29T08:02:45Z",
       "createdAt": "2025-05-10T18:45:52Z",
       "visibility": "public"
     },
@@ -48,7 +48,7 @@
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-06-09T21:08:29Z",
+      "lastUpdated": "2026-06-26T15:07:52Z",
       "createdAt": "2026-05-31T15:07:39Z",
       "visibility": "public"
     },
@@ -84,6 +84,23 @@
       "topics": [],
       "lastUpdated": "2025-01-21T20:57:55Z",
       "createdAt": "2024-12-31T18:26:24Z",
+      "visibility": "public"
+    },
+    {
+      "id": "github-1282642184",
+      "name": "vasanta",
+      "fullName": "thecuriousnobody/vasanta",
+      "title": "Vasanta",
+      "description": "",
+      "aiDescription": "A code project exploring vasanta.",
+      "url": "https://github.com/thecuriousnobody/vasanta",
+      "homepage": "",
+      "language": "Various",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "lastUpdated": "2026-06-28T03:19:28Z",
+      "createdAt": "2026-06-28T03:19:28Z",
       "visibility": "public"
     },
     {
@@ -206,6 +223,6 @@
       "visibility": "public"
     }
   ],
-  "lastUpdated": "2026-06-17T23:50:15.289Z",
+  "lastUpdated": "2026-06-29T09:34:07.707Z",
   "generatedWith": "repo-metadata-only"
 }
