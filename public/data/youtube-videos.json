@@ -53,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/m5D5yiglvjE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/m5D5yiglvjE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 72
+      "views": 74
     },
     {
       "id": "youtube-o0gOSzVKxCk",
@@ -92,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/EhURmnJav3E/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/EhURmnJav3E/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 148
+      "views": 149
     },
     {
       "id": "youtube-SRYBJsnV7cI",
@@ -131,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/uI0bxHBwNc4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/uI0bxHBwNc4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 328
+      "views": 329
     },
     {
       "id": "youtube-pjzOkRg3eks",
@@ -183,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/nry-xSuOrE0/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/nry-xSuOrE0/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 875
+      "views": 876
     },
     {
       "id": "youtube-FVYRVLXTlGc",
@@ -199,7 +199,7 @@
       "views": 27
     }
   ],
-  "lastUpdated": "2026-06-30T07:32:32.730Z",
+  "lastUpdated": "2026-07-01T07:45:05.447Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
