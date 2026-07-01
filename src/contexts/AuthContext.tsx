@@ -23,15 +23,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 // Add your Google Client ID here
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
 
-// Define authorized emails (you can move this to an env variable later)
-const AUTHORIZED_EMAILS = [
-  'rajeev@theideasandbox.com',
-  'theideasandboxpodcast@gmail.com',
-  'apexrisesolutions7@gmail.com',
-  'shay999.in@gmail.com',
-  // Add more editors' emails here as needed:
-  // 'editor2@example.com',
-]
+// UX gate only — the authoritative allow-list is ADMIN_EMAILS on the server
+// (api/dropzone/_lib/auth.js verifyAdmin). Keep both lists in sync.
+// VITE_ vars bake in at build time: adding an admin needs a redeploy.
+const AUTHORIZED_EMAILS = (import.meta.env.VITE_ADMIN_EMAILS || '')
+  .split(',')
+  .map((e: string) => e.trim().toLowerCase())
+  .filter(Boolean)
+if (AUTHORIZED_EMAILS.length === 0) {
+  AUTHORIZED_EMAILS.push(
+    'rajeev@theideasandbox.com',
+    'theideasandboxpodcast@gmail.com',
+    'apexrisesolutions7@gmail.com',
+    'shay999.in@gmail.com',
+  )
+}
 
 // Development mode check
 const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost'
@@ -80,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const googleUser = JSON.parse(jsonPayload)
       
       // Check if user is authorized
-      if (!AUTHORIZED_EMAILS.includes(googleUser.email)) {
+      if (!AUTHORIZED_EMAILS.includes((googleUser.email || '').toLowerCase())) {
         throw new Error('Unauthorized email address')
       }
       

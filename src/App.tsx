@@ -20,6 +20,7 @@ import AdminLogin from './pages/AdminLogin'
 import VideoTracker from './pages/VideoTracker'
 import ArtworkAdmin from './pages/ArtworkAdmin'
 import DropZone from './pages/DropZone'
+import StaticDrop from './pages/StaticDrop'
 import { theme } from './theme'
 import { AuthProvider } from './contexts/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -61,6 +62,14 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <DropZone />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/admin/static-drop" element={
+              <ProtectedRoute>
+                <Layout>
+                  <StaticDrop />
                 </Layout>
               </ProtectedRoute>
             } />
