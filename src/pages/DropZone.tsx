@@ -21,6 +21,31 @@ import ImageIcon from '@mui/icons-material/Image'
 import CloseIcon from '@mui/icons-material/Close'
 import { getAdminCredential } from '../utils/adminCredential'
 
+// The site theme is black-text-on-orange; cards are pure black, so inputs and
+// outlined buttons inside a Card need explicit colors or they disappear.
+// Same pattern as StaticDrop.tsx.
+const ORANGE = '#FF4500'
+const ORANGE_LIGHT = '#FF6A33'
+const CARD_MUTED = 'rgba(255,255,255,0.72)'
+const fieldSx = {
+  '& .MuiInputBase-input': { color: '#FFFFFF' },
+  '& .MuiInputBase-input::placeholder': { color: CARD_MUTED, opacity: 1 },
+  '& .MuiInputLabel-root': { color: ORANGE_LIGHT },
+  '& .MuiInputLabel-root.Mui-focused': { color: ORANGE },
+  '& .MuiInputLabel-root.Mui-error': { color: ORANGE },
+  '& .MuiFormHelperText-root': { color: CARD_MUTED },
+  '& .MuiFormHelperText-root.Mui-error': { color: ORANGE },
+  '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.35)' },
+  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: ORANGE_LIGHT },
+  '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: ORANGE },
+}
+const outlinedBtnSx = {
+  color: ORANGE_LIGHT,
+  borderColor: ORANGE_LIGHT,
+  '&:hover': { borderColor: ORANGE, color: ORANGE, backgroundColor: 'rgba(255,69,0,0.08)' },
+  '&.Mui-disabled': { color: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.2)' },
+}
+
 const VENTURE_LABELS: Record<string, string> = {
   stackday: 'Stack Day',
   desilo: 'DeSilo',
@@ -278,6 +303,7 @@ export default function DropZone() {
             placeholder="Tap the mic and ramble about what you shipped — or paste/type it."
             value={interim ? `${transcript}${transcript ? ' ' : ''}${interim}` : transcript}
             onChange={(e) => setTranscript(e.target.value)}
+            sx={fieldSx}
           />
           <Stack direction="row" spacing={2} sx={{ mt: 2 }} alignItems="center" flexWrap="wrap" useFlexGap>
             {speechSupported ? (
@@ -286,13 +312,19 @@ export default function DropZone() {
                 color={listening ? 'error' : 'primary'}
                 startIcon={listening ? <StopIcon /> : <MicIcon />}
                 onClick={toggleMic}
+                sx={listening ? undefined : outlinedBtnSx}
               >
                 {listening ? 'Stop' : 'Speak'}
               </Button>
             ) : (
               <Typography variant="caption">Mic not supported in this browser — type it.</Typography>
             )}
-            <Button variant="outlined" startIcon={<ImageIcon />} onClick={() => fileRef.current?.click()}>
+            <Button
+              variant="outlined"
+              startIcon={<ImageIcon />}
+              onClick={() => fileRef.current?.click()}
+              sx={outlinedBtnSx}
+            >
               Screenshot
             </Button>
             <input
@@ -353,13 +385,14 @@ export default function DropZone() {
                 value={draft.x.content}
                 error={draft.x.content.length > 280}
                 onChange={(e) => setDraft({ ...draft, x: { ...draft.x, content: e.target.value } })}
+                sx={fieldSx}
               />
               {draft.x.thread.map((t, i) => (
                 <TextField
                   key={i}
                   fullWidth
                   multiline
-                  sx={{ mt: 1 }}
+                  sx={{ mt: 1, ...fieldSx }}
                   label={`Thread ${i + 2} — ${t.length}/280`}
                   value={t}
                   error={t.length > 280}
@@ -381,6 +414,7 @@ export default function DropZone() {
                 multiline
                 value={draft.linkedin_text}
                 onChange={(e) => setDraft({ ...draft, linkedin_text: e.target.value })}
+                sx={fieldSx}
               />
             </CardContent>
           </Card>
@@ -393,6 +427,7 @@ export default function DropZone() {
                 multiline
                 value={draft.facebook_text}
                 onChange={(e) => setDraft({ ...draft, facebook_text: e.target.value })}
+                sx={fieldSx}
               />
             </CardContent>
           </Card>
