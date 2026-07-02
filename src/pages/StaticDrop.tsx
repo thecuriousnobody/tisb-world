@@ -61,6 +61,32 @@ function newClientRef(): string {
 
 const DRAFT_KEY = 'static-drop-draft'
 
+// The site theme is black-text-on-orange; cards are pure black, so anything
+// inside a Card needs explicit colors or it disappears (labels, helper text,
+// outlines all default to near-black palette tokens).
+const ORANGE = '#FF4500'
+const ORANGE_LIGHT = '#FF6A33'
+const CARD_MUTED = 'rgba(255,255,255,0.72)'
+const fieldSx = {
+  '& .MuiInputBase-input': { color: '#FFFFFF' },
+  '& .MuiInputBase-input::placeholder': { color: CARD_MUTED, opacity: 1 },
+  '& .MuiInputLabel-root': { color: ORANGE_LIGHT },
+  '& .MuiInputLabel-root.Mui-focused': { color: ORANGE },
+  '& .MuiInputLabel-root.Mui-error': { color: ORANGE },
+  '& .MuiFormHelperText-root': { color: CARD_MUTED },
+  '& .MuiFormHelperText-root.Mui-error': { color: ORANGE },
+  '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.35)' },
+  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: ORANGE_LIGHT },
+  '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: ORANGE },
+  '& input::-webkit-calendar-picker-indicator': { filter: 'invert(1)' },
+}
+const outlinedBtnSx = {
+  color: ORANGE_LIGHT,
+  borderColor: ORANGE_LIGHT,
+  '&:hover': { borderColor: ORANGE, color: ORANGE, backgroundColor: 'rgba(255,69,0,0.08)' },
+  '&.Mui-disabled': { color: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.2)' },
+}
+
 export default function StaticDrop() {
   const [content, setContent] = useState('')
   const [linkedinText, setLinkedinText] = useState('')
@@ -291,12 +317,18 @@ export default function StaticDrop() {
                 : undefined
             }
             error={platforms.x && xCount > X_LIMIT}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, ...fieldSx }}
           />
 
-          <Accordion disableGutters elevation={0} sx={{ mb: 2, '&:before': { display: 'none' } }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="body2">Adjust per platform (optional)</Typography>
+          <Accordion
+            disableGutters
+            elevation={0}
+            sx={{ mb: 2, bgcolor: 'transparent', color: '#fff', '&:before': { display: 'none' } }}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: ORANGE_LIGHT }} />}>
+              <Typography variant="body2" sx={{ color: ORANGE_LIGHT }}>
+                Adjust per platform (optional)
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Stack spacing={2}>
@@ -306,6 +338,7 @@ export default function StaticDrop() {
                   placeholder={content || 'Falls back to the main text'}
                   value={linkedinText}
                   onChange={(e) => setLinkedinText(e.target.value)}
+                  sx={fieldSx}
                 />
                 <TextField
                   fullWidth multiline minRows={3}
@@ -313,6 +346,7 @@ export default function StaticDrop() {
                   placeholder={content || 'Falls back to the main text'}
                   value={facebookText}
                   onChange={(e) => setFacebookText(e.target.value)}
+                  sx={fieldSx}
                 />
               </Stack>
             </AccordionDetails>
@@ -323,9 +357,13 @@ export default function StaticDrop() {
               <Chip
                 key={p}
                 label={p === 'x' ? 'X' : p === 'linkedin' ? 'LinkedIn' : 'Facebook'}
-                color={platforms[p] ? 'primary' : 'default'}
                 variant={platforms[p] ? 'filled' : 'outlined'}
                 onClick={() => setPlatforms((prev) => ({ ...prev, [p]: !prev[p] }))}
+                sx={
+                  platforms[p]
+                    ? { bgcolor: ORANGE, color: '#000', fontWeight: 700, '&:hover': { bgcolor: ORANGE_LIGHT } }
+                    : { color: CARD_MUTED, borderColor: 'rgba(255,255,255,0.35)', '&:hover': { borderColor: ORANGE_LIGHT } }
+                }
               />
             ))}
           </Stack>
@@ -333,9 +371,10 @@ export default function StaticDrop() {
           <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2, flexWrap: 'wrap' }}>
             <Button
               variant="outlined"
-              startIcon={uploading ? <CircularProgress size={16} /> : <ImageIcon />}
+              startIcon={uploading ? <CircularProgress size={16} sx={{ color: ORANGE_LIGHT }} /> : <ImageIcon />}
               onClick={() => fileRef.current?.click()}
               disabled={uploading || images.length >= MAX_IMAGES}
+              sx={outlinedBtnSx}
             >
               {uploading ? 'Uploading…' : `Add image (${images.length}/${MAX_IMAGES})`}
             </Button>
@@ -367,7 +406,7 @@ export default function StaticDrop() {
             value={scheduledFor}
             onChange={(e) => setScheduledFor(e.target.value)}
             InputLabelProps={{ shrink: true }}
-            sx={{ mb: 2, minWidth: 260 }}
+            sx={{ mb: 2, minWidth: 260, ...fieldSx }}
             helperText="Posts within ~45 minutes of this time"
           />
 
@@ -380,8 +419,14 @@ export default function StaticDrop() {
             >
               {busy === 'approve' ? <CircularProgress size={22} /> : 'APPROVE & SCHEDULE'}
             </Button>
-            <Button variant="outlined" size="large" disabled={busy !== null || uploading} onClick={() => submit(true)}>
-              {busy === 'postnow' ? <CircularProgress size={22} /> : 'Post now instead'}
+            <Button
+              variant="outlined"
+              size="large"
+              disabled={busy !== null || uploading}
+              onClick={() => submit(true)}
+              sx={outlinedBtnSx}
+            >
+              {busy === 'postnow' ? <CircularProgress size={22} sx={{ color: ORANGE_LIGHT }} /> : 'Post now instead'}
             </Button>
           </Stack>
         </CardContent>
@@ -397,7 +442,7 @@ export default function StaticDrop() {
             {enabledPreviews.map((p) => (
               <Card key={p.key} variant="outlined">
                 <CardContent sx={{ py: 1.5 }}>
-                  <Chip label={p.key} size="small" sx={{ mb: 1 }} />
+                  <Chip label={p.key} size="small" sx={{ mb: 1, bgcolor: ORANGE, color: '#000', fontWeight: 700 }} />
                   <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>{p.text}</Typography>
                 </CardContent>
               </Card>
@@ -416,7 +461,7 @@ export default function StaticDrop() {
                   {s.images?.[0] && <img src={s.images[0].url} alt="" style={{ height: 40, borderRadius: 4 }} />}
                   <Box sx={{ flex: 1, minWidth: 0 }}>
                     <Typography variant="body2" noWrap>{s.content}</Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" sx={{ color: CARD_MUTED }}>
                       {new Date(s.scheduled_at).toLocaleString()} · {s.approved_by}
                     </Typography>
                   </Box>
@@ -442,7 +487,7 @@ export default function StaticDrop() {
                     {p.images?.[0] && <img src={p.images[0].url} alt="" style={{ height: 40, borderRadius: 4 }} />}
                     <Box sx={{ flex: 1, minWidth: 0 }}>
                       <Typography variant="body2" noWrap>{p.content}</Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography variant="caption" sx={{ color: CARD_MUTED }}>
                         {m
                           ? `Clicks ${m.clicks?.total ?? 0}` +
                             (m.x ? ` · X ${m.x.likes}♥ ${m.x.impressions} views` : '') +
