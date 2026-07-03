@@ -43,6 +43,13 @@ interface ScheduledItem {
   images?: UploadedImage[]
 }
 
+interface AccountsStatus {
+  x: { ok: boolean; detail: string }
+  linkedin: { ok: boolean; detail: string }
+  facebook: { ok: boolean; detail: string }
+  checked_at: string
+}
+
 interface CampaignMetric {
   posted_at?: string
   x?: { impressions: number; likes: number; retweets: number; replies: number }
@@ -101,6 +108,8 @@ export default function StaticDrop() {
   const [notice, setNotice] = useState<string | null>(null)
   const [sessionExpired, setSessionExpired] = useState(false)
   const [scheduled, setScheduled] = useState<ScheduledItem[]>([])
+  const [accounts, setAccounts] = useState<AccountsStatus | null>(null)
+  const [rechecking, setRechecking] = useState(false)
   const [metrics, setMetrics] = useState<Record<string, CampaignMetric>>({})
   const [recentPosted, setRecentPosted] = useState<ScheduledItem[]>([])
   const fileRef = useRef<HTMLInputElement>(null)
@@ -136,6 +145,7 @@ export default function StaticDrop() {
       .then((s) => {
         setScheduled(s.scheduled || [])
         setRecentPosted(s.recentCampaigns || [])
+        setAccounts(s.accounts || null)
       })
       .catch(() => {})
     apiFetch('/api/static/metrics')
@@ -263,6 +273,28 @@ export default function StaticDrop() {
     }
   }
 
+  const recheckAccounts = async () => {
+    setRechecking(true)
+    setError(null)
+    try {
+      await apiFetch('/api/static/recheck', { method: 'POST' })
+      // The workflow takes ~60s to resolve identities and commit; poll a few times.
+      let polls = 0
+      const before = accounts?.checked_at
+      const timer = setInterval(() => {
+        polls += 1
+        refreshStatus()
+        if (polls >= 6 || (accounts?.checked_at && accounts.checked_at !== before)) {
+          clearInterval(timer)
+          setRechecking(false)
+        }
+      }, 15000)
+    } catch (e) {
+      setError((e as Error).message)
+      setRechecking(false)
+    }
+  }
+
   const cancelItem = async (id: string) => {
     try {
       await apiFetch('/api/static/cancel', { method: 'POST', body: JSON.stringify({ id }) })
@@ -298,6 +330,39 @@ export default function StaticDrop() {
         Drop marketing copy + images. It fans out to X, LinkedIn, and Facebook on schedule, with
         every link click-tracked.
       </Typography>
+
+      {accounts && (
+        <Box sx={{ mb: 3, p: 2, border: '2px solid', borderColor: '#1A0E0A' }}>
+          <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap>
+            <Typography variant="overline" sx={{ mr: 1, fontWeight: 700 }}>
+              POSTING AS
+            </Typography>
+            {(['x', 'linkedin', 'facebook'] as const).map((p) => (
+              <Chip
+                key={p}
+                label={`${p === 'x' ? 'X' : p === 'linkedin' ? 'LinkedIn' : 'Facebook'}: ${
+                  accounts[p].ok ? accounts[p].detail : 'NOT CONNECTED'
+                }`}
+                sx={
+                  accounts[p].ok
+                    ? { bgcolor: '#1A0E0A', color: '#7CFC00', fontWeight: 600 }
+                    : { bgcolor: '#1A0E0A', color: ORANGE, fontWeight: 700 }
+                }
+              />
+            ))}
+            <Box sx={{ flexGrow: 1 }} />
+            <Button size="small" sx={{ color: '#1A0E0A', fontWeight: 700 }} disabled={rechecking} onClick={recheckAccounts}>
+              {rechecking ? 'Checking…' : `Re-check (${new Date(accounts.checked_at).toLocaleDateString()})`}
+            </Button>
+          </Stack>
+          {!(accounts.x.ok && accounts.linkedin.ok && accounts.facebook.ok) && (
+            <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#1A0E0A' }}>
+              Posts only ever go to the accounts shown here. A NOT CONNECTED platform can't post at
+              all — it fails safely and the item stays queued.
+            </Typography>
+          )}
+        </Box>
+      )}
 
       {error && <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError(null)}>{error}</Alert>}
       {notice && <Alert severity="success" sx={{ mb: 2 }} onClose={() => setNotice(null)}>{notice}</Alert>}

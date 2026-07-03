@@ -35,6 +35,7 @@ export default async function handler(req, res) {
       recentCampaigns,
       queueDepth: queue.length,
       linkedinTokenExpires: platformStatus.linkedin_token_expires || null,
+      accounts: platformStatus.accounts || null,
       runs,
     });
   } catch (err) {
