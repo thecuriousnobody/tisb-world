@@ -1,18 +1,23 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Box, Typography, Paper, Alert, Button } from '@mui/material'
 import { GoogleLogin } from '@react-oauth/google'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function AdminLogin() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { login, developmentLogin, isDevelopment } = useAuth()
   const [error, setError] = useState<string | null>(null)
+
+  // Where to land after login. Only same-site admin paths — never external.
+  const rawNext = searchParams.get('next') || ''
+  const next = rawNext.startsWith('/admin') ? rawNext : '/admin/video-tracker'
 
   const handleSuccess = async (credentialResponse: any) => {
     try {
       await login(credentialResponse.credential)
-      navigate('/admin/video-tracker')
+      navigate(next)
     } catch (err: any) {
       setError(err.message || 'Login failed')
     }

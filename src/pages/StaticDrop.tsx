@@ -313,10 +313,19 @@ export default function StaticDrop() {
 
   if (sessionExpired) {
     return (
-      <Container maxWidth="sm" sx={{ py: 8 }}>
-        <Alert severity="warning">
-          Your session expired. <a href="/admin/login">Sign out and back in</a> to continue.
+      <Container maxWidth="sm" sx={{ py: 8, textAlign: 'center' }}>
+        <Alert severity="warning" sx={{ mb: 3, textAlign: 'left' }}>
+          Your sign-in expired (Google sessions last about an hour). Your draft is saved — sign
+          back in and you'll land right back here.
         </Alert>
+        <Button
+          variant="contained"
+          size="large"
+          href="/admin/login?next=/admin/static-drop"
+          sx={{ fontWeight: 700 }}
+        >
+          SIGN BACK IN
+        </Button>
       </Container>
     )
   }

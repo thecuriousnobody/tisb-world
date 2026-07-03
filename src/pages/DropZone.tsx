@@ -249,8 +249,22 @@ export default function DropZone() {
       </Typography>
 
       {sessionExpired && (
-        <Alert severity="warning" sx={{ mb: 3 }}>
-          Session expired. <a href="/admin/login">Sign back in</a>, then return here.
+        <Alert
+          severity="warning"
+          sx={{ mb: 3 }}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              href="/admin/login?next=/admin/drop-zone"
+              sx={{ fontWeight: 700 }}
+            >
+              SIGN BACK IN
+            </Button>
+          }
+        >
+          Your sign-in expired (Google sessions last about an hour). Sign back in and you'll land
+          right back here.
         </Alert>
       )}
 
