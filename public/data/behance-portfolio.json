@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-251905143",
+      "title": "Overshoot",
+      "description": "First principles carry you only to the edge of what they already contain ? then they run out. Past that edge there is nothing left to reason from, and play becomes the only instrument that still works. Overshoot is what happens out there: experiment torquing familiar material until it yields the unfamiliar. The discord isn't failure. It's the signature of having left the map.",
+      "link": "https://www.behance.net/gallery/251905143/Overshoot",
+      "publishedAt": "2026-06-29T12:48:01.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/11b800251905143.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-251560845",
       "title": "Callback",
       "description": "Every system keeps a function it wrote and forgot ? defined at the edge, dormant, waiting to be called. A callback. In theater it means you survived the audition; they want you back. In code, it's the routine invoked later, when the moment finally fires. The changemaker is a callback: the oddball written off, then run exactly when history needed that routine. One loop, auditioning. One head, called.",
@@ -34,7 +47,7 @@
       "link": "https://www.behance.net/gallery/251013691/Afterglow",
       "publishedAt": "2026-06-12T15:10:18.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/2c8ffb251013691.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/489779251013691.Y3JvcCwxMjAwLDkzOCwwLDg4Mg.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -1614,8 +1627,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-06-28T13:29:45.424Z",
-  "scrapedAt": "2026-06-28T13:29:45.424Z",
+  "lastUpdated": "2026-07-05T13:28:55.430Z",
+  "scrapedAt": "2026-07-05T13:28:55.430Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
