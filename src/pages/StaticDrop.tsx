@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Container,
   IconButton,
+  MenuItem,
   Stack,
   TextField,
   Typography,
@@ -65,6 +66,21 @@ function newClientRef(): string {
   return `draft_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
 }
 
+// Today's date as YYYY-MM-DD in the browser's local timezone (default for the picker).
+function todayLocal(): string {
+  const d = new Date()
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
+}
+
+// 30-minute time slots, value "HH:MM" (24h) with a friendly "3:00 PM" label.
+const TIME_OPTIONS = Array.from({ length: 48 }, (_, i) => {
+  const h = Math.floor(i / 2)
+  const mm = i % 2 === 0 ? '00' : '30'
+  const ampm = h < 12 ? 'AM' : 'PM'
+  const h12 = h % 12 === 0 ? 12 : h % 12
+  return { value: `${String(h).padStart(2, '0')}:${mm}`, label: `${h12}:${mm} ${ampm}` }
+})
+
 // Read a File into raw base64 (no data: prefix) for the server upload route.
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -112,7 +128,8 @@ export default function StaticDrop() {
   const [facebookText, setFacebookText] = useState('')
   const [platforms, setPlatforms] = useState({ x: true, linkedin: true, facebook: true })
   const [images, setImages] = useState<UploadedImage[]>([])
-  const [scheduledFor, setScheduledFor] = useState('')
+  const [scheduledDate, setScheduledDate] = useState(todayLocal)
+  const [scheduledTime, setScheduledTime] = useState('')
   const [clientRef, setClientRef] = useState(newClientRef)
   const [uploading, setUploading] = useState(false)
   const [busy, setBusy] = useState<'approve' | 'postnow' | null>(null)
@@ -176,7 +193,11 @@ export default function StaticDrop() {
         setFacebookText(d.facebookText || '')
         setPlatforms(d.platforms || { x: true, linkedin: true, facebook: true })
         setImages(d.images || [])
-        setScheduledFor(d.scheduledFor || '')
+        if (d.scheduledDate) setScheduledDate(d.scheduledDate)
+        else if (d.scheduledFor) setScheduledDate(d.scheduledFor.slice(0, 10))
+        if (d.scheduledTime) setScheduledTime(d.scheduledTime)
+        else if (typeof d.scheduledFor === 'string' && d.scheduledFor.includes('T'))
+          setScheduledTime(d.scheduledFor.slice(11, 16))
         if (d.clientRef) setClientRef(d.clientRef)
       }
     } catch {
@@ -191,9 +212,9 @@ export default function StaticDrop() {
     if (!restoredRef.current) return
     localStorage.setItem(
       DRAFT_KEY,
-      JSON.stringify({ content, linkedinText, facebookText, platforms, images, scheduledFor, clientRef })
+      JSON.stringify({ content, linkedinText, facebookText, platforms, images, scheduledDate, scheduledTime, clientRef })
     )
-  }, [content, linkedinText, facebookText, platforms, images, scheduledFor, clientRef])
+  }, [content, linkedinText, facebookText, platforms, images, scheduledDate, scheduledTime, clientRef])
 
   const clearDraft = () => {
     localStorage.removeItem(DRAFT_KEY)
@@ -202,7 +223,8 @@ export default function StaticDrop() {
     setFacebookText('')
     setPlatforms({ x: true, linkedin: true, facebook: true })
     setImages([])
-    setScheduledFor('')
+    setScheduledDate(todayLocal())
+    setScheduledTime('')
     setClientRef(newClientRef())
   }
 
@@ -255,10 +277,12 @@ export default function StaticDrop() {
       setError('Write the post first.')
       return
     }
-    if (!postNow && !scheduledFor) {
+    if (!postNow && (!scheduledDate || !scheduledTime)) {
       setError('Pick a date and time (or use Post Now).')
       return
     }
+    // Combine into a local datetime (no TZ suffix = browser-local, matches the label).
+    const scheduledFor = `${scheduledDate}T${scheduledTime}`
     setBusy(postNow ? 'postnow' : 'approve')
     try {
       const result = await apiFetch('/api/static/approve', {
@@ -493,15 +517,52 @@ export default function StaticDrop() {
             ))}
           </Stack>
 
-          <TextField
-            type="datetime-local"
-            label={`Post at (${timeZone})`}
-            value={scheduledFor}
-            onChange={(e) => setScheduledFor(e.target.value)}
-            InputLabelProps={{ shrink: true }}
-            sx={{ mb: 2, minWidth: 260, ...fieldSx }}
-            helperText="Posts within ~45 minutes of this time"
-          />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 0.5 }}>
+            <TextField
+              type="date"
+              label="Date"
+              value={scheduledDate}
+              onChange={(e) => setScheduledDate(e.target.value)}
+              inputProps={{ min: todayLocal() }}
+              InputLabelProps={{ shrink: true }}
+              sx={{ minWidth: 180, ...fieldSx }}
+            />
+            <TextField
+              select
+              label="Time"
+              value={scheduledTime}
+              onChange={(e) => setScheduledTime(e.target.value)}
+              InputLabelProps={{ shrink: true }}
+              SelectProps={{
+                displayEmpty: true,
+                MenuProps: {
+                  PaperProps: {
+                    sx: {
+                      maxHeight: 320,
+                      bgcolor: '#1A0E0A',
+                      color: '#fff',
+                      '& .MuiMenuItem-root': { color: '#fff' },
+                      '& .MuiMenuItem-root.Mui-selected': { bgcolor: 'rgba(255,69,0,0.25)' },
+                      '& .MuiMenuItem-root:hover': { bgcolor: 'rgba(255,69,0,0.15)' },
+                    },
+                  },
+                },
+              }}
+              sx={{ minWidth: 160, ...fieldSx }}
+            >
+              <MenuItem value="" disabled>
+                Pick a time
+              </MenuItem>
+              {TIME_OPTIONS.map((t) => (
+                <MenuItem key={t.value} value={t.value}>
+                  {t.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Stack>
+          <Typography variant="caption" sx={{ display: 'block', mb: 2, color: CARD_MUTED }}>
+            {timeZone} · posts within ~45 minutes of this time
+          </Typography>
 
           <Stack direction="row" spacing={2}>
             <Button
