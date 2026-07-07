@@ -20,14 +20,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ImageIcon from '@mui/icons-material/Image'
 import CloseIcon from '@mui/icons-material/Close'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { upload } from '@vercel/blob/client'
 import { getAdminCredential } from '../utils/adminCredential'
 
 const URL_RE = /https?:\/\/[^\s)\]}"']+/g
 const TCO_LENGTH = 23
 const X_LIMIT = 280
 const MAX_IMAGES = 4
-const MAX_IMAGE_BYTES = 4 * 1024 * 1024
+const MAX_IMAGE_BYTES = 3 * 1024 * 1024
 
 interface UploadedImage {
   url: string
@@ -64,6 +63,19 @@ function xLength(text: string): number {
 
 function newClientRef(): string {
   return `draft_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+}
+
+// Read a File into raw base64 (no data: prefix) for the server upload route.
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = String(reader.result)
+      resolve(result.slice(result.indexOf(',') + 1))
+    }
+    reader.onerror = () => reject(new Error('Could not read file'))
+    reader.readAsDataURL(file)
+  })
 }
 
 const DRAFT_KEY = 'static-drop-draft'
@@ -209,17 +221,24 @@ export default function StaticDrop() {
         continue
       }
       if (file.size > MAX_IMAGE_BYTES) {
-        setError(`${file.name} is over 4MB.`)
+        setError(`${file.name} is over 3MB — shrink it and retry.`)
         continue
       }
       setUploading(true)
       try {
-        const blob = await upload(`static/${file.name}`, file, {
-          access: 'public',
-          handleUploadUrl: '/api/static/upload',
-          headers: { Authorization: `Bearer ${cred.token}` },
+        const data = await fileToBase64(file)
+        const res = await fetch('/api/static/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${cred.token}` },
+          body: JSON.stringify({ filename: file.name, contentType: file.type, data }),
         })
-        setImages((prev) => [...prev, { url: blob.url, contentType: file.type, size: file.size }])
+        const json = await res.json().catch(() => ({}))
+        if (res.status === 401) {
+          setSessionExpired(true)
+          throw new Error('Session expired')
+        }
+        if (!res.ok) throw new Error(json.error || `Upload failed (${res.status})`)
+        setImages((prev) => [...prev, { url: json.url, contentType: file.type, size: file.size }])
       } catch (e) {
         setError(`Upload failed: ${(e as Error).message}`)
       } finally {
