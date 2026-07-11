@@ -127,6 +127,7 @@ export default function StaticDrop() {
   const [linkedinText, setLinkedinText] = useState('')
   const [facebookText, setFacebookText] = useState('')
   const [platforms, setPlatforms] = useState({ x: true, linkedin: true, facebook: true })
+  const [trackLinks, setTrackLinks] = useState(true)
   const [images, setImages] = useState<UploadedImage[]>([])
   const [scheduledDate, setScheduledDate] = useState(todayLocal)
   const [scheduledTime, setScheduledTime] = useState('')
@@ -192,6 +193,7 @@ export default function StaticDrop() {
         setLinkedinText(d.linkedinText || '')
         setFacebookText(d.facebookText || '')
         setPlatforms(d.platforms || { x: true, linkedin: true, facebook: true })
+        if (typeof d.trackLinks === 'boolean') setTrackLinks(d.trackLinks)
         setImages(d.images || [])
         if (d.scheduledDate) setScheduledDate(d.scheduledDate)
         else if (d.scheduledFor) setScheduledDate(d.scheduledFor.slice(0, 10))
@@ -212,9 +214,9 @@ export default function StaticDrop() {
     if (!restoredRef.current) return
     localStorage.setItem(
       DRAFT_KEY,
-      JSON.stringify({ content, linkedinText, facebookText, platforms, images, scheduledDate, scheduledTime, clientRef })
+      JSON.stringify({ content, linkedinText, facebookText, platforms, trackLinks, images, scheduledDate, scheduledTime, clientRef })
     )
-  }, [content, linkedinText, facebookText, platforms, images, scheduledDate, scheduledTime, clientRef])
+  }, [content, linkedinText, facebookText, platforms, trackLinks, images, scheduledDate, scheduledTime, clientRef])
 
   const clearDraft = () => {
     localStorage.removeItem(DRAFT_KEY)
@@ -222,6 +224,7 @@ export default function StaticDrop() {
     setLinkedinText('')
     setFacebookText('')
     setPlatforms({ x: true, linkedin: true, facebook: true })
+    setTrackLinks(true)
     setImages([])
     setScheduledDate(todayLocal())
     setScheduledTime('')
@@ -293,6 +296,7 @@ export default function StaticDrop() {
             ...(linkedinText.trim() ? { linkedin_text: linkedinText.trim() } : {}),
             ...(facebookText.trim() ? { facebook_text: facebookText.trim() } : {}),
             platforms,
+            trackLinks,
             images,
             scheduled_at: postNow ? undefined : new Date(scheduledFor).toISOString(),
             client_ref: clientRef,
@@ -348,6 +352,7 @@ export default function StaticDrop() {
   }
 
   const xCount = xLength(content)
+  const hasLink = [content, linkedinText, facebookText].some((t) => /https?:\/\//.test(t))
   const enabledPreviews = [
     platforms.x && { key: 'X', text: content },
     platforms.linkedin && { key: 'LinkedIn', text: linkedinText.trim() || content },
@@ -485,6 +490,29 @@ export default function StaticDrop() {
             ))}
           </Stack>
 
+          {hasLink && (
+            <Box sx={{ mb: 2 }}>
+              <Chip
+                label={trackLinks ? '🔗 Tracking link clicks' : '🔗 Links post raw (preview card)'}
+                variant={trackLinks ? 'filled' : 'outlined'}
+                onClick={() => setTrackLinks((v) => !v)}
+                sx={
+                  trackLinks
+                    ? { bgcolor: ORANGE, color: '#000', fontWeight: 700, '&:hover': { bgcolor: ORANGE_LIGHT } }
+                    : { color: ORANGE_LIGHT, borderColor: ORANGE_LIGHT, '&:hover': { borderColor: ORANGE } }
+                }
+              />
+              <Typography variant="caption" sx={{ display: 'block', mt: 0.5, color: CARD_MUTED }}>
+                {trackLinks
+                  ? 'Links become tisb.world/go/… so clicks are counted. The link preview card may not render (esp. LinkedIn).'
+                  : 'Links post as-is → X and LinkedIn render the full preview card. No click counts for this post.'}
+                {!trackLinks && images.length > 0
+                  ? ' Note: your uploaded image will show instead of the link card.'
+                  : ''}
+              </Typography>
+            </Box>
+          )}
+
           <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2, flexWrap: 'wrap' }}>
             <Button
               variant="outlined"
@@ -589,9 +617,13 @@ export default function StaticDrop() {
       {enabledPreviews.length > 0 && content.trim() && (
         <Box sx={{ mb: 3 }}>
           <Typography variant="h6" gutterBottom>Preview</Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
-            Links become tisb.world/go/… tracking links on approve.
-          </Typography>
+          {hasLink && (
+            <Typography variant="caption" sx={{ display: 'block', mb: 1, color: CARD_MUTED }}>
+              {trackLinks
+                ? 'Links become tisb.world/go/… tracking links on approve.'
+                : 'Links post as-is — platforms will render the preview card.'}
+            </Typography>
+          )}
           <Stack spacing={1}>
             {enabledPreviews.map((p) => (
               <Card key={p.key} variant="outlined">

@@ -131,42 +131,46 @@ export default async function handler(req, res) {
   const id = `static_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`;
 
   // --- link wrapping: per-destination, per-platform go-codes ----------------
-  const destSet = new Set();
-  for (const p of PLATFORMS) {
-    if (!platforms[p]) continue;
-    for (const m of rawTexts[p].match(URL_RE) || []) destSet.add(cleanUrl(m));
-  }
-
+  // Skipped entirely when the post opts out (trackLinks:false) so raw URLs stay
+  // in the text and X/LinkedIn can render the link's Open Graph preview card.
+  const trackLinks = item.trackLinks !== false;
   const links = [];
   const wrapped = { ...rawTexts };
-  try {
-    for (const dest of destSet) {
-      const codes = {};
-      for (const p of PLATFORMS) {
-        if (!platforms[p] || !wrapped[p].includes(dest)) continue;
-        let code = newCode();
-        // NX guards the (astronomically unlikely) collision; regenerate once.
-        let okSet = await kv.set(
-          `go:${code}`,
-          { dest, post_id: id, platform: p, created_at: new Date().toISOString() },
-          { nx: true }
-        );
-        if (okSet === null) {
-          code = newCode();
-          okSet = await kv.set(
+  if (trackLinks) {
+    const destSet = new Set();
+    for (const p of PLATFORMS) {
+      if (!platforms[p]) continue;
+      for (const m of rawTexts[p].match(URL_RE) || []) destSet.add(cleanUrl(m));
+    }
+    try {
+      for (const dest of destSet) {
+        const codes = {};
+        for (const p of PLATFORMS) {
+          if (!platforms[p] || !wrapped[p].includes(dest)) continue;
+          let code = newCode();
+          // NX guards the (astronomically unlikely) collision; regenerate once.
+          let okSet = await kv.set(
             `go:${code}`,
             { dest, post_id: id, platform: p, created_at: new Date().toISOString() },
             { nx: true }
           );
-          if (okSet === null) throw new Error('Could not allocate a tracking code.');
+          if (okSet === null) {
+            code = newCode();
+            okSet = await kv.set(
+              `go:${code}`,
+              { dest, post_id: id, platform: p, created_at: new Date().toISOString() },
+              { nx: true }
+            );
+            if (okSet === null) throw new Error('Could not allocate a tracking code.');
+          }
+          codes[p] = code;
+          wrapped[p] = wrapped[p].split(dest).join(`https://www.tisb.world/go/${code}`);
         }
-        codes[p] = code;
-        wrapped[p] = wrapped[p].split(dest).join(`https://www.tisb.world/go/${code}`);
+        if (Object.keys(codes).length > 0) links.push({ dest, codes });
       }
-      if (Object.keys(codes).length > 0) links.push({ dest, codes });
+    } catch (err) {
+      return res.status(502).json({ error: `Click-tracking setup failed: ${err.message}. Retry.` });
     }
-  } catch (err) {
-    return res.status(502).json({ error: `Click-tracking setup failed: ${err.message}. Retry.` });
   }
 
   // --- X length check AFTER wrapping ----------------------------------------
@@ -185,6 +189,7 @@ export default async function handler(req, res) {
     ...(platforms.linkedin ? { linkedin_text: wrapped.linkedin } : {}),
     ...(platforms.facebook ? { facebook_text: wrapped.facebook } : {}),
     platforms,
+    track_links: trackLinks,
     ...(images.length > 0
       ? { images: images.map((i) => ({ url: i.url, contentType: i.contentType || 'image/jpeg', size: i.size })) }
       : {}),
