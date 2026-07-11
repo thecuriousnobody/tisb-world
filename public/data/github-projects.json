@@ -31,7 +31,7 @@
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-07-07T22:23:55Z",
+      "lastUpdated": "2026-07-11T18:41:38Z",
       "createdAt": "2025-05-10T18:45:52Z",
       "visibility": "public"
     },
@@ -92,14 +92,14 @@
       "fullName": "thecuriousnobody/vasanta",
       "title": "Vasanta",
       "description": "",
-      "aiDescription": "A code project exploring vasanta.",
+      "aiDescription": "A TypeScript project exploring vasanta.",
       "url": "https://github.com/thecuriousnobody/vasanta",
-      "homepage": "",
-      "language": "Various",
+      "homepage": "https://vasanta-iota.vercel.app",
+      "language": "TypeScript",
       "stars": 0,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-06-28T03:19:28Z",
+      "lastUpdated": "2026-07-10T00:39:20Z",
       "createdAt": "2026-06-28T03:19:28Z",
       "visibility": "public"
     },
@@ -223,6 +223,6 @@
       "visibility": "public"
     }
   ],
-  "lastUpdated": "2026-07-07T22:24:29.643Z",
+  "lastUpdated": "2026-07-11T18:42:11.638Z",
   "generatedWith": "repo-metadata-only"
 }
