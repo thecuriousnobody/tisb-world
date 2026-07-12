@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-252456247",
+      "title": "Spandrel",
+      "description": "Copy a square onto a square and the software emits a line you never drew. Architects call the leftover space where arches meet a dome a spandrel ? nobody designs it, it's just what holding a roof up produces. Then someone paints a saint in it. The rule emits; the hand recruits. Here the rule builds the box, and the ribbon swims straight through it, made of the same light as the ground.",
+      "link": "https://www.behance.net/gallery/252456247/Spandrel",
+      "publishedAt": "2026-07-09T15:36:19.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/da7c53252456247.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-251905143",
       "title": "Overshoot",
       "description": "First principles carry you only to the edge of what they already contain ? then they run out. Past that edge there is nothing left to reason from, and play becomes the only instrument that still works. Overshoot is what happens out there: experiment torquing familiar material until it yields the unfamiliar. The discord isn't failure. It's the signature of having left the map.",
@@ -21,7 +34,7 @@
       "link": "https://www.behance.net/gallery/251560845/Callback",
       "publishedAt": "2026-06-22T23:56:52.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/87135f251560845.Y3JvcCwxMjAwLDkzOCwwLDg4Mg.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/acc2c9251560845.Y3JvcCwxMjAwLDkzOCwwLDU0Mw.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -1627,8 +1640,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-07-05T13:28:55.430Z",
-  "scrapedAt": "2026-07-05T13:28:55.430Z",
+  "lastUpdated": "2026-07-12T14:20:11.209Z",
+  "scrapedAt": "2026-07-12T14:20:11.209Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
