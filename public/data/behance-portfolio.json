@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-252932847",
+      "title": "Untouched",
+      "description": "Tangere: to touch. A tangent grazes and leaves. This is its negation ? the untouched: what no hand holds and no ledger invoices. The value moving along the axis the market froze ? the pollinator, the oral hum, the agent outside the frame. Here the line dissolves and only field remains, all presence and no handle. The part that carries everything, and is never caught holding it.",
+      "link": "https://www.behance.net/gallery/252932847/Untouched",
+      "publishedAt": "2026-07-20T15:12:05.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/97b862252932847.Y3JvcCw5ODYsNzcxLDE2Niw5Nzg.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-252456247",
       "title": "Spandrel",
       "description": "Copy a square onto a square and the software emits a line you never drew. Architects call the leftover space where arches meet a dome a spandrel ? nobody designs it, it's just what holding a roof up produces. Then someone paints a saint in it. The rule emits; the hand recruits. Here the rule builds the box, and the ribbon swims straight through it, made of the same light as the ground.",
@@ -1640,8 +1653,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-07-19T14:17:08.794Z",
-  "scrapedAt": "2026-07-19T14:17:08.794Z",
+  "lastUpdated": "2026-07-26T14:20:59.409Z",
+  "scrapedAt": "2026-07-26T14:20:59.409Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
