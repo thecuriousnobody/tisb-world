@@ -138,7 +138,12 @@ export default function Prints() {
               // width, so it clipped even on desktop. Fluid sizing plus no
               // mobile maxWidth keeps it to three clean lines, measured to hold
               // from 320px through 1920px.
-              fontSize: 'clamp(1.25rem, 6.4vw, 5.5rem)',
+              // '&&' doubles the class selector. Without it the theme's
+              // `h1: { '@media (max-width:768px)': { fontSize: '4rem' } }`
+              // outranks this and mobile renders at 64px — "ARCHITECTURAL"
+              // then measures 802px inside a 606px viewport and runs off the
+              // screen. A plain sx fontSize loses to that media query.
+              '&&': { fontSize: 'clamp(1.25rem, 6.4vw, 5.5rem)' },
               wordBreak: 'normal',
               overflowWrap: 'normal',
               fontWeight: 900,
@@ -257,7 +262,8 @@ export default function Prints() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: 'clamp(1.5rem, 5.5vw, 3.25rem)',
+              // Same theme media-query override as the hero h1 — see note there.
+              '&&': { fontSize: 'clamp(1.5rem, 5.5vw, 3.25rem)' },
               wordBreak: 'normal',
               overflowWrap: 'normal',
               fontWeight: 900,
