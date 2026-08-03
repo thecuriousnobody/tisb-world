@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { postsHandler, publishHandler, cronHandler, rescheduleHandler } from './api/content/_lib/handlers.js';
 import contentUpload from './api/content/upload.js';
+import artInquiry from './api/art/inquiry.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -330,6 +331,9 @@ app.post('/api/content/publish', (req, res) => publishHandler(req, res));
 app.all('/api/content/cron', (req, res) => cronHandler(req, res));
 app.post('/api/content/reschedule', (req, res) => rescheduleHandler(req, res));
 app.post('/api/content/upload', (req, res) => contentUpload(req, res));
+
+// Art inquiry intake (/prints) — same handler Vercel runs in production
+app.all('/api/art/inquiry', (req, res) => artInquiry(req, res));
 
 // Serve uploaded images in dev
 app.use('/content-uploads', express.static(path.join(__dirname, 'public', 'content-uploads')));

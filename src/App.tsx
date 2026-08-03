@@ -7,6 +7,7 @@ import Ventures from './pages/Ventures'
 import About from './pages/About'
 import Music from './pages/Music'
 import Art from './pages/Art'
+import Prints from './pages/Prints'
 import Blog from './pages/Blog'
 import Code from './pages/Code'
 import Podcast from './pages/Podcast'
@@ -32,6 +33,9 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
+            {/* Commercial art landing page - No Layout (focused Pinterest destination) */}
+            <Route path="/prints" element={<Prints />} />
+
             {/* Beta Feedback - No Layout */}
             <Route path="/beta-feedback" element={<BetaFeedback />} />
             

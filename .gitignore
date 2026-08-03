@@ -114,3 +114,4 @@ cython_debug/
 # Content Engine runtime data
 api/content/_data/
 public/content-uploads/
+.env*
