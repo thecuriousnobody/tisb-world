@@ -30,8 +30,15 @@ export interface Print {
   image: string
 }
 
-/** Full-bleed installation shot at the top of the page. */
-export const heroImage = '/installations/hero-rooftop-lounge.jpg'
+/**
+ * Full-bleed installation shot at the top of the page.
+ *
+ * Chosen for BRANDING LEGIBILITY as much as composition: these mockups are
+ * AI-rendered, and in several of them the "THE CURIOUS NOBODY" plate comes out
+ * mangled ("THE OURIOUS NOBODI"). At hero scale that reads as sloppy to the
+ * exact buyer we want. Only use shots where the plate renders cleanly.
+ */
+export const heroImage = '/installations/hero-terrace-copper.jpg'
 
 /**
  * The single positioning sentence. Kept as a constant because it is the most
@@ -42,19 +49,19 @@ export const positioning =
 
 export const prints: Print[] = [
   {
+    title: 'Rooftop Lounge',
+    note: 'Hard yellow and red against a skyline. Built for a room that stays busy.',
+    image: '/installations/rooftop-lounge.jpg',
+  },
+  {
     title: 'Rooftop Bar',
-    note: 'Warm ground, high contrast — holds its own against a skyline and a full room.',
+    note: 'Warm ground, high contrast — holds its own at golden hour.',
     image: '/installations/rooftop-bar.jpg',
   },
   {
-    title: 'Residential',
-    note: 'Copper and soot over a fireplace. Vertical format for double-height walls.',
-    image: '/installations/residential-fireplace.jpg',
-  },
-  {
-    title: 'Terrace',
-    note: 'Square format, hard yellow. Built to carry an exterior wall at dusk.',
-    image: '/installations/terrace-sunset.jpg',
+    title: 'Interior',
+    note: 'Vertical format, quiet ground. For residential walls and long sightlines.',
+    image: '/installations/interior-minimal.jpg',
   },
   {
     title: 'Penthouse',

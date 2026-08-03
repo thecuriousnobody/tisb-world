@@ -131,12 +131,26 @@ export default function Prints() {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '2.5rem', sm: '4rem', md: '6rem' },
+              // "ARCHITECTURAL" renders 12.5x the font-size wide in this face.
+              // Two separate things used to break it onto "ARCHITECT / URAL":
+              // the theme's wordBreak:'break-word', and maxWidth:'15ch' — which
+              // in this wide display font is almost exactly the word's own
+              // width, so it clipped even on desktop. Fluid sizing plus no
+              // mobile maxWidth keeps it to three clean lines, measured to hold
+              // from 320px through 1920px.
+              fontSize: 'clamp(1.25rem, 6.4vw, 5.5rem)',
+              wordBreak: 'normal',
+              overflowWrap: 'normal',
               fontWeight: 900,
-              lineHeight: 0.92,
+              // The theme's h1 pairs lineHeight 0.9 with overflow:hidden, which
+              // shears the tops off the capitals on the first line (worst on
+              // mobile, where "ART AT" got visibly chopped). Give the glyphs
+              // room and stop clipping them.
+              lineHeight: { xs: 1.05, md: 0.95 },
+              overflow: 'visible',
               letterSpacing: '-0.03em',
               mb: 2,
-              maxWidth: '15ch',
+              maxWidth: { xs: 'none', md: '15ch' },
             }}
           >
             ART AT ARCHITECTURAL SCALE
@@ -243,8 +257,14 @@ export default function Prints() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs: '2rem', md: '3.25rem' },
+              fontSize: 'clamp(1.5rem, 5.5vw, 3.25rem)',
+              wordBreak: 'normal',
+              overflowWrap: 'normal',
               fontWeight: 900,
+              // Same theme clipping issue as the hero h1 (lineHeight 0.95 +
+              // overflow:hidden).
+              lineHeight: { xs: 1.05, md: 1 },
+              overflow: 'visible',
               letterSpacing: '-0.02em',
               mb: 2,
             }}
