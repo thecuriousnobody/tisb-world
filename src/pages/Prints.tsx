@@ -436,9 +436,18 @@ export default function Prints() {
           gap: 2,
         }}
       >
-        <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
+        <Box
+          component="a"
+          href="/"
+          sx={{
+            color: 'rgba(255,255,255,0.4)',
+            fontSize: '0.85rem',
+            textDecoration: 'none',
+            '&:hover': { color: ACCENT },
+          }}
+        >
           The Curious Nobody — The Idea Sandbox
-        </Typography>
+        </Box>
         <Box
           component="a"
           href="/art"

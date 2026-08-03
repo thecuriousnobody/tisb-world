@@ -30,6 +30,7 @@ const navigationItems = [
   { label: 'Podcast', path: '/podcast' },
   { label: 'Music', path: '/music' },
   { label: 'Art', path: '/art' },
+  { label: 'Prints', path: '/prints' },
   { label: 'Writing', path: '/blog' },
   { label: 'About', path: '/about' },
   { label: 'Admin', path: '/admin' },
