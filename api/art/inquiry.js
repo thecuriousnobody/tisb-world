@@ -95,8 +95,14 @@ async function sendEmail(inquiry) {
   const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS, EMAIL_FROM, EMAIL_TO } =
     process.env
 
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    throw new Error('SMTP not configured')
+  // Name the missing vars — "SMTP not configured" alone sent us hunting through
+  // the Vercel dashboard once already.
+  const missing = Object.entries({ SMTP_HOST, SMTP_USER, SMTP_PASS })
+    .filter(([, v]) => !v)
+    .map(([k]) => k)
+
+  if (missing.length) {
+    throw new Error(`SMTP not configured — missing/empty: ${missing.join(', ')}`)
   }
 
   const transporter = nodemailer.createTransport({
