@@ -2,6 +2,45 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-253970585",
+      "title": "Eye",
+      "description": "The still point is not empty. Four works about what holds at the center while everything turns ? storm systems, ink blooms, currents folding back on themselves. Each begins as a gesture and gathers until it finds its own eye: the place the turbulence organizes around. Spatter, stain, and line on saturated grounds. The merge isn't coming. It's here, and it has a calm middle.",
+      "link": "https://www.behance.net/gallery/253970585/Eye",
+      "publishedAt": "2026-08-08T03:38:57.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/d5e4fd253970585.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
+      "id": "behance-253690475",
+      "title": "Haze",
+      "description": "What's left after the burn. Smoke holds the shape of an event that already happened ? drifting, weightless, still carrying the intensity that made it. Six panels on brushed aluminum where the mark and the smoke are the same gesture, caught at the moment heat becomes air. Made for rooms where people gather and stay a while.",
+      "link": "https://www.behance.net/gallery/253690475/Haze",
+      "publishedAt": "2026-08-03T14:40:00.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/cb2916253690475.Y3JvcCwxMDYzLDgzMiw5Miww.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
+      "id": "behance-253679669",
+      "title": "Best Before",
+      "description": "Four aluminum panels marked in supermarket language. Spatter, ink, and a bright core held in the dark. Freshness stated as a deadline on a surface that doesn't spoil. Aluminum doesn't spoil. That's the joke and the point. Four panels marked in the language of the dairy aisle ? barcode, wordmark, a date that never comes ? carrying spatter fields that behave like something spilled and caught mid-motion. Made for open air, matte finish, weather-indifferent. Freshness stated as a deadline on a surface that has none.",
+      "link": "https://www.behance.net/gallery/253679669/Best-Before",
+      "publishedAt": "2026-08-02T22:53:08.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/00b51e253679669.Y3JvcCw5MjAsNzIwLDI3Myww.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-252932847",
       "title": "Untouched",
       "description": "Tangere: to touch. A tangent grazes and leaves. This is its negation ? the untouched: what no hand holds and no ledger invoices. The value moving along the axis the market froze ? the pollinator, the oral hum, the agent outside the frame. Here the line dissolves and only field remains, all presence and no handle. The part that carries everything, and is never caught holding it.",
@@ -1653,8 +1692,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-08-02T14:20:03.540Z",
-  "scrapedAt": "2026-08-02T14:20:03.540Z",
+  "lastUpdated": "2026-08-09T13:38:36.549Z",
+  "scrapedAt": "2026-08-09T13:38:36.549Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
