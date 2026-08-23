@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-254616025",
+      "title": "Blot",
+      "description": "Blot is five works that refuse the frame. Each yellow field is cut to the shape of its own spill, so the wall doesn't hang a picture so much as absorb one. Black spatter gathers around a single drawn line, a loop, a wave, a funnel, and the edge follows the ink out. Made for rooms where people sit still long enough to start seeing things in it. Aluminum, large format, no rectangle.",
+      "link": "https://www.behance.net/gallery/254616025/Blot",
+      "publishedAt": "2026-08-21T14:03:59.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/15ab84254616025.Y3JvcCwxMjg4LDEwMDgsMjUyLDA.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-253970585",
       "title": "Eye",
       "description": "The still point is not empty. Four works about what holds at the center while everything turns ? storm systems, ink blooms, currents folding back on themselves. Each begins as a gesture and gathers until it finds its own eye: the place the turbulence organizes around. Spatter, stain, and line on saturated grounds. The merge isn't coming. It's here, and it has a calm middle.",
@@ -1692,8 +1705,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-08-09T13:38:36.549Z",
-  "scrapedAt": "2026-08-09T13:38:36.549Z",
+  "lastUpdated": "2026-08-23T13:23:10.346Z",
+  "scrapedAt": "2026-08-23T13:23:10.346Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
