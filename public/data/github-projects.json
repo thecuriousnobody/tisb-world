@@ -31,25 +31,8 @@
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-08-24T07:10:55Z",
+      "lastUpdated": "2026-08-31T13:24:46Z",
       "createdAt": "2025-05-10T18:45:52Z",
-      "visibility": "public"
-    },
-    {
-      "id": "github-1255224431",
-      "name": "neuronify",
-      "fullName": "thecuriousnobody/neuronify",
-      "title": "Neuronify",
-      "description": "",
-      "aiDescription": "A TypeScript project exploring neuronify.",
-      "url": "https://github.com/thecuriousnobody/neuronify",
-      "homepage": "https://neuronify-sooty.vercel.app",
-      "language": "TypeScript",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "lastUpdated": "2026-08-21T01:10:01Z",
-      "createdAt": "2026-05-31T15:07:39Z",
       "visibility": "public"
     },
     {
@@ -223,6 +206,6 @@
       "visibility": "public"
     }
   ],
-  "lastUpdated": "2026-08-24T08:40:30.315Z",
+  "lastUpdated": "2026-08-31T15:42:53.159Z",
   "generatedWith": "repo-metadata-only"
 }
