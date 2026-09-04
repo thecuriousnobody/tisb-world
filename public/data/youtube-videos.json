@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-5dLqKnbgFL4",
+      "videoId": "5dLqKnbgFL4",
+      "title": "1,200 Doctors Joined Out of Fear",
+      "description": "He posted one question for a webinar: will you still have your job in two years? Twelve hundred doctors signed up. Dr. Srikanth K.N. (FRCS) on becoming the master, not the servant, of AI.",
+      "link": "https://www.youtube.com/watch?v=5dLqKnbgFL4",
+      "publishedAt": "2026-09-03T17:00:37+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 219
+    },
+    {
       "id": "youtube-4eEbzQdTVYI",
       "videoId": "4eEbzQdTVYI",
       "title": "Agentic AI for Founders — Watch It Work Live | DeSilo",
@@ -183,23 +196,10 @@
       "thumbnail": "https://img.youtube.com/vi/nry-xSuOrE0/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/nry-xSuOrE0/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 899
-    },
-    {
-      "id": "youtube-FVYRVLXTlGc",
-      "videoId": "FVYRVLXTlGc",
-      "title": "This Is What America Looks Like to Someone Who Wasn’t Born Here",
-      "description": "Master Sergeant Stephen Graves from the 182nd Airlift Wing in Peoria shares how deployments overseas completely changed his view of freedom, comfort and what it means to be “rich.” Growing up in a single‑parent home in America, he already knew struggle but seeing how people live in other countries made him realize how easily we take basic things for granted: clean running water, safety, opportunity, even the right to question our leaders.​\n\nIn this Idea Sandbox clip, he contrasts American privil...",
-      "link": "https://www.youtube.com/watch?v=FVYRVLXTlGc",
-      "publishedAt": "2025-12-07T20:54:26+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/FVYRVLXTlGc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/FVYRVLXTlGc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 27
+      "views": 900
     }
   ],
-  "lastUpdated": "2026-09-03T11:02:16.731Z",
+  "lastUpdated": "2026-09-04T11:03:10.881Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
