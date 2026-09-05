@@ -4,6 +4,45 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-1EBJxmgrEaw",
+      "videoId": "1EBJxmgrEaw",
+      "title": "When Your AI Friend Orders for You: Character.ai &amp; Blurred Reality",
+      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): when AI companions feel real — Character.ai, blurred reality, and what happens when the guardrails slip. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
+      "link": "https://www.youtube.com/watch?v=1EBJxmgrEaw",
+      "publishedAt": "2026-09-05T05:00:23+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 1
+    },
+    {
+      "id": "youtube-2xy60h2rnaY",
+      "videoId": "2xy60h2rnaY",
+      "title": "I Don't Want a House on the Moon in 2047",
+      "description": "Dr. Srikanth K.N. (FRCS) on why development promises dated twenty years out mean nothing to the people who are alive right now. From The Idea Sandbox.",
+      "link": "https://www.youtube.com/watch?v=2xy60h2rnaY",
+      "publishedAt": "2026-09-04T17:01:13+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 1314
+    },
+    {
+      "id": "youtube-72XM4Oiyvg8",
+      "videoId": "72XM4Oiyvg8",
+      "title": "When Hospital AI Goes Wrong: The Cancer Hallucination",
+      "description": "From Chat with Smit: an ER conversational agent tells a patient they have cancer — and the guardrails / accountability debate that follows.\n\nGuest: Dr. Smit Desai\nAssistant Professor, Northeastern University (College of Arts, Media and Design; Khoury affiliate)\nDirector, Conversational Human–AI Interactions (CHAI) Lab\nResearch: human-centered conversational AI, voice interfaces, healthcare agents\n\nMore: https://camd.northeastern.edu/people/smit-desai/\nLab / site: https://smitdesai.net/\n\n#AI #Hea...",
+      "link": "https://www.youtube.com/watch?v=72XM4Oiyvg8",
+      "publishedAt": "2026-09-04T13:30:24+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/72XM4Oiyvg8/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 3
+    },
+    {
       "id": "youtube-5dLqKnbgFL4",
       "videoId": "5dLqKnbgFL4",
       "title": "1,200 Doctors Joined Out of Fear",
@@ -14,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 219
+      "views": 658
     },
     {
       "id": "youtube-4eEbzQdTVYI",
@@ -158,48 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/pjzOkRg3eks/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 14
-    },
-    {
-      "id": "youtube-Gi94Z0DnDlI",
-      "videoId": "Gi94Z0DnDlI",
-      "title": "Why Indians Don’t Want Salon Jobs (And Who’s Doing Them Instead)",
-      "description": "Across Bengaluru and other Indian cities, most salon floors are run by workers from the North‑East, Nepal and Manipur while many “local” families still see barbering and beauty work as “below” their caste or status. In this Idea Sandbox clip, Giri breaks down why his own community refused to step into salons, how much stylists actually earn, and how Northeastern and Nepali workers ended up dominating the industry through sheer hard work and willingness to do hands‑on service.​\n\nHe shares stories...",
-      "link": "https://www.youtube.com/watch?v=Gi94Z0DnDlI",
-      "publishedAt": "2025-12-10T21:20:41+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/Gi94Z0DnDlI/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/Gi94Z0DnDlI/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 17
-    },
-    {
-      "id": "youtube-QMLWGUMQEh4",
-      "videoId": "QMLWGUMQEh4",
-      "title": "Cities Are Made, Not Found: Mumbai, Bangalore and Our Passive Citizens",
-      "description": "Harvard GSD professor and architect Rahul Mehrotra explains why cities like Mumbai and Bangalore are not things you “find” but places you actively make. Starting with the myth around the name “Mumbai” and his essay “Dysfunctional Boomtown” on Bangalore, he shows how governments and developers rename, rebrand and reshape cities while citizens stay “asleep at the wheel,” treating urban life like a product instead of a collective project.​\n\nIn this Idea Sandbox clip, Mehrotra argues that when we sa...",
-      "link": "https://www.youtube.com/watch?v=QMLWGUMQEh4",
-      "publishedAt": "2025-12-09T19:56:17+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/QMLWGUMQEh4/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/QMLWGUMQEh4/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 10
-    },
-    {
-      "id": "youtube-nry-xSuOrE0",
-      "videoId": "nry-xSuOrE0",
-      "title": "Why No One Wants Kids Anymore: Stanford Sociologist Explains Japan &amp; South Korea’s Baby Crisis",
-      "description": "Across Japan, South Korea and other rich countries, birth rates are falling so fast that governments are begging people to go home, have sex and make more babies. Yet nothing changes. In this Idea Sandbox clip, Stanford sociologist Dr Michael Rosenfeld explains one uncomfortable reason why: decades of strict family rules and conservative sexual norms have made marriage and kids feel so constraining that many people are simply opting out.​​​\n\nDrawing on demographic research, he breaks down how de...",
-      "link": "https://www.youtube.com/watch?v=nry-xSuOrE0",
-      "publishedAt": "2025-12-08T20:57:24+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/nry-xSuOrE0/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/nry-xSuOrE0/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 900
     }
   ],
-  "lastUpdated": "2026-09-04T11:03:10.881Z",
+  "lastUpdated": "2026-09-05T10:25:05.426Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
