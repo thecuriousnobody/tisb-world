@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-255221147",
+      "title": "Char",
+      "description": "Char is what stays. Four cut-edge works on orange ground, each holding a black core: smoke, spatter, a line that will not settle. The panel is cut to the burn rather than to a frame; the silhouette is the outline of what the heat left behind. Brushed aluminum, large format, made for terraces, lounges and rooms that get real light",
+      "link": "https://www.behance.net/gallery/255221147/Char",
+      "publishedAt": "2026-09-04T15:16:00.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/8a6063255221147.Y3JvcCwxOTYzLDE1MzYsMzkzLDA.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-254616025",
       "title": "Blot",
       "description": "Blot is five works that refuse the frame. Each yellow field is cut to the shape of its own spill, so the wall doesn't hang a picture so much as absorb one. Black spatter gathers around a single drawn line, a loop, a wave, a funnel, and the edge follows the ink out. Made for rooms where people sit still long enough to start seeing things in it. Aluminum, large format, no rectangle.",
@@ -1705,8 +1718,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-08-30T17:00:36.779Z",
-  "scrapedAt": "2026-08-30T17:00:36.779Z",
+  "lastUpdated": "2026-09-06T15:51:20.555Z",
+  "scrapedAt": "2026-09-06T15:51:20.555Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
