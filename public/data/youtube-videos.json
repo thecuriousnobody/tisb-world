@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-8pHrVkH2CVY",
+      "videoId": "8pHrVkH2CVY",
+      "title": "We're Programming AI Personalities With the Big Five — And It Persuades",
+      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): programming AI personalities with the Big Five — and why that persuades. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
+      "link": "https://www.youtube.com/watch?v=8pHrVkH2CVY",
+      "publishedAt": "2026-09-06T05:00:17+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 1
+    },
+    {
+      "id": "youtube-MPqoQhNBZ50",
+      "videoId": "MPqoQhNBZ50",
+      "title": "Western Mind, Eastern Heart",
+      "description": "The best of both civilizations, in under a minute. Dr. Srikanth K.N. (FRCS) on what the West teaches you and what the East gives you. From The Idea Sandbox.",
+      "link": "https://www.youtube.com/watch?v=MPqoQhNBZ50",
+      "publishedAt": "2026-09-05T17:01:00+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/MPqoQhNBZ50/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/MPqoQhNBZ50/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 53
+    },
+    {
       "id": "youtube-1EBJxmgrEaw",
       "videoId": "1EBJxmgrEaw",
       "title": "When Your AI Friend Orders for You: Character.ai &amp; Blurred Reality",
@@ -14,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1
+      "views": 6
     },
     {
       "id": "youtube-2xy60h2rnaY",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1314
+      "views": 1332
     },
     {
       "id": "youtube-72XM4Oiyvg8",
@@ -40,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/72XM4Oiyvg8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 3
+      "views": 12
     },
     {
       "id": "youtube-5dLqKnbgFL4",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 658
+      "views": 660
     },
     {
       "id": "youtube-4eEbzQdTVYI",
@@ -118,7 +144,7 @@
       "thumbnail": "https://img.youtube.com/vi/o0gOSzVKxCk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/o0gOSzVKxCk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 39
+      "views": 40
     },
     {
       "id": "youtube-pvagGEhMiTU",
@@ -171,35 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/EX02iKe0Vdg/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 42
-    },
-    {
-      "id": "youtube-uI0bxHBwNc4",
-      "videoId": "uI0bxHBwNc4",
-      "title": "Bombay vs Mumbai: The Hidden Cost of Renaming Our Cities",
-      "description": "India is in a frenzy of renaming cities from Bombay to Mumbai and Bangalore to Bengaluru but almost nobody talks about the hidden cost of changing a city’s name. In this Idea Sandbox clip, Harvard GSD professor and architect Rahul Mehrotra explains why cities are actually brands with decades of global recognition, cultural memory and economic value attached to their names.​\n\nHe and Rajeev dig into questions politicians rarely answer: Who are the real stakeholders in these city name changes, how ...",
-      "link": "https://www.youtube.com/watch?v=uI0bxHBwNc4",
-      "publishedAt": "2025-12-12T22:59:03+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/uI0bxHBwNc4/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/uI0bxHBwNc4/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 342
-    },
-    {
-      "id": "youtube-pjzOkRg3eks",
-      "videoId": "pjzOkRg3eks",
-      "title": "1 Death Every 3 Minutes: India's Road Crisis Exposed",
-      "description": "India tops global road fatalities with 168,000 deaths in 2022 alone - that's 465 Indians dying daily in road accidents, boiling down to ONE DEATH EVERY 3 MINUTES on our highways and streets. In this explosive Idea Sandbox clip, co-host Kishore unleashes a raw rant on why India leads the world in road deaths, slamming the transport minister and MPs for zero accountability as 10 people perish while they joke around. He breaks it down: from shocking statistics to the human cost, asking if this does...",
-      "link": "https://www.youtube.com/watch?v=pjzOkRg3eks",
-      "publishedAt": "2025-12-12T00:11:23+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/pjzOkRg3eks/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/pjzOkRg3eks/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 14
     }
   ],
-  "lastUpdated": "2026-09-05T10:25:05.426Z",
+  "lastUpdated": "2026-09-06T10:44:02.411Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
