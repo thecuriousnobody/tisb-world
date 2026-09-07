@@ -4,6 +4,58 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-T5GwbbZbnag",
+      "videoId": "T5GwbbZbnag",
+      "title": "India's Research Trap: IIT Pedigree, No Incentives, and the China Lesson",
+      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): India's research trap — pedigree, incentives, and the China comparison. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
+      "link": "https://www.youtube.com/watch?v=T5GwbbZbnag",
+      "publishedAt": "2026-09-07T05:00:25+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 0
+    },
+    {
+      "id": "youtube-6kFkrhPlRGA",
+      "videoId": "6kFkrhPlRGA",
+      "title": "God Becomes Dog in 4 Days | Dr. Srikanth K.N.",
+      "description": "What happens to a surgeon's status the day the hospital bill arrives. From my conversation with orthopaedic surgeon Dr. Srikanth K.N. (FRCS) on redesigning Indian healthcare. Full episode on The Idea Sandbox.",
+      "link": "https://www.youtube.com/watch?v=6kFkrhPlRGA",
+      "publishedAt": "2026-09-07T05:00:21+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 5
+    },
+    {
+      "id": "youtube-ocZlo2W-N1g",
+      "videoId": "ocZlo2W-N1g",
+      "title": "72 Hours vs 5 Minutes AI",
+      "description": "Dr. Srikanth K.N. on AI in healthcare — 72 hours of human work vs minutes with AI. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
+      "link": "https://www.youtube.com/watch?v=ocZlo2W-N1g",
+      "publishedAt": "2026-09-06T16:00:37+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/ocZlo2W-N1g/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/ocZlo2W-N1g/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 50
+    },
+    {
+      "id": "youtube-9DwnN7KrjNU",
+      "videoId": "9DwnN7KrjNU",
+      "title": "Why &quot;Brought Dead&quot; Is the Default Fate in Indian Hospitals | Dr. Srikanth K.N.",
+      "description": "Orthopaedic surgeon Dr. Srikanth K.N. (FRCS) explains why Indian hospitals increasingly declare arriving patients dead on arrival by default. It isn't incompetence. After years of doctors being assaulted and hospitals vandalized when a resuscitation attempt fails, the safest clinical decision became not trying at all. From the full conversation on redesigning Indian healthcare from scratch, on The Idea Sandbox.",
+      "link": "https://www.youtube.com/watch?v=9DwnN7KrjNU",
+      "publishedAt": "2026-09-06T15:00:43+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 4
+    },
+    {
       "id": "youtube-8pHrVkH2CVY",
       "videoId": "8pHrVkH2CVY",
       "title": "We're Programming AI Personalities With the Big Five — And It Persuades",
@@ -14,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1
+      "views": 13
     },
     {
       "id": "youtube-MPqoQhNBZ50",
@@ -27,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/MPqoQhNBZ50/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/MPqoQhNBZ50/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 53
+      "views": 80
     },
     {
       "id": "youtube-1EBJxmgrEaw",
@@ -40,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 6
+      "views": 8
     },
     {
       "id": "youtube-2xy60h2rnaY",
@@ -53,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1332
+      "views": 1364
     },
     {
       "id": "youtube-72XM4Oiyvg8",
@@ -79,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 660
+      "views": 683
     },
     {
       "id": "youtube-4eEbzQdTVYI",
@@ -145,61 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/o0gOSzVKxCk/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 40
-    },
-    {
-      "id": "youtube-pvagGEhMiTU",
-      "videoId": "pvagGEhMiTU",
-      "title": "Can Civil Society Save India’s Democracy?",
-      "description": "What will really save Indian democracy - elections every five years, or ordinary people saying “enough is enough”. \nIn this Idea Sandbox clip, veteran journalist Kalpana argues that only civil society, youth movements and independent digital media can stop India sliding into division and violence between citizens. She explains how school education and rewritten history books, social media echo chambers and ghettoised neighbourhoods are making it harder for kids to grow up seeing India as one soc...",
-      "link": "https://www.youtube.com/watch?v=pvagGEhMiTU",
-      "publishedAt": "2025-12-17T20:46:48+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/pvagGEhMiTU/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/pvagGEhMiTU/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 11
-    },
-    {
-      "id": "youtube-EhURmnJav3E",
-      "videoId": "EhURmnJav3E",
-      "title": "India’s Architecture of Chaos: Rahul Mehrotra Explains Our 4 Ways of Building",
-      "description": "Since India’s economic liberalisation in 1990, our cities have become a cacophony of architectures - glass towers, regional buildings, alternative craft projects and brand new “ancient” temples all jostling on the same streets. In this Idea Sandbox clip, architect and Harvard GSD professor Rahul Mehrotra breaks down his framework from Architecture in India Since 1990, mapping four types of practice: global architecture of “impatient capital”, regionally rooted work, collaborative alternate pract...",
-      "link": "https://www.youtube.com/watch?v=EhURmnJav3E",
-      "publishedAt": "2025-12-16T21:09:58+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/EhURmnJav3E/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/EhURmnJav3E/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 166
-    },
-    {
-      "id": "youtube-SRYBJsnV7cI",
-      "videoId": "SRYBJsnV7cI",
-      "title": "India’s Street Dog Crisis: Too Poor To Care?",
-      "description": "Why do India and Nepal treat street dogs so differently from pampered pet dogs - is it cruelty, culture, caste or just poverty. In this Idea Sandbox clip, glaciologist and animal-welfare researcher Dr. Julie Palais explains that many families in India and Nepal are living on the edge, spending hours commuting and just trying to survive each day, so they simply don’t have the money, time or bandwidth to adopt and care for stray dogs.​​\n\nShe describes how wealthier, urban families with disposable ...",
-      "link": "https://www.youtube.com/watch?v=SRYBJsnV7cI",
-      "publishedAt": "2025-12-15T23:12:16+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/SRYBJsnV7cI/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/SRYBJsnV7cI/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 21
-    },
-    {
-      "id": "youtube-EX02iKe0Vdg",
-      "videoId": "EX02iKe0Vdg",
-      "title": "I Built an AI to Read Every Indian Law (Politicians Won’t Like This)",
-      "description": "As a tech/AI engineer, Rajeev built a prototype that reads every new Indian bill for you translating Hindi-English PDFs, summarising 25‑page documents, pulling past laws and distilling the real impact in minutes. He describes AI as having “a team of eight research assistants or interns” working for each citizen, giving ordinary people the power to finally understand legislation that controls their money and rights.​\n\nIn this Idea Sandbox clip, he explains how his tool translates bills, captures ...",
-      "link": "https://www.youtube.com/watch?v=EX02iKe0Vdg",
-      "publishedAt": "2025-12-14T23:59:43+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/EX02iKe0Vdg/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/EX02iKe0Vdg/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 42
     }
   ],
-  "lastUpdated": "2026-09-06T10:44:02.411Z",
+  "lastUpdated": "2026-09-07T12:13:30.320Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
