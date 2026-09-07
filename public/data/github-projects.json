@@ -31,7 +31,7 @@
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "lastUpdated": "2026-08-31T13:24:46Z",
+      "lastUpdated": "2026-09-07T12:13:31Z",
       "createdAt": "2025-05-10T18:45:52Z",
       "visibility": "public"
     },
@@ -70,6 +70,23 @@
       "visibility": "public"
     },
     {
+      "id": "github-1181134742",
+      "name": "farm-sitter",
+      "fullName": "thecuriousnobody/farm-sitter",
+      "title": "Farm Sitter",
+      "description": "",
+      "aiDescription": "A TypeScript project exploring farm sitter.",
+      "url": "https://github.com/thecuriousnobody/farm-sitter",
+      "homepage": "",
+      "language": "TypeScript",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "lastUpdated": "2026-09-01T01:46:04Z",
+      "createdAt": "2026-03-13T19:37:19Z",
+      "visibility": "public"
+    },
+    {
       "id": "github-1282642184",
       "name": "vasanta",
       "fullName": "thecuriousnobody/vasanta",
@@ -101,23 +118,6 @@
       "topics": [],
       "lastUpdated": "2026-03-23T19:49:43Z",
       "createdAt": "2026-02-08T22:32:23Z",
-      "visibility": "public"
-    },
-    {
-      "id": "github-1181134742",
-      "name": "farm-sitter",
-      "fullName": "thecuriousnobody/farm-sitter",
-      "title": "Farm Sitter",
-      "description": "",
-      "aiDescription": "A TypeScript project exploring farm sitter.",
-      "url": "https://github.com/thecuriousnobody/farm-sitter",
-      "homepage": "",
-      "language": "TypeScript",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "lastUpdated": "2026-03-13T21:07:26Z",
-      "createdAt": "2026-03-13T19:37:19Z",
       "visibility": "public"
     },
     {
@@ -206,6 +206,6 @@
       "visibility": "public"
     }
   ],
-  "lastUpdated": "2026-08-31T15:42:53.159Z",
+  "lastUpdated": "2026-09-07T13:50:12.497Z",
   "generatedWith": "repo-metadata-only"
 }
