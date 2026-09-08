@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-xdS40afel48",
+      "videoId": "xdS40afel48",
+      "title": "Why Talking to AI Feels Better Than Talking to People",
+      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): why talking to AI can feel better than talking to people — and what that says about us. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
+      "link": "https://www.youtube.com/watch?v=xdS40afel48",
+      "publishedAt": "2026-09-08T05:00:16+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 10
+    },
+    {
+      "id": "youtube-BLa8OsQkyVI",
+      "videoId": "BLa8OsQkyVI",
+      "title": "Brought Dead — AI Reality",
+      "description": "Dr. Srikanth K.N. on the hard reality of “brought dead” and AI in Indian healthcare. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
+      "link": "https://www.youtube.com/watch?v=BLa8OsQkyVI",
+      "publishedAt": "2026-09-07T16:01:13+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/BLa8OsQkyVI/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/BLa8OsQkyVI/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 39
+    },
+    {
       "id": "youtube-T5GwbbZbnag",
       "videoId": "T5GwbbZbnag",
       "title": "India's Research Trap: IIT Pedigree, No Incentives, and the China Lesson",
@@ -14,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 0
+      "views": 13
     },
     {
       "id": "youtube-6kFkrhPlRGA",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 5
+      "views": 13
     },
     {
       "id": "youtube-ocZlo2W-N1g",
@@ -40,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/ocZlo2W-N1g/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ocZlo2W-N1g/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 50
+      "views": 87
     },
     {
       "id": "youtube-9DwnN7KrjNU",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 4
+      "views": 135
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -66,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 16
     },
     {
       "id": "youtube-MPqoQhNBZ50",
@@ -79,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/MPqoQhNBZ50/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/MPqoQhNBZ50/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 80
+      "views": 86
     },
     {
       "id": "youtube-1EBJxmgrEaw",
@@ -105,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1364
+      "views": 1378
     },
     {
       "id": "youtube-72XM4Oiyvg8",
@@ -118,7 +144,7 @@
       "thumbnail": "https://img.youtube.com/vi/72XM4Oiyvg8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 12
+      "views": 13
     },
     {
       "id": "youtube-5dLqKnbgFL4",
@@ -131,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 683
+      "views": 685
     },
     {
       "id": "youtube-4eEbzQdTVYI",
@@ -170,36 +196,10 @@
       "thumbnail": "https://img.youtube.com/vi/v8V3aHh9z0Y/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/v8V3aHh9z0Y/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 228
-    },
-    {
-      "id": "youtube-m5D5yiglvjE",
-      "videoId": "m5D5yiglvjE",
-      "title": "India’s Stray Dog Crisis: Too Poor and Too Afraid To Care?",
-      "description": "India’s stray dog crisis is usually framed as “cruel owners” vs “dangerous dogs” but what if the real story is poverty, fear and caste. \nIn this Idea Sandbox clip, glaciologist and animal‑welfare researcher Dr. Julie Palais explains how millions of street dogs end up sick, starving and full of skin disease, which makes them look terrifying while rabies cases rise and people become more afraid of being bitten. That fear stops people from helping, and the lack of help keeps the dogs dangerous—a se...",
-      "link": "https://www.youtube.com/watch?v=m5D5yiglvjE",
-      "publishedAt": "2025-12-22T18:11:47+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/m5D5yiglvjE/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/m5D5yiglvjE/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 103
-    },
-    {
-      "id": "youtube-o0gOSzVKxCk",
-      "videoId": "o0gOSzVKxCk",
-      "title": "Why Artists Hate Their Own Work (And Why That’s Okay)",
-      "description": "If you make anything - paintings, photos, podcasts - you probably hate your own work the moment it’s finished, then cringe at it years later. In this Idea Sandbox clip, artist Preeti Varma explains why that’s a normal part of the creative process, describing how she constantly walks toward and away from her canvas, looking at it from different angles until she reaches a personal “point of resolution”.​​\n\nPreeti talks about revisiting paintings and photo books made after a 13‑year hiatus and real...",
-      "link": "https://www.youtube.com/watch?v=o0gOSzVKxCk",
-      "publishedAt": "2025-12-18T19:10:59+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/o0gOSzVKxCk/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/o0gOSzVKxCk/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 40
+      "views": 229
     }
   ],
-  "lastUpdated": "2026-09-07T12:13:30.320Z",
+  "lastUpdated": "2026-09-08T11:03:15.863Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
