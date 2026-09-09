@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-6BiWuNfnEVA",
+      "videoId": "6BiWuNfnEVA",
+      "title": "GOD Becomes DOG in 4 Days",
+      "description": "Dr. Srikanth K.N. on how “GOD” becomes “DOG” in four days — AI and healthcare systems. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
+      "link": "https://www.youtube.com/watch?v=6BiWuNfnEVA",
+      "publishedAt": "2026-09-08T16:00:38+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 12
+    },
+    {
       "id": "youtube-xdS40afel48",
       "videoId": "xdS40afel48",
       "title": "Why Talking to AI Feels Better Than Talking to People",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 10
+      "views": 15
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/BLa8OsQkyVI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/BLa8OsQkyVI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 39
+      "views": 47
     },
     {
       "id": "youtube-T5GwbbZbnag",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 22
     },
     {
       "id": "youtube-6kFkrhPlRGA",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 14
     },
     {
       "id": "youtube-ocZlo2W-N1g",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/ocZlo2W-N1g/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ocZlo2W-N1g/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 87
+      "views": 89
     },
     {
       "id": "youtube-9DwnN7KrjNU",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 135
+      "views": 286
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 16
+      "views": 17
     },
     {
       "id": "youtube-MPqoQhNBZ50",
@@ -118,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 9
     },
     {
       "id": "youtube-2xy60h2rnaY",
@@ -144,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/72XM4Oiyvg8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 14
     },
     {
       "id": "youtube-5dLqKnbgFL4",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/AFsZ4EVVRrw/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 96
-    },
-    {
-      "id": "youtube-v8V3aHh9z0Y",
-      "videoId": "v8V3aHh9z0Y",
-      "title": "India's Emergency Response is Broken. Here's How AI Fixes It.",
-      "description": "Every year, India loses 2.4 million people to treatable conditions — heart attacks, road accidents, snakebites, maternal emergencies.\n\nThe treatments exist. The hospitals exist. The ambulances exist.\n\nWhat's missing is coordination.\n\nOnly 7% of trauma patients in India reach a hospital within the &quot;Golden Hour&quot; — that critical 60-minute window when intervention saves lives. In the US, it's over 50%.\n\nThis video proposes Golden Hour — a voice-first, AI-powered emergency response system t...",
-      "link": "https://www.youtube.com/watch?v=v8V3aHh9z0Y",
-      "publishedAt": "2026-01-16T23:00:00+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/v8V3aHh9z0Y/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/v8V3aHh9z0Y/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 229
     }
   ],
-  "lastUpdated": "2026-09-08T11:03:15.863Z",
+  "lastUpdated": "2026-09-09T11:08:10.559Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
