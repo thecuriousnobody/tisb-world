@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-NaSlp-qtgjk",
+      "videoId": "NaSlp-qtgjk",
+      "title": "House on the Moon by 2047",
+      "description": "Dr. Srikanth K.N. on a house on the moon by 2047 — ambition, AI, and healthcare timelines. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
+      "link": "https://www.youtube.com/watch?v=NaSlp-qtgjk",
+      "publishedAt": "2026-09-10T16:01:56+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 1411
+    },
+    {
       "id": "youtube-QvDE2LfpjbI",
       "videoId": "QvDE2LfpjbI",
       "title": "The Augmented Surgeon: AI, AR Glasses, India's Hospitals Refuse to Fix | Dr. Srikanth K.N.R., FRCS",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 51
+      "views": 66
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/PXODv9jTXG8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/PXODv9jTXG8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 121
+      "views": 156
     },
     {
       "id": "youtube-6BiWuNfnEVA",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 12
+      "views": 14
     },
     {
       "id": "youtube-xdS40afel48",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 18
+      "views": 21
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 40
+      "views": 55
     },
     {
       "id": "youtube-6kFkrhPlRGA",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 18
+      "views": 19
     },
     {
       "id": "youtube-ocZlo2W-N1g",
@@ -118,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 384
+      "views": 428
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -131,7 +144,7 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 18
+      "views": 19
     },
     {
       "id": "youtube-MPqoQhNBZ50",
@@ -157,7 +170,7 @@
       "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 11
     },
     {
       "id": "youtube-2xy60h2rnaY",
@@ -170,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1378
+      "views": 1379
     },
     {
       "id": "youtube-72XM4Oiyvg8",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 14
-    },
-    {
-      "id": "youtube-5dLqKnbgFL4",
-      "videoId": "5dLqKnbgFL4",
-      "title": "1,200 Doctors Joined Out of Fear",
-      "description": "He posted one question for a webinar: will you still have your job in two years? Twelve hundred doctors signed up. Dr. Srikanth K.N. (FRCS) on becoming the master, not the servant, of AI.",
-      "link": "https://www.youtube.com/watch?v=5dLqKnbgFL4",
-      "publishedAt": "2026-09-03T17:00:37+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/5dLqKnbgFL4/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/5dLqKnbgFL4/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 685
     }
   ],
-  "lastUpdated": "2026-09-10T11:04:31.085Z",
+  "lastUpdated": "2026-09-11T11:03:12.529Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
