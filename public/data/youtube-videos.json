@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-OMf9lyN84FU",
+      "videoId": "OMf9lyN84FU",
+      "title": "Western Mind, Eastern Heart",
+      "description": "Dr. Srikanth K.N. on Western mind, Eastern heart — AI and how we practice care. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
+      "link": "https://www.youtube.com/watch?v=OMf9lyN84FU",
+      "publishedAt": "2026-09-11T16:01:35+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/OMf9lyN84FU/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/OMf9lyN84FU/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 22
+    },
+    {
       "id": "youtube-NaSlp-qtgjk",
       "videoId": "NaSlp-qtgjk",
       "title": "House on the Moon by 2047",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1411
+      "views": 1424
     },
     {
       "id": "youtube-QvDE2LfpjbI",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 66
+      "views": 73
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/PXODv9jTXG8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/PXODv9jTXG8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 156
+      "views": 175
     },
     {
       "id": "youtube-6BiWuNfnEVA",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 21
+      "views": 25
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 1379
-    },
-    {
-      "id": "youtube-72XM4Oiyvg8",
-      "videoId": "72XM4Oiyvg8",
-      "title": "When Hospital AI Goes Wrong: The Cancer Hallucination",
-      "description": "From Chat with Smit: an ER conversational agent tells a patient they have cancer — and the guardrails / accountability debate that follows.\n\nGuest: Dr. Smit Desai\nAssistant Professor, Northeastern University (College of Arts, Media and Design; Khoury affiliate)\nDirector, Conversational Human–AI Interactions (CHAI) Lab\nResearch: human-centered conversational AI, voice interfaces, healthcare agents\n\nMore: https://camd.northeastern.edu/people/smit-desai/\nLab / site: https://smitdesai.net/\n\n#AI #Hea...",
-      "link": "https://www.youtube.com/watch?v=72XM4Oiyvg8",
-      "publishedAt": "2026-09-04T13:30:24+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/72XM4Oiyvg8/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/72XM4Oiyvg8/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 14
     }
   ],
-  "lastUpdated": "2026-09-11T11:03:12.529Z",
+  "lastUpdated": "2026-09-12T10:32:23.163Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
