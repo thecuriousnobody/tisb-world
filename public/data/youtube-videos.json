@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-ZL48ALYgOos",
+      "videoId": "ZL48ALYgOos",
+      "title": "Patent Costs $30K — Unpaid Since 2007",
+      "description": "Dr. Rex Dyer on patent costs, unpaid entrepreneurial work, and food safety innovation — from The Idea Sandbox podcast. #foodsafety #patents #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=ZL48ALYgOos",
+      "publishedAt": "2026-09-12T16:00:32+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/ZL48ALYgOos/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/ZL48ALYgOos/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 37
+    },
+    {
       "id": "youtube-OMf9lyN84FU",
       "videoId": "OMf9lyN84FU",
       "title": "Western Mind, Eastern Heart",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/OMf9lyN84FU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/OMf9lyN84FU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 22
+      "views": 30
     },
     {
       "id": "youtube-NaSlp-qtgjk",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1424
+      "views": 1431
     },
     {
       "id": "youtube-QvDE2LfpjbI",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 73
+      "views": 85
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 14
+      "views": 15
     },
     {
       "id": "youtube-xdS40afel48",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 25
+      "views": 28
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -144,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 428
+      "views": 430
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -157,7 +170,7 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 19
+      "views": 20
     },
     {
       "id": "youtube-MPqoQhNBZ50",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 11
-    },
-    {
-      "id": "youtube-2xy60h2rnaY",
-      "videoId": "2xy60h2rnaY",
-      "title": "I Don't Want a House on the Moon in 2047",
-      "description": "Dr. Srikanth K.N. (FRCS) on why development promises dated twenty years out mean nothing to the people who are alive right now. From The Idea Sandbox.",
-      "link": "https://www.youtube.com/watch?v=2xy60h2rnaY",
-      "publishedAt": "2026-09-04T17:01:13+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/2xy60h2rnaY/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/2xy60h2rnaY/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 1379
     }
   ],
-  "lastUpdated": "2026-09-12T10:32:23.163Z",
+  "lastUpdated": "2026-09-13T11:35:23.887Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
