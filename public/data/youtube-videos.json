@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-R0B54-e6VHM",
+      "videoId": "R0B54-e6VHM",
+      "title": "AI Could Fix Blind Spots in Congress",
+      "description": "Dr. Rex Dyer on AI boiling food-safety problems into data Congress can act on — from The Idea Sandbox podcast. #AI #foodsafety #policy #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=R0B54-e6VHM",
+      "publishedAt": "2026-09-13T16:01:25+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/R0B54-e6VHM/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/R0B54-e6VHM/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 4
+    },
+    {
       "id": "youtube-ZL48ALYgOos",
       "videoId": "ZL48ALYgOos",
       "title": "Patent Costs $30K — Unpaid Since 2007",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/ZL48ALYgOos/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ZL48ALYgOos/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 37
+      "views": 42
     },
     {
       "id": "youtube-OMf9lyN84FU",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/OMf9lyN84FU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/OMf9lyN84FU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 30
+      "views": 35
     },
     {
       "id": "youtube-NaSlp-qtgjk",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1431
+      "views": 1434
     },
     {
       "id": "youtube-QvDE2LfpjbI",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 85
+      "views": 92
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 15
+      "views": 16
     },
     {
       "id": "youtube-xdS40afel48",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 28
+      "views": 29
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -118,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 55
+      "views": 57
     },
     {
       "id": "youtube-6kFkrhPlRGA",
@@ -157,7 +170,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 430
+      "views": 431
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/MPqoQhNBZ50/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 86
-    },
-    {
-      "id": "youtube-1EBJxmgrEaw",
-      "videoId": "1EBJxmgrEaw",
-      "title": "When Your AI Friend Orders for You: Character.ai &amp; Blurred Reality",
-      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): when AI companions feel real — Character.ai, blurred reality, and what happens when the guardrails slip. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
-      "link": "https://www.youtube.com/watch?v=1EBJxmgrEaw",
-      "publishedAt": "2026-09-05T05:00:23+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/1EBJxmgrEaw/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/1EBJxmgrEaw/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 11
     }
   ],
-  "lastUpdated": "2026-09-13T11:35:23.887Z",
+  "lastUpdated": "2026-09-14T12:29:10.880Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
