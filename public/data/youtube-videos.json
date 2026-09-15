@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-agKvq56H4Lo",
+      "videoId": "agKvq56H4Lo",
+      "title": "Ethical Food Makers Hit Thin Margins",
+      "description": "Dr. Rex Dyer on ethical food manufacturers vs razor-thin margins — from The Idea Sandbox podcast. #foodsafety #manufacturing #ethics #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=agKvq56H4Lo",
+      "publishedAt": "2026-09-14T16:01:46+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/agKvq56H4Lo/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/agKvq56H4Lo/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 8
+    },
+    {
       "id": "youtube-R0B54-e6VHM",
       "videoId": "R0B54-e6VHM",
       "title": "AI Could Fix Blind Spots in Congress",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 1434
+      "views": 1449
     },
     {
       "id": "youtube-QvDE2LfpjbI",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 92
+      "views": 94
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/PXODv9jTXG8/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/PXODv9jTXG8/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 175
+      "views": 174
     },
     {
       "id": "youtube-6BiWuNfnEVA",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 16
+      "views": 17
     },
     {
       "id": "youtube-xdS40afel48",
@@ -105,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 29
+      "views": 30
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -144,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 19
+      "views": 20
     },
     {
       "id": "youtube-ocZlo2W-N1g",
@@ -157,7 +170,7 @@
       "thumbnail": "https://img.youtube.com/vi/ocZlo2W-N1g/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ocZlo2W-N1g/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 89
+      "views": 90
     },
     {
       "id": "youtube-9DwnN7KrjNU",
@@ -170,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 431
+      "views": 432
     },
     {
       "id": "youtube-8pHrVkH2CVY",
@@ -183,23 +196,10 @@
       "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 20
-    },
-    {
-      "id": "youtube-MPqoQhNBZ50",
-      "videoId": "MPqoQhNBZ50",
-      "title": "Western Mind, Eastern Heart",
-      "description": "The best of both civilizations, in under a minute. Dr. Srikanth K.N. (FRCS) on what the West teaches you and what the East gives you. From The Idea Sandbox.",
-      "link": "https://www.youtube.com/watch?v=MPqoQhNBZ50",
-      "publishedAt": "2026-09-05T17:01:00+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/MPqoQhNBZ50/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/MPqoQhNBZ50/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 86
+      "views": 21
     }
   ],
-  "lastUpdated": "2026-09-14T12:29:10.880Z",
+  "lastUpdated": "2026-09-15T11:32:47.211Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
