@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-24neGNP6Kj4",
+      "videoId": "24neGNP6Kj4",
+      "title": "Food Safety Still Stuck on Recalls",
+      "description": "Dr. Rex Dyer on why food safety still runs on recalls instead of in-plant automation — from The Idea Sandbox podcast. #foodsafety #recalls #innovation #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=24neGNP6Kj4",
+      "publishedAt": "2026-09-15T16:00:47+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/24neGNP6Kj4/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/24neGNP6Kj4/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 8
+    },
+    {
       "id": "youtube-agKvq56H4Lo",
       "videoId": "agKvq56H4Lo",
       "title": "Ethical Food Makers Hit Thin Margins",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/R0B54-e6VHM/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/R0B54-e6VHM/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 4
+      "views": 5
     },
     {
       "id": "youtube-ZL48ALYgOos",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 94
+      "views": 95
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 432
-    },
-    {
-      "id": "youtube-8pHrVkH2CVY",
-      "videoId": "8pHrVkH2CVY",
-      "title": "We're Programming AI Personalities With the Big Five — And It Persuades",
-      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): programming AI personalities with the Big Five — and why that persuades. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
-      "link": "https://www.youtube.com/watch?v=8pHrVkH2CVY",
-      "publishedAt": "2026-09-06T05:00:17+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/8pHrVkH2CVY/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/8pHrVkH2CVY/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 21
     }
   ],
-  "lastUpdated": "2026-09-15T11:32:47.211Z",
+  "lastUpdated": "2026-09-16T11:19:10.907Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
