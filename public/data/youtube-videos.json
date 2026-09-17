@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-5j5lffsG7Ew",
+      "videoId": "5j5lffsG7Ew",
+      "title": "AI Could Fast-Track Food Safety Bills",
+      "description": "Could AI triage food-safety advocacy and put the right bills on the floor tomorrow? From The Idea Sandbox with Dr. Rex Dyer. #AI #lobbying #foodsafety #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=5j5lffsG7Ew",
+      "publishedAt": "2026-09-16T16:01:04+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 52
+    },
+    {
+      "id": "youtube-epzWhELwiEc",
+      "videoId": "epzWhELwiEc",
+      "title": "Idea → Machine Shop in Weeks",
+      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
+      "link": "https://www.youtube.com/watch?v=epzWhELwiEc",
+      "publishedAt": "2026-09-16T16:00:44+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 18
+    },
+    {
       "id": "youtube-24neGNP6Kj4",
       "videoId": "24neGNP6Kj4",
       "title": "Food Safety Still Stuck on Recalls",
@@ -14,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/24neGNP6Kj4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/24neGNP6Kj4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 13
     },
     {
       "id": "youtube-agKvq56H4Lo",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/agKvq56H4Lo/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/agKvq56H4Lo/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 9
     },
     {
       "id": "youtube-R0B54-e6VHM",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/ZL48ALYgOos/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ZL48ALYgOos/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 42
+      "views": 44
     },
     {
       "id": "youtube-OMf9lyN84FU",
@@ -92,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 95
+      "views": 99
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -131,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 30
+      "views": 31
     },
     {
       "id": "youtube-BLa8OsQkyVI",
@@ -157,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 57
+      "views": 58
     },
     {
       "id": "youtube-6kFkrhPlRGA",
@@ -170,36 +196,10 @@
       "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 20
-    },
-    {
-      "id": "youtube-ocZlo2W-N1g",
-      "videoId": "ocZlo2W-N1g",
-      "title": "72 Hours vs 5 Minutes AI",
-      "description": "Dr. Srikanth K.N. on AI in healthcare — 72 hours of human work vs minutes with AI. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=ocZlo2W-N1g",
-      "publishedAt": "2026-09-06T16:00:37+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/ocZlo2W-N1g/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/ocZlo2W-N1g/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 90
-    },
-    {
-      "id": "youtube-9DwnN7KrjNU",
-      "videoId": "9DwnN7KrjNU",
-      "title": "Why &quot;Brought Dead&quot; Is the Default Fate in Indian Hospitals | Dr. Srikanth K.N.",
-      "description": "Orthopaedic surgeon Dr. Srikanth K.N. (FRCS) explains why Indian hospitals increasingly declare arriving patients dead on arrival by default. It isn't incompetence. After years of doctors being assaulted and hospitals vandalized when a resuscitation attempt fails, the safest clinical decision became not trying at all. From the full conversation on redesigning Indian healthcare from scratch, on The Idea Sandbox.",
-      "link": "https://www.youtube.com/watch?v=9DwnN7KrjNU",
-      "publishedAt": "2026-09-06T15:00:43+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/9DwnN7KrjNU/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/9DwnN7KrjNU/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 432
+      "views": 21
     }
   ],
-  "lastUpdated": "2026-09-16T11:19:10.907Z",
+  "lastUpdated": "2026-09-17T11:27:14.194Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
