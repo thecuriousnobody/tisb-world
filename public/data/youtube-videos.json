@@ -4,6 +4,45 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube--imu-nevg58",
+      "videoId": "-imu-nevg58",
+      "title": "Why Some 80-Year-Olds Function Like They're 30 | Dr. Ameya Patwardhan, NIMHANS-trained Neurologist",
+      "description": "This is a short cut from my upcoming full conversation with Dr. Ameya Patwardhan — a NIMHANS-trained cognitive neurologist (Parkinson’s &amp; dementia). He is a Cognitive &amp; Movement Disorders fellowship alum at Sunnybrook / University of Toronto, and now an Assistant Professor / cognitive neurologist at Western University (London, ON).\n\nIn this ~10-minute piece we sit with super-agers: people past 80 who still function like they’re in their 30s–40s — cognitively healthy aging. Ameya is clear...",
+      "link": "https://www.youtube.com/watch?v=-imu-nevg58",
+      "publishedAt": "2026-09-17T20:30:17+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 41
+    },
+    {
+      "id": "youtube-V_uCTP8vQn4",
+      "videoId": "V_uCTP8vQn4",
+      "title": "In-Plant Testing Should Already Exist",
+      "description": "Dr. Rex Dyer: in-plant automated testing should already exist — millions in recalls and kids at risk. From The Idea Sandbox. #foodsafety #testing #innovation #shorts #theideasandbox",
+      "link": "https://www.youtube.com/watch?v=V_uCTP8vQn4",
+      "publishedAt": "2026-09-17T16:01:57+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/V_uCTP8vQn4/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/V_uCTP8vQn4/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 122
+    },
+    {
+      "id": "youtube-iXNrDjY4FEc",
+      "videoId": "iXNrDjY4FEc",
+      "title": "Building in Isolation Is a Bad Idea",
+      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
+      "link": "https://www.youtube.com/watch?v=iXNrDjY4FEc",
+      "publishedAt": "2026-09-17T16:01:57+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/iXNrDjY4FEc/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/iXNrDjY4FEc/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 32
+    },
+    {
       "id": "youtube-5j5lffsG7Ew",
       "videoId": "5j5lffsG7Ew",
       "title": "AI Could Fast-Track Food Safety Bills",
@@ -14,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 52
+      "views": 88
     },
     {
       "id": "youtube-epzWhELwiEc",
@@ -27,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 18
+      "views": 35
     },
     {
       "id": "youtube-24neGNP6Kj4",
@@ -118,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 99
+      "views": 101
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -158,48 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 31
-    },
-    {
-      "id": "youtube-BLa8OsQkyVI",
-      "videoId": "BLa8OsQkyVI",
-      "title": "Brought Dead — AI Reality",
-      "description": "Dr. Srikanth K.N. on the hard reality of “brought dead” and AI in Indian healthcare. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=BLa8OsQkyVI",
-      "publishedAt": "2026-09-07T16:01:13+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/BLa8OsQkyVI/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/BLa8OsQkyVI/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 48
-    },
-    {
-      "id": "youtube-T5GwbbZbnag",
-      "videoId": "T5GwbbZbnag",
-      "title": "India's Research Trap: IIT Pedigree, No Incentives, and the China Lesson",
-      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): India's research trap — pedigree, incentives, and the China comparison. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
-      "link": "https://www.youtube.com/watch?v=T5GwbbZbnag",
-      "publishedAt": "2026-09-07T05:00:25+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/T5GwbbZbnag/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/T5GwbbZbnag/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 58
-    },
-    {
-      "id": "youtube-6kFkrhPlRGA",
-      "videoId": "6kFkrhPlRGA",
-      "title": "God Becomes Dog in 4 Days | Dr. Srikanth K.N.",
-      "description": "What happens to a surgeon's status the day the hospital bill arrives. From my conversation with orthopaedic surgeon Dr. Srikanth K.N. (FRCS) on redesigning Indian healthcare. Full episode on The Idea Sandbox.",
-      "link": "https://www.youtube.com/watch?v=6kFkrhPlRGA",
-      "publishedAt": "2026-09-07T05:00:21+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/6kFkrhPlRGA/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/6kFkrhPlRGA/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 21
     }
   ],
-  "lastUpdated": "2026-09-17T11:27:14.194Z",
+  "lastUpdated": "2026-09-18T11:00:21.980Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
