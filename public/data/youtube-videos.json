@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-YIcoxKwrVQc",
+      "videoId": "YIcoxKwrVQc",
+      "title": "Software → AI-Run Machine Shop",
+      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
+      "link": "https://www.youtube.com/watch?v=YIcoxKwrVQc",
+      "publishedAt": "2026-09-18T23:00:33+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/YIcoxKwrVQc/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/YIcoxKwrVQc/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 112
+    },
+    {
+      "id": "youtube-d_6022_10vA",
+      "videoId": "d_6022_10vA",
+      "title": "Super-Agers — 80 Like 30",
+      "description": "Some 80-year-olds still think like they're 30. A NIMHANS-trained neurologist on what super-agers teach us about the mind. The Idea Sandbox",
+      "link": "https://www.youtube.com/watch?v=d_6022_10vA",
+      "publishedAt": "2026-09-18T16:00:53+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/d_6022_10vA/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/d_6022_10vA/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 9
+    },
+    {
       "id": "youtube--imu-nevg58",
       "videoId": "-imu-nevg58",
       "title": "Why Some 80-Year-Olds Function Like They're 30 | Dr. Ameya Patwardhan, NIMHANS-trained Neurologist",
@@ -14,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 41
+      "views": 156
     },
     {
       "id": "youtube-V_uCTP8vQn4",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/V_uCTP8vQn4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/V_uCTP8vQn4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 122
+      "views": 121
     },
     {
       "id": "youtube-iXNrDjY4FEc",
@@ -40,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/iXNrDjY4FEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/iXNrDjY4FEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 32
+      "views": 50
     },
     {
       "id": "youtube-5j5lffsG7Ew",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 88
+      "views": 164
     },
     {
       "id": "youtube-epzWhELwiEc",
@@ -66,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 35
+      "views": 38
     },
     {
       "id": "youtube-24neGNP6Kj4",
@@ -157,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 101
+      "views": 102
     },
     {
       "id": "youtube-PXODv9jTXG8",
@@ -171,35 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/PXODv9jTXG8/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 174
-    },
-    {
-      "id": "youtube-6BiWuNfnEVA",
-      "videoId": "6BiWuNfnEVA",
-      "title": "GOD Becomes DOG in 4 Days",
-      "description": "Dr. Srikanth K.N. on how “GOD” becomes “DOG” in four days — AI and healthcare systems. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=6BiWuNfnEVA",
-      "publishedAt": "2026-09-08T16:00:38+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/6BiWuNfnEVA/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/6BiWuNfnEVA/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 17
-    },
-    {
-      "id": "youtube-xdS40afel48",
-      "videoId": "xdS40afel48",
-      "title": "Why Talking to AI Feels Better Than Talking to People",
-      "description": "From Chat with Smit with Dr. Smit Desai (Assistant Professor, Northeastern; Director, CHAI Lab): why talking to AI can feel better than talking to people — and what that says about us. Guest: Dr. Smit Desai Assistant Professor, Northeastern University (CAMD; Khoury affiliate) Director, Conversational Human–AI Interactions (CHAI) Lab More: https://camd.northeastern.edu/people/smit-desai/",
-      "link": "https://www.youtube.com/watch?v=xdS40afel48",
-      "publishedAt": "2026-09-08T05:00:16+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/xdS40afel48/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/xdS40afel48/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 31
     }
   ],
-  "lastUpdated": "2026-09-18T11:00:21.980Z",
+  "lastUpdated": "2026-09-19T10:44:06.634Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
