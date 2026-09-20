@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-tAbIie0inEc",
+      "videoId": "tAbIie0inEc",
+      "title": "The Resource Pot",
+      "description": "Alzheimer's drains the pot. Purpose and connection refill it. The resource-pot analogy that reframes cognitive aging. The Idea Sandbox",
+      "link": "https://www.youtube.com/watch?v=tAbIie0inEc",
+      "publishedAt": "2026-09-19T16:03:28+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/tAbIie0inEc/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/tAbIie0inEc/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 8
+    },
+    {
       "id": "youtube-YIcoxKwrVQc",
       "videoId": "YIcoxKwrVQc",
       "title": "Software → AI-Run Machine Shop",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/YIcoxKwrVQc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/YIcoxKwrVQc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 112
+      "views": 118
     },
     {
       "id": "youtube-d_6022_10vA",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/d_6022_10vA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/d_6022_10vA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 12
     },
     {
       "id": "youtube--imu-nevg58",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 156
+      "views": 171
     },
     {
       "id": "youtube-V_uCTP8vQn4",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/iXNrDjY4FEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/iXNrDjY4FEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 50
+      "views": 51
     },
     {
       "id": "youtube-5j5lffsG7Ew",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 164
+      "views": 148
     },
     {
       "id": "youtube-epzWhELwiEc",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 38
+      "views": 37
     },
     {
       "id": "youtube-24neGNP6Kj4",
@@ -105,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/24neGNP6Kj4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/24neGNP6Kj4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 8
     },
     {
       "id": "youtube-agKvq56H4Lo",
@@ -118,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/agKvq56H4Lo/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/agKvq56H4Lo/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 8
     },
     {
       "id": "youtube-R0B54-e6VHM",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 102
-    },
-    {
-      "id": "youtube-PXODv9jTXG8",
-      "videoId": "PXODv9jTXG8",
-      "title": "1200 Doctors Joined From Fear",
-      "description": "Dr. Srikanth K.N. on 1200 doctors joining from fear — AI and the future of medicine. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=PXODv9jTXG8",
-      "publishedAt": "2026-09-09T16:00:44+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/PXODv9jTXG8/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/PXODv9jTXG8/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 174
     }
   ],
-  "lastUpdated": "2026-09-19T10:44:06.634Z",
+  "lastUpdated": "2026-09-20T11:06:47.338Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
