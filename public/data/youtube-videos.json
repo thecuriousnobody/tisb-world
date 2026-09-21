@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-wW_bCmyU8Zo",
+      "videoId": "wW_bCmyU8Zo",
+      "title": "Find Problems, Don't Invent Them",
+      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
+      "link": "https://www.youtube.com/watch?v=wW_bCmyU8Zo",
+      "publishedAt": "2026-09-20T23:00:44+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/wW_bCmyU8Zo/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/wW_bCmyU8Zo/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 13
+    },
+    {
+      "id": "youtube-V8_DQCb0a9Q",
+      "videoId": "V8_DQCb0a9Q",
+      "title": "AI Won't Replace Doctors",
+      "description": "AI stores and patterns. Judgment stays human. Why doctors who use AI may replace those who don't. The Idea Sandbox",
+      "link": "https://www.youtube.com/watch?v=V8_DQCb0a9Q",
+      "publishedAt": "2026-09-20T16:00:46+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/V8_DQCb0a9Q/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/V8_DQCb0a9Q/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 9
+    },
+    {
       "id": "youtube-tAbIie0inEc",
       "videoId": "tAbIie0inEc",
       "title": "The Resource Pot",
@@ -14,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/tAbIie0inEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/tAbIie0inEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 13
     },
     {
       "id": "youtube-YIcoxKwrVQc",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/YIcoxKwrVQc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/YIcoxKwrVQc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 118
+      "views": 119
     },
     {
       "id": "youtube-d_6022_10vA",
@@ -40,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/d_6022_10vA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/d_6022_10vA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 12
+      "views": 13
     },
     {
       "id": "youtube--imu-nevg58",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 171
+      "views": 176
     },
     {
       "id": "youtube-V_uCTP8vQn4",
@@ -66,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/V_uCTP8vQn4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/V_uCTP8vQn4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 121
+      "views": 113
     },
     {
       "id": "youtube-iXNrDjY4FEc",
@@ -79,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/iXNrDjY4FEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/iXNrDjY4FEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 51
+      "views": 48
     },
     {
       "id": "youtube-5j5lffsG7Ew",
@@ -92,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 148
+      "views": 144
     },
     {
       "id": "youtube-epzWhELwiEc",
@@ -105,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 37
+      "views": 35
     },
     {
       "id": "youtube-24neGNP6Kj4",
@@ -171,35 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/OMf9lyN84FU/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 35
-    },
-    {
-      "id": "youtube-NaSlp-qtgjk",
-      "videoId": "NaSlp-qtgjk",
-      "title": "House on the Moon by 2047",
-      "description": "Dr. Srikanth K.N. on a house on the moon by 2047 — ambition, AI, and healthcare timelines. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=NaSlp-qtgjk",
-      "publishedAt": "2026-09-10T16:01:56+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/NaSlp-qtgjk/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/NaSlp-qtgjk/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 1449
-    },
-    {
-      "id": "youtube-QvDE2LfpjbI",
-      "videoId": "QvDE2LfpjbI",
-      "title": "The Augmented Surgeon: AI, AR Glasses, India's Hospitals Refuse to Fix | Dr. Srikanth K.N.R., FRCS",
-      "description": "Dr. Srikanth K.N.R. — Super Specialist Consultant, Joint Replacement / Robotic &amp; Reconstructive Surgery · MD, Sarathi Super Specialty Orthopaedic Centre · Director, International Meet the Masters · Bristol Hip Course (India &amp; SE Asia) https://www.srikanthkn.com https://www.linkedin.com/in/srikanthkn12/ \nChapters:\n0:00 AUGMENTED DOCTOR\n4:48 MASTER, NOT SERVANT\n6:42 AR IN THE OR\n11:28 WESTERN MIND, EASTERN HEART\n12:55 OUTCOME ACCOUNTABILITY\n15:27 GHOST COLLEGES\n22:14 BROUGHT DEAD BY DEFAUL...",
-      "link": "https://www.youtube.com/watch?v=QvDE2LfpjbI",
-      "publishedAt": "2026-09-09T16:02:03+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/QvDE2LfpjbI/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/QvDE2LfpjbI/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 102
     }
   ],
-  "lastUpdated": "2026-09-20T11:06:47.338Z",
+  "lastUpdated": "2026-09-21T12:35:17.217Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
