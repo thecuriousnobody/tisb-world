@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-Gyi_tc5v_mE",
+      "videoId": "Gyi_tc5v_mE",
+      "title": "Mental Health Stigma in India",
+      "description": "Minor mental illness meets major silence. A neurologist's clear-eyed take on stigma in India. The Idea Sandbox",
+      "link": "https://www.youtube.com/watch?v=Gyi_tc5v_mE",
+      "publishedAt": "2026-09-21T16:00:38+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/Gyi_tc5v_mE/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/Gyi_tc5v_mE/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 51
+    },
+    {
       "id": "youtube-wW_bCmyU8Zo",
       "videoId": "wW_bCmyU8Zo",
       "title": "Find Problems, Don't Invent Them",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/wW_bCmyU8Zo/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/wW_bCmyU8Zo/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 17
     },
     {
       "id": "youtube-V8_DQCb0a9Q",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/V8_DQCb0a9Q/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/V8_DQCb0a9Q/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 18
     },
     {
       "id": "youtube-tAbIie0inEc",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/tAbIie0inEc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/tAbIie0inEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 13
+      "views": 15
     },
     {
       "id": "youtube-YIcoxKwrVQc",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/YIcoxKwrVQc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/YIcoxKwrVQc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 119
+      "views": 118
     },
     {
       "id": "youtube-d_6022_10vA",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 176
+      "views": 184
     },
     {
       "id": "youtube-V_uCTP8vQn4",
@@ -118,7 +131,7 @@
       "thumbnail": "https://img.youtube.com/vi/5j5lffsG7Ew/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 144
+      "views": 147
     },
     {
       "id": "youtube-epzWhELwiEc",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/ZL48ALYgOos/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 44
-    },
-    {
-      "id": "youtube-OMf9lyN84FU",
-      "videoId": "OMf9lyN84FU",
-      "title": "Western Mind, Eastern Heart",
-      "description": "Dr. Srikanth K.N. on Western mind, Eastern heart — AI and how we practice care. From The Idea Sandbox podcast. Guest: Dr. Srikanth K.N. #Shorts #AIinHealthcare #TheIdeaSandbox",
-      "link": "https://www.youtube.com/watch?v=OMf9lyN84FU",
-      "publishedAt": "2026-09-11T16:01:35+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/OMf9lyN84FU/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/OMf9lyN84FU/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 35
     }
   ],
-  "lastUpdated": "2026-09-21T12:35:17.217Z",
+  "lastUpdated": "2026-09-22T11:22:43.440Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
