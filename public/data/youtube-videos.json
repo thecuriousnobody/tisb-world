@@ -4,6 +4,32 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-l3scamlbLpc",
+      "videoId": "l3scamlbLpc",
+      "title": "Everything Adds Up | Preeti Varma, NYC artist",
+      "description": "Everything adds up — even the years that felt like a detour.\n\nNYC artist Preeti Varma on art school in Singapore, loosening twenty years of grip, and why a corporate past still informs the work.\n\nClip from The Idea Sandbox.\n\nGuest: Preeti Varma — NYC artist\nHost: Rajeev Kumar (Curious Nobody)\n\nLinks\nSubstack: https://theideasandbox.substack.com\nBehance: https://www.behance.net/theideasandbox\nYouTube: https://www.youtube.com/@theideasandbox\n\n#IdeaSandbox #Art #PreetiVarma",
+      "link": "https://www.youtube.com/watch?v=l3scamlbLpc",
+      "publishedAt": "2026-09-23T23:00:44+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/l3scamlbLpc/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/l3scamlbLpc/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 9
+    },
+    {
+      "id": "youtube-AsXE_lKVwiE",
+      "videoId": "AsXE_lKVwiE",
+      "title": "Psychiatry Exodus",
+      "description": "Why psychiatrists leave — incentives, time, and a civil-engineering analogy that lands hard.\n\nThe Idea Sandbox",
+      "link": "https://www.youtube.com/watch?v=AsXE_lKVwiE",
+      "publishedAt": "2026-09-23T16:01:36+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/AsXE_lKVwiE/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/AsXE_lKVwiE/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 40
+    },
+    {
       "id": "youtube-yy4_lTPsLoc",
       "videoId": "yy4_lTPsLoc",
       "title": "Luxury Belief? | Why Care About Animal Rights — Dulki Seethawaka",
@@ -27,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/F7TTvjBnqy4/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/F7TTvjBnqy4/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 12
+      "views": 15
     },
     {
       "id": "youtube-TiEoIcTtixU",
@@ -40,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/TiEoIcTtixU/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/TiEoIcTtixU/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 4
+      "views": 8
     },
     {
       "id": "youtube-Gyi_tc5v_mE",
@@ -53,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/Gyi_tc5v_mE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/Gyi_tc5v_mE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 72
+      "views": 77
     },
     {
       "id": "youtube-wW_bCmyU8Zo",
@@ -131,7 +157,7 @@
       "thumbnail": "https://img.youtube.com/vi/-imu-nevg58/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/-imu-nevg58/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 189
+      "views": 190
     },
     {
       "id": "youtube-V_uCTP8vQn4",
@@ -171,35 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/5j5lffsG7Ew/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 147
-    },
-    {
-      "id": "youtube-epzWhELwiEc",
-      "videoId": "epzWhELwiEc",
-      "title": "Idea → Machine Shop in Weeks",
-      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
-      "link": "https://www.youtube.com/watch?v=epzWhELwiEc",
-      "publishedAt": "2026-09-16T16:00:44+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/epzWhELwiEc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/epzWhELwiEc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 35
-    },
-    {
-      "id": "youtube-24neGNP6Kj4",
-      "videoId": "24neGNP6Kj4",
-      "title": "Food Safety Still Stuck on Recalls",
-      "description": "Dr. Rex Dyer on why food safety still runs on recalls instead of in-plant automation — from The Idea Sandbox podcast. #foodsafety #recalls #innovation #shorts #theideasandbox",
-      "link": "https://www.youtube.com/watch?v=24neGNP6Kj4",
-      "publishedAt": "2026-09-15T16:00:47+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/24neGNP6Kj4/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/24neGNP6Kj4/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 8
     }
   ],
-  "lastUpdated": "2026-09-23T11:18:53.950Z",
+  "lastUpdated": "2026-09-24T11:32:02.050Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
