@@ -104,7 +104,20 @@ export function SectionHeader({
     >
       <Box sx={{ p: `clamp(40px, 5vw, 64px) ${GUTTER}`, display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <Mono as="div">{label}</Mono>
-        <Box component="h1" sx={{ font: `400 ${titleSize}/${titleLine} ${F.display}`, letterSpacing: '.02em', overflowWrap: 'anywhere' }}>
+        <Box
+          component="h1"
+          sx={{
+            fontFamily: F.display, fontWeight: 400, lineHeight: titleLine, letterSpacing: '.02em',
+            // Michroma is wide (~1em per capital), so the desktop 44px floor
+            // can't fit "VENTURES" on a phone; it used to split into
+            // "VENTURE / S". Below the wide breakpoint the title scales with
+            // the viewport so the longest single word always fits, and words
+            // are never broken mid-way.
+            fontSize: 'clamp(26px, 8.6vw, 56px)',
+            overflowWrap: 'normal',
+            [WIDE]: { fontSize: titleSize },
+          }}
+        >
           {title}
         </Box>
         <Box component="p" sx={{ fontSize: leadSize, lineHeight: 1.7, fontWeight: 300, maxWidth: leadMax }}>
