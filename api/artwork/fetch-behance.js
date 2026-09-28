@@ -1,32 +1,38 @@
 import axios from 'axios'
+import { verifyAdmin } from '../dropzone/_lib/auth.js'
 import * as cheerio from 'cheerio'
 
 export default async function handler(req, res) {
-  // Enable CORS for local development
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end()
-    return
-  }
-
+  // Admin-only, same-origin. Previously open to anyone, from any website.
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
+  if (!(await verifyAdmin(req, res))) return
 
   try {
     const { url } = req.body
 
-    if (!url || !url.includes('behance.net/gallery/')) {
+    // Parse, don't substring-match: `url.includes('behance.net/gallery/')`
+    // accepted http://any-host/?x=behance.net/gallery/ and made this server
+    // fetch arbitrary URLs (SSRF).
+    const BEHANCE_HOSTS = ['www.behance.net', 'behance.net']
+    let parsed
+    try {
+      parsed = new URL(String(url || ''))
+    } catch {
+      parsed = null
+    }
+    if (!parsed || parsed.protocol !== 'https:' || !BEHANCE_HOSTS.includes(parsed.hostname) || !parsed.pathname.startsWith('/gallery/')) {
       return res.status(400).json({ error: 'Please provide a valid Behance gallery URL' })
     }
 
     console.log(`🎨 Fetching Behance project: ${url}`)
 
-    const response = await axios.get(url, {
+    const response = await axios.get(parsed.href, {
+      maxRedirects: 3,
+      beforeRedirect: (opts) => {
+        if (!BEHANCE_HOSTS.includes(opts.hostname)) throw new Error('Redirected off Behance')
+      },
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',

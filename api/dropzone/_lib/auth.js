@@ -8,7 +8,7 @@ const FALLBACK_ADMINS = [
   'shay999.in@gmail.com',
 ];
 
-export async function verifyAdmin(req, res) {
+async function verifyAllowed(req, res, allowList) {
   const auth = req.headers.authorization || '';
   const token = auth.replace(/^Bearer\s+/i, '');
   if (!token) {
@@ -41,15 +41,33 @@ export async function verifyAdmin(req, res) {
     return null;
   }
 
-  const admins = (process.env.ADMIN_EMAILS || FALLBACK_ADMINS.join(','))
-    .split(',')
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
   const email = (info.email || '').toLowerCase();
-  if (!admins.includes(email)) {
+  if (!allowList.includes(email)) {
     res.status(403).json({ error: 'Not an admin account.' });
     return null;
   }
 
   return { email };
+}
+
+
+const parseList = (...lists) =>
+  lists.join(',').split(',').map((e) => e.trim().toLowerCase()).filter(Boolean);
+
+/** Admin-only tools (drop zone, static drop, artwork). */
+export function verifyAdmin(req, res) {
+  return verifyAllowed(req, res, parseList(process.env.ADMIN_EMAILS || FALLBACK_ADMINS.join(',')));
+}
+
+/**
+ * Tools editors use too (the Video Production Tracker). Allow-list is
+ * ADMIN_EMAILS plus VITE_ADMIN_EMAILS — the list the client already uses to
+ * let editors into /admin — so the server and the UI agree on who's in.
+ */
+export function verifyEditor(req, res) {
+  return verifyAllowed(
+    req,
+    res,
+    parseList(process.env.ADMIN_EMAILS || FALLBACK_ADMINS.join(','), process.env.VITE_ADMIN_EMAILS || ''),
+  );
 }

@@ -41,6 +41,29 @@ import {
   Mood as MoodIcon,
 } from '@mui/icons-material'
 import { useAuth } from '../contexts/AuthContext'
+import { getAdminCredential } from '../utils/adminCredential'
+
+/**
+ * The tracker API verifies the editor's Google sign-in server-side, so every
+ * call carries the ID token. An expired or rejected session sends the editor
+ * back through /admin/login rather than failing silently.
+ */
+async function trackerFetch(init: RequestInit = {}): Promise<Response> {
+  const cred = getAdminCredential()
+  if ('expired' in cred) {
+    window.location.assign('/admin/login')
+    throw new Error('Session expired')
+  }
+  const res = await fetch('/api/notion/videos', {
+    ...init,
+    headers: { ...(init.headers || {}), Authorization: `Bearer ${cred.token}` },
+  })
+  if (res.status === 401) {
+    window.location.assign('/admin/login')
+    throw new Error('Session expired')
+  }
+  return res
+}
 
 interface Video {
   id: string
@@ -109,7 +132,7 @@ export default function VideoTracker() {
 
   const fetchVideos = async () => {
     try {
-      const response = await fetch('/api/notion/videos')
+      const response = await trackerFetch()
       if (!response.ok) throw new Error('Failed to fetch videos')
       const data = await response.json()
       setVideos(data.videos || [])
@@ -162,14 +185,14 @@ export default function VideoTracker() {
   const handleSubmit = async () => {
     try {
       if (editingVideo) {
-        const response = await fetch('/api/notion/videos', {
+        const response = await trackerFetch({
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: editingVideo.id, ...formData })
         })
         if (!response.ok) throw new Error('Failed to update video')
       } else {
-        const response = await fetch('/api/notion/videos', {
+        const response = await trackerFetch({
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -188,7 +211,7 @@ export default function VideoTracker() {
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this video?')) {
       try {
-        const response = await fetch('/api/notion/videos', {
+        const response = await trackerFetch({
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id })
@@ -204,7 +227,7 @@ export default function VideoTracker() {
 
   const handleStatusChange = async (id: string, newStatus: Video['status']) => {
     try {
-      const response = await fetch('/api/notion/videos', {
+      const response = await trackerFetch({
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: newStatus })
@@ -243,7 +266,7 @@ export default function VideoTracker() {
   const handleSaveSentiment = async () => {
     if (sentimentDialog.videoId) {
       try {
-        const response = await fetch('/api/notion/videos', {
+        const response = await trackerFetch({
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: sentimentDialog.videoId, sentiment: sentimentText })
@@ -274,7 +297,7 @@ export default function VideoTracker() {
   const handleSaveNotes = async () => {
     if (notesDialog.videoId) {
       try {
-        const response = await fetch('/api/notion/videos', {
+        const response = await trackerFetch({
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: notesDialog.videoId, notes: notesText })

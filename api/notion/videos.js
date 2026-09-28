@@ -1,12 +1,18 @@
-export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+import { verifyEditor } from '../dropzone/_lib/auth.js';
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+/*
+ * Video Production Tracker backend. Every method requires a Google sign-in
+ * from someone on the editor allow-list — this endpoint used to be fully
+ * public (anyone could read, edit or archive rows). Same-origin only: no
+ * CORS headers, since only tisb.world's own /admin UI calls it.
+ */
+export default async function handler(req, res) {
+  if (!['GET', 'POST', 'PATCH', 'DELETE'].includes(req.method)) {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  const editor = await verifyEditor(req, res);
+  if (!editor) return; // verifyEditor already sent 401/403
 
   const NOTION_TOKEN = process.env.NOTION_API_KEY;
   const DATABASE_ID = 'e6101ffb659249c09af07012d65ba65f';
@@ -19,6 +25,16 @@ export default async function handler(req, res) {
     'Authorization': `Bearer ${NOTION_TOKEN}`,
     'Content-Type': 'application/json',
     'Notion-Version': '2022-06-28'
+  };
+
+
+  const normalize = (id) => String(id || '').replace(/-/g, '').toLowerCase();
+  const belongsToTracker = async (id) => {
+    if (!/^[0-9a-f-]{32,36}$/i.test(String(id || ''))) return false;
+    const r = await fetch(`https://api.notion.com/v1/pages/${id}`, { headers });
+    if (!r.ok) return false;
+    const page = await r.json();
+    return normalize(page.parent?.database_id) === normalize(DATABASE_ID);
   };
 
   try {
@@ -105,6 +121,9 @@ export default async function handler(req, res) {
       if (!id) {
         return res.status(400).json({ error: 'Video ID required' });
       }
+      if (!(await belongsToTracker(id))) {
+        return res.status(403).json({ error: 'That page is not part of the video tracker.' });
+      }
 
       const statusMap = {
         'not_started': 'Not Started',
@@ -141,6 +160,9 @@ export default async function handler(req, res) {
 
       if (!id) {
         return res.status(400).json({ error: 'Video ID required' });
+      }
+      if (!(await belongsToTracker(id))) {
+        return res.status(403).json({ error: 'That page is not part of the video tracker.' });
       }
 
       const response = await fetch(`https://api.notion.com/v1/pages/${id}`, {

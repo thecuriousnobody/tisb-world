@@ -158,8 +158,9 @@ export class ContentService {
         console.warn('Server proxy failed, trying direct RSS...', error);
       }
       
-      // Fallback to direct RSS with CORS proxies
-      return this.getSubstackPostsRSS();
+      // No third-party CORS proxies: they'd see every visitor's request and
+      // could tamper with the feed. If our own proxy is down, show the error.
+      throw new Error('Substack feed unavailable');
     });
   }
 
@@ -249,61 +250,6 @@ export class ContentService {
     };
   }
 
-  private async getSubstackPostsRSS(): Promise<ContentFeed> {
-    try {
-      // Multiple CORS proxy options for reliability
-      const proxyUrls = [
-        'https://api.allorigins.win/raw?url=',
-        'https://corsproxy.io/?',
-        'https://api.codetabs.com/v1/proxy?quest=',
-        'https://cors-anywhere.herokuapp.com/',
-      ];
-      const feedUrl = 'https://thecuriousnobody.substack.com/feed';
-      
-      let xmlText = '';
-      let lastError: Error | null = null;
-      
-      // Try each proxy until one works
-      for (const proxyUrl of proxyUrls) {
-        try {
-          console.log(`Trying Substack RSS with proxy: ${proxyUrl}`);
-          const response = await fetch(`${proxyUrl}${encodeURIComponent(feedUrl)}`);
-          
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          
-          xmlText = await response.text();
-          
-          // Verify we got valid XML
-          if (xmlText.includes('<rss') || xmlText.includes('<item')) {
-            console.log('Successfully fetched Substack RSS');
-            break;
-          } else {
-            throw new Error('Invalid XML response');
-          }
-        } catch (error) {
-          console.warn(`Proxy ${proxyUrl} failed:`, error);
-          lastError = error as Error;
-          continue;
-        }
-      }
-      
-      if (!xmlText) {
-        throw lastError || new Error('All CORS proxies failed');
-      }
-      
-      return this.parseSubstackXML(xmlText);
-    } catch (error) {
-      console.error('Both Substack API and RSS failed:', error);
-      return {
-        platform: 'Substack',
-        items: [],
-        lastUpdated: new Date(),
-      };
-    }
-  }
-
   async getYouTubeVideos(): Promise<ContentFeed> {
     return this.fetchWithCache('youtube', async () => {
       // Try static JSON file first (updated daily via GitHub Actions - no API quota needed)
@@ -339,104 +285,9 @@ export class ContentService {
         console.warn('Static JSON failed, trying RSS fallback...', error);
       }
 
-      // Fallback to RSS if static JSON fails
-      return this.getYouTubeVideosRSS();
+      // No third-party CORS proxy fallback (see Substack above).
+      throw new Error('YouTube feed unavailable');
     });
-  }
-
-  private async getYouTubeVideosRSS(): Promise<ContentFeed> {
-    try {
-      const feedUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=UC_pKSnd_emg2JJMDGJpwZnQ';
-      
-      // Multiple CORS proxy options for reliability
-      const proxyUrls = [
-        'https://api.allorigins.win/raw?url=',
-        'https://corsproxy.io/?',
-        'https://api.codetabs.com/v1/proxy?quest=',
-      ];
-      
-      let xmlText = '';
-      let lastError: Error | null = null;
-      
-      // Try each proxy until one works
-      for (const proxyUrl of proxyUrls) {
-        try {
-          console.log(`Trying YouTube RSS with proxy: ${proxyUrl}`);
-          const response = await fetch(`${proxyUrl}${encodeURIComponent(feedUrl)}`);
-          
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          
-          xmlText = await response.text();
-          
-          // Verify we got valid XML
-          if (xmlText.includes('<feed') || xmlText.includes('<entry')) {
-            console.log('Successfully fetched YouTube RSS');
-            break;
-          } else {
-            throw new Error('Invalid XML response');
-          }
-        } catch (error) {
-          console.warn(`Proxy ${proxyUrl} failed:`, error);
-          lastError = error as Error;
-          continue;
-        }
-      }
-      
-      if (!xmlText) {
-        throw lastError || new Error('All CORS proxies failed');
-      }
-      
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(xmlText, 'application/xml');
-      const entries = Array.from(doc.querySelectorAll('entry'));
-
-      // Get all available videos from RSS feed (usually 15-50)
-      const contentItems: ContentItem[] = entries.map((entry, index) => {
-        const title = entry.querySelector('title')?.textContent || '';
-        const link = entry.querySelector('link')?.getAttribute('href') || '';
-        const description = entry.querySelector('media\\:description, description')?.textContent || '';
-        const published = entry.querySelector('published')?.textContent || '';
-        
-        // Try multiple ways to get thumbnail
-        let thumbnail = entry.querySelector('media\\:thumbnail')?.getAttribute('url') || 
-                       entry.querySelector('media\\:group media\\:thumbnail')?.getAttribute('url') || '';
-        
-        // If no thumbnail found, generate from YouTube video ID
-        if (!thumbnail && link) {
-          const videoIdMatch = link.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
-          if (videoIdMatch) {
-            thumbnail = `https://img.youtube.com/vi/${videoIdMatch[1]}/maxresdefault.jpg`;
-          }
-        }
-        
-        return {
-          id: `youtube-${index}`,
-          title,
-          description: description.length > 300 ? description.substring(0, 300) + '...' : description,
-          link,
-          publishedAt: new Date(published),
-          platform: 'youtube' as const,
-          thumbnail,
-          author: 'The Idea Sandbox',
-        };
-      });
-
-      return {
-        platform: 'YouTube',
-        items: contentItems,
-        lastUpdated: new Date(),
-      };
-    } catch (error) {
-      console.error('YouTube RSS fetch error:', error);
-      // Return empty feed if fetch fails
-      return {
-        platform: 'YouTube',
-        items: [],
-        lastUpdated: new Date(),
-      };
-    }
   }
 
   async getBehanceProjects(): Promise<ContentFeed> {

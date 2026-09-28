@@ -1,5 +1,8 @@
 // Vercel Serverless Function for YouTube API
 export default async function handler(req, res) {
+  // Served from Vercel's CDN for 30 min: public data, and repeat anonymous
+  // calls must not burn the upstream API quota.
+  res.setHeader('Cache-Control', 'public, s-maxage=1800, stale-while-revalidate=86400');
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');

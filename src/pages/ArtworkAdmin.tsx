@@ -30,6 +30,17 @@ import {
 } from '@mui/icons-material'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { getAdminCredential } from '../utils/adminCredential'
+
+/** Admin API routes verify the Google ID token server-side. */
+function adminToken(): string {
+  const cred = getAdminCredential()
+  if ('expired' in cred) {
+    window.location.assign('/admin/login')
+    throw new Error('Session expired')
+  }
+  return cred.token
+}
 
 interface ArtworkProject {
   id: string
@@ -126,6 +137,7 @@ export default function ArtworkAdmin() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${adminToken()}`,
           },
           body: JSON.stringify(newPortfolio)
         })
@@ -286,6 +298,7 @@ export default function ArtworkAdmin() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${adminToken()}`,
         },
         body: JSON.stringify({ url })
       })

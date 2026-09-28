@@ -13,8 +13,6 @@ import Post from './pages/Post'
 import Podcast from './pages/Podcast'
 import TaskChat from './pages/TaskChat'
 import Admin from './pages/Admin'
-import BetaFeedback from './pages/BetaFeedback'
-import AdminFeedback from './pages/AdminFeedback'
 import AdminLogin from './pages/AdminLogin'
 import VideoTracker from './pages/VideoTracker'
 import ArtworkAdmin from './pages/ArtworkAdmin'
@@ -31,11 +29,6 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            {/* Beta Feedback - No Layout */}
-            <Route path="/beta-feedback" element={<BetaFeedback />} />
-            
-            {/* Admin Feedback - No Layout */}
-            <Route path="/admin-feedback" element={<AdminFeedback />} />
             
             {/* Admin Login - No Layout */}
             <Route path="/admin/login" element={<AdminLogin />} />
