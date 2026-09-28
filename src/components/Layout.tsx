@@ -372,6 +372,14 @@ function MobileMenu({ page, clock }: { page: PageKey | null; clock: string }) {
       <Box sx={{ mt: 'auto', pt: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <Status clock={clock} />
         <Mono color={C.ink}><a href={`mailto:${EMAIL}`}>{EMAIL}</a></Mono>
+        {/* On phones the footer's social links are a long scroll away. */}
+        <Box component="nav" aria-label="Social" sx={{ display: 'flex', flexWrap: 'wrap', gap: '4px 20px', font: `400 10px ${F.mono}`, letterSpacing: '.16em' }}>
+          {SOCIAL.map(([label, href]) => (
+            <Box key={label} component="a" href={href} target="_blank" rel="noopener noreferrer" sx={{ color: C.ink, py: '12px' }}>
+              {label} ↗
+            </Box>
+          ))}
+        </Box>
       </Box>
     </Box>
   )

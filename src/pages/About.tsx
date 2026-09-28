@@ -85,6 +85,8 @@ export default function About() {
             sx={{ ...btn, border: `1px solid ${C.paper}`, color: C.paper }}>LINKEDIN</Box>
           <Box component="a" href="https://x.com/theideasandbox" target="_blank" rel="noopener noreferrer"
             sx={{ ...btn, border: `1px solid ${C.paper}`, color: C.paper }}>FOLLOW ON X</Box>
+          <Box component="a" href="https://www.facebook.com/profile.php?id=100093144579226" target="_blank" rel="noopener noreferrer"
+            sx={{ ...btn, border: `1px solid ${C.paper}`, color: C.paper }}>FACEBOOK</Box>
           <Box component="a" href="mailto:rajeev@theideasandbox.com" className="s-btn-verm" sx={btn}>EMAIL ME</Box>
         </Box>
       </Box>
