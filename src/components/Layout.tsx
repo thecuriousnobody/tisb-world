@@ -313,7 +313,8 @@ function Header({
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             sx={{
               border: `1px solid ${C.ink}`, background: menuOpen ? C.ink : 'transparent',
-              color: menuOpen ? C.paper : C.ink, cursor: 'pointer', p: '9px 14px',
+              // 44px minimum touch target — it's the only way into the nav on phones.
+              color: menuOpen ? C.paper : C.ink, cursor: 'pointer', p: '0 16px', minHeight: 44,
               font: `400 10px ${F.mono}`, letterSpacing: '.16em',
               [`@media (min-width: ${NAV_BP}px)`]: { display: 'none' },
             }}
