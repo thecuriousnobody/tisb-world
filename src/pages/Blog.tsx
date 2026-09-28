@@ -1,151 +1,130 @@
-import { Typography, Box } from '@mui/material'
-import { useSubstackPosts } from '../hooks/useContent'
-import { useVideoLoadMore } from '../hooks/useVideoLoadMore'
-import BrutalistBlogGrid from '../components/BrutalistBlogGrid'
-import SocialSection from '../components/SocialSection'
+import { useState } from 'react'
+import { Box } from '@mui/material'
 import Seo from '../components/Seo'
+import { useSubstackPosts } from '../hooks/useContent'
+import { C, F, GUTTER } from '../design/tokens'
+import { Mono, SectionHeader } from '../design/primitives'
+import { SLink } from '../design/transition'
+import { SUBSTACK, entryNo, fmtDate, fmtRead } from '../utils/writing'
+
+const PAGE_SIZE = 10
+/** Rows switch from the 4-column table to a stacked layout below this. */
+const TABLE = '@media (min-width: 760px)'
+const COLS = '90px minmax(0, 1fr) 150px 110px'
 
 export default function Blog() {
-  const { posts, loading, error } = useSubstackPosts();
-  const { displayedVideos, loadMore, hasMore } = useVideoLoadMore(posts || [], {
-    initialCount: 8,
-    increment: 6
-  });
-
-  // Transform posts to match BrutalistBlogGrid format with actual reading time
-  const blogPosts = displayedVideos?.map(post => ({
-    ...post,
-    readTime: post.tags?.[0] || '5 min read',
-  })) || [];
+  const { posts, loading, error } = useSubstackPosts()
+  const [shown, setShown] = useState(PAGE_SIZE)
+  const visible = posts.slice(0, shown)
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      py: { xs: 2, md: 4 },
-    }}>
+    <Box component="section">
       <Seo
-        title="The Curious Nobody"
-        description="Writing on building, AI, agency, and the messy middle of creating companies from the middle of the country."
+        title="Writing — The Curious Nobody"
+        description="Essays on building, AI, agency, and the messy middle of creating companies from the middle of the country."
         path="/blog"
       />
-      {/* Brutalist Blog Grid */}
-      <BrutalistBlogGrid posts={blogPosts} loading={loading} error={error} />
-      
-      {/* Load More Button */}
-      {hasMore && !loading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', pb: 4 }}>
-          <Box
-            component="button"
-            onClick={loadMore}
-            sx={{
-              backgroundColor: '#000000',
-              color: '#FFFFFF',
-              border: '3px solid #FF4500',
-              px: 6,
-              py: 2,
-              fontSize: '1.25rem',
-              fontWeight: 900,
-              fontFamily: 'monospace',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              position: 'relative',
-              transition: 'all 0.2s ease',
-              boxShadow: '4px 4px 0px #FF4500',
-              '&:hover': {
-                transform: 'translate(-4px, -4px)',
-                boxShadow: '8px 8px 0px #FF4500',
-                backgroundColor: '#FF4500',
-                color: '#000000',
-              },
-              '&:active': {
-                transform: 'translate(0, 0)',
-                boxShadow: 'none',
-              },
-            }}
-          >
-            LOAD MORE POSTS
-          </Box>
-        </Box>
-      )}
 
-      {/* About Section */}
-      <Box sx={{ 
-        mt: 12,
-        px: { xs: 2, md: 8 },
-        borderTop: '2px solid #000000',
-        pt: 8,
-      }}>
+      <SectionHeader
+        label="SYS / 006 — THE CURIOUS NOBODY / 無名の好奇心"
+        title="WRITING"
+        lead={`"The Curious Nobody" is my exploration of the spaces between technology and humanity, creativity and logic, the known and the mysterious. Each post is an attempt to make sense of our rapidly changing world through the lens of curiosity and wonder.`}
+        kanji="書"
+        caption="書 / SHO — WRITING"
+      />
+
+      <Box sx={{ px: GUTTER, pb: '96px' }}>
         <Box
+          aria-hidden="true"
           sx={{
-            backgroundColor: '#000000',
-            color: 'white',
-            borderRadius: '0px',
-            p: { xs: 4, md: 8 },
-            textAlign: 'center',
-            border: '2px solid #FF4500',
+            display: 'none', py: '16px', borderBottom: `1px solid ${C.ink}`,
+            [TABLE]: { display: 'grid', gridTemplateColumns: COLS, gap: '24px' },
           }}
         >
-          <Typography 
-            variant="h3" 
-            sx={{ 
-              fontSize: { xs: '1.75rem', md: '2.5rem' },
-              fontWeight: 700,
-              mb: 4,
-              overflow: 'hidden',
-            }}
-          >
-            ABOUT THE BLOG
-          </Typography>
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              fontSize: { xs: '1rem', md: '1.125rem' },
-              maxWidth: '700px',
-              mx: 'auto',
-              mb: 4,
-              lineHeight: 1.7,
-              opacity: 0.9,
-            }}
-          >
-            "The Curious Nobody" is my exploration of the spaces between technology and humanity, 
-            creativity and logic, the known and the mysterious. Each post is an attempt to make 
-            sense of our rapidly changing world through the lens of curiosity and wonder.
-          </Typography>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              fontSize: { xs: '0.9rem', md: '1rem' },
-              maxWidth: '700px',
-              mx: 'auto',
-              mb: 6,
-              lineHeight: 1.7,
-              opacity: 0.7,
-              fontStyle: 'italic',
-            }}
-          >
-            Questions, thoughts, or just want to continue the conversation? Reach out at{' '}
-            <Box 
-              component="a" 
-              href="mailto:rajeev@theideasandbox.com"
-              sx={{ 
-                color: '#FFFFFF',
-                textDecoration: 'underline',
-                fontWeight: 600,
-                '&:hover': { 
-                  color: '#FF4500',
-                  textDecoration: 'underline' 
-                }
-              }}
-            >
-              rajeev@theideasandbox.com
-            </Box>
-          </Typography>
+          {['ENTRY', 'TITLE', 'DATE', 'READ'].map((h) => <Mono key={h}>{h}</Mono>)}
         </Box>
-      </Box>
 
-      {/* Social Media Section */}
-      <SocialSection />
+        {loading && posts.length === 0 && (
+          <Box sx={{ py: '48px', display: 'flex', alignItems: 'center', gap: '10px', borderBottom: `1px solid ${C.hairline}` }}>
+            <Box className="s-pulse" sx={{ width: 6, height: 6, background: C.vermilion }} />
+            <Mono>LOADING ENTRIES FROM SUBSTACK…</Mono>
+          </Box>
+        )}
+
+        {!loading && posts.length === 0 && (
+          <Box sx={{ py: '48px', display: 'flex', flexDirection: 'column', gap: '16px', borderBottom: `1px solid ${C.hairline}` }}>
+            <Mono color={C.vermilion}>{error ? '[ SIGNAL LOST ] THE FEED DID NOT ANSWER' : '[ EMPTY ] NO ENTRIES YET'}</Mono>
+            <Mono color={C.ink}>
+              <a href={SUBSTACK} target="_blank" rel="noopener noreferrer">READ ON SUBSTACK ↗</a>
+            </Mono>
+          </Box>
+        )}
+
+        {visible.map((p, i) => {
+          const no = entryNo(i, posts.length)
+          const date = fmtDate(p.publishedAt)
+          const read = fmtRead(p)
+          const inner = (
+            <>
+              <Mono size={11} spacing="0" sx={{ display: 'none', [TABLE]: { display: 'block' } }}>{no}</Mono>
+              {/* Stacked (phone) meta line */}
+              <Mono sx={{ [TABLE]: { display: 'none' } }}>{no} — {date} — {read}</Mono>
+              <Box
+                component="span"
+                sx={{ fontSize: 'clamp(20px, 2vw, 26px)', lineHeight: 1.35, fontWeight: 500, textWrap: 'pretty', minWidth: 0 }}
+              >
+                {p.title}
+              </Box>
+              <Mono spacing=".14em" sx={{ display: 'none', [TABLE]: { display: 'block' } }}>{date}</Mono>
+              <Mono spacing=".14em" sx={{ display: 'none', [TABLE]: { display: 'block' } }}>{read} →</Mono>
+            </>
+          )
+          const rowSx = {
+            display: 'grid', gridTemplateColumns: '1fr', gap: '10px', alignItems: 'baseline',
+            py: '28px', borderBottom: `1px solid ${C.hairline}`,
+            [TABLE]: { gridTemplateColumns: COLS, gap: '24px' },
+          }
+          // Every feed item should have a slug; if one doesn't, fall back to the original.
+          return p.slug ? (
+            <Box key={p.id} component={SLink} to={`/blog/${p.slug}`} className="s-row" data-reveal sx={rowSx}>
+              {inner}
+            </Box>
+          ) : (
+            <Box key={p.id} component="a" href={p.link} target="_blank" rel="noopener noreferrer" className="s-row" data-reveal sx={rowSx}>
+              {inner}
+            </Box>
+          )
+        })}
+
+        {posts.length > 0 && (
+          <Box sx={{ pt: '48px', display: 'flex', flexWrap: 'wrap', gap: '16px 24px', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Mono>{String(visible.length).padStart(2, '0')} OF {String(posts.length).padStart(2, '0')} ENTRIES</Mono>
+            {shown < posts.length ? (
+              <Box
+                component="button"
+                type="button"
+                onClick={() => setShown((n) => n + PAGE_SIZE)}
+                className="s-btn-line"
+                sx={{ background: 'transparent', cursor: 'pointer', p: '14px 20px', font: `400 10px ${F.mono}`, letterSpacing: '.16em', color: C.ink, '&:hover': { color: C.vermilion } }}
+              >
+                LOAD MORE ↓
+              </Box>
+            ) : (
+              // The RSS feed only carries the latest ~20 essays; the archive lives on Substack.
+              <Box
+                component="a"
+                href={`${SUBSTACK}/archive`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="s-btn-line"
+                sx={{ p: '14px 20px', font: `400 10px ${F.mono}`, letterSpacing: '.16em', color: C.ink }}
+              >
+                OLDER ESSAYS ON SUBSTACK ↗
+              </Box>
+            )}
+          </Box>
+        )}
+      </Box>
     </Box>
   )
 }

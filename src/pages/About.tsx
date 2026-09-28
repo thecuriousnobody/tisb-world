@@ -1,9 +1,11 @@
-import { Box, Typography, Button, Card, CardContent } from '@mui/material'
-import { LinkedIn, X, Email } from '@mui/icons-material'
+import { Box } from '@mui/material'
 import Seo from '../components/Seo'
 import { ventureCount } from '../data/ventures'
+import { C, F, GUTTER } from '../design/tokens'
+import { Mono, SectionHeader } from '../design/primitives'
+import { pad2 } from '../design/pages'
 
-const chapters = [
+const CHAPTERS = [
   {
     title: 'THE IMMIGRANT BET',
     body: 'I came to this country with the same bet every immigrant founder makes: that agency beats circumstance. Nobody hands you a network, a playbook, or permission. You build all three.',
@@ -22,100 +24,68 @@ const chapters = [
   },
 ]
 
+const btn = { font: `400 10px ${F.mono}`, letterSpacing: '.16em', p: '14px 20px', whiteSpace: 'nowrap' } as const
+
 export default function About() {
   return (
-    <Box sx={{ py: { xs: 4, md: 8 } }}>
+    <Box component="section">
       <Seo
         title="The Builder"
         description="Immigrant founder, eighteen years of engineering at Caterpillar, now building seven companies from Central Illinois. The thesis: every human has agency — AI just removes the barriers."
         path="/about"
       />
-      <Box sx={{ mb: { xs: 4, md: 8 } }}>
-        <Typography variant="h1" sx={{ mb: 2, fontSize: { xs: '3rem', sm: '4.5rem', md: '6rem' } }}>
-          THE BUILDER
-        </Typography>
-        <Typography variant="h5" sx={{ color: 'text.secondary', maxWidth: '700px' }}>
-          Immigrant founder. Systems thinker. {ventureCount} companies deep.
-        </Typography>
-      </Box>
+      <SectionHeader
+        label="SYS / 007 — THE BUILDER / 人"
+        title="THE BUILDER"
+        titleSize="clamp(40px, 5.2vw, 68px)"
+        titleLine={1.05}
+        lead={`Immigrant founder. Systems thinker. ${ventureCount} companies deep.`}
+        leadSize={21}
+        kanji="人"
+        caption="人 / HITO — PERSON"
+      />
 
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-          gap: { xs: 3, md: 4 },
-          mb: { xs: 6, md: 10 },
-        }}
-      >
-        {chapters.map((chapter) => (
-          <Card key={chapter.title}>
-            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-              <Typography
-                variant="h5"
-                sx={{ color: '#FF4500', fontWeight: 900, mb: 2 }}
-              >
-                {chapter.title}
-              </Typography>
-              <Typography variant="body1" sx={{ color: 'grey.300' }}>
-                {chapter.body}
-              </Typography>
-            </CardContent>
-          </Card>
+      <Box sx={{ p: `0 ${GUTTER} 96px` }}>
+        {CHAPTERS.map((c, i) => (
+          <Box
+            key={c.title}
+            data-reveal
+            sx={{
+              display: 'grid', gridTemplateColumns: '1fr', gap: '24px 48px', py: '48px',
+              borderBottom: `1px solid ${C.hairline}`,
+              // Title | body spanning two — explicit, so phones don't grow a phantom column.
+              '@media (min-width: 880px)': { gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr)' },
+            }}
+          >
+            <Box sx={{ display: 'flex', gap: '20px', alignItems: 'baseline' }}>
+              <Mono size={11} spacing="0" color={C.vermilion}>{pad2(i + 1)}</Mono>
+              <Box component="h2" sx={{ font: `400 18px/1.4 ${F.display}` }}>{c.title}</Box>
+            </Box>
+            <Box component="p" sx={{ fontSize: 18, lineHeight: 1.75, fontWeight: 300, maxWidth: 720 }}>{c.body}</Box>
+          </Box>
         ))}
       </Box>
 
       <Box
+        data-reveal
+        className="s-on-dark"
         sx={{
-          backgroundColor: '#000000',
-          p: { xs: 4, md: 6 },
-          textAlign: 'center',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '32px',
+          p: `72px ${GUTTER}`, background: C.ink, color: C.paper,
         }}
       >
-        <Typography variant="h3" sx={{ color: '#ffffff', mb: 3, fontSize: { xs: '1.75rem', md: '3rem' } }}>
-          FOLLOW THE BUILD
-        </Typography>
-        <Typography variant="body1" sx={{ color: 'grey.400', mb: 4, maxWidth: '600px', mx: 'auto' }}>
-          The messy middle of building {ventureCount} startups at once, shared as it happens.
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 2,
-            flexWrap: 'wrap',
-          }}
-        >
-          <Button
-            variant="contained"
-            startIcon={<LinkedIn />}
-            component="a"
-            href="https://www.linkedin.com/in/industrious1/"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{ backgroundColor: '#FF4500', color: '#000000', minHeight: 44, '&:hover': { backgroundColor: '#FF6A33' } }}
-          >
-            LinkedIn
-          </Button>
-          <Button
-            variant="contained"
-            startIcon={<X />}
-            component="a"
-            href="https://x.com/theideasandbox"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{ backgroundColor: '#FF4500', color: '#000000', minHeight: 44, '&:hover': { backgroundColor: '#FF6A33' } }}
-          >
-            Follow on X
-          </Button>
-          <Button
-            variant="contained"
-            startIcon={<Email />}
-            component="a"
-            href="mailto:rajeev@theideasandbox.com"
-            sx={{ backgroundColor: '#FF4500', color: '#000000', minHeight: 44, '&:hover': { backgroundColor: '#FF6A33' } }}
-          >
-            Email Me
-          </Button>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <Mono color={C.mutedOnDark}>FOLLOW THE BUILD</Mono>
+          <Box component="p" sx={{ fontSize: 20, lineHeight: 1.6, fontWeight: 300 }}>
+            The messy middle of building {ventureCount} startups at once, shared as it happens.
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+          <Box component="a" href="https://www.linkedin.com/in/industrious1/" target="_blank" rel="noopener noreferrer"
+            sx={{ ...btn, border: `1px solid ${C.paper}`, color: C.paper }}>LINKEDIN</Box>
+          <Box component="a" href="https://x.com/theideasandbox" target="_blank" rel="noopener noreferrer"
+            sx={{ ...btn, border: `1px solid ${C.paper}`, color: C.paper }}>FOLLOW ON X</Box>
+          <Box component="a" href="mailto:rajeev@theideasandbox.com" className="s-btn-verm" sx={btn}>EMAIL ME</Box>
         </Box>
       </Box>
     </Box>

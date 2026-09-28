@@ -9,10 +9,8 @@ import Music from './pages/Music'
 import Art from './pages/Art'
 import Prints from './pages/Prints'
 import Blog from './pages/Blog'
-import Code from './pages/Code'
+import Post from './pages/Post'
 import Podcast from './pages/Podcast'
-import Thoughts from './pages/Thoughts'
-import Timeline from './pages/Timeline'
 import TaskChat from './pages/TaskChat'
 import Admin from './pages/Admin'
 import BetaFeedback from './pages/BetaFeedback'
@@ -33,9 +31,6 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            {/* Commercial art landing page - No Layout (focused Pinterest destination) */}
-            <Route path="/prints" element={<Prints />} />
-
             {/* Beta Feedback - No Layout */}
             <Route path="/beta-feedback" element={<BetaFeedback />} />
             
@@ -88,11 +83,17 @@ function App() {
                   <Route path="/music" element={<Music />} />
                   <Route path="/art" element={<Art />} />
                   <Route path="/blog" element={<Blog />} />
-                  <Route path="/code" element={<Code />} />
+                  <Route path="/blog/:slug" element={<Post />} />
+                  {/* Inside the shared Layout so the ink veil survives navigating
+                      to it; Layout drops the site nav on this route itself. */}
+                  <Route path="/prints" element={<Prints />} />
+                  {/* Retired in the Signal redesign; vercel.json 301s these server-side.
+                      Client-side fallbacks cover in-app navigation and local dev. */}
+                  <Route path="/code" element={<Navigate to="/ventures" replace />} />
                   <Route path="/ai" element={<Navigate to="/ventures" replace />} />
                   <Route path="/podcast" element={<Podcast />} />
-                  <Route path="/thoughts" element={<Thoughts />} />
-                  <Route path="/timeline" element={<Timeline />} />
+                  <Route path="/thoughts" element={<Navigate to="/about" replace />} />
+                  <Route path="/timeline" element={<Navigate to="/" replace />} />
                   <Route path="/task-chat" element={<TaskChat />} />
                   <Route path="/admin" element={<Admin />} />
                 </Routes>

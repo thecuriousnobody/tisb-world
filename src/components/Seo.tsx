@@ -19,6 +19,12 @@ interface SeoProps {
   /** Route path, e.g. "/ventures". Used for canonical + og:url. */
   path: string
   image?: string
+  /**
+   * Override the canonical URL. Essays are mirrored from Substack, so their
+   * canonical points back at the Substack original — otherwise Google sees two
+   * copies of every post and may rank neither.
+   */
+  canonical?: string
 }
 
 function set(selector: string, attr: string, value: string) {
@@ -26,14 +32,14 @@ function set(selector: string, attr: string, value: string) {
   if (el) el.setAttribute(attr, value)
 }
 
-export default function Seo({ title, description, path, image = DEFAULT_IMAGE }: SeoProps) {
+export default function Seo({ title, description, path, image = DEFAULT_IMAGE, canonical }: SeoProps) {
   useEffect(() => {
     const url = `${SITE}${path === '/' ? '/' : path}`
     const fullTitle = path === '/' ? title : `${title} | ${BRAND}`
 
     document.title = fullTitle
     set('meta[name="description"]', 'content', description)
-    set('link[rel="canonical"]', 'href', url)
+    set('link[rel="canonical"]', 'href', canonical ?? url)
 
     set('meta[property="og:title"]', 'content', fullTitle)
     set('meta[property="og:description"]', 'content', description)
@@ -44,7 +50,7 @@ export default function Seo({ title, description, path, image = DEFAULT_IMAGE }:
     set('meta[property="twitter:description"]', 'content', description)
     set('meta[property="twitter:url"]', 'content', url)
     set('meta[property="twitter:image"]', 'content', image)
-  }, [title, description, path, image])
+  }, [title, description, path, image, canonical])
 
   return null
 }

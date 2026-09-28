@@ -38,7 +38,7 @@ export interface Print {
  * mangled ("THE OURIOUS NOBODI"). At hero scale that reads as sloppy to the
  * exact buyer we want. Only use shots where the plate renders cleanly.
  */
-export const heroImage = '/installations/hero-terrace-copper.jpg'
+export const heroImage = '/installations/hero-terrace-copper.webp'
 
 /**
  * The single positioning sentence. Kept as a constant because it is the most
@@ -51,22 +51,22 @@ export const prints: Print[] = [
   {
     title: 'Rooftop Lounge',
     note: 'Hard yellow and red against a skyline. Built for a room that stays busy.',
-    image: '/installations/rooftop-lounge.jpg',
+    image: '/installations/rooftop-lounge.webp',
   },
   {
     title: 'Rooftop Bar',
     note: 'Warm ground, high contrast — holds its own at golden hour.',
-    image: '/installations/rooftop-bar.jpg',
+    image: '/installations/rooftop-bar.webp',
   },
   {
     title: 'Interior',
     note: 'Vertical format, quiet ground. For residential walls and long sightlines.',
-    image: '/installations/interior-minimal.jpg',
+    image: '/installations/interior-minimal.webp',
   },
   {
     title: 'Penthouse',
     note: 'Cooler register — teal and black for interiors that need calm, not heat.',
-    image: '/installations/penthouse-terrace.jpg',
+    image: '/installations/penthouse-terrace.webp',
   },
 ]
 

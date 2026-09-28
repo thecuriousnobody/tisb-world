@@ -4,12 +4,18 @@ export interface Venture {
   name: string
   tagline: string
   status: VentureStatus
-  /** Empty string = no public destination yet; card renders unlinked */
+  /** Empty string = no public destination yet; the row renders unlinked. */
   url: string
-  /** Hairline accent only — never used as a fill */
-  accentColor: string
-  /** Optional card image (path under public/), pulled from the venture's own site */
-  image?: string
+  /** Brush mark for the tile when there's no art, and as the overlay when there is. */
+  kanji: string
+  /** oklch(0.68 0.13 H). Hairline accent under the tile only — never a fill. */
+  accentHue: number
+  /** Tile art under public/ventures/. None = the kanji tile renders instead. */
+  art?: string
+  /** Dark art flips the kanji overlay to paper so it stays legible. */
+  artIsDark?: boolean
+  /** Scale-in to crop art edges (podcastbots has blurred side strips). */
+  artZoom?: number
 }
 
 const STATUS_ORDER: Record<VentureStatus, number> = {
@@ -24,55 +30,67 @@ const ventures: Venture[] = [
     tagline: 'Your day, stacked and conquered.',
     status: 'shipped',
     url: 'https://stackday.ai',
-    accentColor: '#FFD700',
-    image: '/ventures/stackday.jpg',
+    kanji: '積',
+    accentHue: 85,
+    art: '/ventures/stackday-brand.webp',
   },
   {
     name: 'DeSilo',
     tagline: 'The AI appliance for entrepreneurs. Ideas in, ventures out.',
     status: 'beta',
     url: 'https://desilo-it.ai',
-    accentColor: '#FF3333',
-    image: '/ventures/desilo.jpg',
+    kanji: '解',
+    accentHue: 40,
+    art: '/ventures/desilo-scout.webp',
+    artIsDark: true,
   },
   {
     name: 'swych-box',
     tagline: 'An AI concierge at the edge for every small business.',
     status: 'beta',
     url: 'https://app.swych-box.com',
-    accentColor: '#00BFFF',
-    image: '/ventures/swychbox.jpg',
+    kanji: '迎',
+    accentHue: 235,
+    art: '/ventures/swychbox-product.webp',
   },
   {
     name: 'podcastbots',
     tagline: 'Find people doing meaningful work. Have better conversations.',
     status: 'beta',
     url: 'https://podcastbots.ai',
-    accentColor: '#9370DB',
-    image: '/ventures/podcastbots.jpg',
+    kanji: '縁',
+    accentHue: 300,
+    art: '/ventures/podcastbots-brand.webp',
+    artIsDark: true,
+    artZoom: 1.16,
   },
   {
     name: 'Autonomy Labs',
     tagline: 'Building autonomous systems that work for you.',
     status: 'building',
     url: 'https://autonomylabs.dev',
-    accentColor: '#32CD32',
-    image: '/ventures/autonomylabs.jpg',
+    kanji: '自',
+    accentHue: 150,
+    art: '/ventures/autonomylabs-doorpath.webp',
+    artIsDark: true,
   },
   {
     name: 'Golden Hour',
     tagline: 'Voice-first AI emergency response for India. Every minute counts.',
     status: 'building',
     url: '',
-    accentColor: '#FF9933',
+    kanji: '救',
+    accentHue: 55,
   },
   {
     name: 'Neuronify',
     tagline: "Your city's nervous system. Speak, and City Hall hears a costed brief.",
     status: 'building',
     url: 'https://neuronify.ai',
-    accentColor: '#40E0D0',
-    image: '/ventures/neuronify.png',
+    kanji: '脈',
+    accentHue: 250,
+    art: '/ventures/neuronify-brand.webp',
+    artIsDark: true,
   },
 ]
 
@@ -83,3 +101,7 @@ export const sortedVentures: Venture[] = [...ventures].sort(
 export const featuredVentures: Venture[] = sortedVentures.slice(0, 3)
 
 export const ventureCount = ventures.length
+
+/** "STACKDAY.AI" — the domain shown under each tagline. */
+export const ventureDomain = (v: Venture) =>
+  v.url ? v.url.replace(/^https?:\/\//, '').replace(/\/$/, '').toUpperCase() : 'NO PUBLIC URL YET'

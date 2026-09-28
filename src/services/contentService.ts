@@ -9,12 +9,30 @@ export interface ContentItem {
   author?: string;
   duration?: string;
   tags?: string[];
+  /** Substack only: last path segment of the post URL (`/p/<slug>`). */
+  slug?: string;
+  /** Substack only: raw content:encoded HTML. Sanitize before rendering. */
+  contentHtml?: string;
+  /** Substack only: estimated minutes at ~200 wpm. */
+  readingMinutes?: number;
+  /** Substack only: the post's subtitle (RSS <description>). */
+  subtitle?: string;
 }
 
 export interface ContentFeed {
   platform: string;
   items: ContentItem[];
   lastUpdated: Date;
+}
+
+/**
+ * Substack's RSS <description> is CDATA that still contains numeric entities
+ * (`&#8212;`), so textContent hands them back literally. Decode through an
+ * inert HTML document — never innerHTML on a live node.
+ */
+function decodeEntities(text: string): string {
+  if (!text || !text.includes('&')) return text;
+  return new DOMParser().parseFromString(text, 'text/html').documentElement.textContent || text;
 }
 
 export class ContentService {
@@ -124,7 +142,8 @@ export class ContentService {
   }
 
   async getSubstackPosts(): Promise<ContentFeed> {
-    return this.fetchWithCache('substack', async () => {
+    // v2: items now carry contentHtml + slug; old cached entries lack them.
+    return this.fetchWithCache('substack_v2', async () => {
       // Try server proxy first, then fall back to direct RSS
       console.log('Fetching Substack posts...');
       
@@ -153,7 +172,13 @@ export class ContentService {
       const title = item.querySelector('title')?.textContent || '';
       const link = item.querySelector('link')?.textContent || '';
       const description = item.querySelector('description')?.textContent || '';
-      const content = item.querySelector('content\\:encoded')?.textContent || description;
+      // querySelector on an escaped QName works in most engines; the namespaced
+      // lookup is the spec-correct fallback.
+      const encoded =
+        item.querySelector('content\\:encoded')?.textContent ||
+        item.getElementsByTagNameNS('http://purl.org/rss/1.0/modules/content/', 'encoded')[0]?.textContent ||
+        '';
+      const content = encoded || description;
       const pubDate = item.querySelector('pubDate')?.textContent || '';
       
       // Try multiple methods to extract thumbnail
@@ -210,6 +235,10 @@ export class ContentService {
         author: 'The Curious Nobody',
         thumbnail,
         tags: [`${readingTime} min read`],
+        slug: link.match(/\/p\/([^/?#]+)/)?.[1] || undefined,
+        contentHtml: content,
+        readingMinutes: readingTime,
+        subtitle: decodeEntities(cleanDescription) || undefined,
       };
     });
 

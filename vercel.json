@@ -1,4 +1,21 @@
 {
+  "redirects": [
+    {
+      "source": "/code",
+      "destination": "/ventures",
+      "permanent": true
+    },
+    {
+      "source": "/thoughts",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/timeline",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/go/:code",

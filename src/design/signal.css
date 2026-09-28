@@ -1,0 +1,93 @@
+/*
+ * Signal — global motifs. Layout lives in each component's sx; this file only
+ * holds what must be shared or can't be expressed inline: keyframes, hover
+ * states on repeated elements, and the reduced-motion contract.
+ */
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #FAFAF8;
+  color: #0F0F0E;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+p { text-wrap: pretty; }
+
+a { color: inherit; text-decoration: none; cursor: pointer; transition: color .25s; }
+a:hover { color: #D63A22; }
+
+::selection { background: #D63A22; color: #FAFAF8; }
+
+input, select, textarea, button { font: inherit; color: inherit; }
+
+img { max-width: 100%; }
+
+/* ── Keyframes ───────────────────────────────────────────────────────── */
+
+@keyframes inkIn {
+  0%   { clip-path: inset(0 0 100% 0); filter: blur(10px); opacity: .1; }
+  55%  { filter: blur(1.5px); opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); filter: blur(0); opacity: 1; }
+}
+@keyframes pulse   { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── Motifs ──────────────────────────────────────────────────────────── */
+
+/* Brush kanji ink in on mount. Remounted per route, so it replays each visit. */
+.s-ink {
+  display: inline-block;
+  font-family: 'Ma Shan Zheng', 'Yuji Boku', serif;
+  animation: inkIn 2.2s cubic-bezier(.2,.7,.1,1) .4s both;
+}
+
+/* Table rows (Ventures, Writing): tint + indent. */
+.s-row { transition: background .3s, padding .4s cubic-bezier(.2,.7,.1,1); }
+.s-row:hover { background: #F2F1ED; padding-left: 12px; }
+
+/* Cards: tint only. */
+.s-card { transition: background .3s; }
+.s-card:hover { background: #F2F1ED; }
+
+/* Image slowly scales inside its well. */
+.s-zoom img { transition: transform 1.2s cubic-bezier(.2,.7,.1,1); }
+.s-zoom:hover img { transform: scale(1.04); }
+
+/* Episode thumbnails: grayscale at rest, colour on hover. */
+.s-gray img {
+  filter: grayscale(1) contrast(1.05);
+  transition: filter .6s, transform .9s cubic-bezier(.2,.7,.1,1);
+}
+.s-gray:hover img { filter: none; transform: scale(1.03); }
+
+.s-pulse { animation: pulse 2.4s ease-in-out infinite; }
+
+/* Filled buttons need explicit hovers — the global a:hover would otherwise
+   turn vermilion text invisible on a vermilion fill. */
+.s-btn-ink { background: #0F0F0E; color: #FAFAF8; transition: background .3s; }
+.s-btn-ink:hover { background: #D63A22; color: #FAFAF8; }
+.s-btn-verm { background: #D63A22; color: #FAFAF8; transition: background .3s; }
+.s-btn-verm:hover { background: #FAFAF8; color: #0F0F0E; }
+.s-btn-line { border: 1px solid currentColor; transition: background .3s, color .3s; }
+
+/* Links sitting on ink bands. */
+.s-on-dark a:hover, a.s-on-dark:hover { color: #FF6B52; }
+
+/* ── Reduced motion: keep the content, drop the choreography ────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .s-ink, .s-pulse { animation: none !important; }
+  .s-zoom img, .s-gray img { transition: none; }
+  .s-zoom:hover img, .s-gray:hover img { transform: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

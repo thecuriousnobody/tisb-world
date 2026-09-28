@@ -1,153 +1,210 @@
-import React from 'react';
-import { 
-  Typography, 
-  Box
-} from '@mui/material';
-import { useYouTubeVideos } from '../hooks/useContent';
-import { useVideoLoadMore } from '../hooks/useVideoLoadMore';
-import SocialSection from '../components/SocialSection';
-import BrutalistVideoGrid from '../components/BrutalistVideoGrid';
-import Seo from '../components/Seo';
+import { useMemo, useState } from 'react'
+import { Box } from '@mui/material'
+import Seo from '../components/Seo'
+import { useYouTubeVideos } from '../hooks/useContent'
+import type { ContentItem } from '../services/contentService'
+import { C, F, GUTTER } from '../design/tokens'
+import { Mono, QuoteBand, SectionHeader, Well } from '../design/primitives'
+import { pad2 } from '../design/pages'
 
-const Podcast: React.FC = () => {
-  const { videos, loading, error } = useYouTubeVideos();
-  const { displayedVideos, loadMore, hasMore } = useVideoLoadMore(videos || []);
+/** Episodes shown per page of the grid (multiple of 2, 3 and 4 columns). */
+const PAGE = 12
+
+interface Episode {
+  key: string
+  idx: string
+  title: string
+  date: string
+  link: string
+  thumb: string
+}
+
+const videoId = (link: string) =>
+  link.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|\/shorts\/)([^&\n?#/]+)/)?.[1]
+
+/** DD.MM.YY — the prototype's metadata date format. */
+const fmtDate = (d: Date) =>
+  Number.isNaN(d.getTime())
+    ? '—'
+    : `${pad2(d.getDate())}.${pad2(d.getMonth() + 1)}.${String(d.getFullYear()).slice(2)}`
+
+function toEpisodes(items: ContentItem[]): Episode[] {
+  const sorted = [...items].sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+  return sorted.map((v, i) => {
+    const id = videoId(v.link)
+    return {
+      key: v.id,
+      // Counts down: the newest episode carries the highest number.
+      idx: pad2(sorted.length - i),
+      title: v.title,
+      date: fmtDate(new Date(v.publishedAt)),
+      link: v.link,
+      // hqdefault always exists; maxresdefault is missing for many clips.
+      thumb: id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : v.thumbnail ?? '',
+    }
+  })
+}
+
+function PlaySquare() {
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute', left: 24, bottom: 24, width: 56, height: 56,
+        background: C.vermilion, display: 'grid', placeItems: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          width: 0, height: 0, ml: '4px',
+          borderLeft: `16px solid ${C.paper}`,
+          borderTop: '10px solid transparent', borderBottom: '10px solid transparent',
+        }}
+      />
+    </Box>
+  )
+}
+
+function Featured({ e }: { e: Episode }) {
+  return (
+    <Box
+      component="a"
+      href={e.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="s-zoom"
+      sx={{
+        display: 'grid', borderBottom: `1px solid ${C.hairline}`, gridTemplateColumns: '1fr',
+        '@media (min-width: 900px)': { gridTemplateColumns: '1fr 1fr' },
+      }}
+    >
+      <Box sx={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', background: C.ink }}>
+        <img
+          src={e.thumb}
+          alt={e.title}
+          decoding="async"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+        <PlaySquare />
+      </Box>
+      <Box
+        sx={{
+          p: 'clamp(28px, 4vw, 56px)', display: 'flex', flexDirection: 'column',
+          justifyContent: 'space-between', gap: '32px',
+          '@media (min-width: 900px)': { borderLeft: `1px solid ${C.hairline}` },
+        }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+          <Mono>LATEST — E.{e.idx}</Mono>
+          <Mono>{e.date}</Mono>
+        </Box>
+        <Box
+          component="span"
+          sx={{ font: `400 clamp(20px, 2.2vw, 28px)/1.35 ${F.display}`, textWrap: 'balance', overflowWrap: 'anywhere' }}
+        >
+          {e.title}
+        </Box>
+        <Mono color={C.ink}>WATCH ON YOUTUBE →</Mono>
+      </Box>
+    </Box>
+  )
+}
+
+function EpisodeCard({ e }: { e: Episode }) {
+  return (
+    <Box
+      component="a"
+      data-reveal
+      href={e.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="s-gray"
+      sx={{ display: 'flex', flexDirection: 'column', gap: '14px' }}
+    >
+      <Well src={e.thumb} alt={e.title} ratio="16/9" />
+      <Mono>E.{e.idx} — {e.date}</Mono>
+      <Box component="span" sx={{ fontSize: 17, lineHeight: 1.45, fontWeight: 500, textWrap: 'pretty' }}>
+        {e.title}
+      </Box>
+    </Box>
+  )
+}
+
+export default function Podcast() {
+  const { videos, loading, error } = useYouTubeVideos()
+  const episodes = useMemo(() => toEpisodes(videos ?? []), [videos])
+  const [latest, ...rest] = episodes
+  const [count, setCount] = useState(PAGE)
+  const shown = rest.slice(0, count)
+  const hasMore = rest.length > count
+  const loadMore = () => setCount((c) => c + PAGE)
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      py: { xs: 2, md: 4 },
-    }}>
+    <section>
       <Seo
-        title="Podcast & Videos"
-        description="The Idea Sandbox podcast and video archive — conversations with people doing meaningful work, plus build-in-public updates."
+        title="Podcast"
+        description="The Idea Sandbox podcast — conversations with scientists, artists, and builders about technology, creativity, and the future of making things."
         path="/podcast"
       />
-      {/* YouTube Videos Feed */}
-      <Box sx={{ py: { xs: 4, md: 8 } }}>
-        {/* Section Header */}
-        <Box sx={{ 
-          width: '100%', 
-          overflow: 'hidden',
-          mb: 6,
-          textAlign: 'center',
-        }}>
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: '2rem', sm: '3rem', md: '4rem', lg: '5rem' },
-              fontWeight: 800,
-              overflow: 'hidden',
-              mb: 2,
-            }}
-          >
-            PODCAST & VIDEOS
-          </Typography>
+      <SectionHeader
+        label="SYS / 002 — THE IDEA SANDBOX — CONVERSATIONS / 対話"
+        title="PODCAST"
+        lead="Conversations about technology, creativity, and the future of making things. Each episode explores ideas at the intersection of innovation and human potential, featuring insights on automation, digital creativity, and the evolving landscape of work and life."
+        kanji="話"
+        caption="話 / HANASHI — CONVERSATION"
+      />
+
+      {loading && episodes.length === 0 && (
+        <Box sx={{ p: `64px ${GUTTER} 96px` }}>
+          <Mono as="div">LOADING CONVERSATIONS …</Mono>
         </Box>
+      )}
 
-        {/* Videos Grid */}
-        <Box sx={{
-          px: { xs: 2, md: 8 },
-          mb: 8,
-        }}>
-          {loading && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-              <Typography variant="h3" sx={{ fontWeight: 700 }}>
-                LOADING VIDEOS...
-              </Typography>
-            </Box>
-          )}
-
-          {error && (
-            <Box sx={{ textAlign: 'center', py: 8 }}>
-              <Typography variant="h3" sx={{ fontWeight: 700, color: 'error.main' }}>
-                FAILED TO LOAD VIDEOS
-              </Typography>
-              <Typography variant="body1" sx={{ mt: 2 }}>
-                {error}
-              </Typography>
-            </Box>
-          )}
-
-          {videos && videos.length > 0 && (
-            <BrutalistVideoGrid
-              videos={displayedVideos}
-              onLoadMore={loadMore}
-              hasMore={hasMore}
-            />
-          )}
-
-          {videos && videos.length === 0 && !loading && (
-            <Box sx={{ textAlign: 'center', py: 8 }}>
-              <Typography variant="h3" sx={{ fontWeight: 700 }}>
-                NO VIDEOS AVAILABLE
-              </Typography>
-            </Box>
-          )}
+      {!loading && episodes.length === 0 && (
+        <Box sx={{ p: `64px ${GUTTER} 96px`, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <Mono as="div" color={C.vermilion}>
+            {error ? '[ ERROR ] EPISODES DIDN’T LOAD' : '[ EMPTY ] NO EPISODES YET'}
+          </Mono>
+          <Mono as="div" color={C.ink}>
+            <a href="https://www.youtube.com/@theideasandbox" target="_blank" rel="noopener noreferrer">
+              WATCH ON YOUTUBE →
+            </a>
+          </Mono>
         </Box>
-      </Box>
+      )}
 
-      {/* About the Podcast Section */}
-      <Box sx={{ 
-        mt: 12,
-        px: { xs: 2, md: 8 },
-        borderTop: '2px solid #000000',
-        pt: 8,
-      }}>
+      {latest && <Featured e={latest} />}
+
+      {shown.length > 0 && (
         <Box
           sx={{
-            backgroundColor: '#000000',
-            color: 'white',
-            borderRadius: '0px',
-            p: { xs: 4, md: 8 },
-            textAlign: 'center',
-            border: '2px solid #FF4500',
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+            gap: '48px 32px', p: `64px ${GUTTER} ${hasMore ? '48px' : '96px'}`,
           }}
         >
-          <Typography 
-            variant="h3" 
-            sx={{ 
-              fontSize: { xs: '1.75rem', md: '2.5rem' },
-              fontWeight: 700,
-              mb: 4,
-              overflow: 'hidden',
-            }}
-          >
-            ABOUT THE PODCAST
-          </Typography>
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              fontSize: { xs: '1rem', md: '1.125rem' },
-              maxWidth: '700px',
-              mx: 'auto',
-              mb: 6,
-              lineHeight: 1.7,
-              opacity: 0.9,
-            }}
-          >
-            Conversations about technology, creativity, and the future of making things. 
-            Each episode explores ideas at the intersection of innovation and human potential, 
-            featuring insights on automation, digital creativity, and the evolving landscape of work and life.
-          </Typography>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              fontSize: '1rem',
-              fontStyle: 'italic',
-              opacity: 0.7,
-              color: '#FF4500',
-            }}
-          >
-            "The future belongs to those who can imagine it and build it."
-          </Typography>
+          {shown.map((e) => <EpisodeCard key={e.key} e={e} />)}
         </Box>
-      </Box>
+      )}
 
-      {/* Social Media Section */}
-      <SocialSection />
-    </Box>
-  );
-};
+      {hasMore && (
+        <Box sx={{ p: `0 ${GUTTER} 96px`, display: 'flex', justifyContent: 'center' }}>
+          <Box
+            component="button"
+            type="button"
+            onClick={loadMore}
+            className="s-btn-line"
+            sx={{
+              background: 'transparent', cursor: 'pointer', p: '14px 20px', color: C.ink,
+              font: `400 10px ${F.mono}`, letterSpacing: '.16em',
+              '&:hover': { color: C.vermilion },
+            }}
+          >
+            LOAD MORE EPISODES
+          </Box>
+        </Box>
+      )}
 
-export default Podcast;
+      <QuoteBand>"The future belongs to those who can imagine it and build it."</QuoteBand>
+    </section>
+  )
+}

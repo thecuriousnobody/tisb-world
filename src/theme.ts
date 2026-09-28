@@ -1,188 +1,72 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
+import { C, F } from './design/tokens'
+
+/**
+ * MUI theme for the "Signal" system.
+ *
+ * The public pages mostly style themselves with tokens from src/design; this
+ * theme exists so anything still built from stock MUI components (admin tools,
+ * the video tracker, older utility pages) lands in the same visual language.
+ *
+ * Deliberately NOT set on headings: responsive font-size media queries or
+ * `overflow: hidden`. The previous theme had both, and they silently beat
+ * page-level `sx` on phones — that's what once rendered the /prints hero at
+ * 64px and clipped the tops off its capitals. Pages own their type scale.
+ */
+const display = { fontFamily: F.display, fontWeight: 400, letterSpacing: '.02em' }
 
 export const theme = createTheme({
   palette: {
     mode: 'light',
-    primary: {
-      main: '#1A0E0A', // Rich dark brown/black
-      light: '#3D2B1F',
-      dark: '#000000',
-    },
-    secondary: {
-      main: '#FF4500', // BRIGHT BOLD ORANGE
-      light: '#FF6A33',
-      dark: '#CC3700',
-    },
-    background: {
-      default: '#FF4500', // BRIGHT ORANGE BACKGROUND
-      paper: '#000000', // Pure black
-    },
-    text: {
-      primary: '#000000', // Pure black text on orange
-      secondary: '#333333', // Dark gray
-    },
-    grey: {
-      100: '#f5f5f5',
-      200: '#eeeeee',
-      300: '#e0e0e0',
-      400: '#bdbdbd',
-      500: '#9e9e9e',
-      600: '#757575',
-      700: '#616161',
-      800: '#424242',
-      900: '#212121',
-    },
+    primary: { main: C.ink, contrastText: C.paper },
+    secondary: { main: C.vermilion, contrastText: C.paper },
+    error: { main: C.vermilion },
+    background: { default: C.paper, paper: C.paperPure },
+    text: { primary: C.ink, secondary: C.inkSoft },
+    divider: C.hairline,
   },
+  shape: { borderRadius: 0 },
+  shadows: Array(25).fill('none') as unknown as ReturnType<typeof createTheme>['shadows'],
   typography: {
-    fontFamily: '"Yapari", "Yapari Extended", "Yapari Wide", "Yapari Expanded", "Black Ops One", "Bungee", "Archivo Black", "Russo One", "Fredoka One", "Righteous", "Racing Sans One", "Orbitron", "Bebas Neue", "Anton", "Oswald", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
-    h1: {
-      fontWeight: 900, // MAXIMUM BOLD
-      fontSize: '8rem', // MASSIVE
-      lineHeight: 0.9,
-      letterSpacing: '-0.03em',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-      '@media (max-width:768px)': {
-        fontSize: '4rem',
-      },
-    },
-    h2: {
-      fontWeight: 800,
-      fontSize: '5rem',
-      lineHeight: 0.95,
-      letterSpacing: '-0.02em',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-      '@media (max-width:768px)': {
-        fontSize: '3rem',
-      },
-    },
-    h3: {
-      fontWeight: 700,
-      fontSize: '3.5rem',
-      lineHeight: 1.0,
-      letterSpacing: '-0.015em',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-      '@media (max-width:768px)': {
-        fontSize: '2rem',
-      },
-    },
-    h4: {
-      fontWeight: 600,
-      fontSize: '2.5rem',
-      lineHeight: 1.1,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-      '@media (max-width:768px)': {
-        fontSize: '1.75rem',
-      },
-    },
-    h5: {
-      fontWeight: 600,
-      fontSize: '1.75rem',
-      lineHeight: 1.2,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-    },
-    h6: {
-      fontWeight: 600,
-      fontSize: '1.25rem',
-      lineHeight: 1.3,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      wordBreak: 'break-word',
-    },
-    body1: {
-      fontSize: '1.125rem',
-      lineHeight: 1.7,
-      fontWeight: 400,
-    },
-    body2: {
-      fontSize: '1rem',
-      lineHeight: 1.6,
-      fontWeight: 400,
-    },
-    button: {
-      textTransform: 'none',
-      fontWeight: 500,
-      borderRadius: '24px',
-    },
+    fontFamily: F.body,
+    h1: { ...display, lineHeight: 1.05 },
+    h2: { ...display, lineHeight: 1.1 },
+    h3: { ...display, lineHeight: 1.15 },
+    h4: { ...display, lineHeight: 1.2 },
+    h5: { ...display, lineHeight: 1.3 },
+    h6: { ...display, lineHeight: 1.35 },
+    body1: { fontSize: '1.0625rem', lineHeight: 1.7, fontWeight: 300 },
+    body2: { fontSize: '0.9375rem', lineHeight: 1.6, fontWeight: 300 },
+    button: { fontFamily: F.mono, fontSize: 10, letterSpacing: '.16em', textTransform: 'uppercase' },
+    caption: { fontFamily: F.mono, letterSpacing: '.12em' },
+    overline: { fontFamily: F.mono, letterSpacing: '.16em' },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: { body: { backgroundColor: C.paper } },
+    },
+    MuiPaper: {
+      styleOverrides: { root: { backgroundImage: 'none', border: `1px solid ${C.hairline}` } },
+    },
     MuiCard: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#000000',
-          color: '#ffffff',
-          borderRadius: '0px', // Sharp edges for boldness
-          border: 'none',
-          boxShadow: 'none',
-          overflow: 'hidden', // Prevent content overflow
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '200px', // Ensure consistent card heights
-        },
-      },
+      // Legacy utility pages were written for black cards with white text.
+      // Keeping cards as ink bands preserves their legibility, and ink bands
+      // are part of the Signal vocabulary anyway (footer, CTA bands).
+      styleOverrides: { root: { backgroundColor: C.ink, color: C.paper, borderRadius: 0, border: 0 } },
     },
     MuiButton: {
+      defaultProps: { disableElevation: true },
       styleOverrides: {
-        root: {
-          borderRadius: '0px', // No rounded corners
-          padding: '16px 32px',
-          textTransform: 'none',
-          fontWeight: 600,
-          fontSize: '1rem',
-          letterSpacing: '0.5px',
-        },
-        outlined: {
-          borderColor: '#1A0E0A',
-          borderWidth: '2px',
-          color: '#1A0E0A',
-          '&:hover': {
-            borderColor: '#D2691E',
-            color: '#D2691E',
-            backgroundColor: 'transparent',
-            borderWidth: '2px',
-          },
-        },
-        contained: {
-          backgroundColor: '#1A0E0A',
-          color: '#ffffff',
-          '&:hover': {
-            backgroundColor: '#D2691E',
-          },
-        },
+        root: { borderRadius: 0, padding: '14px 20px' },
+        contained: { backgroundColor: C.ink, color: C.paper, '&:hover': { backgroundColor: C.vermilion } },
+        outlined: { borderColor: C.ink, color: C.ink, '&:hover': { borderColor: C.vermilion, color: C.vermilion, background: 'transparent' } },
       },
     },
     MuiChip: {
-      styleOverrides: {
-        root: {
-          borderRadius: '0px',
-          fontWeight: 500,
-          textTransform: 'uppercase',
-          letterSpacing: '1px',
-          fontSize: '0.75rem',
-        },
-        outlined: {
-          borderColor: '#1A0E0A',
-          color: '#1A0E0A',
-          borderWidth: '1px',
-          '&:hover': {
-            backgroundColor: '#D2691E',
-            color: '#ffffff',
-            borderColor: '#D2691E',
-          },
-        },
-      },
+      styleOverrides: { root: { borderRadius: 0, fontFamily: F.mono, fontSize: 10, letterSpacing: '.14em' } },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: { root: { borderRadius: 0 } },
     },
   },
-  shape: {
-    borderRadius: 0, // No rounded corners anywhere
-  },
-});
+})

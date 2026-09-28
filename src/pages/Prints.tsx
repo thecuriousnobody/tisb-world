@@ -1,73 +1,44 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
-import { Box, Typography, TextField, MenuItem, Button, Alert, CircularProgress } from '@mui/material'
+import type { ChangeEvent, FormEvent, ReactNode } from 'react'
+import { Box } from '@mui/material'
 import Seo from '../components/Seo'
 import { prints, heroImage, positioning, useCases, sizes } from '../data/prints'
+import { C, F, GUTTER, WIDE } from '../design/tokens'
+import { Corners, Kanji, Mono, Seal, Well } from '../design/primitives'
+import { pad2 } from '../design/pages'
 
 /**
- * /prints — the commercial landing page for Pinterest traffic.
+ * /prints — the commercial page Pinterest and Behance buyers land on.
  *
- * Rendered OUTSIDE the main Layout by design. A designer arriving from a pin
- * has exactly one question ("can I get this on my client's wall, and how?").
- * Site nav to the podcast/ventures/AI work is a strength in another context and
- * a distraction here, so this page carries only its own quiet link home.
+ * Layout renders this route without the site nav (see Layout.tsx): a designer
+ * arriving from a pin has one question — "can I get this on my client's wall,
+ * and how?" — and podcast/startup links don't help answer it. The form posts
+ * to /api/art/inquiry, which writes a Notion row AND emails Rajeev.
  */
 
-const ACCENT = '#FF4500'
-const CANVAS = '#0A0A0A'
-
-const WHATSAPP = 'https://wa.me/13096797200?text=Hi%20Rajeev%20%E2%80%94%20I%27m%20interested%20in%20your%20large-format%20work.'
+const WHATSAPP =
+  'https://wa.me/13096797200?text=Hi%20Rajeev%20%E2%80%94%20I%27m%20interested%20in%20your%20large-format%20work.'
 const EMAIL = 'rajeev@theideasandbox.com'
-
-/** Shared dark-field styling for the inquiry form. */
-const fieldSx = {
-  '& .MuiInputBase-root': {
-    backgroundColor: '#000',
-    color: '#fff',
-    borderRadius: 0,
-  },
-  '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.25)' },
-  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.5)' },
-  '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: ACCENT, borderWidth: '2px' },
-  '& .MuiInputLabel-root': { color: 'rgba(255,255,255,0.6)' },
-  '& .MuiInputLabel-root.Mui-focused': { color: ACCENT },
-  '& .MuiSelect-icon': { color: 'rgba(255,255,255,0.6)' },
-}
-
-const selectMenuProps = {
-  PaperProps: {
-    sx: {
-      backgroundColor: '#000',
-      color: '#fff',
-      borderRadius: 0,
-      border: '1px solid rgba(255,255,255,0.2)',
-      '& .MuiMenuItem-root:hover': { backgroundColor: 'rgba(255,69,0,0.2)' },
-    },
-  },
-}
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
+const EMPTY = { name: '', email: '', useCase: '', size: '', notes: '', company: '' }
+
 export default function Prints() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    useCase: '',
-    size: '',
-    notes: '',
-    company: '', // honeypot — hidden from humans
-  })
+  // `company` is a honeypot: hidden from humans, filled by bots, rejected server-side.
+  const [form, setForm] = useState(EMPTY)
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
-  const update = (field: keyof typeof form) => (e: { target: { value: string } }) =>
-    setForm((prev) => ({ ...prev, [field]: e.target.value }))
+  const update =
+    (field: keyof typeof EMPTY) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+      setForm((prev) => ({ ...prev, [field]: e.target.value }))
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setStatus('sending')
     setErrorMsg('')
-
     try {
       const res = await fetch('/api/art/inquiry', {
         method: 'POST',
@@ -75,418 +46,245 @@ export default function Prints() {
         body: JSON.stringify({ ...form, source: '/prints' }),
       })
       const data = await res.json().catch(() => ({}))
-
       if (!res.ok) throw new Error(data.error || 'Something went wrong.')
-
       setStatus('sent')
-      setForm({ name: '', email: '', useCase: '', size: '', notes: '', company: '' })
+      setForm(EMPTY)
     } catch (err) {
       setStatus('error')
       setErrorMsg(err instanceof Error ? err.message : 'Something went wrong.')
     }
   }
 
-  const scrollToForm = () =>
-    document.getElementById('inquire')?.scrollIntoView({ behavior: 'smooth' })
-
   return (
-    <Box sx={{ backgroundColor: CANVAS, minHeight: '100vh', color: '#fff' }}>
+    <Box component="section">
       <Seo
         title="Large-Format Art for Commercial Installation"
         description="Original large-format work on brushed aluminum for hospitality, commercial, and residential installation. Sizes and editions by inquiry."
         path="/prints"
-        image="https://www.tisb.world/installations/hero-rooftop-lounge.jpg"
+        image="https://www.tisb.world/installations/hero-terrace-copper.webp"
       />
 
       {/* ── Hero: the work, at scale, on a real wall ─────────────────── */}
-      <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-        <Box
-          component="img"
+      <Box sx={{ position: 'relative', height: 'min(78vh, 760px)', minHeight: 480, overflow: 'hidden', background: C.ink }}>
+        <img
           src={heroImage}
           alt="Large-format print on brushed aluminum installed on a concrete wall"
-          sx={{
-            width: '100%',
-            height: { xs: '58vh', md: '82vh' },
-            objectFit: 'cover',
-            display: 'block',
-          }}
+          fetchPriority="high"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
+        <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,15,14,.82), rgba(15,15,14,0) 55%)' }} />
+        <Corners which={['tl', 'tr']} size={18} inset={28} color={C.paper} />
+        <Box sx={{ position: 'absolute', right: { xs: 36, md: 56 }, top: { xs: 44, md: 52 }, color: C.paper }}>
+          <Kanji char="版" size="clamp(96px, 20vw, 160px)" />
+        </Box>
         <Box
           sx={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.55) 35%, rgba(10,10,10,0.1) 70%)',
-          }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            p: { xs: 3, md: 8 },
+            position: 'absolute', left: GUTTER, right: GUTTER, bottom: '48px',
+            display: 'flex', flexDirection: 'column', gap: '20px', color: C.paper,
           }}
         >
-          <Typography
-            variant="h1"
-            sx={{
-              // "ARCHITECTURAL" renders 12.5x the font-size wide in this face.
-              // Two separate things used to break it onto "ARCHITECT / URAL":
-              // the theme's wordBreak:'break-word', and maxWidth:'15ch' — which
-              // in this wide display font is almost exactly the word's own
-              // width, so it clipped even on desktop. Fluid sizing plus no
-              // mobile maxWidth keeps it to three clean lines, measured to hold
-              // from 320px through 1920px.
-              // '&&' doubles the class selector. Without it the theme's
-              // `h1: { '@media (max-width:768px)': { fontSize: '4rem' } }`
-              // outranks this and mobile renders at 64px — "ARCHITECTURAL"
-              // then measures 802px inside a 606px viewport and runs off the
-              // screen. A plain sx fontSize loses to that media query.
-              '&&': { fontSize: 'clamp(1.25rem, 6.4vw, 5.5rem)' },
-              wordBreak: 'normal',
-              overflowWrap: 'normal',
-              fontWeight: 900,
-              // The theme's h1 pairs lineHeight 0.9 with overflow:hidden, which
-              // shears the tops off the capitals on the first line (worst on
-              // mobile, where "ART AT" got visibly chopped). Give the glyphs
-              // room and stop clipping them.
-              lineHeight: { xs: 1.05, md: 0.95 },
-              overflow: 'visible',
-              letterSpacing: '-0.03em',
-              mb: 2,
-              maxWidth: { xs: 'none', md: '15ch' },
-            }}
+          <Mono color={C.paper}>SYS / 005 — LARGE FORMAT / 版</Mono>
+          <Box
+            component="h1"
+            // Michroma is wide: "ARCHITECTURAL" is ~12em across. The floor of
+            // 22px keeps it on one line down to a 320px phone.
+            sx={{ font: `400 clamp(22px, 4.4vw, 60px)/1.15 ${F.display}`, letterSpacing: '.02em', maxWidth: 900 }}
           >
             ART AT ARCHITECTURAL SCALE
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: { xs: '1rem', md: '1.35rem' },
-              color: 'rgba(255,255,255,0.85)',
-              maxWidth: '62ch',
-              lineHeight: 1.6,
-            }}
-          >
+          </Box>
+          <Box component="p" sx={{ fontSize: { xs: 17, md: 19 }, lineHeight: 1.6, maxWidth: 620, fontWeight: 300 }}>
             {positioning}
-          </Typography>
-          <Button
-            onClick={scrollToForm}
-            sx={{
-              mt: { xs: 3, md: 4 },
-              backgroundColor: ACCENT,
-              color: '#000',
-              fontWeight: 700,
-              px: 4,
-              py: 1.75,
-              borderRadius: 0,
-              '&:hover': { backgroundColor: '#fff' },
-            }}
+          </Box>
+          <Box
+            component="a"
+            href="#inquire"
+            className="s-btn-verm"
+            sx={{ alignSelf: 'flex-start', mt: '4px', p: '14px 20px', font: `400 10px ${F.mono}`, letterSpacing: '.16em' }}
           >
-            Request sizes &amp; pricing
-          </Button>
+            REQUEST SIZES &amp; PRICING ↓
+          </Box>
         </Box>
       </Box>
 
-      {/* ── Selected work ─────────────────────────────────────────────── */}
-      <Box sx={{ px: { xs: 3, md: 8 }, py: { xs: 6, md: 10 } }}>
-        <Typography
-          sx={{
-            fontSize: '0.8rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: ACCENT,
-            mb: 4,
-            fontWeight: 700,
-          }}
-        >
-          Selected Work
-        </Typography>
-
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-            gap: { xs: 4, md: 5 },
-          }}
-        >
-          {prints.map((print) => (
-            <Box key={print.title}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  backgroundColor: '#000',
-                  aspectRatio: '4 / 3',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                }}
-              >
-                <Box
-                  component="img"
-                  src={print.image}
-                  alt={print.title}
-                  loading="lazy"
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    transition: 'transform 0.6s ease',
-                    '&:hover': { transform: 'scale(1.04)' },
-                  }}
-                />
+      {/* ── Plates ───────────────────────────────────────────────────── */}
+      <Box
+        sx={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+          gap: '48px 32px', p: `80px ${GUTTER}`,
+        }}
+      >
+        {prints.map((p, i) => (
+          <Box key={p.title} data-reveal className="s-zoom" sx={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <Well src={p.image} alt={`${p.title} — large-format print installed`} ratio="4/3" />
+            <Box sx={{ display: 'flex', gap: '16px', alignItems: 'baseline' }}>
+              <Mono>P.{pad2(i + 1)}</Mono>
+              <Box component="span" sx={{ font: `400 16px ${F.display}`, textTransform: 'uppercase', letterSpacing: '.02em' }}>
+                {p.title}
               </Box>
-              <Typography
-                sx={{ mt: 2, fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.01em' }}
-              >
-                {print.title}
-              </Typography>
-              <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', mt: 0.5 }}>
-                {print.note}
-              </Typography>
             </Box>
-          ))}
-        </Box>
+            <Box component="span" sx={{ fontSize: 15, lineHeight: 1.55, color: C.inkSoft, fontWeight: 300 }}>{p.note}</Box>
+          </Box>
+        ))}
       </Box>
 
-      {/* ── Inquiry ───────────────────────────────────────────────────── */}
+      {/* ── Inquiry ──────────────────────────────────────────────────── */}
       <Box
         id="inquire"
         sx={{
-          px: { xs: 3, md: 8 },
-          py: { xs: 6, md: 10 },
-          borderTop: '1px solid rgba(255,255,255,0.12)',
+          scrollMarginTop: '64px',
+          display: 'grid', gridTemplateColumns: '1fr', gap: '48px',
+          p: `80px ${GUTTER} 96px`, borderTop: `1px solid ${C.hairline}`,
+          [WIDE]: { gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr)' },
         }}
       >
-        <Box sx={{ maxWidth: '760px' }}>
-          <Typography
-            variant="h2"
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <Mono>[A] INQUIRY / 問合せ</Mono>
+          <Box component="h2" sx={{ font: `400 clamp(24px, 3vw, 38px)/1.25 ${F.display}`, letterSpacing: '.02em' }}>
+            TELL ME ABOUT THE WALL
+          </Box>
+          <Box component="p" sx={{ fontSize: 17, lineHeight: 1.7, fontWeight: 300, color: C.inkSoft, maxWidth: 440 }}>
+            Where it's going, how big, and anything about the space. I'll come back with sizes, edition options, and a quote.
+          </Box>
+        </Box>
+
+        {status === 'sent' ? (
+          <Box
+            role="status"
+            sx={{ display: 'flex', gap: '24px', alignItems: 'center', p: '32px', border: `1px solid ${C.vermilion}`, alignSelf: 'start' }}
+          >
+            <Seal char="済" size={44} glyph={30} />
+            <Box component="span" sx={{ fontSize: 19 }}>
+              Got it — I'll be in touch shortly with sizes and a quote.
+            </Box>
+          </Box>
+        ) : (
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
             sx={{
-              // Same theme media-query override as the hero h1 — see note there.
-              '&&': { fontSize: 'clamp(1.5rem, 5.5vw, 3.25rem)' },
-              wordBreak: 'normal',
-              overflowWrap: 'normal',
-              fontWeight: 900,
-              // Same theme clipping issue as the hero h1 (lineHeight 0.95 +
-              // overflow:hidden).
-              lineHeight: { xs: 1.05, md: 1 },
-              overflow: 'visible',
-              letterSpacing: '-0.02em',
-              mb: 2,
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '28px 24px',
+              alignContent: 'start',
             }}
           >
-            TELL ME ABOUT THE WALL
-          </Typography>
-          <Typography sx={{ color: 'rgba(255,255,255,0.7)', mb: 5, fontSize: '1.05rem' }}>
-            Where it's going, how big, and anything about the space. I'll come back
-            with sizes, edition options, and a quote.
-          </Typography>
+            {/* Honeypot: off-screen, never announced, never tabbable. */}
+            <input
+              type="text"
+              name="company"
+              value={form.company}
+              onChange={update('company')}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: -9999, width: 1, height: 1, opacity: 0 }}
+            />
 
-          {status === 'sent' ? (
-            <Alert
-              severity="success"
-              sx={{
-                backgroundColor: 'rgba(255,69,0,0.12)',
-                color: '#fff',
-                borderRadius: 0,
-                border: `1px solid ${ACCENT}`,
-                '& .MuiAlert-icon': { color: ACCENT },
-              }}
-            >
-              Got it — I'll be in touch shortly with sizes and a quote.
-            </Alert>
-          ) : (
-            <Box component="form" onSubmit={handleSubmit} sx={{ display: 'grid', gap: 3 }}>
-              {/* Honeypot: off-screen, never announced, never tabbable. */}
-              <Box
-                component="input"
-                type="text"
-                name="company"
-                value={form.company}
-                onChange={update('company')}
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                sx={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
-              />
-
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-                  gap: 3,
-                }}
-              >
-                <TextField
-                  required
-                  label="Name"
-                  value={form.name}
-                  onChange={update('name')}
-                  sx={fieldSx}
-                  fullWidth
-                />
-                <TextField
-                  required
-                  type="email"
-                  label="Email"
-                  value={form.email}
-                  onChange={update('email')}
-                  sx={fieldSx}
-                  fullWidth
-                />
-              </Box>
-
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-                  gap: 3,
-                }}
-              >
-                <TextField
-                  select
-                  label="What's it for?"
-                  value={form.useCase}
-                  onChange={update('useCase')}
-                  sx={fieldSx}
-                  SelectProps={{ MenuProps: selectMenuProps }}
-                  fullWidth
-                >
-                  {useCases.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  select
-                  label="Size"
-                  value={form.size}
-                  onChange={update('size')}
-                  sx={fieldSx}
-                  SelectProps={{ MenuProps: selectMenuProps }}
-                  fullWidth
-                >
-                  {sizes.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Box>
-
-              <TextField
-                label="Notes"
-                placeholder="The space, the piece you have in mind, timing — anything helps."
+            <Field label="NAME" required>
+              <input required autoComplete="name" value={form.name} onChange={update('name')} style={inputStyle} />
+            </Field>
+            <Field label="EMAIL" required>
+              <input required type="email" autoComplete="email" value={form.email} onChange={update('email')} style={inputStyle} />
+            </Field>
+            <Field label="WHAT'S IT FOR?">
+              {/* Starts blank on purpose: pre-selecting "Hospitality" would
+                  quietly mislabel every lead who didn't touch the dropdown. */}
+              <select value={form.useCase} onChange={update('useCase')} style={inputStyle}>
+                <option value="">Select…</option>
+                {useCases.map((o) => <option key={o} value={o}>{o}</option>)}
+              </select>
+            </Field>
+            <Field label="SIZE">
+              <select value={form.size} onChange={update('size')} style={inputStyle}>
+                <option value="">Select…</option>
+                {sizes.map((o) => <option key={o} value={o}>{o}</option>)}
+              </select>
+            </Field>
+            <Field label="NOTES" full>
+              <textarea
+                rows={4}
                 value={form.notes}
                 onChange={update('notes')}
-                multiline
-                rows={5}
-                sx={fieldSx}
-                fullWidth
+                placeholder="The space, the piece you have in mind, timing — anything helps."
+                style={{ ...inputStyle, lineHeight: 1.6, resize: 'vertical' }}
               />
+            </Field>
 
-              {status === 'error' && (
-                <Alert
-                  severity="error"
-                  sx={{ borderRadius: 0, backgroundColor: 'rgba(255,0,0,0.1)', color: '#fff' }}
-                >
-                  {errorMsg} You can also email{' '}
-                  <Box component="a" href={`mailto:${EMAIL}`} sx={{ color: ACCENT }}>
-                    {EMAIL}
-                  </Box>
-                  .
-                </Alert>
-              )}
+            {status === 'error' && (
+              <Box role="alert" sx={{ gridColumn: '1 / -1', borderLeft: `2px solid ${C.vermilion}`, pl: '16px' }}>
+                <Mono color={C.vermilion} as="div">TRANSMISSION FAILED</Mono>
+                <Box component="p" sx={{ fontSize: 15, color: C.inkSoft, mt: '6px' }}>
+                  {errorMsg} You can also email <a href={`mailto:${EMAIL}`} style={{ borderBottom: `1px solid ${C.ink}` }}>{EMAIL}</a>.
+                </Box>
+              </Box>
+            )}
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, flexWrap: 'wrap' }}>
-                <Button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  sx={{
-                    backgroundColor: ACCENT,
-                    color: '#000',
-                    fontWeight: 700,
-                    px: 5,
-                    py: 1.75,
-                    borderRadius: 0,
-                    '&:hover': { backgroundColor: '#fff' },
-                    '&.Mui-disabled': { backgroundColor: 'rgba(255,255,255,0.2)', color: '#666' },
-                  }}
-                >
-                  {status === 'sending' ? (
-                    <>
-                      <CircularProgress size={18} sx={{ mr: 1.5, color: '#666' }} />
-                      Sending…
-                    </>
-                  ) : (
-                    'Send inquiry'
-                  )}
-                </Button>
-
-                <Typography sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem' }}>
-                  or reach me on{' '}
-                  <Box
-                    component="a"
-                    href={WHATSAPP}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: ACCENT, fontWeight: 600, textDecoration: 'none' }}
-                  >
-                    WhatsApp
-                  </Box>{' '}
-                  ·{' '}
-                  <Box
-                    component="a"
-                    href={`mailto:${EMAIL}`}
-                    sx={{ color: ACCENT, fontWeight: 600, textDecoration: 'none' }}
-                  >
-                    {EMAIL}
-                  </Box>
-                </Typography>
+            <Box sx={{ gridColumn: '1 / -1', display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center' }}>
+              <Box
+                component="button"
+                type="submit"
+                disabled={status === 'sending'}
+                className="s-btn-ink"
+                sx={{
+                  border: 0, p: '16px 28px', cursor: 'pointer', font: `400 10px ${F.mono}`, letterSpacing: '.16em',
+                  '&:disabled': { background: C.muted, cursor: 'wait' },
+                }}
+              >
+                {status === 'sending' ? 'SENDING…' : 'SEND INQUIRY →'}
+              </Box>
+              <Box component="span" sx={{ fontSize: 15, color: C.inkSoft }}>
+                or reach me on{' '}
+                <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" style={{ borderBottom: `1px solid ${C.ink}` }}>WhatsApp</a>
+                {' · '}
+                <a href={`mailto:${EMAIL}`} style={{ borderBottom: `1px solid ${C.ink}` }}>{EMAIL}</a>
               </Box>
             </Box>
-          )}
-        </Box>
+          </Box>
+        )}
       </Box>
+    </Box>
+  )
+}
 
-      {/* ── Quiet way home. Not nav — an exit for the curious. ────────── */}
-      <Box
-        sx={{
-          px: { xs: 3, md: 8 },
-          py: 4,
-          borderTop: '1px solid rgba(255,255,255,0.12)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 2,
-        }}
-      >
-        <Box
-          component="a"
-          href="/"
-          sx={{
-            color: 'rgba(255,255,255,0.4)',
-            fontSize: '0.85rem',
-            textDecoration: 'none',
-            '&:hover': { color: ACCENT },
-          }}
-        >
-          The Curious Nobody — The Idea Sandbox
-        </Box>
-        <Box
-          component="a"
-          href="/art"
-          sx={{
-            color: 'rgba(255,255,255,0.55)',
-            fontSize: '0.85rem',
-            textDecoration: 'none',
-            '&:hover': { color: ACCENT },
-          }}
-        >
-          See the full archive →
-        </Box>
-      </Box>
+const inputStyle = {
+  border: 0,
+  borderBottom: `1px solid ${C.ink}`,
+  borderRadius: 0,
+  // backgroundColor, not the `background` shorthand — the shorthand would
+  // reset the select caret drawn with backgroundImage in <Field>.
+  backgroundColor: 'transparent',
+  padding: '10px 0',
+  font: `400 17px ${F.body}`,
+  color: C.ink,
+  width: '100%',
+  appearance: 'none' as const,
+}
+
+/**
+ * Label + control. The prototype sets `outline: none` on fields; we keep the
+ * hairline look but give keyboard users a visible vermilion underline instead
+ * of removing focus indication outright.
+ */
+function Field({ label, children, required, full }: { label: string; children: ReactNode; required?: boolean; full?: boolean }) {
+  return (
+    <Box
+      component="label"
+      sx={{
+        display: 'flex', flexDirection: 'column', gap: '8px', gridColumn: full ? '1 / -1' : undefined,
+        font: `400 10px ${F.mono}`, letterSpacing: '.16em', color: C.muted,
+        '& input, & select, & textarea': { outline: 'none', transition: 'border-color .25s, box-shadow .25s' },
+        '& input:focus-visible, & select:focus-visible, & textarea:focus-visible': {
+          borderBottomColor: C.vermilion, boxShadow: `0 1px 0 ${C.vermilion}`,
+        },
+        '& select': {
+          cursor: 'pointer',
+          backgroundImage: `linear-gradient(45deg, transparent 50%, ${C.ink} 50%), linear-gradient(135deg, ${C.ink} 50%, transparent 50%)`,
+          backgroundPosition: 'calc(100% - 10px) 55%, calc(100% - 5px) 55%',
+          backgroundSize: '5px 5px',
+          backgroundRepeat: 'no-repeat',
+        },
+      }}
+    >
+      <span>{label}{required && <span style={{ color: C.vermilion }}> *</span>}</span>
+      {children}
     </Box>
   )
 }
