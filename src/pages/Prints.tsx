@@ -10,10 +10,10 @@ import { pad2 } from '../design/pages'
 /**
  * /prints — the commercial page Pinterest and Behance buyers land on.
  *
- * Layout renders this route without the site nav (see Layout.tsx): a designer
- * arriving from a pin has one question — "can I get this on my client's wall,
- * and how?" — and podcast/startup links don't help answer it. The form posts
- * to /api/art/inquiry, which writes a Notion row AND emails Rajeev.
+ * A designer arriving from a pin has one question — "can I get this on my
+ * client's wall, and how?" — so the page leads with installations and ends in
+ * the inquiry form. The form posts to /api/art/inquiry, which writes a Notion
+ * row AND emails Rajeev.
  */
 
 const WHATSAPP =

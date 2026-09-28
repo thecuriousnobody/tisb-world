@@ -101,11 +101,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
   const navigate = useNavigate()
   const page = pageForPath(location.pathname)
-  // /prints is where Pinterest and Behance buyers land. It keeps the Signal
-  // chrome but drops the site nav, so a designer asking "can I get this on my
-  // client's wall?" isn't handed podcast and startup links. The footer still
-  // carries the full nav, so it's never a dead end.
-  const focused = page === 'prints'
 
   const [out, setOut] = useState(false)
   const [veil, setVeil] = useState<{ on: boolean; op: number; to: PageKey | null }>({ on: false, op: 0, to: null })
@@ -188,7 +183,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         <Header
           page={page}
-          focused={focused}
           clock={clock}
           menuOpen={menuOpen}
           onMenu={() => setMenuOpen((o) => !o)}
@@ -263,9 +257,9 @@ function Status({ clock }: { clock: string }) {
 }
 
 function Header({
-  page, focused, clock, menuOpen, onMenu, progress,
+  page, clock, menuOpen, onMenu, progress,
 }: {
-  page: PageKey | null; focused: boolean; clock: string
+  page: PageKey | null; clock: string
   menuOpen: boolean; onMenu: () => void; progress: number | null
 }) {
   return (
@@ -285,51 +279,47 @@ function Header({
       >
         <Logo />
 
-        {!focused && (
-          <Box
-            component="nav"
-            aria-label="Primary"
-            sx={{
-              display: 'none', flexWrap: 'wrap', gap: '6px 24px',
-              font: `400 10px ${F.mono}`, letterSpacing: '.16em',
-              [`@media (min-width: ${NAV_BP}px)`]: { display: 'flex' },
-            }}
-          >
-            {NAV.map((k, i) => (
-              <Box
-                key={k}
-                component={SLink}
-                to={PAGES[k].path}
-                aria-current={isNavActive(k, page) ? 'page' : undefined}
-                sx={{ py: '6px', color: isNavActive(k, page) ? C.vermilion : C.ink }}
-              >
-                [{pad2(i + 1)}] {PAGES[k].label}
-              </Box>
-            ))}
-          </Box>
-        )}
+        <Box
+          component="nav"
+          aria-label="Primary"
+          sx={{
+            display: 'none', flexWrap: 'wrap', gap: '6px 24px',
+            font: `400 10px ${F.mono}`, letterSpacing: '.16em',
+            [`@media (min-width: ${NAV_BP}px)`]: { display: 'flex' },
+          }}
+        >
+          {NAV.map((k, i) => (
+            <Box
+              key={k}
+              component={SLink}
+              to={PAGES[k].path}
+              aria-current={isNavActive(k, page) ? 'page' : undefined}
+              sx={{ py: '6px', color: isNavActive(k, page) ? C.vermilion : C.ink }}
+            >
+              [{pad2(i + 1)}] {PAGES[k].label}
+            </Box>
+          ))}
+        </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <Box sx={{ display: 'none', '@media (min-width: 1120px)': { display: 'flex' }, ...(focused && { display: 'flex' }) }}>
+          <Box sx={{ display: 'none', '@media (min-width: 1120px)': { display: 'flex' } }}>
             <Status clock={clock} />
           </Box>
-          {!focused && (
-            <Box
-              component="button"
-              type="button"
-              onClick={onMenu}
-              aria-expanded={menuOpen}
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              sx={{
-                border: `1px solid ${C.ink}`, background: menuOpen ? C.ink : 'transparent',
-                color: menuOpen ? C.paper : C.ink, cursor: 'pointer', p: '9px 14px',
-                font: `400 10px ${F.mono}`, letterSpacing: '.16em',
-                [`@media (min-width: ${NAV_BP}px)`]: { display: 'none' },
-              }}
-            >
-              {menuOpen ? 'CLOSE ×' : 'MENU'}
-            </Box>
-          )}
+          <Box
+            component="button"
+            type="button"
+            onClick={onMenu}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            sx={{
+              border: `1px solid ${C.ink}`, background: menuOpen ? C.ink : 'transparent',
+              color: menuOpen ? C.paper : C.ink, cursor: 'pointer', p: '9px 14px',
+              font: `400 10px ${F.mono}`, letterSpacing: '.16em',
+              [`@media (min-width: ${NAV_BP}px)`]: { display: 'none' },
+            }}
+          >
+            {menuOpen ? 'CLOSE ×' : 'MENU'}
+          </Box>
         </Box>
       </Box>
 
