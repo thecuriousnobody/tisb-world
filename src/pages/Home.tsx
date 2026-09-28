@@ -43,7 +43,7 @@ export default function Home() {
     <Box component="section" sx={{ display: 'flex', flexDirection: 'column' }}>
       <Seo
         title="TISB — The Idea Sandbox"
-        description="Rajeev Kumar builds seven AI startups from Central Illinois — alongside original music, large-format art, and a podcast of forty-plus conversations. Where ideas become ventures."
+        description="Rajeev Kumar builds seven AI startups from Central Illinois — alongside original music, large-format art, essays, and a podcast of forty-plus conversations. Where ideas become ventures."
         path="/"
       />
 
@@ -67,8 +67,8 @@ export default function Home() {
             THE IDEA<br />SANDBOX
           </Box>
           <Box component="p" sx={{ fontSize: 19, lineHeight: 1.7, maxWidth: 520, fontWeight: 300 }}>
-            Music, art, technology and AI. Seven ventures, forty-plus conversations, and a stubbornly
-            optimistic nobody building from the middle of the country.
+            Music, art, writing, technology and AI. Seven ventures, forty-plus conversations — one
+            curious nobody from the middle of the country, pitching in.
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', borderTop: `1px solid ${C.hairline}` }}>
             {STATS.map((s, i) => (
@@ -134,7 +134,7 @@ export default function Home() {
           <p>
             The Idea Sandbox is where it all lands: forty-plus conversations with scientists, artists,
             and beautiful misfits; essays on technology, culture, and the games we choose to play; and a
-            running experiment in what one stubbornly optimistic nobody can build when the tools finally
+            running experiment in what one curious nobody can build when the tools finally
             catch up to the imagination.
           </p>
           <Box component="p" sx={{ mt: '12px', font: `400 17px/1.6 ${F.display}`, letterSpacing: '.02em' }}>
