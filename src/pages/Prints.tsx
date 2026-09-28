@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import { Box } from '@mui/material'
 import Seo from '../components/Seo'
-import { prints, heroImage, positioning, useCases, sizes } from '../data/prints'
+import { prints, heroImage, positioning, disclosure, useCases, sizes } from '../data/prints'
 import { C, F, GUTTER, WIDE } from '../design/tokens'
 import { Corners, Kanji, Mono, Seal, Well } from '../design/primitives'
 import { pad2 } from '../design/pages'
@@ -11,7 +11,8 @@ import { pad2 } from '../design/pages'
  * /prints — the commercial page Pinterest and Behance buyers land on.
  *
  * A designer arriving from a pin has one question — "can I get this on my
- * client's wall, and how?" — so the page leads with installations and ends in
+ * client's wall, and how?" — so the page leads with visualizations at scale
+ * (clearly labelled as renders, not past installs) and ends in
  * the inquiry form. The form posts to /api/art/inquiry, which writes a Notion
  * row AND emails Rajeev.
  */
@@ -58,17 +59,17 @@ export default function Prints() {
   return (
     <Box component="section">
       <Seo
-        title="Large-Format Art for Commercial Installation"
-        description="Original large-format work on brushed aluminum for hospitality, commercial, and residential installation. Sizes and editions by inquiry."
+        title="Large-Format Art on Aluminum, Made to Order"
+        description="Original work by Rajeev Kumar, produced to order in large format on brushed or anodized aluminum for hospitality, commercial, and residential spaces. Sizes, finishes, and editions by inquiry."
         path="/prints"
         image="https://www.tisb.world/installations/hero-terrace-copper.webp"
       />
 
-      {/* ── Hero: the work, at scale, on a real wall ─────────────────── */}
+      {/* ── Hero: a visualization of the work at architectural scale ─── */}
       <Box sx={{ position: 'relative', height: 'min(78vh, 760px)', minHeight: 480, overflow: 'hidden', background: C.ink }}>
         <img
           src={heroImage}
-          alt="Large-format print on brushed aluminum installed on a concrete wall"
+          alt="Visualization of a large-format aluminum print on a concrete wall"
           fetchPriority="high"
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
@@ -109,13 +110,24 @@ export default function Prints() {
       {/* ── Plates ───────────────────────────────────────────────────── */}
       <Box
         sx={{
+          display: 'flex', flexWrap: 'wrap', gap: '12px 32px', alignItems: 'baseline',
+          p: `56px ${GUTTER} 0`,
+        }}
+      >
+        <Mono>[A] VISUALIZATIONS / 構想</Mono>
+        <Box component="p" sx={{ fontSize: 15, lineHeight: 1.6, color: C.inkSoft, fontWeight: 300, maxWidth: 640 }}>
+          {disclosure}
+        </Box>
+      </Box>
+      <Box
+        sx={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
-          gap: '48px 32px', p: `80px ${GUTTER}`,
+          gap: '48px 32px', p: `40px ${GUTTER} 80px`,
         }}
       >
         {prints.map((p, i) => (
           <Box key={p.title} data-reveal className="s-zoom" sx={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <Well src={p.image} alt={`${p.title} — large-format print installed`} ratio="4/3" />
+            <Well src={p.image} alt={`${p.title} — visualization of the piece at large format`} ratio="4/3" />
             <Box sx={{ display: 'flex', gap: '16px', alignItems: 'baseline' }}>
               <Mono>P.{pad2(i + 1)}</Mono>
               <Box component="span" sx={{ font: `400 16px ${F.display}`, textTransform: 'uppercase', letterSpacing: '.02em' }}>
@@ -138,12 +150,19 @@ export default function Prints() {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <Mono>[A] INQUIRY / 問合せ</Mono>
+          <Mono>[B] INQUIRY / 問合せ</Mono>
           <Box component="h2" sx={{ font: `400 clamp(24px, 3vw, 38px)/1.25 ${F.display}`, letterSpacing: '.02em' }}>
             TELL ME ABOUT THE WALL
           </Box>
           <Box component="p" sx={{ fontSize: 17, lineHeight: 1.7, fontWeight: 300, color: C.inkSoft, maxWidth: 440 }}>
-            Where it's going, how big, and anything about the space. I'll come back with sizes, edition options, and a quote.
+            Where it's going, how big, and anything about the space. I'll come back with sizes, finishes, edition options, and a quote.
+          </Box>
+          <Box
+            component="p"
+            sx={{ fontSize: 15, lineHeight: 1.6, fontWeight: 300, color: C.inkSoft, maxWidth: 440, borderLeft: `2px solid ${C.vermilion}`, pl: '14px' }}
+          >
+            Print studio or fabricator working in brushed or anodized aluminum? I'm looking for a production
+            partner — use the same form and pick "Print studio / fabrication partner".
           </Box>
         </Box>
 

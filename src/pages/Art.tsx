@@ -30,9 +30,9 @@ function PrintsBanner() {
       >
         <Mono color={C.vermilionOnDark}>FOR DESIGNERS &amp; SPECIFIERS</Mono>
         <Box component="span" sx={{ fontSize: 18, color: C.paper }}>
-          Available in large format on brushed aluminum.
+          Made to order in large format on aluminum.
         </Box>
-        <Mono color={C.paper}>SEE INSTALLATIONS →</Mono>
+        <Mono color={C.paper}>SEE IT AT SCALE →</Mono>
       </Box>
     </SLink>
   )

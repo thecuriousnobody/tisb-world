@@ -3,7 +3,7 @@
  *
  * Deliberately a tiny hand-curated list, NOT the full Behance archive — this
  * page exists to answer one question for a designer landing from Pinterest:
- * "can I get this on my client's wall, and how?" Four installation shots answer
+ * "can I get this on my client's wall, and how?" Four visualizations answer
  * it; a 125-item grid of flat artwork does not.
  *
  * The four below are chosen for RANGE OF SETTING, not just for the art — a
@@ -19,7 +19,7 @@
 
 export interface Print {
   /**
-   * Series name. These are currently the installation SETTING, because the
+   * Series name. These are currently the visualized SETTING, because the
    * mapping from each mockup back to its Behance series isn't recorded
    * anywhere — swap in the real series names when you have them.
    */
@@ -31,7 +31,12 @@ export interface Print {
 }
 
 /**
- * Full-bleed installation shot at the top of the page.
+ * Full-bleed visualization at the top of the page.
+ *
+ * NOT photographs of completed work: every image on /prints is an AI-rendered
+ * visualization (made with Nano Banana Pro) of how a piece would read at
+ * scale. Copy must never claim these are real installations — see
+ * `disclosure` below.
  *
  * Chosen for BRANDING LEGIBILITY as much as composition: these mockups are
  * AI-rendered, and in several of them the "THE CURIOUS NOBODY" plate comes out
@@ -45,7 +50,11 @@ export const heroImage = '/installations/hero-terrace-copper.webp'
  * load-bearing copy on the page — it sets format, material, and market.
  */
 export const positioning =
-  'Available in large format on brushed aluminum for hospitality, commercial, and residential installation. Sizes and editions by inquiry.'
+  'Original work, produced to order in large format on brushed or anodized aluminum for hospitality, commercial, and residential spaces. Sizes, finishes, and editions by inquiry.'
+
+/** Shown above the plates so no buyer mistakes a render for a past install. */
+export const disclosure =
+  'These are visualizations — renderings of how each piece reads at architectural scale, not photographs of finished installations. Every piece is produced to order.'
 
 export const prints: Print[] = [
   {
@@ -76,6 +85,7 @@ export const useCases = [
   'Commercial (office, lobby, retail)',
   'Residential',
   'Set / event / temporary install',
+  'Print studio / fabrication partner',
   'Not sure yet',
 ]
 
