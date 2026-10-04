@@ -40,8 +40,10 @@ const ventures: Venture[] = [
     status: 'beta',
     url: 'https://desilo-it.ai',
     kanji: '解',
-    accentHue: 40,
-    art: '/ventures/desilo-scout.webp',
+    // 51 = the new brand orange (#EF781B) in oklch, so the hairline matches the mark.
+    accentHue: 51,
+    // New DeSilo mark (Oct 2026 redesign), centred on its own #020A12 ground for 16:9.
+    art: '/ventures/desilo-brand.webp',
     artIsDark: true,
   },
   {
