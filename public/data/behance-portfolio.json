@@ -2,6 +2,32 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-255998159",
+      "title": "The Part That Holds",
+      "description": "The Part That Holds is five works on yellow. At the center of each, a black core the spatter can't leave alone; around it, one line that loops back on itself and pulls tight. A storm has an eye. So does a needle, and so does a rope. The calm at the middle isn't peace, it's the part that holds while everything around it moves. Cut to the mark, shown in rooms where the outside gets in.",
+      "link": "https://www.behance.net/gallery/255998159/The-Part-That-Holds",
+      "publishedAt": "2026-09-30T19:15:12.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/e42f5d255998159.Y3JvcCwxOTYzLDE1MzYsMzkzLDA.jpeg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
+      "id": "behance-256332927",
+      "title": "TISB ? SIGNAL",
+      "description": "Identity, website and venture brand system for The Idea Sandbox. The earlier brutalist look had started to shout over the work, so SIGNAL moves to white paper, black calligraphy, precise technical type and a single vermilion seal. The Japanese name, ?????, means a miniature garden of ideas, and every page of tisb.world gets one brushed character of its own. Live at tisb.world.",
+      "link": "https://www.behance.net/gallery/256332927/TISB-SIGNAL",
+      "publishedAt": "2026-09-28T02:43:29.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/e2c21a256332927.Y3JvcCwxNjE2LDEyNjQsMCww.png",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-255221147",
       "title": "Char",
       "description": "Char is what stays. Four cut-edge works on orange ground, each holding a black core: smoke, spatter, a line that will not settle. The panel is cut to the burn rather than to a frame; the silhouette is the outline of what the heat left behind. Brushed aluminum, large format, made for terraces, lounges and rooms that get real light",
@@ -21,7 +47,7 @@
       "link": "https://www.behance.net/gallery/254616025/Blot",
       "publishedAt": "2026-08-21T14:03:59.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/15ab84254616025.Y3JvcCwxMjg4LDEwMDgsMjUyLDA.jpg",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/f408fa254616025.Y3JvcCw4MTMsNjM2LDUyNSwxNA.jpg",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -73,7 +99,7 @@
       "link": "https://www.behance.net/gallery/252932847/Untouched",
       "publishedAt": "2026-07-20T15:12:05.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/97b862252932847.Y3JvcCw5ODYsNzcxLDE2Niw5Nzg.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/9af03f252932847.Y3JvcCwxMjAwLDkzOCwwLDc5Ng.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -86,7 +112,7 @@
       "link": "https://www.behance.net/gallery/252456247/Spandrel",
       "publishedAt": "2026-07-09T15:36:19.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/da7c53252456247.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/79d955252456247.Y3JvcCw5NDAsNzM1LDU1LDcwMA.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -99,7 +125,7 @@
       "link": "https://www.behance.net/gallery/251905143/Overshoot",
       "publishedAt": "2026-06-29T12:48:01.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/11b800251905143.Y3JvcCw0MzIwLDMzNzksMCwyOTk0.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/dbcac7251905143.Y3JvcCwxMjAwLDkzOCwwLDk5Mg.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -112,7 +138,7 @@
       "link": "https://www.behance.net/gallery/251560845/Callback",
       "publishedAt": "2026-06-22T23:56:52.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/acc2c9251560845.Y3JvcCwxMjAwLDkzOCwwLDU0Mw.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/db5942251560845.Y3JvcCw5MTIsNzEzLDIxNCw5MTQ.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -1718,8 +1744,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-09-27T17:19:40.379Z",
-  "scrapedAt": "2026-09-27T17:19:40.379Z",
+  "lastUpdated": "2026-10-04T17:07:17.485Z",
+  "scrapedAt": "2026-10-04T17:07:17.485Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
