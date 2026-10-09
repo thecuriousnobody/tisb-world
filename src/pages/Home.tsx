@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import Seo from '../components/Seo'
 import { useYouTubeVideos } from '../hooks/useContent'
 import type { ContentItem } from '../services/contentService'
-import { featuredVentures, ventureCount } from '../data/ventures'
+import { featuredVentures, ventureCount, ventureDomain } from '../data/ventures'
 import { C, F, GUTTER } from '../design/tokens'
 import { Corners, Kanji, Mono, Seal, SubHead } from '../design/primitives'
 import VentureTile from '../design/VentureTile'
@@ -162,8 +162,12 @@ export default function Home() {
           {featuredVentures.map((v, i) => (
             <Box
               key={v.name}
-              component={SLink}
-              to="/ventures"
+              // A card for a venture should take you to that venture, not to
+              // the Ventures index. Only ventures without a public site yet
+              // fall back to /ventures.
+              {...(v.url
+                ? { component: 'a', href: v.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${v.name} — opens ${ventureDomain(v).toLowerCase()} in a new tab` }
+                : { component: SLink, to: '/ventures' })}
               className="s-card s-zoom"
               sx={{
                 p: '28px', display: 'flex', flexDirection: 'column', gap: '28px', justifyContent: 'flex-start',
