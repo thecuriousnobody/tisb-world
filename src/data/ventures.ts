@@ -50,7 +50,7 @@ const ventures: Venture[] = [
     name: 'swych-box',
     tagline: 'An AI concierge at the edge for every small business.',
     status: 'beta',
-    url: 'https://app.swych-box.com',
+    url: 'https://www.swych-box.com/',
     kanji: '迎',
     accentHue: 235,
     art: '/ventures/swychbox-product.webp',
