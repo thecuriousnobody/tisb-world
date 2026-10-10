@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-Ssvwqs4gGs0",
+      "videoId": "Ssvwqs4gGs0",
+      "title": "They Knew Ten Things. Eight and a Half Were Right | Lowell Mora, Fractional CFO",
+      "description": "Owners often &quot;know&quot; their business cold — until the margins say otherwise. Fractional CFO Lowell Mora (Impact CFO) on the pattern he kept seeing across 30+ years: people had about ten things they knew; typically eight and a half were right — and the gaps lived in customer and product margin minutia. Why a CFO lens helps when you can hire a controller but not a full-time CFO — and why family businesses that refuse debt (or drain all the cash) leave growth on the table.\n\nChapters\n0:00 Te...",
+      "link": "https://www.youtube.com/watch?v=Ssvwqs4gGs0",
+      "publishedAt": "2026-10-09T23:00:47+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/Ssvwqs4gGs0/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/Ssvwqs4gGs0/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 5
+    },
+    {
       "id": "youtube-6rjVefXiSIg",
       "videoId": "6rjVefXiSIg",
       "title": "Table Stakes: Just Show Up | Preeti Varma, NYC artist",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/jmZS7BFujqo/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jmZS7BFujqo/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 16
+      "views": 17
     },
     {
       "id": "youtube-jAb6fBvZlVE",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/jAb6fBvZlVE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jAb6fBvZlVE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 101
+      "views": 102
     },
     {
       "id": "youtube-umIrgnyZ5Yc",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/umIrgnyZ5Yc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/umIrgnyZ5Yc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 320
+      "views": 321
     },
     {
       "id": "youtube-kTVFRwMS0AM",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/tAbIie0inEc/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 20
-    },
-    {
-      "id": "youtube-YIcoxKwrVQc",
-      "videoId": "YIcoxKwrVQc",
-      "title": "Software → AI-Run Machine Shop",
-      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
-      "link": "https://www.youtube.com/watch?v=YIcoxKwrVQc",
-      "publishedAt": "2026-09-18T23:00:33+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/YIcoxKwrVQc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/YIcoxKwrVQc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 121
     }
   ],
-  "lastUpdated": "2026-10-09T13:00:55.955Z",
+  "lastUpdated": "2026-10-10T12:18:00.496Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
