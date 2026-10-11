@@ -2,6 +2,19 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-256898043",
+      "title": "Flare",
+      "description": "Six yellow panels fired into the least likely places: a flower market, a subway, a brick side street, a stairwell. A black core, one line, nothing taken back. Made to stop you mid-step.",
+      "link": "https://www.behance.net/gallery/256898043/Flare",
+      "publishedAt": "2026-10-09T21:21:09.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/5bf9b6256898043.Y3JvcCwxNjE2LDEyNjQsMCww.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-255998159",
       "title": "The Part That Holds",
       "description": "The Part That Holds is five works on yellow. At the center of each, a black core the spatter can't leave alone; around it, one line that loops back on itself and pulls tight. A storm has an eye. So does a needle, and so does a rope. The calm at the middle isn't peace, it's the part that holds while everything around it moves. Cut to the mark, shown in rooms where the outside gets in.",
@@ -1744,8 +1757,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-10-04T17:07:17.485Z",
-  "scrapedAt": "2026-10-04T17:07:17.485Z",
+  "lastUpdated": "2026-10-11T17:49:14.704Z",
+  "scrapedAt": "2026-10-11T17:49:14.704Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
