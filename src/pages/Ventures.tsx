@@ -5,6 +5,7 @@ import { sortedVentures, ventureCount, ventureDomain } from '../data/ventures'
 import type { Venture } from '../data/ventures'
 import { C, F, GUTTER } from '../design/tokens'
 import { Mono, SectionHeader } from '../design/primitives'
+import { SLink } from '../design/transition'
 import VentureTile from '../design/VentureTile'
 import { pad2 } from '../design/pages'
 
@@ -113,6 +114,24 @@ export default function Ventures() {
           {sortedVentures.map((v, i) => <Row key={v.name} v={v} i={i} />)}
         </Box>
       </Box>
+
+      {/* Investors land here from shared links. Seven companies raise the
+          question "who's building these?" — answer it one click away. */}
+      <SLink to="/about#record" className="s-on-dark" style={{ display: 'block', background: C.ink, color: C.paper }}>
+        <Box
+          sx={{
+            display: 'flex', flexWrap: 'wrap', gap: '16px 32px', justifyContent: 'space-between',
+            alignItems: 'center', p: `28px ${GUTTER}`,
+          }}
+        >
+          <Mono color={C.vermilionOnDark}>THE BUILDER / 経歴</Mono>
+          <Box component="span" sx={{ fontSize: { xs: 16, md: 18 }, color: C.paper, maxWidth: 760, fontWeight: 300 }}>
+            Close to two decades of embedded-systems product development at Caterpillar — electrohydraulic
+            controls, hardware-in-the-loop, autonomous mining trucks.
+          </Box>
+          <Mono color={C.paper}>TRACK RECORD →</Mono>
+        </Box>
+      </SLink>
     </Box>
   )
 }

@@ -130,7 +130,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     setMenuOpen(false)
     if (busy.current) return
     if (target === pathRef.current) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Same page: a #section link scrolls to that section, anything else to the top.
+      const id = to.includes('#') ? to.split('#')[1] : ''
+      const el = id ? document.getElementById(id) : null
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      else window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
     busy.current = true

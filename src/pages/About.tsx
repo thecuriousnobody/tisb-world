@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
 import { Box } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 import Seo from '../components/Seo'
 import { ventureCount } from '../data/ventures'
+import { RECORD_LEAD, roles, patents, recognition, education } from '../data/trackRecord'
 import { C, F, GUTTER } from '../design/tokens'
 import { Mono, SectionHeader } from '../design/primitives'
 import { pad2 } from '../design/pages'
@@ -27,11 +30,20 @@ const CHAPTERS = [
 const btn = { font: `400 10px ${F.mono}`, letterSpacing: '.16em', p: '14px 20px', whiteSpace: 'nowrap' } as const
 
 export default function About() {
+  const { hash } = useLocation()
+  // /about#record is the link that gets sent to investors. The SPA renders
+  // after the browser's own hash jump, so scroll to the section once mounted.
+  useEffect(() => {
+    if (hash !== '#record') return
+    const t = window.setTimeout(() => document.getElementById('record')?.scrollIntoView({ behavior: 'smooth' }), 150)
+    return () => window.clearTimeout(t)
+  }, [hash])
+
   return (
     <Box component="section">
       <Seo
         title="The Builder"
-        description="Immigrant founder, eighteen years of engineering at Caterpillar, now building seven companies from Central Illinois. The thesis: every human has agency — AI just removes the barriers."
+        description="Immigrant founder with close to two decades of embedded-systems product development at Caterpillar — electrohydraulic controls, hardware-in-the-loop validation, autonomous mining trucks, three patents — now building seven companies from Central Illinois."
         path="/about"
       />
       <SectionHeader
@@ -66,6 +78,8 @@ export default function About() {
         ))}
       </Box>
 
+      <TrackRecord />
+
       <Box
         data-reveal
         className="s-on-dark"
@@ -90,6 +104,98 @@ export default function About() {
           <Box component="a" href="mailto:rajeev@theideasandbox.com" className="s-btn-verm" sx={btn}>EMAIL ME</Box>
         </Box>
       </Box>
+    </Box>
+  )
+}
+
+/**
+ * Track record — the Caterpillar years in detail, for investors and anyone
+ * checking whether the builder has shipped real systems before. Linked from
+ * the Ventures page as /about#record.
+ */
+function TrackRecord() {
+  return (
+    <Box id="record" sx={{ scrollMarginTop: '72px', p: `88px ${GUTTER} 96px`, borderTop: `1px solid ${C.ink}` }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: 820 }}>
+        <Mono as="div">[A] TRACK RECORD / 経歴</Mono>
+        <Box component="h2" sx={{ font: `400 clamp(24px, 3.2vw, 40px)/1.25 ${F.display}`, letterSpacing: '.02em' }}>
+          CLOSE TO TWO DECADES OF EMBEDDED SYSTEMS
+        </Box>
+        <Box component="p" sx={{ fontSize: { xs: 17, md: 19 }, lineHeight: 1.7, fontWeight: 300, color: C.inkSoft }}>
+          {RECORD_LEAD}
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', maxWidth: 560, mt: '40px',
+          borderTop: `1px solid ${C.hairline}`,
+        }}
+      >
+        {[['CATERPILLAR', '2005–22'], ['PATENTS', pad2(patents.length)]].map(([label, value], i) => (
+          <Box key={label} sx={{ py: '18px', pl: i ? '20px' : 0, borderLeft: i ? `1px solid ${C.hairline}` : 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <Mono>{label}</Mono>
+            <Box component="span" sx={{ font: `400 clamp(22px, 6vw, 28px) ${F.display}` }}>{value}</Box>
+          </Box>
+        ))}
+      </Box>
+
+      <Box sx={{ mt: '56px', borderTop: `1px solid ${C.ink}` }}>
+        {roles.map((r) => (
+          <Box
+            key={r.years}
+            data-reveal
+            sx={{
+              display: 'grid', gridTemplateColumns: '1fr', gap: '10px 40px', py: '32px',
+              borderBottom: `1px solid ${C.hairline}`,
+              '@media (min-width: 900px)': { gridTemplateColumns: '130px minmax(0, 1fr) minmax(0, 1.5fr)' },
+            }}
+          >
+            <Mono size={11} spacing=".1em" sx={{ pt: '3px' }}>{r.years}</Mono>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Box component="h3" sx={{ font: `400 15px/1.5 ${F.display}`, letterSpacing: '.02em', textTransform: 'uppercase' }}>
+                {r.title}
+              </Box>
+              {r.place && <Mono color={C.vermilion}>{r.place}</Mono>}
+            </Box>
+            <Box component="ul" sx={{ m: 0, pl: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {r.points.map((p) => (
+                <Box
+                  component="li"
+                  key={p}
+                  sx={{
+                    fontSize: 16, lineHeight: 1.65, fontWeight: 300, position: 'relative', pl: '18px',
+                    '&::before': { content: '""', position: 'absolute', left: 0, top: '0.7em', width: '6px', height: '1px', background: C.ink },
+                  }}
+                >
+                  {p}
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
+
+      <Box
+        data-reveal
+        sx={{
+          mt: '48px', display: 'grid', gridTemplateColumns: '1fr', gap: '32px',
+          '@media (min-width: 900px)': { gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 1fr)' },
+        }}
+      >
+        {([['PATENTS', patents], ['RECOGNITION', recognition], ['EDUCATION', education]] as const).map(([label, items]) => (
+          <Box key={label} sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <Mono>{label}</Mono>
+            {items.map((x) => (
+              <Box component="span" key={x} sx={{ fontSize: 15, lineHeight: 1.55, fontWeight: 300 }}>{x}</Box>
+            ))}
+          </Box>
+        ))}
+      </Box>
+
+      <Mono color={C.ink} as="div" sx={{ mt: '40px' }}>
+        <a href="https://www.linkedin.com/in/industrious1/" target="_blank" rel="noopener noreferrer">FULL HISTORY ON LINKEDIN ↗</a>
+      </Mono>
     </Box>
   )
 }
