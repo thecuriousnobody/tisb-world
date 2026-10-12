@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-VhY6MfMO7rE",
+      "videoId": "VhY6MfMO7rE",
+      "title": "Welfare Is Comfort. Rights Means You Don't Own Them | Dr. Julie Palais, Animal-Law Advocate",
+      "description": "Animal welfare asks whether an animal is fed, housed, and free to move. Animal rights asks whether we have the right to own them at all. Dr. Julie Palais — former NSF Antarctic glaciology program director turned animal-law advocate (MSL, Lewis &amp; Clark CALS; founding director, SAVE Nepal) — draws that line, then points at Nepal: people say &quot;animal rights&quot; while keeping pets and eating meat — often meaning welfare. Then the cruel loop: neglected street dogs look scary, people fear th...",
+      "link": "https://www.youtube.com/watch?v=VhY6MfMO7rE",
+      "publishedAt": "2026-10-11T23:01:13+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/VhY6MfMO7rE/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/VhY6MfMO7rE/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 4
+    },
+    {
       "id": "youtube-Ssvwqs4gGs0",
       "videoId": "Ssvwqs4gGs0",
       "title": "They Knew Ten Things. Eight and a Half Were Right | Lowell Mora, Fractional CFO",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/jAb6fBvZlVE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jAb6fBvZlVE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 107
+      "views": 112
     },
     {
       "id": "youtube-umIrgnyZ5Yc",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/V8_DQCb0a9Q/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 23
-    },
-    {
-      "id": "youtube-tAbIie0inEc",
-      "videoId": "tAbIie0inEc",
-      "title": "The Resource Pot",
-      "description": "Alzheimer's drains the pot. Purpose and connection refill it. The resource-pot analogy that reframes cognitive aging. The Idea Sandbox",
-      "link": "https://www.youtube.com/watch?v=tAbIie0inEc",
-      "publishedAt": "2026-09-19T16:03:28+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/tAbIie0inEc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/tAbIie0inEc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 20
     }
   ],
-  "lastUpdated": "2026-10-11T12:34:30.431Z",
+  "lastUpdated": "2026-10-12T15:07:26.415Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
