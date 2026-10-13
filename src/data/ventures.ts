@@ -31,8 +31,12 @@ const ventures: Venture[] = [
     status: 'shipped',
     url: 'https://stackday.ai',
     kanji: '積',
-    accentHue: 85,
-    art: '/ventures/stackday-brand.webp',
+    // 101 = the Stack Day yellow (#FFE500) in oklch, so the hairline matches the mark.
+    accentHue: 101,
+    // The official mark (stackday repo: public/stackday-favicon.svg) — tapering
+    // yellow bars on black — re-rendered from the vector as a 16:9 tile.
+    art: '/ventures/stackday-mark.webp',
+    artIsDark: true,
   },
   {
     name: 'DeSilo',
