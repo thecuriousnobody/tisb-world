@@ -52,7 +52,9 @@ const ventures: Venture[] = [
   },
   {
     name: 'swych-box',
-    tagline: 'An AI concierge at the edge for every small business.',
+    // Physical box at the charger + QR-opened AI concierge + host revenue share
+    // (per swych-box.com). Not "just a concierge" — keep the hardware in the line.
+    tagline: 'Service while you charge — an on-site box and AI concierge that turn the EV charging wait into local orders, with a revenue share for the station.',
     status: 'beta',
     url: 'https://www.swych-box.com/',
     kanji: '迎',
