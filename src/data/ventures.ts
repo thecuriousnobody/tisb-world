@@ -25,7 +25,9 @@ export interface Venture {
 const ventures: Venture[] = [
   {
     name: 'DeSilo',
-    tagline: 'The AI appliance for entrepreneurs. Ideas in, ventures out.',
+    // Rajeev's positioning (Oct 2026): the tractable milestone is the first
+    // paying customer. desilo-it.ai says "AI for the first mile" — same idea.
+    tagline: 'AI for startups — from the idea to your first paying customer.',
     status: 'beta',
     url: 'https://desilo-it.ai',
     kanji: '解',
