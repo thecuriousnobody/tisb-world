@@ -50,7 +50,9 @@ const ventures: Venture[] = [
   },
   {
     name: 'Stack Day',
-    tagline: 'Your day, stacked and conquered.',
+    // Discovery first ("Going out"), planning second ("Hosting") — per Rajeev
+    // and stackday.ai. Five Illinois cities is Rajeev's own figure.
+    tagline: "See what's on across five Illinois cities — and find the night your event won't have to compete.",
     status: 'shipped',
     url: 'https://stackday.ai',
     kanji: '積',
@@ -75,7 +77,8 @@ const ventures: Venture[] = [
   },
   {
     name: 'Autonomy Labs',
-    tagline: 'Building autonomous systems that work for you.',
+    // Rajeev: "autonomy for errands" is the key. Rover details per autonomylabs.dev.
+    tagline: 'Autonomy for errands — a vision-first rover that sees, reasons in plain language, and learns every day.',
     status: 'building',
     url: 'https://autonomylabs.dev',
     kanji: '自',
