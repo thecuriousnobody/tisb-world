@@ -18,26 +18,11 @@ export interface Venture {
   artZoom?: number
 }
 
-const STATUS_ORDER: Record<VentureStatus, number> = {
-  shipped: 0,
-  beta: 1,
-  building: 2,
-}
-
+/**
+ * Display order is curated by Rajeev (Oct 2026) — NOT sorted by status.
+ * The first three are the Home page's "Now building" cards.
+ */
 const ventures: Venture[] = [
-  {
-    name: 'Stack Day',
-    tagline: 'Your day, stacked and conquered.',
-    status: 'shipped',
-    url: 'https://stackday.ai',
-    kanji: '積',
-    // 101 = the Stack Day yellow (#FFE500) in oklch, so the hairline matches the mark.
-    accentHue: 101,
-    // The official mark (stackday repo: public/stackday-favicon.svg) — tapering
-    // yellow bars on black — re-rendered from the vector as a 16:9 tile.
-    art: '/ventures/stackday-mark.webp',
-    artIsDark: true,
-  },
   {
     name: 'DeSilo',
     tagline: 'The AI appliance for entrepreneurs. Ideas in, ventures out.',
@@ -54,12 +39,25 @@ const ventures: Venture[] = [
     name: 'swych-box',
     // Physical box at the charger + QR-opened AI concierge + host revenue share
     // (per swych-box.com). Not "just a concierge" — keep the hardware in the line.
-    tagline: 'Service while you charge — an on-site box and AI concierge that turn the EV charging wait into local orders, with a revenue share for the station.',
+    tagline: 'Service while you charge — an on-site box and AI concierge that turn the EV charging wait into local orders and revenue for the station. Equipment lockers coming soon.',
     status: 'beta',
     url: 'https://www.swych-box.com/',
     kanji: '迎',
     accentHue: 235,
     art: '/ventures/swychbox-product.webp',
+  },
+  {
+    name: 'Stack Day',
+    tagline: 'Your day, stacked and conquered.',
+    status: 'shipped',
+    url: 'https://stackday.ai',
+    kanji: '積',
+    // 101 = the Stack Day yellow (#FFE500) in oklch, so the hairline matches the mark.
+    accentHue: 101,
+    // The official mark (stackday repo: public/stackday-favicon.svg) — tapering
+    // yellow bars on black — re-rendered from the vector as a 16:9 tile.
+    art: '/ventures/stackday-mark.webp',
+    artIsDark: true,
   },
   {
     name: 'podcastbots',
@@ -84,14 +82,6 @@ const ventures: Venture[] = [
     artIsDark: true,
   },
   {
-    name: 'Golden Hour',
-    tagline: 'Voice-first AI emergency response for India. Every minute counts.',
-    status: 'building',
-    url: '',
-    kanji: '救',
-    accentHue: 55,
-  },
-  {
     name: 'Neuronify',
     tagline: "Your city's nervous system. Speak, and City Hall hears a costed brief.",
     status: 'building',
@@ -101,11 +91,17 @@ const ventures: Venture[] = [
     art: '/ventures/neuronify-brand.webp',
     artIsDark: true,
   },
+  {
+    name: 'Golden Hour',
+    tagline: 'Voice-first AI emergency response for India. Every minute counts.',
+    status: 'building',
+    url: '',
+    kanji: '救',
+    accentHue: 55,
+  },
 ]
 
-export const sortedVentures: Venture[] = [...ventures].sort(
-  (a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status]
-)
+export const sortedVentures: Venture[] = ventures
 
 export const featuredVentures: Venture[] = sortedVentures.slice(0, 3)
 

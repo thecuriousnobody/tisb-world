@@ -88,7 +88,7 @@ export default function Ventures() {
     <Box component="section">
       <Seo
         title="Ventures"
-        description="Seven AI startups, one builder: Stack Day, DeSilo, swych-box, podcastbots, Autonomy Labs, Golden Hour, and Neuronify. Each one removes a barrier between you and what you want to build."
+        description="Seven AI startups, one builder: DeSilo, SWYCH Box, Stack Day, podcastbots, Autonomy Labs, Neuronify, and Golden Hour. Each one removes a barrier between you and what you want to build."
         path="/ventures"
       />
       <SectionHeader
