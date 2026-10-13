@@ -66,9 +66,10 @@ const ventures: Venture[] = [
     url: 'https://podcastbots.ai',
     kanji: '縁',
     accentHue: 300,
-    art: '/ventures/podcastbots-brand.webp',
+    // Just the headphones figure — no wordmark, no blurred side strips — cut
+    // from the original art and feathered onto its own dark ground.
+    art: '/ventures/podcastbots-mark.webp',
     artIsDark: true,
-    artZoom: 1.16,
   },
   {
     name: 'Autonomy Labs',
