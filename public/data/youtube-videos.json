@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-Ey2Tfk8rvMY",
+      "videoId": "Ey2Tfk8rvMY",
+      "title": "Make PE Richer, or Fix the Family Business? | Lowell Mora, Fractional CFO",
+      "description": "After selling into strategic buyers and private equity, Lowell Mora flipped the model: rather than making PE guys richer, help real owners and the people who've worked those shops for decades. Owners always overvalue the business; he comes in for years, grows EBITDA, then sits on their side of the table at exit — retainer, not a skim of the sale. And why &quot;fractional CFO&quot; is booming while the market is still flooded with people selling accounting as strategy.\n\nOpen question for me: when...",
+      "link": "https://www.youtube.com/watch?v=Ey2Tfk8rvMY",
+      "publishedAt": "2026-10-13T23:01:05+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/Ey2Tfk8rvMY/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/Ey2Tfk8rvMY/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 8
+    },
+    {
       "id": "youtube-VhY6MfMO7rE",
       "videoId": "VhY6MfMO7rE",
       "title": "Welfare Is Comfort. Rights Means You Don't Own Them | Dr. Julie Palais, Animal-Law Advocate",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/VhY6MfMO7rE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/VhY6MfMO7rE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 10
     },
     {
       "id": "youtube-Ssvwqs4gGs0",
@@ -40,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/6rjVefXiSIg/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6rjVefXiSIg/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 30
+      "views": 31
     },
     {
       "id": "youtube-jmZS7BFujqo",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/jmZS7BFujqo/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jmZS7BFujqo/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 17
+      "views": 18
     },
     {
       "id": "youtube-jAb6fBvZlVE",
@@ -66,7 +79,7 @@
       "thumbnail": "https://img.youtube.com/vi/jAb6fBvZlVE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jAb6fBvZlVE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 114
+      "views": 115
     },
     {
       "id": "youtube-umIrgnyZ5Yc",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/wW_bCmyU8Zo/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 25
-    },
-    {
-      "id": "youtube-V8_DQCb0a9Q",
-      "videoId": "V8_DQCb0a9Q",
-      "title": "AI Won't Replace Doctors",
-      "description": "AI stores and patterns. Judgment stays human. Why doctors who use AI may replace those who don't. The Idea Sandbox",
-      "link": "https://www.youtube.com/watch?v=V8_DQCb0a9Q",
-      "publishedAt": "2026-09-20T16:00:46+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/V8_DQCb0a9Q/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/V8_DQCb0a9Q/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 23
     }
   ],
-  "lastUpdated": "2026-10-13T14:00:07.477Z",
+  "lastUpdated": "2026-10-14T11:36:44.005Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
