@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-dFBAFio8P-A",
+      "videoId": "dFBAFio8P-A",
+      "title": "One Human One Node | Humanode — Victor Vernissage",
+      "description": "This is a short cut from my conversation with Victor Vernissage — co-founder of Humanode (crypto-biometric uniqueness: one human = one node / one vote). Economist; Moscow-born / Georgia-based; Humanode / Vortex DAO; proof-of-stake industry background. humanode.io\n\nIn this Path Mid we walk an imaginary country with one shared ledger — then land on the punchline: humans who control the blockchain our society runs on, so AGI abundance doesn’t turn people into house-pets. One human. One node.\n\nWhy t...",
+      "link": "https://www.youtube.com/watch?v=dFBAFio8P-A",
+      "publishedAt": "2026-10-14T23:00:52+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/dFBAFio8P-A/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/dFBAFio8P-A/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 6
+    },
+    {
       "id": "youtube-Ey2Tfk8rvMY",
       "videoId": "Ey2Tfk8rvMY",
       "title": "Make PE Richer, or Fix the Family Business? | Lowell Mora, Fractional CFO",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/Ey2Tfk8rvMY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/Ey2Tfk8rvMY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 11
     },
     {
       "id": "youtube-VhY6MfMO7rE",
@@ -27,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/VhY6MfMO7rE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/VhY6MfMO7rE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 10
+      "views": 13
     },
     {
       "id": "youtube-Ssvwqs4gGs0",
@@ -53,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/6rjVefXiSIg/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6rjVefXiSIg/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 31
+      "views": 32
     },
     {
       "id": "youtube-jmZS7BFujqo",
@@ -79,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/jAb6fBvZlVE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jAb6fBvZlVE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 115
+      "views": 118
     },
     {
       "id": "youtube-umIrgnyZ5Yc",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/Gyi_tc5v_mE/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 91
-    },
-    {
-      "id": "youtube-wW_bCmyU8Zo",
-      "videoId": "wW_bCmyU8Zo",
-      "title": "Find Problems, Don't Invent Them",
-      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
-      "link": "https://www.youtube.com/watch?v=wW_bCmyU8Zo",
-      "publishedAt": "2026-09-20T23:00:44+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/wW_bCmyU8Zo/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/wW_bCmyU8Zo/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 25
     }
   ],
-  "lastUpdated": "2026-10-14T11:36:44.005Z",
+  "lastUpdated": "2026-10-15T11:15:23.981Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
