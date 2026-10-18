@@ -2,6 +2,32 @@
   "platform": "Behance",
   "items": [
     {
+      "id": "behance-257256401",
+      "title": "Field",
+      "description": "Four works on yellow. A field is potential before anything moves: a ribbon warping, a line coiled like a spring, a spark, a shoot rising from a dark seed. Nothing has happened yet. Everything is about to.",
+      "link": "https://www.behance.net/gallery/257256401/Field",
+      "publishedAt": "2026-10-18T04:36:03.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/fcb03b257256401.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
+      "id": "behance-257162505",
+      "title": "Ply",
+      "description": "Four paintings, ten places already cared for: a Kyoto lane, a tea street in Istanbul, a Dutch canal, an Alpine dairy, a hill-country station. Look closely and each piece is layers, the ones beneath still shining through the top. That's the point. Nothing good is made from one strand; it's twisted from many, the way thread gets its strength. Hung where people pass, something to stop for.",
+      "link": "https://www.behance.net/gallery/257162505/Ply",
+      "publishedAt": "2026-10-15T17:10:43.000Z",
+      "platform": "behance",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/f8f5d3257162505.Y3JvcCw2NjIsNTE4LDUxMywxNDQ.jpg",
+      "author": "The Idea Sandbox",
+      "tags": [
+        "digital art"
+      ]
+    },
+    {
       "id": "behance-256898043",
       "title": "Flare",
       "description": "Six yellow panels fired into the least likely places: a flower market, a subway, a brick side street, a stairwell. A black core, one line, nothing taken back. Made to stop you mid-step.",
@@ -125,7 +151,7 @@
       "link": "https://www.behance.net/gallery/252456247/Spandrel",
       "publishedAt": "2026-07-09T15:36:19.000Z",
       "platform": "behance",
-      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/79d955252456247.Y3JvcCw5NDAsNzM1LDU1LDcwMA.png",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/projects/404/efcd04252456247.Y3JvcCw3MDIsNTQ5LDIzMiw4NDI.png",
       "author": "The Idea Sandbox",
       "tags": [
         "digital art"
@@ -1757,8 +1783,8 @@
       ]
     }
   ],
-  "lastUpdated": "2026-10-11T17:49:14.704Z",
-  "scrapedAt": "2026-10-11T17:49:14.704Z",
+  "lastUpdated": "2026-10-18T16:11:17.116Z",
+  "scrapedAt": "2026-10-18T16:11:17.116Z",
   "updateMethod": "rss_feed",
   "note": "Synced from Behance RSS; archive merged across runs"
 }
