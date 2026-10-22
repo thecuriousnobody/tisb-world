@@ -4,6 +4,45 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-TZQAzIHuxPs",
+      "videoId": "TZQAzIHuxPs",
+      "title": "शौचालय कहाँ गया? | ह्यूमनोड के सह-संस्थापक विक्टर वर्निसाज",
+      "description": "शौचालय के लिए भेजा गया पैसा आखिर कहाँ जाता है? ह्यूमनोड के सह-संस्थापक और अर्थशास्त्री विक्टर वर्निसाज बताते हैं कि हर लेन-देन को पारदर्शी बनाकर, भरोसे की जगह सबूत और बाबू की जगह लेजर रखकर, भ्रष्टाचार कैसे कम किया जा सकता है — और सच पर किसका ह���़ है।\n\nह्यूमनोड: https://humanode.io/\n\nExperimental Hindi AI dub of an Idea Sandbox conversation with Victor Vernissage (Humanode). Original English: https://www.youtube.com/watch?v=0jYHhiLS0Ds",
+      "link": "https://www.youtube.com/watch?v=TZQAzIHuxPs",
+      "publishedAt": "2026-10-21T23:00:17+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/TZQAzIHuxPs/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/TZQAzIHuxPs/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 6
+    },
+    {
+      "id": "youtube-j9GnmVS6YUs",
+      "videoId": "j9GnmVS6YUs",
+      "title": "கழிப்பறை எங்கே போனது? | ஹியூமனோட் இணை நிறுவனர் விக்டர் வெர்னிசாஜ்",
+      "description": "கழிப்பறைகளுக்காக அனுப்பப்பட்ட பணம் உண்மையில் எங்கே செல்கிறது? ஹியூமனோட் இணை நிறுவனரும் பொருளாதார நிபுணருமான விக்டர் வெர்னிசாஜ், ஒவ்வொரு பரிவர்த்தனையையும் வெளிப்படையாக்கி, நம்பிக்கைக்குப் பதிலாக ஆதாரம், அதிகாரிக்குப் பதிலாக லெட்ஜர் — என மாற்றுவதன் மூலம் ஊழலை எப்படிக் குறைக்கலாம் என்றும், உண்மை யாருடையது என்றும் விளக்குகிறார்.\n\nஹியூமனோட்: https://humanode.io/\n\nExperimental Tamil AI dub of an Idea Sandbox conversation with Victor Vernissage (Humanode). Original English: https://www.youtube.com/watc...",
+      "link": "https://www.youtube.com/watch?v=j9GnmVS6YUs",
+      "publishedAt": "2026-10-21T23:00:04+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/j9GnmVS6YUs/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/j9GnmVS6YUs/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 2
+    },
+    {
+      "id": "youtube-0jYHhiLS0Ds",
+      "videoId": "0jYHhiLS0Ds",
+      "title": "Who Controls the Truth | India Toilets — Victor Vernissage",
+      "description": "This is a short cut from my conversation with Victor Vernissage — co-founder of Humanode (crypto-biometric uniqueness: one human = one node / one vote). Economist; Moscow-born / Georgia-based; Humanode / Vortex DAO; proof-of-stake industry background. humanode.io\n\nIn this Path Mid we start from India’s rural toilets / fund siphoning — no common ledger — and land on who controls the truth: rich vs government vs a biometric network that makes collusion hard.\n\nWhy this conversation\nTransparency, in...",
+      "link": "https://www.youtube.com/watch?v=0jYHhiLS0Ds",
+      "publishedAt": "2026-10-21T22:00:09+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/0jYHhiLS0Ds/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/0jYHhiLS0Ds/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 2
+    },
+    {
       "id": "youtube-ohwueC-gm3s",
       "videoId": "ohwueC-gm3s",
       "title": "In Nepal, Picking Up Dog Shit Is Still a Caste Problem | Dr. Julie Palais, Animal-Law Advocate",
@@ -14,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/ohwueC-gm3s/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ohwueC-gm3s/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 2
+      "views": 7
     },
     {
       "id": "youtube-dFBAFio8P-A",
@@ -66,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/Ssvwqs4gGs0/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/Ssvwqs4gGs0/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 11
+      "views": 13
     },
     {
       "id": "youtube-6rjVefXiSIg",
@@ -105,7 +144,7 @@
       "thumbnail": "https://img.youtube.com/vi/jAb6fBvZlVE/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/jAb6fBvZlVE/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 130
+      "views": 131
     },
     {
       "id": "youtube-umIrgnyZ5Yc",
@@ -158,48 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/AsXE_lKVwiE/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 68
-    },
-    {
-      "id": "youtube-yy4_lTPsLoc",
-      "videoId": "yy4_lTPsLoc",
-      "title": "Luxury Belief? | Why Care About Animal Rights — Dulki Seethawaka",
-      "description": "Is animal rights a luxury belief? Sri Lanka animal-law lawyer Dulki Seethawaka pushes back: this planet is not humans-only, factory farms drive climate harm, and change starts when you admit animals suffer because of us. Clip from The Idea Sandbox with Dulki Seethawaka. Guest: Dulki Seethawaka — Sri Lanka animal protection lawyer; University of Colombo master's on inadequate SL animal laws; Lewis &amp; Clark LLM animal law (full scholarship); World Animal Justice. Host: Rajeev Kumar (Curious Nob...",
-      "link": "https://www.youtube.com/watch?v=yy4_lTPsLoc",
-      "publishedAt": "2026-09-22T23:00:47+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/yy4_lTPsLoc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/yy4_lTPsLoc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 39
-    },
-    {
-      "id": "youtube-F7TTvjBnqy4",
-      "videoId": "F7TTvjBnqy4",
-      "title": "Respect in Co-Founder Relationships",
-      "description": "Curious Nobody with Hemant &amp; Sam — Sutra / Distillery Labs. Love and Peace",
-      "link": "https://www.youtube.com/watch?v=F7TTvjBnqy4",
-      "publishedAt": "2026-09-22T23:00:41+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/F7TTvjBnqy4/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/F7TTvjBnqy4/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 25
-    },
-    {
-      "id": "youtube-TiEoIcTtixU",
-      "videoId": "TiEoIcTtixU",
-      "title": "Lewy Body — The Extra Three People",
-      "description": "When hallucinations add three people to the room. A clinical receipt from Lewy body dementia care. The Idea Sandbox",
-      "link": "https://www.youtube.com/watch?v=TiEoIcTtixU",
-      "publishedAt": "2026-09-22T16:01:52+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/TiEoIcTtixU/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/TiEoIcTtixU/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 27
     }
   ],
-  "lastUpdated": "2026-10-21T11:35:11.752Z",
+  "lastUpdated": "2026-10-22T11:35:07.781Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
