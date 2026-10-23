@@ -14,7 +14,7 @@
       "thumbnail": "https://img.youtube.com/vi/TZQAzIHuxPs/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/TZQAzIHuxPs/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 6
+      "views": 7
     },
     {
       "id": "youtube-j9GnmVS6YUs",
@@ -27,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/j9GnmVS6YUs/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/j9GnmVS6YUs/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 2
+      "views": 15
     },
     {
       "id": "youtube-0jYHhiLS0Ds",
@@ -40,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/0jYHhiLS0Ds/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/0jYHhiLS0Ds/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 2
+      "views": 5
     },
     {
       "id": "youtube-ohwueC-gm3s",
@@ -53,7 +53,7 @@
       "thumbnail": "https://img.youtube.com/vi/ohwueC-gm3s/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/ohwueC-gm3s/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 7
+      "views": 8
     },
     {
       "id": "youtube-dFBAFio8P-A",
@@ -66,7 +66,7 @@
       "thumbnail": "https://img.youtube.com/vi/dFBAFio8P-A/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/dFBAFio8P-A/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 9
     },
     {
       "id": "youtube-Ey2Tfk8rvMY",
@@ -118,7 +118,7 @@
       "thumbnail": "https://img.youtube.com/vi/6rjVefXiSIg/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/6rjVefXiSIg/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 33
+      "views": 34
     },
     {
       "id": "youtube-jmZS7BFujqo",
@@ -183,7 +183,7 @@
       "thumbnail": "https://img.youtube.com/vi/l3scamlbLpc/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/l3scamlbLpc/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 51
+      "views": 52
     },
     {
       "id": "youtube-AsXE_lKVwiE",
@@ -199,7 +199,7 @@
       "views": 68
     }
   ],
-  "lastUpdated": "2026-10-22T11:35:07.781Z",
+  "lastUpdated": "2026-10-23T11:24:15.889Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
