@@ -4,6 +4,19 @@
   "channelName": "The Idea Sandbox",
   "items": [
     {
+      "id": "youtube-K72iizRhB2M",
+      "videoId": "K72iizRhB2M",
+      "title": "Street Dogs, Sacrifice, and What Nepal's Students Chose | Dr. Julie Palais, Animal-Law Advocate",
+      "description": "Julie Palais on the SAVE Nepal / CALS Global Ambassador work with law students in Kathmandu: four self-chosen research topics — street dogs, wildlife poaching, working animals, and animal sacrifice. The sacrifice paper went to Gadimai; the mayor's pushback was economic. Julie's own Nepal door: trekking, then Kukur Tihar — dogs celebrated one day, &quot;back to the usual&quot; the next — and the true story that became her children's book about a dog scalded with boiling water.\n\nChapters\n0:00 Four...",
+      "link": "https://www.youtube.com/watch?v=K72iizRhB2M",
+      "publishedAt": "2026-10-26T23:49:19+00:00",
+      "platform": "youtube",
+      "thumbnail": "https://img.youtube.com/vi/K72iizRhB2M/maxresdefault.jpg",
+      "thumbnailFallback": "https://img.youtube.com/vi/K72iizRhB2M/hqdefault.jpg",
+      "author": "The Idea Sandbox",
+      "views": 3
+    },
+    {
       "id": "youtube-DJSyTX3Obyw",
       "videoId": "DJSyTX3Obyw",
       "title": "Hear Your Own Voice — Stretch the Limits of Music | Mpho Molikeng, Basotho Musician",
@@ -14,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/DJSyTX3Obyw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/DJSyTX3Obyw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 35
+      "views": 59
     },
     {
       "id": "youtube-TZQAzIHuxPs",
@@ -32,15 +45,15 @@
     {
       "id": "youtube-j9GnmVS6YUs",
       "videoId": "j9GnmVS6YUs",
-      "title": "கழிப்பறை எங்கே போனது? | ஹியூமனோட் இணை நிறுவனர் விக்டர் வெ���்னிசாஜ்",
-      "description": "ஹியூமனோட் இணை நிறுவனர் மற்றும் பொருளாதார நிபுணர் விக்டர் வெர்னிசாஜ் உடன் உரையாடல்: வெளிப்படைத்தன்மை, பொது லெட்ஜர், ஊழல். The Idea Sandbox (தமிழ் டப்பிங்).\n\nகழிப்பறைகளுக்காக அனுப்பப்பட்ட பணம் உண்மையில் எங்கே செல்கிறது? ஹியூமனோட் இணை நிறுவனரும் பொருளாதார நிபுணருமான விக்டர் வெர்னிசாஜ், ஒவ்வொரு பரிவர்த்தனையையும் வெளிப்படையாக்கி, நம்பிக்கைக்குப் பதிலாக ஆதாரம், அதிகாரிக்குப் பதிலாக லெட்ஜர் — என மாற்றுவதன் மூலம் ஊழலை எப்படிக் குறைக்கலாம் என்றும், உண்மை யாருடையது என்றும் விளக்குகிறார்.\n\nஹியூமனோட்: https...",
+      "title": "கழிப்பறை எங்கே போனது? | ஹியூமனோட் இணை நிறுவனர் வ���க்டர் வெர்னிசாஜ்",
+      "description": "ஹியூமனோட் இணை நிறுவனர் மற்றும் பொருளாதார நிபுணர் விக்டர் வெர்னிசாஜ் உடன் உரையாடல்: வெளிப்படைத்தன்மை, பொது லெட்ஜர், ஊழல். The Idea Sandbox (தமிழ் டப்பிங்).\n\nகழிப்பறைகளுக்காக அனுப்பப்பட்ட பணம் உண்மையில் எங்கே செ���்கிறது? ஹியூமனோட் இணை நிறுவனரும் பொருளாதார நிபுணருமான விக்டர் வெர்னிசாஜ், ஒவ்வொரு பரிவர்த்தனையையும் வெளிப்படையாக்கி, நம்பிக்கைக்குப் பதிலாக ஆதாரம், அதிகாரிக்குப் பதிலாக லெட்ஜர் — என மாற்றுவதன் மூலம் ஊழலை எப்படிக் குறைக்கலாம் என்றும், உண்மை யாருடையது என்றும் விளக்குகிறார்.\n\nஹியூமனோட்: htt...",
       "link": "https://www.youtube.com/watch?v=j9GnmVS6YUs",
       "publishedAt": "2026-10-21T23:00:04+00:00",
       "platform": "youtube",
       "thumbnail": "https://img.youtube.com/vi/j9GnmVS6YUs/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/j9GnmVS6YUs/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 21
+      "views": 23
     },
     {
       "id": "youtube-0jYHhiLS0Ds",
@@ -92,7 +105,7 @@
       "thumbnail": "https://img.youtube.com/vi/Ey2Tfk8rvMY/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/Ey2Tfk8rvMY/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 15
+      "views": 16
     },
     {
       "id": "youtube-VhY6MfMO7rE",
@@ -184,22 +197,9 @@
       "thumbnailFallback": "https://img.youtube.com/vi/kTVFRwMS0AM/hqdefault.jpg",
       "author": "The Idea Sandbox",
       "views": 29
-    },
-    {
-      "id": "youtube-l3scamlbLpc",
-      "videoId": "l3scamlbLpc",
-      "title": "Nothing You Make Is Wasted | Preeti Varma, NYC Artist",
-      "description": "New York artist Preeti Varma on moving from a corporate career to full-time art, art school in Singapore, and loosening twenty years of control in her work.\n\nEverything adds up — even the years that felt like a detour.\n\nNYC artist Preeti Varma on art school in Singapore, loosening twenty years of grip, and why a corporate past still informs the work.\n\nClip from The Idea Sandbox.\n\nGuest: Preeti Varma — NYC artist\nHost: Rajeev Kumar — The Curious Nobody / The Idea Sandbox\n\nLinks\nSubstack (The Curi...",
-      "link": "https://www.youtube.com/watch?v=l3scamlbLpc",
-      "publishedAt": "2026-09-23T23:00:44+00:00",
-      "platform": "youtube",
-      "thumbnail": "https://img.youtube.com/vi/l3scamlbLpc/maxresdefault.jpg",
-      "thumbnailFallback": "https://img.youtube.com/vi/l3scamlbLpc/hqdefault.jpg",
-      "author": "The Idea Sandbox",
-      "views": 52
     }
   ],
-  "lastUpdated": "2026-10-26T12:42:44.524Z",
+  "lastUpdated": "2026-10-27T11:57:20.409Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
