@@ -14,7 +14,7 @@
       "thumbnail": "https://img.youtube.com/vi/U1mVMGq81hw/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/U1mVMGq81hw/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 10
     },
     {
       "id": "youtube-8zvasy3tqXA",
@@ -27,7 +27,7 @@
       "thumbnail": "https://img.youtube.com/vi/8zvasy3tqXA/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/8zvasy3tqXA/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 9
+      "views": 12
     },
     {
       "id": "youtube-K72iizRhB2M",
@@ -40,7 +40,7 @@
       "thumbnail": "https://img.youtube.com/vi/K72iizRhB2M/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/K72iizRhB2M/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 8
+      "views": 9
     },
     {
       "id": "youtube-DJSyTX3Obyw",
@@ -71,8 +71,8 @@
     {
       "id": "youtube-j9GnmVS6YUs",
       "videoId": "j9GnmVS6YUs",
-      "title": "கழிப்பறை எங்கே போனது? | ஹியூமனோட் இணை நிறுவனர் விக்டர் வெர்னிசாஜ்",
-      "description": "ஹியூமனோட் இணை நிறுவனர் மற்றும் பொருளாதார நிபுணர் விக்டர் வெர்னிசாஜ் உடன் உரையாடல்: வெளிப்படைத்தன்மை, பொது லெட்ஜர், ஊழல். The Idea Sandbox (தமிழ் டப்பிங்).\n\nகழிப்பறைகளுக்காக அனுப்பப்பட்ட பணம் உண்மையில் எங்கே செல்கிறது? ஹியூமன��ட் இணை நிறுவனரும் பொருளாதார நிபுணருமான விக்டர் வெர்னிசாஜ், ஒவ்வொரு பரிவர்த்தனையையும் வெளிப்படையாக்கி, நம்பிக்கைக்குப் பதிலாக ஆதாரம், அதிகாரிக்குப் பதிலாக லெட்ஜர் — என மாற்றுவதன் மூலம் ஊழலை எப்படிக் குறைக்கலாம் என்றும், உண்மை யாருடையது என்றும் விளக்குகிறார்.\n\nஹியூமனோட்: http...",
+      "title": "கழிப்பறை எங்கே போனது? | ஹியூமனோட் இணை நிறுவனர் விக்டர் வெர்னிச���ஜ்",
+      "description": "ஹியூமனோட் இணை நிறுவனர் மற்றும் பொருளாதார நிபுணர் விக்டர் வெர்னிசாஜ் உடன் உரையாடல்: வெளிப்படைத்தன்மை, பொது லெட்ஜர், ஊழல். The Idea Sandbox (தமிழ் டப்பிங்).\n\nகழிப்பறைகளுக்காக அனுப்பப்பட்ட பணம் உண்மையில் எங்கே செல்கிறது? ஹியூமனோட் இணை நிறுவனரும் பொருளாதார நிபுணருமான விக்டர் வெர்னிசாஜ், ஒவ்வொரு பரிவர்த்தனையையும் வெளிப்படையாக்கி, நம்பிக்கைக்குப் பதிலாக ஆதாரம், அதிகாரிக்குப் பதிலாக லெட்ஜர் — என மாற்றுவதன் மூலம் ஊழலை எப்படிக் குறைக்கலாம் என்றும், உண்மை யாருடையது என்றும் விளக்குகிறார்.\n\nஹியூமனோட்: https...",
       "link": "https://www.youtube.com/watch?v=j9GnmVS6YUs",
       "publishedAt": "2026-10-21T23:00:04+00:00",
       "platform": "youtube",
@@ -92,7 +92,7 @@
       "thumbnail": "https://img.youtube.com/vi/0jYHhiLS0Ds/maxresdefault.jpg",
       "thumbnailFallback": "https://img.youtube.com/vi/0jYHhiLS0Ds/hqdefault.jpg",
       "author": "The Idea Sandbox",
-      "views": 7
+      "views": 8
     },
     {
       "id": "youtube-ohwueC-gm3s",
@@ -199,7 +199,7 @@
       "views": 140
     }
   ],
-  "lastUpdated": "2026-11-03T13:58:24.071Z",
+  "lastUpdated": "2026-11-04T14:14:37.264Z",
   "fetchMethod": "rss_feed",
   "note": "Fetched from YouTube RSS feed - no API quota used"
 }
